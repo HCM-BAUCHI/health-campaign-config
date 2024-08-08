@@ -59,10 +59,10 @@ serviceMaps:
       fromTopic: update-facility-topic
       isTransaction: true
       isAuditEnabled: true
-      module: FACILITY
+      module: FACILITY-UPDATE
       objecIdJsonPath: $.id
       tenantIdJsonPath: $.tenantId
-      userUuidJsonPath: $.[0].auditDetails.createdBy
+      userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
       transactionCodeJsonPath: $.clientReferenceId
       auditAttributeBasePath: $.*
       queryMaps:
@@ -124,10 +124,10 @@ serviceMaps:
       fromTopic: delete-facility-topic
       isTransaction: true
       isAuditEnabled: true
-      module: FACILITY
+      module: FACILITY-DELETE
       objecIdJsonPath: $.id
       tenantIdJsonPath: $.tenantId
-      userUuidJsonPath: $.[0].auditDetails.createdBy
+      userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
       transactionCodeJsonPath: $.clientReferenceId
       auditAttributeBasePath: $.*
       queryMaps:

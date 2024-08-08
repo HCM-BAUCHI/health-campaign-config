@@ -59,10 +59,10 @@ serviceMaps:
       fromTopic: update-household-topic
       isTransaction: true
       isAuditEnabled: true
-      module: HOUSEHOLD
+      module: HOUSEHOLD-UPDATE
       objecIdJsonPath: $.id
       tenantIdJsonPath: $.tenantId
-      userUuidJsonPath: $.[0].auditDetails.createdBy
+      userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
       transactionCodeJsonPath: $.clientReferenceId
       auditAttributeBasePath: $.*
       queryMaps:
@@ -122,11 +122,11 @@ serviceMaps:
       fromTopic: delete-household-topic
       isTransaction: true
       isAuditEnabled: true
-      module: HOUSEHOLD
+      module: HOUSEHOLD-DELETE
       objecIdJsonPath: $.id
       tenantIdJsonPath: $.tenantId
-      userUuidJsonPath: $.[0].auditDetails.createdBy
-      transactionCodeJsonPath: $.clientReferenceId
+      userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+      transactionCodeJsonPath: $.householdClientReferenceId
       auditAttributeBasePath: $.*
       queryMaps:
         - query: UPDATE HOUSEHOLD SET lastModifiedBy = ?, lastModifiedTime = ?, clientLastModifiedTime = ?, clientLastModifiedBy = ?,  rowVersion = ?, isDeleted = ?, additionalDetails=? WHERE ID = ?;
@@ -148,11 +148,11 @@ serviceMaps:
       fromTopic: save-household-member-topic
       isTransaction: true
       isAuditEnabled: true
-      module: HOUSEHOLD
+      module: HOUSEHOLD-MEMBER
       objecIdJsonPath: $.id
       tenantIdJsonPath: $.tenantId
       userUuidJsonPath: $.[0].auditDetails.createdBy
-      transactionCodeJsonPath: $.clientReferenceId
+      transactionCodeJsonPath: $.householdClientReferenceId
       auditAttributeBasePath: $.*
       queryMaps:
         - query: INSERT INTO HOUSEHOLD_MEMBER(id, tenantId, clientReferenceId, individualId, individualClientReferenceId, householdId, householdClientReferenceId, isHeadOfHousehold, additionalDetails, createdBy, lastModifiedBy, createdTime, lastModifiedTime, rowVersion, isDeleted, clientCreatedTime, clientLastModifiedTime, clientCreatedBy, clientLastModifiedBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
@@ -184,18 +184,17 @@ serviceMaps:
       fromTopic: update-household-member-topic
       isTransaction: true
       isAuditEnabled: true
-      module: HOUSEHOLD
+      module: HOUSEHOLD-MEMBER-UPDATE
       objecIdJsonPath: $.id
       tenantIdJsonPath: $.tenantId
-      userUuidJsonPath: $.[0].auditDetails.createdBy
-      transactionCodeJsonPath: $.clientReferenceId
-      auditAttributeBasePath: $.*
+      userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+      transactionCodeJsonPath: $.individualId
+      auditAttributeBasePath: $.*      
       queryMaps:
-        - query: UPDATE HOUSEHOLD_MEMBER SET isHeadOfHousehold=?, clientReferenceId = ?, additionalDetails=?, lastModifiedBy=?, lastModifiedTime=?, rowVersion=?, isDeleted=?, clientLastModifiedTime = ?, clientLastModifiedBy = ? WHERE individualId=? AND householdId=? AND isDeleted=false;
+        - query: UPDATE HOUSEHOLD_MEMBER SET isHeadOfHousehold=?, additionalDetails=?, lastModifiedBy=?, lastModifiedTime=?, rowVersion=?, isDeleted=?, clientLastModifiedTime = ?, clientLastModifiedBy = ? WHERE individualId=? AND householdId=? AND isDeleted=false;
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.isHeadOfHousehold
-            - jsonPath: $.*.clientReferenceId
             - jsonPath: $.*.additionalFields
               type: JSON
               dbType: JSONB
@@ -212,12 +211,12 @@ serviceMaps:
       fromTopic: delete-household-member-topic
       isTransaction: true
       isAuditEnabled: true
-      module: HOUSEHOLD
+      module: HOUSEHOLD-MEMBER-DELETE
       objecIdJsonPath: $.id
       tenantIdJsonPath: $.tenantId
-      userUuidJsonPath: $.[0].auditDetails.createdBy
-      transactionCodeJsonPath: $.clientReferenceId
-      auditAttributeBasePath: $.*
+      userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+      transactionCodeJsonPath: $.id
+      auditAttributeBasePath: $.* 
       queryMaps:
         - query: UPDATE HOUSEHOLD_MEMBER SET lastModifiedBy = ?, lastModifiedTime = ?, clientLastModifiedTime = ?, clientLastModifiedBy = ?, rowVersion = ?, isDeleted = ?, additionalDetails=? WHERE ID = ?;
           basePath: $.*

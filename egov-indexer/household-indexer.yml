@@ -6,7 +6,7 @@ ServiceMaps:
       configKey: INDEX
       indexes:
         - name: household-index-v1
-          type: _doc
+          type: household
           id: $.household.clientReferenceId
           isBulk: true
           jsonPath: $.*
@@ -15,12 +15,12 @@ ServiceMaps:
             fieldMapping:
               - inJsonPath: $
                 outJsonPath: $.Data
-          timeStampField: $.household.clientAuditDetails.createdTime
+          timeStampField: $.household.clientAuditDetails.lastModifiedTime
     - topic: delete-household-topic
       configKey: INDEX
       indexes:
         - name: household-index-v1
-          type: _doc
+          type: household
           id: $.clientReferenceId
           isBulk: true
           jsonPath: $.*
@@ -29,16 +29,21 @@ ServiceMaps:
       configKey: INDEX
       indexes:
         - name: household-member-index-v1
-          type: _doc
-          id: $.householdMember.id
+          type: member
+          id: $.householdMember.clientReferenceId
           isBulk: true
           jsonPath: $.*
-          timeStampField: $.householdMember.auditDetails.createdTime
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+          timeStampField: $.householdMember.clientAuditDetails.lastModifiedTime
     - topic: delete-household-member-topic
       configKey: INDEX
       indexes:
         - name: household-member-index-v1
-          type: _doc
+          type: member
           id: $.id
           isBulk: true
           jsonPath: $.*
