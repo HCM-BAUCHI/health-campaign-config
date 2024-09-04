@@ -99,7 +99,7 @@ serviceMaps:
       queryMaps:
 
 
-        - query: INSERT INTO eg_service(id, tenantid, servicedefid, referenceid, createdby, lastmodifiedby, createdtime, lastmodifiedtime, additionaldetails, accountid, clientid, additionalFields) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_service(id, tenantid, servicedefid, referenceid, createdby, lastmodifiedby, createdtime, lastmodifiedtime, additionaldetails, accountid, clientid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.Service
           jsonMaps:
             - jsonPath: $.Service.id
@@ -122,16 +122,12 @@ serviceMaps:
               type: JSON
               dbType: JSONB
 
-            - jsonPath: $.Service.additionalFields
-              type: JSON
-              dbType: JSONB
-
             - jsonPath: $.Service.accountId
 
             - jsonPath: $.Service.clientId
 
 
-        - query: INSERT INTO eg_service_attribute_value(id, referenceid, attributecode, value, createdby, lastmodifiedby, createdtime, lastmodifiedtime, additionaldetails, additionalFields) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_service_attribute_value(id, referenceid, attributecode, value, createdby, lastmodifiedby, createdtime, lastmodifiedtime,  additionalFields) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.Service.attributes.*
           jsonMaps:
             - jsonPath: $.Service.attributes.*.id
@@ -144,10 +140,6 @@ serviceMaps:
               type: JSON
               dbType: JSONB
 
-            - jsonPath: $.Service.attributes.*.additionalFields
-              type: JSON
-              dbType: JSONB
-
             - jsonPath: $.Service.attributes.*.auditDetails.createdBy
 
             - jsonPath: $.Service.attributes.*.auditDetails.lastModifiedBy
@@ -156,6 +148,6 @@ serviceMaps:
 
             - jsonPath: $.Service.attributes.*.auditDetails.lastModifiedTime
 
-            - jsonPath: $.Service.attributes.*.additionalDetails
+            - jsonPath: $.Service.attributes.*.additionalFields
               type: JSON
               dbType: JSONB
