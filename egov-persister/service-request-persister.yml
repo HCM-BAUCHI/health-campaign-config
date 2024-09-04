@@ -148,6 +148,6 @@ serviceMaps:
 
             - jsonPath: $.Service.attributes.*.auditDetails.lastModifiedTime
 
-            - jsonPath: $.Service.attributes.*.additionalDetails
+            - jsonPath: $.Service.attributes.*.additionalFields
               type: JSON
               dbType: JSONB
