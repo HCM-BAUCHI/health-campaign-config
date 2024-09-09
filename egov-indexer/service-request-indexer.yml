@@ -52,7 +52,7 @@ ServiceMaps:
       indexes:
         - name: hf-referral-fever-index
           type: service
-          id: $.id,$.ageGroup
+          id: $.id
           isBulk: true
           jsonPath: $
           customJsonMapping:
