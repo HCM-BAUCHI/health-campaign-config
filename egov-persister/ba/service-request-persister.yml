@@ -26,7 +26,7 @@ serviceMaps:
       - jsonPath: $.ServiceDefinition.auditDetails.lastModifiedBy
       - jsonPath: $.ServiceDefinition.auditDetails.createdTime
       - jsonPath: $.ServiceDefinition.auditDetails.lastModifiedTime
-      - jsonPath: $.ServiceDefinition.additionalDetails
+      - jsonPath: $.ServiceDefinition.additionalFields
         type: JSON
         dbType: JSONB
       - jsonPath: $.ServiceDefinition.clientId
@@ -52,7 +52,7 @@ serviceMaps:
       - jsonPath: $.ServiceDefinition.attributes.*.auditDetails.lastModifiedBy
       - jsonPath: $.ServiceDefinition.attributes.*.auditDetails.createdTime
       - jsonPath: $.ServiceDefinition.attributes.*.auditDetails.lastModifiedTime
-      - jsonPath: $.ServiceDefinition.attributes.*.additionalDetails
+      - jsonPath: $.ServiceDefinition.attributes.*.additionalFields
         type: JSON
         dbType: JSONB
   - version: 1.0
@@ -80,7 +80,7 @@ serviceMaps:
       - jsonPath: $.Service.auditDetails.lastModifiedBy
       - jsonPath: $.Service.auditDetails.createdTime
       - jsonPath: $.Service.auditDetails.lastModifiedTime
-      - jsonPath: $.Service.additionalDetails
+      - jsonPath: $.Service.additionalFields
         type: JSON
         dbType: JSONB
       - jsonPath: $.Service.accountId
