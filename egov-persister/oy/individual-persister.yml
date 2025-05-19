@@ -40,10 +40,10 @@ serviceMaps:
         givenName, familyName, otherNames, dateOfBirth, gender, bloodGroup, mobileNumber,
         altContactNumber, email, fatherName, husbandName, photo, additionalDetails,
         createdBy, lastModifiedBy, createdTime, lastModifiedTime, rowVersion, isDeleted,
-        individualId, relationship, isSystemUser, isSystemUserActive, username, password,
+        individualId, relationship, isSystemUser, isSystemUserActive, username,
         type, roles, clientCreatedTime, clientLastModifiedTime, clientCreatedBy, clientLastModifiedBy)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: $.*
       jsonMaps:
       - jsonPath: $.*.id
@@ -78,7 +78,6 @@ serviceMaps:
       - jsonPath: $.*.isSystemUser
       - jsonPath: $.*.isSystemUserActive
       - jsonPath: $.*.userDetails.username
-      - jsonPath: $.*.userDetails.password
       - jsonPath: $.*.userDetails.type
       - jsonPath: $.*.userDetails.roles
         type: JSON
@@ -136,7 +135,7 @@ serviceMaps:
     fromTopic: oy-update-individual-topic
     isTransaction: true
     isAuditEnabled: true
-    module: INDIVIDUAL-UPDATE
+    module: INDIVIDUAL
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     userUuidJsonPath: $.[0].auditDetails.createdBy
@@ -147,7 +146,7 @@ serviceMaps:
         familyName=?, otherNames=?, dateOfBirth=?, Gender=?, bloodGroup=?, mobileNumber=?,
         altContactNumber=?, email=?, fatherName=?, husbandName=?, relationship=?,
         photo=?, isSystemUserActive=?, additionalDetails=?, lastModifiedBy=?, lastModifiedTime=?,
-        rowVersion=?, username = ?, password = ?, type = ?, roles = ?, clientLastModifiedTime
+        rowVersion=?, username = ?, type = ?, roles = ?, clientLastModifiedTime
         = ?, clientLastModifiedBy = ? WHERE id=? AND isDeleted=false;
       basePath: $.*
       jsonMaps:
@@ -176,7 +175,6 @@ serviceMaps:
       - jsonPath: $.*.auditDetails.lastModifiedTime
       - jsonPath: $.*.rowVersion
       - jsonPath: $.*.userDetails.username
-      - jsonPath: $.*.userDetails.password
       - jsonPath: $.*.userDetails.type
       - jsonPath: $.*.userDetails.roles
         type: JSON
@@ -288,7 +286,7 @@ serviceMaps:
     fromTopic: oy-delete-individual-topic
     isTransaction: true
     isAuditEnabled: true
-    module: INDIVIDUAL-DELETE
+    module: INDIVIDUAL
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     userUuidJsonPath: $.[0].auditDetails.createdBy
@@ -337,6 +335,13 @@ serviceMaps:
     description: Updates userId and userUuid received from user-service into an individual
     fromTopic: oy-update-user-id-topic
     isTransaction: true
+    isAuditEnabled: true
+    module: INDIVIDUAL
+    objecIdJsonPath: $.id
+    tenantIdJsonPath: $.tenantId
+    userUuidJsonPath: $.[0].auditDetails.createdBy
+    transactionCodeJsonPath: $.clientReferenceId
+    auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE oy.individual SET userId=?, userUuid=? WHERE id=?;
       basePath: $.*
