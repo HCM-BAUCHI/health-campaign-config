@@ -91,7 +91,7 @@ serviceMaps:
     - query: INSERT INTO oy.ADDRESS(id, tenantid, clientReferenceId, doorno, latitude,
         longitude, locationAccuracy, type, addressline1, addressline2, landmark, city,
         pincode, buildingName, street, localityCode) VALUES (?, ?, ?, ?, ?, ?, ?,
-        ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE oy.SET tenantId = ?,
+        ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET tenantId = ?,
         clientReferenceId=?, doorno = ?, latitude = ?, longitude = ?, locationAccuracy
         = ?, type = ?, addressline1 = ?, addressline2 = ?, landmark = ?, city = ?,
         pincode = ?, buildingName = ?, street = ?, localityCode = ?;

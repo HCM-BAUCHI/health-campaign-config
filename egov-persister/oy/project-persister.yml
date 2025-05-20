@@ -340,7 +340,7 @@ serviceMaps:
       - jsonPath: $.Projects.*.address.boundary
       - jsonPath: $.Projects.*.address.id
     - query: INSERT INTO oy.project_target(id,projectId,beneficiaryType,totalNo,targetNo,isDeleted,createdBy,lastModifiedBy,createdTime,lastModifiedTime)
-        VALUES (?,?,?,?,?,?,?,?,?,?) ON CONFLICT (id) DO UPDATE oy.SET beneficiaryType
+        VALUES (?,?,?,?,?,?,?,?,?,?) ON CONFLICT (id) DO UPDATE SET beneficiaryType
         = ?, totalNo =?, targetNo=?, isDeleted=?, lastModifiedBy=?, lastModifiedTime=?;
       basePath: $.Projects.*.targets.*
       jsonMaps:
@@ -361,7 +361,7 @@ serviceMaps:
       - jsonPath: $.Projects.*.targets.*.auditDetails.lastModifiedBy
       - jsonPath: $.Projects.*.targets.*.auditDetails.lastModifiedTime
     - query: INSERT INTO oy.project_document(id,projectId,documentType,filestoreId,documentUid,additionalDetails,status,createdBy,lastModifiedBy,createdTime,lastModifiedTime)
-        VALUES (?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT (id) DO UPDATE oy.SET documentType=?,
+        VALUES (?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT (id) DO UPDATE SET documentType=?,
         filestoreId=?, documentUid=?, additionalDetails=?, status=?, lastModifiedBy=?,
         lastModifiedTime=?;
       basePath: $.Projects.*.documents.*

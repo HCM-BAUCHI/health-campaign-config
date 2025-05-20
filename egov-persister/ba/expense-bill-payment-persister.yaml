@@ -185,7 +185,7 @@ serviceMaps:
         totalpaidamount, status, referenceId, paymentStatus, fromperiod, toperiod,
         createdby, createdTime, lastModifiedby, lastModifiedTime, additionalDetails)
         values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(id, tenantid)  DO UPDATE
-        ba.SET referenceid=EXCLUDED.referenceid, paymentstatus=EXCLUDED.paymentstatus,
+        SET referenceid=EXCLUDED.referenceid, paymentstatus=EXCLUDED.paymentstatus,
         status=EXCLUDED.status, totalamount=EXCLUDED.totalamount, totalpaidamount=EXCLUDED.totalpaidamount,
         fromperiod=EXCLUDED.fromperiod, toperiod=EXCLUDED.toperiod, lastmodifiedby=EXCLUDED.lastmodifiedby,
         lastmodifiedtime=EXCLUDED.lastmodifiedtime, additionaldetails=EXCLUDED.additionaldetails;
@@ -210,7 +210,7 @@ serviceMaps:
         dbType: JSONB
     - query: INSERT into ba.eg_expense_party (id, tenantid, type, identifier, parentId,
         status, additionalDetails, createdby, createdTime, lastmodifiedby, lastModifiedTime)
-        values(?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT (id, tenantid) DO UPDATE ba.SET
+        values(?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT (id, tenantid) DO UPDATE SET
         type=EXCLUDED.type, identifier=EXCLUDED.identifier, parentid=EXCLUDED.parentid,
         status=EXCLUDED.status, lastmodifiedby=EXCLUDED.lastmodifiedby, lastmodifiedtime=EXCLUDED.lastmodifiedtime,
         additionaldetails=EXCLUDED.additionaldetails
@@ -232,7 +232,7 @@ serviceMaps:
     - query: INSERT into ba.eg_expense_lineitem (id, tenantid, billDetailId, headCode,
         amount, paidAmount, type, status, islineitempayable, createdby, createdTime,
         lastmodifiedby, lastModifiedTime, additionalDetails) values(?,?,?,?,?,?,?,?,false,?,?,?,?,?)
-        ON CONFLICT (id,tenantid) DO UPDATE ba.SET headcode=EXCLUDED.headcode, amount=EXCLUDED.amount,
+        ON CONFLICT (id,tenantid) DO UPDATE SET headcode=EXCLUDED.headcode, amount=EXCLUDED.amount,
         paidamount=EXCLUDED.paidamount, type=EXCLUDED.type, status=EXCLUDED.status,
         islineitempayable=EXCLUDED.islineitempayable, lastmodifiedby=EXCLUDED.lastmodifiedby,
         lastmodifiedtime=EXCLUDED.lastmodifiedtime, additionaldetails=EXCLUDED.additionaldetails;
@@ -256,7 +256,7 @@ serviceMaps:
     - query: INSERT into ba.eg_expense_lineitem (id, tenantid, billDetailId, headCode,
         amount, paidAmount, type, status, paymentStatus, islineitempayable, createdby,
         createdTime, lastmodifiedby, lastModifiedTime, additionalDetails) values(?,?,?,?,?,?,?,?,?,true,?,?,?,?,?)
-        ON CONFLICT (id,tenantid) DO UPDATE ba.SET headcode=EXCLUDED.headcode, amount=EXCLUDED.amount,
+        ON CONFLICT (id,tenantid) DO UPDATE SET headcode=EXCLUDED.headcode, amount=EXCLUDED.amount,
         paidamount=EXCLUDED.paidamount, type=EXCLUDED.type, status=EXCLUDED.status,
         paymentStatus=EXCLUDED.paymentStatus, islineitempayable=EXCLUDED.islineitempayable,
         lastmodifiedby=EXCLUDED.lastmodifiedby, lastmodifiedtime=EXCLUDED.lastmodifiedtime,

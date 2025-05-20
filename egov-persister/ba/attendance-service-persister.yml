@@ -196,7 +196,7 @@ serviceMaps:
     - query: INSERT INTO ba.eg_wms_attendance_document(id, filestore_id, document_type,
         attendance_log_id, additionaldetails, createdby, lastmodifiedby, createdtime,
         lastmodifiedtime, tenantid, status) VALUES (?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT
-        (id) DO UPDATE ba.SET filestore_id = ?, document_type = ? , additionaldetails
+        (id) DO UPDATE SET filestore_id = ?, document_type = ? , additionaldetails
         = ? ,lastmodifiedby = ? ,lastmodifiedtime = ?, status = ?;
       basePath: $.attendance.*.documentIds.*
       jsonMaps:
