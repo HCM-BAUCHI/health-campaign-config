@@ -461,16 +461,13 @@ serviceMaps:
     auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE ba.project_resource SET lastModifiedBy=?, lastModifiedTime=?,
-        rowVersion=?, isDeleted=?, additionalDetails=?  WHERE id = ?
+        rowVersion=?, isDeleted=? WHERE id = ?
       basePath: $.*
       jsonMaps:
       - jsonPath: $.*.auditDetails.lastModifiedBy
       - jsonPath: $.*.auditDetails.lastModifiedTime
       - jsonPath: $.*.rowVersion
       - jsonPath: $.*.isDeleted
-      - jsonPath: $.*.additionalFields
-        type: JSON
-        dbType: JSONB
       - jsonPath: $.*.id
   - version: 1.0
     description: Saves a project facility
