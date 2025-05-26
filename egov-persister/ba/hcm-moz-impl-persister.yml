@@ -208,7 +208,7 @@ serviceMaps:
         boundary, source, campaignStartDate, campaignEndDate, totalHouseholds, targetedHouseholds,
         totalIndividuals, targetedIndividuals, bednetsEstimated, totalBednets, createdBy,
         lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?,
-        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE ba.SET name=?,
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name=?,
         parent=?, path=?, children=?, boundaryLevel=?, boundary=?, source=?, lastModifiedBy=?,
         lastModifiedTime=?, campaignStartDate=?, campaignEndDate=?, totalHouseholds=?,
         targetedHouseholds=?, totalIndividuals=?, targetedIndividuals=?, bednetsEstimated=?,
@@ -260,7 +260,7 @@ serviceMaps:
     - query: INSERT INTO ba.eg_dhis2_boundary_csv(id, name, parent, path, children,
         boundaryLevel, boundary, source, campaignStartDate, campaignEndDate, objectNode,
         createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?,
-        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE ba.SET name=?,
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name=?,
         parent=?, path=?, children=?, boundaryLevel=?, boundary=?, source=?, lastModifiedBy=?,
         lastModifiedTime=?, objectNode=?;
       basePath: $.*
