@@ -82,7 +82,7 @@ ServiceMaps:
   - topic: oy-transformer-producer-extra-transformed-checklist-index-topic
     configKey: INDEX
     indexes:
-    - name: transformed-checklist-index-v1
+    - name: oy-transformed-checklist-index-v1
       type: service
       id: $.id,$.tenantId
       isBulk: true
