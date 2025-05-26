@@ -154,7 +154,7 @@ serviceMaps:
     - query: INSERT INTO oy.TASK_RESOURCE(id, clientReferenceId, tenantid, productvariantid,
         taskid, quantity, isDelivered, reasonIfNotDelivered, additionalDetails, createdBy,
         createdTime, lastModifiedBy, lastModifiedTime, isDeleted) VALUES (?, ?, ?,
-        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE oy.SET tenantid
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET tenantid
         = ?, taskid = ?, productvariantid = ?, quantity = ?, isDelivered = ?, reasonIfNotDelivered
         = ?, additionalDetails = ?, lastModifiedBy = ?, lastModifiedTime = ?;
       basePath: $.*.resources.*

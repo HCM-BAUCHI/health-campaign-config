@@ -100,7 +100,7 @@ serviceMaps:
     isTransaction: true
     queryMaps:
     - query: INSERT INTO ba.eg_usrevents_user_lat(userid, lastaccesstime) VALUES (?,
-        ?) ON CONFLICT (userid) DO UPDATE ba.SET lastaccesstime = ?;
+        ?) ON CONFLICT (userid) DO UPDATE SET lastaccesstime = ?;
       basePath: lastAccessDetails
       jsonMaps:
       - jsonPath: $.lastAccessDetails.userId

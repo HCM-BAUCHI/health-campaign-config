@@ -40,10 +40,10 @@ serviceMaps:
         givenName, familyName, otherNames, dateOfBirth, gender, bloodGroup, mobileNumber,
         altContactNumber, email, fatherName, husbandName, photo, additionalDetails,
         createdBy, lastModifiedBy, createdTime, lastModifiedTime, rowVersion, isDeleted,
-        individualId, relationship, isSystemUser, isSystemUserActive, username, password,
+        individualId, relationship, isSystemUser, isSystemUserActive, username,
         type, roles, clientCreatedTime, clientLastModifiedTime, clientCreatedBy, clientLastModifiedBy)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: $.*
       jsonMaps:
       - jsonPath: $.*.id
@@ -78,7 +78,6 @@ serviceMaps:
       - jsonPath: $.*.isSystemUser
       - jsonPath: $.*.isSystemUserActive
       - jsonPath: $.*.userDetails.username
-      - jsonPath: $.*.userDetails.password
       - jsonPath: $.*.userDetails.type
       - jsonPath: $.*.userDetails.roles
         type: JSON
@@ -136,7 +135,7 @@ serviceMaps:
     fromTopic: oy-update-individual-topic
     isTransaction: true
     isAuditEnabled: true
-    module: INDIVIDUAL-UPDATE
+    module: INDIVIDUAL
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     userUuidJsonPath: $.[0].auditDetails.createdBy
@@ -147,7 +146,7 @@ serviceMaps:
         familyName=?, otherNames=?, dateOfBirth=?, Gender=?, bloodGroup=?, mobileNumber=?,
         altContactNumber=?, email=?, fatherName=?, husbandName=?, relationship=?,
         photo=?, isSystemUserActive=?, additionalDetails=?, lastModifiedBy=?, lastModifiedTime=?,
-        rowVersion=?, username = ?, password = ?, type = ?, roles = ?, clientLastModifiedTime
+        rowVersion=?, username = ?, type = ?, roles = ?, clientLastModifiedTime
         = ?, clientLastModifiedBy = ? WHERE id=? AND isDeleted=false;
       basePath: $.*
       jsonMaps:
@@ -176,7 +175,6 @@ serviceMaps:
       - jsonPath: $.*.auditDetails.lastModifiedTime
       - jsonPath: $.*.rowVersion
       - jsonPath: $.*.userDetails.username
-      - jsonPath: $.*.userDetails.password
       - jsonPath: $.*.userDetails.type
       - jsonPath: $.*.userDetails.roles
         type: JSON
@@ -187,7 +185,7 @@ serviceMaps:
     - query: INSERT INTO oy.address(id, clientReferenceId, tenantId, doorNo, latitude,
         longitude, locationAccuracy, type, addressLine1, addressLine2, landmark, city,
         pincode, buildingName, street, localityCode, wardCode) VALUES (?, ?, ?, ?,
-        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE oy.SET doorno=?,
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET doorno=?,
         latitude=?, longitude=?, locationaccuracy=?, type=?, addressline1=?, addressline2=?,
         landmark=?, city=?, pincode=?, buildingname=?, street=?, localitycode=?, wardCode=?;
       basePath: $.*.address.*
@@ -226,7 +224,7 @@ serviceMaps:
     - query: INSERT INTO oy.individual_address(individualId, addressId, type, createdBy,
         lastModifiedBy, createdTime, lastModifiedTime, isDeleted) VALUES (?, ?, ?,
         ?, ?, ?, ?, ?) ON CONFLICT (individualId, addressId, type, isDeleted) WHERE
-        isDeleted=false DO UPDATE oy.SET lastModifiedBy = ?, lastModifiedTime = ?;
+        isDeleted=false DO UPDATE SET lastModifiedBy = ?, lastModifiedTime = ?;
       basePath: $.*.address.*
       jsonMaps:
       - jsonPath: $.*.address.*.individualId
@@ -242,7 +240,7 @@ serviceMaps:
     - query: INSERT INTO oy.individual_identifier(id, clientReferenceId, individualId,
         identifierType, identifierId, createdBy, lastModifiedBy, createdTime, lastModifiedTime,
         isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (individualid,
-        identifiertype, isdeleted) WHERE isDeleted=false DO UPDATE oy.SET identifierId
+        identifiertype, isdeleted) WHERE isDeleted=false DO UPDATE SET identifierId
         = ?, identifierType = ?, lastModifiedBy = ?, lastModifiedTime = ?;
       basePath: $.*.identifiers.*
       jsonMaps:
@@ -263,7 +261,7 @@ serviceMaps:
     - query: INSERT INTO oy.individual_skill(id, clientReferenceId, individualId,
         type, level, experience, createdBy, lastModifiedBy, createdTime, lastModifiedTime,
         isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) WHERE
-        isDeleted=false DO UPDATE oy.SET type = ?, level = ?, experience = ?, lastModifiedBy
+        isDeleted=false DO UPDATE SET type = ?, level = ?, experience = ?, lastModifiedBy
         = ?, lastModifiedTime = ?;
       basePath: $.*.skills.*
       jsonMaps:
@@ -288,7 +286,7 @@ serviceMaps:
     fromTopic: oy-delete-individual-topic
     isTransaction: true
     isAuditEnabled: true
-    module: INDIVIDUAL-DELETE
+    module: INDIVIDUAL
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     userUuidJsonPath: $.[0].auditDetails.createdBy
@@ -337,6 +335,13 @@ serviceMaps:
     description: Updates userId and userUuid received from user-service into an individual
     fromTopic: oy-update-user-id-topic
     isTransaction: true
+    isAuditEnabled: true
+    module: INDIVIDUAL
+    objecIdJsonPath: $.id
+    tenantIdJsonPath: $.tenantId
+    userUuidJsonPath: $.[0].auditDetails.createdBy
+    transactionCodeJsonPath: $.clientReferenceId
+    auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE oy.individual SET userId=?, userUuid=? WHERE id=?;
       basePath: $.*
