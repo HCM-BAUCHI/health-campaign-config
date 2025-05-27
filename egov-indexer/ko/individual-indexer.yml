@@ -1,0 +1,31 @@
+ServiceMaps:
+  serviceName: individual
+  version: 1.0.0
+  mappings:
+  - topic: ko-save-individual-topic
+    configKey: INDEX
+    indexes:
+    - name: ko-individual-index-v1
+      type: individual
+      id: $.clientReferenceId
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.createdTime
+  - topic: ko-update-individual-topic
+    configKey: INDEX
+    indexes:
+    - name: ko-individual-index-v1
+      type: individual
+      id: $.clientReferenceId
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.lastModifiedTime
+  - topic: ko-delete-individual-topic
+    configKey: INDEX
+    indexes:
+    - name: ko-individual-index-v1
+      type: individual
+      id: $.clientReferenceId
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.lastModifiedTime

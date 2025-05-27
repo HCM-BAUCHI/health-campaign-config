@@ -1,0 +1,22 @@
+ServiceMaps:
+  serviceName: Uploader
+  version: 1.0.0
+  mappings:
+  - topic: na-save-upload-jobs
+    configKey: INDEX
+    indexes:
+    - name: na-uploaderindex-v1
+      type: jobs
+      id: $.code
+      isBulk: false
+      jsonPath: $.UploadJob
+      timeStampField: $.auditDetails.createdTime
+  - topic: na-update-upload-jobs
+    configKey: INDEX
+    indexes:
+    - name: na-uploaderindex-v1
+      type: jobs
+      id: $.code
+      isBulk: false
+      jsonPath: $.UploadJob
+      timeStampField: $.auditDetails.createdTime
