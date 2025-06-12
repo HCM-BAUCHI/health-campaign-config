@@ -10,7 +10,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.[0].auditDetails.createdBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: INSERT INTO ba.product(id, tenantId, type, name, manufacturer, additionalDetails,
@@ -41,7 +41,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE ba.product SET tenantId = ?, type = ?, name = ?, manufacturer
@@ -70,7 +70,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.[0].auditDetails.createdBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: INSERT INTO ba.product_variant(id, tenantId, productId, sku, variation,
@@ -101,7 +101,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE ba.product_variant SET tenantId = ?, productId = ?, sku = ?, variation

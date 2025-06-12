@@ -10,7 +10,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.[0].auditDetails.createdBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: INSERT INTO ab.project_staff (id, tenantId, projectId, staffId, startDate,
@@ -42,7 +42,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE ab.project_staff SET projectId=?, staffId=?, startDate=?, endDate=?,
@@ -71,7 +71,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE ab.project_staff SET lastModifiedBy=?, lastModifiedTime=?, rowVersion=?,
@@ -95,7 +95,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.clientReferenceId
-    userUuidJsonPath: $.[0].auditDetails.createdBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: INSERT INTO ab.project_beneficiary (id, tenantId, projectId, beneficiaryId,
@@ -135,7 +135,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.clientReferenceId
-    userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE ab.project_beneficiary SET projectId=?, beneficiaryId=?, clientReferenceId=?,
@@ -169,7 +169,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE ab.project_beneficiary SET lastModifiedBy=?, lastModifiedTime=?,
@@ -197,7 +197,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.Projects.[0].auditDetails.lastModifiedBy
+    
     auditAttributeBasePath: $.Projects.*
     queryMaps:
     - query: INSERT INTO ab.project(id,tenantId,projectNumber,name,projectType,projectTypeId,projectSubType,department,description,referenceId,startDate,endDate,isTaskEnabled,parent,projectHierarchy,natureOfWork,additionalDetails,isDeleted,rowVersion,createdBy,lastModifiedBy,createdTime,lastModifiedTime)
@@ -291,7 +291,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.Projects.[0].auditDetails.lastModifiedBy
+    
     auditAttributeBasePath: $.Projects.*
     queryMaps:
     - query: UPDATE ab.project SET name = ?, projectType = ?, projectTypeId = ?, projectSubType
@@ -397,7 +397,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.[0].auditDetails.createdBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: INSERT INTO ab.project_resource (id, tenantId, projectId, productVariantId,
@@ -428,7 +428,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE ab.project_resource SET tenantId=?, projectId=?, productVariantId=?,
@@ -457,7 +457,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE ab.project_resource SET lastModifiedBy=?, lastModifiedTime=?,
@@ -478,7 +478,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.[0].auditDetails.createdBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: INSERT INTO ab.project_facility (id, tenantId, projectId, facilityId,
@@ -508,7 +508,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE ab.project_facility SET projectId=?, facilityId=?, additionalDetails=?,
@@ -535,7 +535,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE ab.project_facility SET lastModifiedBy=?, lastModifiedTime=?,

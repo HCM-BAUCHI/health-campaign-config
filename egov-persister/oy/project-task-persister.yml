@@ -10,7 +10,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.clientReferenceId
-    userUuidJsonPath: $.[0].auditDetails.createdBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: INSERT INTO oy.PROJECT_TASK(id, clientReferenceId, tenantId, projectId,
@@ -99,7 +99,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.clientReferenceId
-    userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE oy.PROJECT_TASK SET tenantId = ?, projectId = ?, projectBeneficiaryId
@@ -195,7 +195,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.clientReferenceId
-    userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+    
     auditAttributeBasePath: $.*
     queryMaps:
     - query: UPDATE oy.PROJECT_TASK SET lastModifiedBy = ?, lastModifiedTime = ?,

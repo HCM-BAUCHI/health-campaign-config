@@ -10,7 +10,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.id
-    userUuidJsonPath: $.RequestInfo.userInfo.uuid
+    
     auditAttributeBasePath: $.ServiceDefinition
     queryMaps:
     - query: INSERT INTO pl.eg_service_definition(id, tenantid, code, isactive, createdby,
@@ -64,7 +64,7 @@ serviceMaps:
     objecIdJsonPath: $.id
     tenantIdJsonPath: $.tenantId
     transactionCodeJsonPath: $.referenceId
-    userUuidJsonPath: $.RequestInfo.userInfo.uuid
+    
     auditAttributeBasePath: $.Service
     queryMaps:
     - query: INSERT INTO pl.eg_service(id, tenantid, servicedefid, referenceid, createdby,
