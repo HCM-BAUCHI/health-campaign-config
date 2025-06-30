@@ -1,0 +1,21 @@
+ServiceMaps:
+  serviceName: Tracer
+  version: 1.0.0
+  mappings:
+  - topic: bo-tracer-error-queue-index
+    configKey: INDEX
+    indexes:
+    - name: bo-egovtracer
+      type: errors
+      id: $.id
+      isBulk: false
+      timeStampField: $.ts
+  - topic: bo-tracer-error-queue-reindex
+    configKey: REINDEX
+    indexes:
+    - name: bo-egovtracerreindex
+      type: errors
+      id: $.id
+      isBulk: true
+      jsonPath: $.hits
+      timeStampField: $.ts
