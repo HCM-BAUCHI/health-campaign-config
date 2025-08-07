@@ -1,0 +1,40 @@
+ServiceMaps:
+  serviceName: product
+  version: 1.0.0
+  mappings:
+  - topic: od-save-product-variant-topic
+    configKey: INDEX
+    indexes:
+    - name: od-product-variant-index-v1
+      type: product-variant
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.createdTime
+  - topic: od-save-product-topic
+    configKey: INDEX
+    indexes:
+    - name: od-product-index-v1
+      type: product
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.createdTime
+  - topic: od-update-product-topic
+    configKey: INDEX
+    indexes:
+    - name: od-product-index-v1
+      type: product
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.createdTime
+  - topic: od-update-product-variant-topic
+    configKey: INDEX
+    indexes:
+    - name: od-product-variant-index-v1
+      type: product-variant-update
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.createdTime
