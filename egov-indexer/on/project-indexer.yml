@@ -1,0 +1,100 @@
+ServiceMaps:
+  serviceName: Project Service
+  version: 1.0.0
+  mappings:
+  - topic: on-transformer-producer-bulk-project-index-v1-topic
+    configKey: INDEX
+    indexes:
+    - name: on-project-index-v1
+      type: projects
+      id: $.id
+      isBulk: true
+      jsonPath: $
+      customJsonMapping:
+        indexMapping:
+          Data: {}
+        fieldMapping:
+        - inJsonPath: $
+          outJsonPath: $.Data
+      timeStampField: $.lastModifiedTime
+  - topic: on-save-project-beneficiary-topic
+    configKey: INDEX
+    indexes:
+    - name: on-project-beneficiary-index-v1
+      type: project-beneficiary
+      id: $.clientReferenceId,$.beneficiaryClientReferenceId,$.tenantId
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.createdTime
+  - topic: on-update-project-beneficiary-topic
+    configKey: INDEX
+    indexes:
+    - name: on-project-beneficiary-index-v1
+      type: project-beneficiary
+      id: $.clientReferenceId,$.beneficiaryClientReferenceId,$.tenantId
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.lastModifiedTime
+  - topic: on-delete-project-beneficiary-topic
+    configKey: INDEX
+    indexes:
+    - name: on-project-beneficiary-index-v1
+      type: project-beneficiary
+      id: $.clientReferenceId,$.beneficiaryClientReferenceId,$.tenantId
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.lastModifiedTime
+  - topic: on-save-project-resource-topic
+    configKey: INDEX
+    indexes:
+    - name: on-project-resource-index-v1
+      type: project-resource
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.createdTime
+  - topic: on-update-project-resource-topic
+    configKey: INDEX
+    indexes:
+    - name: on-project-resource-index-v1
+      type: project-resource
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.lastModifiedTime
+  - topic: on-delete-project-resource-topic
+    configKey: INDEX
+    indexes:
+    - name: on-project-resource-index-v1
+      type: project-resource
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.lastModifiedTime
+  - topic: on-save-project-facility-topic
+    configKey: INDEX
+    indexes:
+    - name: on-project-facility-index-v1
+      type: project-facility
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.createdTime
+  - topic: on-update-project-facility-topic
+    configKey: INDEX
+    indexes:
+    - name: on-project-facility-index-v1
+      type: project-facility
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.lastModifiedTime
+  - topic: on-delete-project-facility-topic
+    configKey: INDEX
+    indexes:
+    - name: on-project-facility-index-v1
+      type: project-facility
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.lastModifiedTime
