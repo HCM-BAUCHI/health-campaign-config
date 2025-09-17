@@ -1,0 +1,85 @@
+ServiceMaps:
+  serviceName: attendance-service
+  version: 1.0.0
+  mappings:
+  - topic: ka-save-attendance
+    configKey: INDEX
+    indexes:
+    - name: ka-attendance-index-v1
+      type: attendance
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.createdTime
+  - topic: ka-update-attendance
+    configKey: INDEX
+    indexes:
+    - name: ka-attendance-index-v1
+      type: attendance
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.lastModifiedTime
+  - topic: ka-save-attendee
+    configKey: INDEX
+    indexes:
+    - name: ka-attendee-index-v1
+      type: attendee
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.createdTime
+  - topic: ka-update-attendee
+    configKey: INDEX
+    indexes:
+    - name: ka-attendee-index-v1
+      type: attendee
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.lastModifiedTime
+  - topic: ka-save-staff
+    configKey: INDEX
+    indexes:
+    - name: ka-staff-index-v1
+      type: staff
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.createdTime
+  - topic: ka-update-staff
+    configKey: INDEX
+    indexes:
+    - name: ka-staff-index-v1
+      type: staff
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.lastModifiedTime
+  - topic: ka-transformer-save-attendance-register
+    configKey: INDEX
+    indexes:
+    - name: ka-transformed-attendance-register-index-v1
+      type: attendance-register
+      id: $.attendanceRegister.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.attendanceRegister.auditDetails.lastModifiedTime
+  - topic: ka-transformer-save-attendance-log
+    configKey: INDEX
+    indexes:
+    - name: ka-attendance-log-index-v1
+      type: attendance-log
+      id: $.attendanceLog.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.attendanceLog.auditDetails.lastModifiedTime
+  - topic: ka-update-attendance-log
+    configKey: INDEX
+    indexes:
+    - name: ka-attendance-log-index-v1
+      type: attendance-log
+      id: $.id
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.time
