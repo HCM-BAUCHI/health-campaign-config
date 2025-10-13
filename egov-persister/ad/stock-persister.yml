@@ -13,7 +13,7 @@ serviceMaps:
     transactionCodeJsonPath: $.clientReferenceId
     auditAttributeBasePath: $.*
     queryMaps:
-    - query: INSERT INTO ab.STOCK(id, clientReferenceId, tenantId, productVariantId,
+    - query: INSERT INTO ad.STOCK(id, clientReferenceId, tenantId, productVariantId,
         wayBillNumber, quantity, referenceId, referenceIdType, transactionType, transactionReason,
         senderType, senderId, receiverType, receiverId, additionalDetails, createdBy,
         createdTime, lastModifiedBy, lastModifiedTime, rowVersion, isDeleted, dateOfEntry,
@@ -61,7 +61,7 @@ serviceMaps:
     transactionCodeJsonPath: $.clientReferenceId
     auditAttributeBasePath: $.*
     queryMaps:
-    - query: UPDATE ab.STOCK SET tenantId=?, dateOfEntry = ?, productVariantId=?,
+    - query: UPDATE ad.STOCK SET tenantId=?, dateOfEntry = ?, productVariantId=?,
         wayBillNumber=?, quantity=?, referenceId=?, referenceIdType=?, transactionType=?,
         transactionReason=?, senderType=?, senderId=?, receiverType=?, receiverId=?,
         additionalDetails=?, lastModifiedBy=?, lastModifiedTime=?, rowVersion=?, clientLastModifiedTime
@@ -102,7 +102,7 @@ serviceMaps:
     transactionCodeJsonPath: $.clientReferenceId
     auditAttributeBasePath: $.*
     queryMaps:
-    - query: UPDATE ab.STOCK SET lastModifiedBy=?, lastModifiedTime=?, clientLastModifiedTime
+    - query: UPDATE ad.STOCK SET lastModifiedBy=?, lastModifiedTime=?, clientLastModifiedTime
         = ?, clientLastModifiedBy = ?, rowVersion=?, isDeleted=?, additionalDetails=?
         WHERE id=?;
       basePath: $.*
@@ -129,7 +129,7 @@ serviceMaps:
     transactionCodeJsonPath: $.clientReferenceId
     auditAttributeBasePath: $.*
     queryMaps:
-    - query: INSERT INTO ab.STOCK_RECONCILIATION_LOG(id, clientReferenceId, tenantId,
+    - query: INSERT INTO ad.STOCK_RECONCILIATION_LOG(id, clientReferenceId, tenantId,
         facilityId, dateOfReconciliation, calculatedCount, physicalRecordedCount,
         commentsOnReconciliation, productVariantId, referenceId, referenceIdType,
         additionalDetails, createdBy, createdTime, lastModifiedBy, lastModifiedTime,
@@ -173,7 +173,7 @@ serviceMaps:
     transactionCodeJsonPath: $.clientReferenceId
     auditAttributeBasePath: $.*
     queryMaps:
-    - query: UPDATE ab.STOCK_RECONCILIATION_LOG SET tenantId=?, facilityId=?, productVariantId=?,
+    - query: UPDATE ad.STOCK_RECONCILIATION_LOG SET tenantId=?, facilityId=?, productVariantId=?,
         referenceId=?, referenceIdType=?, dateOfReconciliation=?, calculatedCount=?,
         physicalRecordedCount=?, commentsOnReconciliation=?, additionalDetails=?,
         lastModifiedBy=?, lastModifiedTime=?, rowVersion=?, clientLastModifiedTime
@@ -210,7 +210,7 @@ serviceMaps:
     transactionCodeJsonPath: $.clientReferenceId
     auditAttributeBasePath: $.*
     queryMaps:
-    - query: UPDATE ab.STOCK_RECONCILIATION_LOG SET lastModifiedBy=?, lastModifiedTime=?,
+    - query: UPDATE ad.STOCK_RECONCILIATION_LOG SET lastModifiedBy=?, lastModifiedTime=?,
         clientLastModifiedTime = ?, clientLastModifiedBy = ?, rowVersion=?, isDeleted=?,
         additionalDetails=? WHERE id=?;
       basePath: $.*

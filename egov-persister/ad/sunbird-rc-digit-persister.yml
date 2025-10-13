@@ -6,7 +6,7 @@ serviceMaps:
     fromTopic: ad-save-vc-service-delivery-topic
     isTransaction: true
     queryMaps:
-    - query: INSERT INTO ab.eg_vc_service_delivery (id, certificateId, serviceTaskId,
+    - query: INSERT INTO ad.eg_vc_service_delivery (id, certificateId, serviceTaskId,
         beneficiaryId, distributedBy, createdBy, lastModifiedBy,createdTime, lastModifiedTime)
         VALUES (?,?,?,?,?,?,?,?,?);
       basePath: $.*
@@ -25,7 +25,7 @@ serviceMaps:
     fromTopic: ad-update-vc-service-delivery-topic
     isTransaction: true
     queryMaps:
-    - query: UPDATE ab.eg_vc_service_delivery SET certificateId=?, lastModifiedBy=?,
+    - query: UPDATE ad.eg_vc_service_delivery SET certificateId=?, lastModifiedBy=?,
         lastModifiedTime=? WHERE serviceTaskId = ?
       basePath: $.*
       jsonMaps:

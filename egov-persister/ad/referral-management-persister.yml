@@ -6,7 +6,7 @@ serviceMaps:
     fromTopic: ad-save-side-effect-topic
     isTransaction: true
     queryMaps:
-    - query: INSERT INTO ab.SIDE_EFFECT(id, clientReferenceId, tenantId, taskId, taskClientReferenceId,
+    - query: INSERT INTO ad.SIDE_EFFECT(id, clientReferenceId, tenantId, taskId, taskClientReferenceId,
         projectBeneficiaryId, projectBeneficiaryClientReferenceId, symptoms, additionalDetails,
         createdBy, createdTime, lastModifiedBy, lastModifiedTime, clientCreatedBy,
         clientCreatedTime, clientLastModifiedBy, clientLastModifiedTime, rowVersion,
@@ -41,7 +41,7 @@ serviceMaps:
     fromTopic: ad-update-side-effect-topic
     isTransaction: true
     queryMaps:
-    - query: UPDATE ab.SIDE_EFFECT SET tenantId = ?, taskId = ?, taskClientReferenceId
+    - query: UPDATE ad.SIDE_EFFECT SET tenantId = ?, taskId = ?, taskClientReferenceId
         = ?, projectBeneficiaryId = ?, projectBeneficiaryClientReferenceId = ?, symptoms
         = ?, additionalDetails = ?, lastModifiedBy = ?, lastModifiedTime = ?, clientLastModifiedBy
         = ?, clientLastModifiedTime = ?, rowVersion = ?, isDeleted = ? WHERE ID =
@@ -71,7 +71,7 @@ serviceMaps:
     fromTopic: ad-delete-side-effect-topic
     isTransaction: true
     queryMaps:
-    - query: UPDATE ab.SIDE_EFFECT SET lastModifiedBy = ?, lastModifiedTime = ?, clientLastModifiedBy
+    - query: UPDATE ad.SIDE_EFFECT SET lastModifiedBy = ?, lastModifiedTime = ?, clientLastModifiedBy
         = ?, clientLastModifiedTime = ?, rowVersion = ?, isDeleted = ? WHERE ID =
         ?;
       basePath: $.*
@@ -88,7 +88,7 @@ serviceMaps:
     fromTopic: ad-save-referral-topic
     isTransaction: true
     queryMaps:
-    - query: INSERT INTO ab.REFERRAL(id, clientReferenceId, tenantId, projectBeneficiaryId,
+    - query: INSERT INTO ad.REFERRAL(id, clientReferenceId, tenantId, projectBeneficiaryId,
         projectBeneficiaryClientReferenceId, referrerId, recipientId, recipientType,
         reasons, additionalDetails, sideEffectId, sideEffectClientReferenceId, createdBy,
         createdTime, lastModifiedBy, lastModifiedTime, clientCreatedBy, clientCreatedTime,
@@ -126,7 +126,7 @@ serviceMaps:
     fromTopic: ad-update-referral-topic
     isTransaction: true
     queryMaps:
-    - query: UPDATE ab.REFERRAL SET tenantId = ?, projectBeneficiaryId = ?, projectBeneficiaryClientReferenceId
+    - query: UPDATE ad.REFERRAL SET tenantId = ?, projectBeneficiaryId = ?, projectBeneficiaryClientReferenceId
         = ?, referrerId = ?, recipientId = ?, recipientType = ?, reasons = ?, additionalDetails
         = ?, sideEffectId = ?, sideEffectClientReferenceId = ?, lastModifiedBy = ?,
         lastModifiedTime = ?, clientLastModifiedBy = ?, clientLastModifiedTime = ?,
@@ -159,7 +159,7 @@ serviceMaps:
     fromTopic: ad-delete-referral-topic
     isTransaction: true
     queryMaps:
-    - query: UPDATE ab.REFERRAL SET lastModifiedBy = ?, lastModifiedTime = ?, clientLastModifiedBy
+    - query: UPDATE ad.REFERRAL SET lastModifiedBy = ?, lastModifiedTime = ?, clientLastModifiedBy
         = ?, clientLastModifiedTime = ?, rowVersion = ?, isDeleted = ? WHERE ID =
         ?;
       basePath: $.*
@@ -176,7 +176,7 @@ serviceMaps:
     fromTopic: ad-save-hfreferral-topic
     isTransaction: true
     queryMaps:
-    - query: INSERT INTO ab.hf_referral(id, clientReferenceId, tenantId, projectid,
+    - query: INSERT INTO ad.hf_referral(id, clientReferenceId, tenantId, projectid,
         projectFacilityId, symptom, symptomsurveyid, beneficiaryid, referralcode,
         nationallevelid, additionalDetails, createdBy, createdTime, lastModifiedBy,
         lastModifiedTime, clientCreatedBy, clientCreatedTime, clientLastModifiedBy,
@@ -211,7 +211,7 @@ serviceMaps:
     fromTopic: ad-update-hfreferral-topic
     isTransaction: true
     queryMaps:
-    - query: UPDATE ab.hf_referral SET clientReferenceId = ?, tenantId = ?, projectid
+    - query: UPDATE ad.hf_referral SET clientReferenceId = ?, tenantId = ?, projectid
         = ?, projectFacilityId = ?, symptom = ?, symptomsurveyid = ?, beneficiaryid
         = ?, referralcode = ?, nationallevelid = ?, additionalDetails = ?, lastModifiedBy
         = ?, lastModifiedTime = ?, clientLastModifiedBy = ?, clientLastModifiedTime
@@ -241,7 +241,7 @@ serviceMaps:
     fromTopic: ad-delete-hfreferral-topic
     isTransaction: true
     queryMaps:
-    - query: UPDATE ab.hf_referral SET lastModifiedBy = ?, lastModifiedTime = ?, clientLastModifiedBy
+    - query: UPDATE ad.hf_referral SET lastModifiedBy = ?, lastModifiedTime = ?, clientLastModifiedBy
         = ?, clientLastModifiedTime = ?, rowVersion = ?, isDeleted = ? WHERE ID =
         ?;
       basePath: $.*

@@ -7,7 +7,7 @@ serviceMaps:
     fromTopic: ad-save-upload-jobs
     isTransaction: true
     queryMaps:
-    - query: Insert into ab.EGDU_UPLOADREGISTRY(CODE, TENANTID, REQUESTFILE_PATH,
+    - query: Insert into ad.EGDU_UPLOADREGISTRY(CODE, TENANTID, REQUESTFILE_PATH,
         MODULE_NAME, DEF_NAME, REQUESTER_NAME, STATUS,FILE_NAME,CREATEDBY,CREATEDDATE,LASTMODIFIEDBY,LASTMODIFIEDDATE)
         VALUES(?,?,?,?,?,?,?,?,?,?,?,?);
       basePath: UploadJob
@@ -30,7 +30,7 @@ serviceMaps:
     fromTopic: ad-update-upload-jobs
     isTransaction: true
     queryMaps:
-    - query: Update ab.EGDU_UPLOADREGISTRY set START_TIME=?, END_TIME=?, TOTAL_ROWS=?,
+    - query: Update ad.EGDU_UPLOADREGISTRY set START_TIME=?, END_TIME=?, TOTAL_ROWS=?,
         SUCCESS_ROWS=?, FAILED_ROWS=?, RESPONSEFILE_PATH=?, STATUS=?, REASON_FOR_FAILURE
         = ?, LASTMODIFIEDBY=?, LASTMODIFIEDDATE=? where CODE=? AND TENANTID=?
       basePath: UploadJobs

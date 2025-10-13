@@ -6,7 +6,7 @@ serviceMaps:
       fromTopic: ad-create-dhis2-record
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO ab.eg_dhis2_record(dhis2RecordInternalID,dhis2Id,parentId,dhis2EntityType,dhis2DataPayload,source,createdBy,lastModifiedBy,createdTime,lastModifiedTime)
+        - query: INSERT INTO ad.eg_dhis2_record(dhis2RecordInternalID,dhis2Id,parentId,dhis2EntityType,dhis2DataPayload,source,createdBy,lastModifiedBy,createdTime,lastModifiedTime)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
           jsonMaps:
@@ -27,7 +27,7 @@ serviceMaps:
       fromTopic: ad-update-dhis2-record
       isTransaction: true
       queryMaps:
-        - query: UPDATE ab.eg_dhis2_record SET  dhis2Id= ?, dhis2EntityType=?, dhis2DataPayload=?,
+        - query: UPDATE ad.eg_dhis2_record SET  dhis2Id= ?, dhis2EntityType=?, dhis2DataPayload=?,
             lastModifiedTime=?, lastModifiedBy=?  WHERE dhis2RecordInternalID=?;
           basePath: $.*
           jsonMaps:
@@ -44,7 +44,7 @@ serviceMaps:
       fromTopic: ad-create-digit-record
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO ab.eg_digit_record(digitRecordInternalId,digitId,parentId,referenceId,digitEntityType,digitDataPayload,source,createdBy,lastModifiedBy,createdTime,lastModifiedTime)
+        - query: INSERT INTO ad.eg_digit_record(digitRecordInternalId,digitId,parentId,referenceId,digitEntityType,digitDataPayload,source,createdBy,lastModifiedBy,createdTime,lastModifiedTime)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
           jsonMaps:
@@ -66,7 +66,7 @@ serviceMaps:
       fromTopic: ad-update-digit-record
       isTransaction: true
       queryMaps:
-        - query: UPDATE ab.eg_digit_record SET  digitId= ?,referenceId=? ,digitEntityType=?,
+        - query: UPDATE ad.eg_digit_record SET  digitId= ?,referenceId=? ,digitEntityType=?,
             digitDataPayload=?, lastModifiedTime=?, lastModifiedBy=? WHERE digitRecordInternalId=?;
           basePath: $.*
           jsonMaps:
@@ -84,7 +84,7 @@ serviceMaps:
       fromTopic: ad-create-dhis2-digit-mapping
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO ab.eg_digit_mapping(digitMappingId, dhis2RecordInternalID,
+        - query: INSERT INTO ad.eg_digit_mapping(digitMappingId, dhis2RecordInternalID,
             digitId, parentId, rowVersion, digitEntityType, createdBy,lastModifiedBy,createdTime,lastModifiedTime)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
@@ -104,7 +104,7 @@ serviceMaps:
       fromTopic: ad-update-dhis2-digit-mapping
       isTransaction: true
       queryMaps:
-        - query: UPDATE ab.eg_digit_mapping SET  digitId= ?, digitEntityType=?, dhis2RecordInternalID=?,
+        - query: UPDATE ad.eg_digit_mapping SET  digitId= ?, digitEntityType=?, dhis2RecordInternalID=?,
             lastModifiedTime=?, lastModifiedBy=?, rowVersion=?  WHERE digitMappingId=?;
           basePath: $.*
           jsonMaps:
@@ -120,7 +120,7 @@ serviceMaps:
       fromTopic: ad-create-digit-dhis2-mapping
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO ab.eg_dhis2_mapping(dhis2MappingId, digitRecordInternalId,
+        - query: INSERT INTO ad.eg_dhis2_mapping(dhis2MappingId, digitRecordInternalId,
             dhis2d,parentId,dhis2EntityType, createdBy,lastModifiedBy,createdTime,lastModifiedTime)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
@@ -139,7 +139,7 @@ serviceMaps:
       fromTopic: ad-update-digit-dhis2-mapping
       isTransaction: true
       queryMaps:
-        - query: UPDATE ab.eg_dhis2_mapping SET  dhis2d= ?, dhis2EntityType=?, digitRecordInternalId=?,
+        - query: UPDATE ad.eg_dhis2_mapping SET  dhis2d= ?, dhis2EntityType=?, digitRecordInternalId=?,
             lastModifiedTime=?, lastModifiedBy=? WHERE dhis2MappingId=?;
           basePath: $.*
           jsonMaps:
@@ -154,7 +154,7 @@ serviceMaps:
       fromTopic: ad-create-dhis2-job
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO ab.eg_scheduler_job_history(jobID, jobType, jobName, executionStartTime,
+        - query: INSERT INTO ad.eg_scheduler_job_history(jobID, jobType, jobName, executionStartTime,
             executionCompletionTime, executionStatus, executionRetryCount, createdBy,lastModifiedBy,createdTime,lastModifiedTime,syncCount,province)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.Job
@@ -179,7 +179,7 @@ serviceMaps:
       fromTopic: ad-update-dhis2-job
       isTransaction: true
       queryMaps:
-        - query: UPDATE ab.eg_scheduler_job_history SET executionStatus = ?, executionCompletionTime
+        - query: UPDATE ad.eg_scheduler_job_history SET executionStatus = ?, executionCompletionTime
             = ?, executionRetryCount = ?, syncCount = ? WHERE jobID=?;
           basePath: $.Job
           jsonMaps:
@@ -204,7 +204,7 @@ serviceMaps:
       fromTopic: ad-create-boundary-data
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO ab.eg_dhis2_boundary(id, name, parent, path, children, boundaryLevel,
+        - query: INSERT INTO ad.eg_dhis2_boundary(id, name, parent, path, children, boundaryLevel,
             boundary, source, campaignStartDate, campaignEndDate, totalHouseholds, targetedHouseholds,
             totalIndividuals, targetedIndividuals, bednetsEstimated, totalBednets, createdBy,
             lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?,
@@ -257,7 +257,7 @@ serviceMaps:
       fromTopic: ad-create-boundaryCSV-data
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO ab.eg_dhis2_boundary_csv(id, name, parent, path, children,
+        - query: INSERT INTO ad.eg_dhis2_boundary_csv(id, name, parent, path, children,
             boundaryLevel, boundary, source, campaignStartDate, campaignEndDate, objectNode,
             createdBy, lastModifiedBy, createdTime, lastModifiedTime, boundaryHierarchy)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO
@@ -301,7 +301,7 @@ serviceMaps:
       fromTopic: ad-create-hcm-event-history
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO ab.eg_hcm_event_history(eventId, jobId, url, payload, status,
+        - query: INSERT INTO ad.eg_hcm_event_history(eventId, jobId, url, payload, status,
             message, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES
             (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*

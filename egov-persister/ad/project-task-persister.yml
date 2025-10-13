@@ -13,7 +13,7 @@ serviceMaps:
     
     auditAttributeBasePath: $.*
     queryMaps:
-    - query: INSERT INTO ab.PROJECT_TASK(id, clientReferenceId, tenantId, projectId,
+    - query: INSERT INTO ad.PROJECT_TASK(id, clientReferenceId, tenantId, projectId,
         projectBeneficiaryId, projectBeneficiaryClientReferenceId, plannedStartDate,
         plannedEndDate, actualStartDate, actualEndDate, addressId, status, additionalDetails,
         createdBy, createdTime, lastModifiedBy, lastModifiedTime, rowVersion, isDeleted,
@@ -46,7 +46,7 @@ serviceMaps:
       - jsonPath: $.*.clientAuditDetails.lastModifiedTime
       - jsonPath: $.*.clientAuditDetails.createdBy
       - jsonPath: $.*.clientAuditDetails.lastModifiedBy
-    - query: INSERT INTO ab.ADDRESS(id, clientReferenceId, tenantid, doorno, latitude,
+    - query: INSERT INTO ad.ADDRESS(id, clientReferenceId, tenantid, doorno, latitude,
         longitude, locationAccuracy, type, addressline1, addressline2, landmark, city,
         pincode, buildingName, street, localityCode) VALUES (?, ?, ?, ?, ?, ?, ?,
         ?, ?, ?, ?, ?, ?, ?, ?, ?);
@@ -68,7 +68,7 @@ serviceMaps:
       - jsonPath: $.*.address.buildingName
       - jsonPath: $.*.address.street
       - jsonPath: $.*.address.locality.code
-    - query: INSERT INTO ab.TASK_RESOURCE(id, clientReferenceId, tenantid, productvariantid,
+    - query: INSERT INTO ad.TASK_RESOURCE(id, clientReferenceId, tenantid, productvariantid,
         taskid, quantity, isDelivered, reasonIfNotDelivered, createdBy, createdTime,
         lastModifiedBy, lastModifiedTime, isDeleted, additionalDetails) VALUES (?,
         ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
@@ -102,7 +102,7 @@ serviceMaps:
     
     auditAttributeBasePath: $.*
     queryMaps:
-    - query: UPDATE ab.PROJECT_TASK SET tenantId = ?, projectId = ?, projectBeneficiaryId
+    - query: UPDATE ad.PROJECT_TASK SET tenantId = ?, projectId = ?, projectBeneficiaryId
         = ?, projectBeneficiaryClientReferenceId = ?, addressId = ?, plannedStartDate
         = ?, plannedEndDate = ?, actualStartDate = ?, actualEndDate = ?, status =
         ?, additionalDetails = ?, lastModifiedBy = ?, lastModifiedTime = ?, rowVersion
@@ -130,7 +130,7 @@ serviceMaps:
       - jsonPath: $.*.clientAuditDetails.lastModifiedTime
       - jsonPath: $.*.clientAuditDetails.lastModifiedBy
       - jsonPath: $.*.id
-    - query: UPDATE ab.ADDRESS SET tenantId = ?, doorno = ?, latitude = ?, longitude
+    - query: UPDATE ad.ADDRESS SET tenantId = ?, doorno = ?, latitude = ?, longitude
         = ?, locationAccuracy = ?, type = ?, addressline1 = ?, addressline2 = ?, landmark
         = ?, city = ?, pincode = ?, buildingName = ?, street = ?, localityCode = ?
         WHERE ID = ?;
@@ -151,7 +151,7 @@ serviceMaps:
       - jsonPath: $.*.address.street
       - jsonPath: $.*.address.locality.code
       - jsonPath: $.*.address.id
-    - query: INSERT INTO ab.TASK_RESOURCE(id, clientReferenceId, tenantid, productvariantid,
+    - query: INSERT INTO ad.TASK_RESOURCE(id, clientReferenceId, tenantid, productvariantid,
         taskid, quantity, isDelivered, reasonIfNotDelivered, additionalDetails, createdBy,
         createdTime, lastModifiedBy, lastModifiedTime, isDeleted) VALUES (?, ?, ?,
         ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET tenantid
@@ -198,7 +198,7 @@ serviceMaps:
     
     auditAttributeBasePath: $.*
     queryMaps:
-    - query: UPDATE ab.PROJECT_TASK SET lastModifiedBy = ?, lastModifiedTime = ?,
+    - query: UPDATE ad.PROJECT_TASK SET lastModifiedBy = ?, lastModifiedTime = ?,
         clientLastModifiedTime = ?, clientLastModifiedBy = ?, rowVersion = ?, isDeleted
         = ?, additionalDetails=? WHERE ID = ?;
       basePath: $.*
@@ -213,7 +213,7 @@ serviceMaps:
         type: JSON
         dbType: JSONB
       - jsonPath: $.*.id
-    - query: UPDATE ab.TASK_RESOURCE SET lastModifiedBy = ?, lastModifiedTime = ?,
+    - query: UPDATE ad.TASK_RESOURCE SET lastModifiedBy = ?, lastModifiedTime = ?,
         isDeleted = ? WHERE ID = ?;
       basePath: $.*.resources.*
       jsonMaps:

@@ -6,7 +6,7 @@ serviceMaps:
     fromTopic: ad-create-boundary-entity
     isTransaction: true
     queryMaps:
-    - query: INSERT INTO ab.boundary (id, tenantId, code, geometry, additionalDetails,
+    - query: INSERT INTO ad.boundary (id, tenantId, code, geometry, additionalDetails,
         createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?,
         ?, ?, ?, ?, ?, ?);
       basePath: $.Boundary.*
@@ -29,7 +29,7 @@ serviceMaps:
     fromTopic: ad-update-boundary-entity
     isTransaction: true
     queryMaps:
-    - query: UPDATE ab.boundary SET geometry = ? , lastModifiedBy = ? , lastModifiedTime
+    - query: UPDATE ad.boundary SET geometry = ? , lastModifiedBy = ? , lastModifiedTime
         = ? WHERE code = ? AND tenantId = ?;
       basePath: $.Boundary.*
       jsonMaps:
@@ -45,7 +45,7 @@ serviceMaps:
     fromTopic: ad-save-boundary-hierarchy-definition
     isTransaction: true
     queryMaps:
-    - query: INSERT INTO ab.boundary_hierarchy (id, tenantId, hierarchyType, boundaryHierarchy,
+    - query: INSERT INTO ad.boundary_hierarchy (id, tenantId, hierarchyType, boundaryHierarchy,
         createdTime, createdBy, lastModifiedTime, lastModifiedBy) VALUES (?, ?, ?,
         ?, ?, ?, ?, ?);
       basePath: $.BoundaryHierarchy
@@ -65,7 +65,7 @@ serviceMaps:
     fromTopic: ad-save-boundary-relationship
     isTransaction: true
     queryMaps:
-    - query: INSERT INTO ab.boundary_relationship (id, tenantId, code, hierarchyType,
+    - query: INSERT INTO ad.boundary_relationship (id, tenantId, code, hierarchyType,
         boundaryType, parent, ancestralMaterializedPath, createdTime, createdBy, lastModifiedTime,
         lastModifiedBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: $.BoundaryRelationship
@@ -86,7 +86,7 @@ serviceMaps:
     fromTopic: ad-update-boundary-relationship
     isTransaction: true
     queryMaps:
-    - query: UPDATE ab.boundary_relationship SET parent = ?, ancestralmaterializedpath
+    - query: UPDATE ad.boundary_relationship SET parent = ?, ancestralmaterializedpath
         = ?, lastmodifiedtime = ?, lastmodifiedby = ? WHERE id = ?;
       basePath: $.BoundaryRelationshipList.*
       jsonMaps:

@@ -13,7 +13,7 @@ serviceMaps:
     
     auditAttributeBasePath: $.*
     queryMaps:
-    - query: INSERT INTO ab.product(id, tenantId, type, name, manufacturer, additionalDetails,
+    - query: INSERT INTO ad.product(id, tenantId, type, name, manufacturer, additionalDetails,
         createdBy, lastModifiedBy, createdTime, lastModifiedTime, rowVersion, isDeleted)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: $.*
@@ -44,7 +44,7 @@ serviceMaps:
     
     auditAttributeBasePath: $.*
     queryMaps:
-    - query: UPDATE ab.product SET tenantId = ?, type = ?, name = ?, manufacturer
+    - query: UPDATE ad.product SET tenantId = ?, type = ?, name = ?, manufacturer
         = ?, additionalDetails = ?, lastModifiedBy = ?, lastModifiedTime = ?, rowVersion
         = ?, isDeleted = ? WHERE id = ?
       basePath: $.*
@@ -73,7 +73,7 @@ serviceMaps:
     
     auditAttributeBasePath: $.*
     queryMaps:
-    - query: INSERT INTO ab.product_variant(id, tenantId, productId, sku, variation,
+    - query: INSERT INTO ad.product_variant(id, tenantId, productId, sku, variation,
         additionalDetails, createdBy, lastModifiedBy, createdTime, lastModifiedTime,
         rowVersion, isDeleted) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);
       basePath: $.*
@@ -104,7 +104,7 @@ serviceMaps:
     
     auditAttributeBasePath: $.*
     queryMaps:
-    - query: UPDATE ab.product_variant SET tenantId = ?, productId = ?, sku = ?, variation
+    - query: UPDATE ad.product_variant SET tenantId = ?, productId = ?, sku = ?, variation
         = ?, additionalDetails = ?, lastModifiedBy = ?, lastModifiedTime = ?, rowVersion
         = ?, isDeleted = ? WHERE id = ?;
       basePath: $.*

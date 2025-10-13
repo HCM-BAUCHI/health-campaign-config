@@ -6,7 +6,7 @@ serviceMaps:
     fromTopic: ad-audit-create
     isTransaction: true
     queryMaps:
-    - query: INSERT INTO ab.eg_audit_logs( id, useruuid,module,tenantid,transactioncode,changedate,objectid,entityname,
+    - query: INSERT INTO ad.eg_audit_logs( id, useruuid,module,tenantid,transactioncode,changedate,objectid,entityname,
         keyvaluemap, operationtype, integrityhash, auditcorrelationid) VALUES (?,
         ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: AuditLogs.*

@@ -6,7 +6,7 @@ serviceMaps:
     fromTopic: ad-save-mdms-schema-definition
     isTransaction: true
     queryMaps:
-    - query: INSERT INTO ab.eg_mdms_schema_definition (id ,tenantid, code, description,
+    - query: INSERT INTO ad.eg_mdms_schema_definition (id ,tenantid, code, description,
         definition, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: $.SchemaDefinition
@@ -28,7 +28,7 @@ serviceMaps:
     fromTopic: ad-save-mdms-data
     isTransaction: true
     queryMaps:
-    - query: INSERT INTO ab.eg_mdms_data (id, tenantid, uniqueidentifier, schemacode,
+    - query: INSERT INTO ad.eg_mdms_data (id, tenantid, uniqueidentifier, schemacode,
         data, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: $.Mdms
@@ -50,7 +50,7 @@ serviceMaps:
     fromTopic: ad-update-mdms-data
     isTransaction: true
     queryMaps:
-    - query: UPDATE ab.eg_mdms_data SET data = ?, isActive = ?, lastModifiedBy = ?,
+    - query: UPDATE ad.eg_mdms_data SET data = ?, isActive = ?, lastModifiedBy = ?,
         lastModifiedTime = ? WHERE id = ?;
       basePath: $.Mdms
       jsonMaps:
