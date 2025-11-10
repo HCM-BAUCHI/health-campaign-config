@@ -1,0 +1,21 @@
+ServiceMaps:
+  serviceName: Tracer
+  version: 1.0.0
+  mappings:
+  - topic: ch-tracer-error-queue-index
+    configKey: INDEX
+    indexes:
+    - name: ch-egovtracer
+      type: errors
+      id: $.id
+      isBulk: false
+      timeStampField: $.ts
+  - topic: ch-tracer-error-queue-reindex
+    configKey: REINDEX
+    indexes:
+    - name: ch-egovtracerreindex
+      type: errors
+      id: $.id
+      isBulk: true
+      jsonPath: $.hits
+      timeStampField: $.ts
