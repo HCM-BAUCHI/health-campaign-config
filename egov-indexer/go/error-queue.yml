@@ -1,0 +1,21 @@
+ServiceMaps:
+  serviceName: Tracer
+  version: 1.0.0
+  mappings:
+  - topic: go-tracer-error-queue-index
+    configKey: INDEX
+    indexes:
+    - name: go-egovtracer
+      type: errors
+      id: $.id
+      isBulk: false
+      timeStampField: $.ts
+  - topic: go-tracer-error-queue-reindex
+    configKey: REINDEX
+    indexes:
+    - name: go-egovtracerreindex
+      type: errors
+      id: $.id
+      isBulk: true
+      jsonPath: $.hits
+      timeStampField: $.ts
