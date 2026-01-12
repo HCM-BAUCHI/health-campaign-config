@@ -261,7 +261,7 @@ serviceMaps:
             boundaryLevel, boundary, source, campaignStartDate, campaignEndDate, objectNode,
             createdBy, lastModifiedBy, createdTime, lastModifiedTime, boundaryHierarchy)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO
-            UPDATE SET name=?, parent=?, path=?, children=?, boundaryLevel=?, boundary=?,
+            UPDATE SET name=?, parent=?, path=?, children=?, boundaryLevel=?, boundary=?,campaignStartDate=?,campaignEndDate=?,
             source=?, lastModifiedBy=?, lastModifiedTime=?, objectNode=?, boundaryHierarchy=?;
           basePath: $.*
           jsonMaps:
@@ -289,6 +289,8 @@ serviceMaps:
             - jsonPath: $.*.children
             - jsonPath: $.*.boundaryLevel
             - jsonPath: $.*.boundary
+            - jsonPath: $.*.campaignStartDate
+            - jsonPath: $.*.campaignEndDate
             - jsonPath: $.*.source
             - jsonPath: $.*.auditDetails.lastModifiedBy
             - jsonPath: $.*.auditDetails.lastModifiedTime
