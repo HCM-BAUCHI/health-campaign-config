@@ -294,13 +294,15 @@ serviceMaps:
     
     auditAttributeBasePath: $.Projects.*
     queryMaps:
-    - query: UPDATE kd.project SET name = ?, projectType = ?, projectTypeId = ?, projectSubType
+    - query: UPDATE kd.project SET name = ?, parent = ?, projectHierarchy = ?, projectType = ?, projectTypeId = ?, projectSubType
         = ?, department = ?, description = ?, referenceId = ?, startDate = ?, endDate
         = ?, isTaskEnabled = ?, natureOfWork = ?, additionalDetails = ?, isDeleted
         = ?, rowVersion = ?, lastModifiedBy = ?, lastModifiedTime = ? WHERE id = ?;
       basePath: $.Projects.*
       jsonMaps:
       - jsonPath: $.Projects.*.name
+      - jsonPath: $.Projects.*.parent
+      - jsonPath: $.Projects.*.projectHierarchy
       - jsonPath: $.Projects.*.projectType
       - jsonPath: $.Projects.*.projectTypeId
       - jsonPath: $.Projects.*.projectSubType
