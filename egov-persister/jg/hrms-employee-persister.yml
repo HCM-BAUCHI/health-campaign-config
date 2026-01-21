@@ -137,7 +137,7 @@ serviceMaps:
   - version: 1.0
     name: hrms
     description: Persists employee details in the table
-    fromTopic: jg-update-hrms-employee
+    fromTopic: jg-egov-hrms-update
     isTransaction: true
     queryMaps:
     - query: DELETE from jg.eg_hrms_employee WHERE uuid=?
