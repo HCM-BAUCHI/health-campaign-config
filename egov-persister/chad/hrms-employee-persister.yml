@@ -137,10 +137,10 @@ serviceMaps:
   - version: 1.0
     name: hrms
     description: Persists employee details in the table
-    fromTopic: chad-update-hrms-employee
+    fromTopic: chad-egov-hrms-update
     isTransaction: true
     queryMaps:
-    - query: DELETE from eg_hrms_employee WHERE uuid=?
+    - query: DELETE from chad.eg_hrms_employee WHERE uuid=?
       basePath: Employees.*
       jsonMaps:
       - jsonPath: $.Employees.*.uuid
