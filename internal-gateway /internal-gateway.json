@@ -1,1 +1,36 @@
-{}
+{
+  "/health-expense-calculator/.*": {
+    "ba": "http://health-expense-calculator.bauchi:8080",
+    "ab": "http://health-expense-calculator.abuja:8080",
+    "ad": "http://health-expense-calculator.adamawa:8080",
+    "bo": "http://health-expense-calculator.borno:8080",
+    "ch": "http://health-expense-calculator.chad:8080",
+    "go": "http://health-expense-calculator.gombe:8080",
+    "jg": "http://health-expense-calculator.jigawa:8080",
+    "kd": "http://health-expense-calculator.kaduna:8080",
+    "ke": "http://health-expense-calculator.kebbi:8080",
+    "ko": "http://health-expense-calculator.kogi:8080",
+    "na": "http://health-expense-calculator.nasarawa:8080",
+    "od": "http://health-expense-calculator.ondo:8080",
+    "oy": "http://health-expense-calculator.oyo:8080",
+    "pl": "http://health-expense-calculator.plateau:8080",
+    "so": "http://health-expense-calculator.sokoto:8080"
+  },
+  "/egov-enc-service/.*": {
+    "ba": "http://egov-enc-service.egov:8080",
+    "ab": "http://egov-enc-service.egov:8080",
+    "ad": "http://egov-enc-service.egov:8080",
+    "bo": "http://egov-enc-service.egov:8080",
+    "ch": "http://egov-enc-service.egov:8080",
+    "go": "http://egov-enc-service.egov:8080",
+    "jg": "http://egov-enc-service.jigawa:8080",
+    "kd": "http://egov-enc-service.kaduna:8080",
+    "ke": "http://egov-enc-service.egov:8080",
+    "ko": "http://egov-enc-service.egov:8080",
+    "na": "http://egov-enc-service.egov:8080",
+    "od": "http://egov-enc-service.egov:8080",
+    "oy": "http://egov-enc-service.egov:8080",
+    "pl": "http://egov-enc-service.egov:8080",
+    "so": "http://egov-enc-service.egov:8080"
+  }
+}
