@@ -2,60 +2,36 @@ ServiceMaps:
   serviceName: attendance-service
   version: 1.0.0
   mappings:
-  - topic: kd-save-attendance
-    configKey: INDEX
-    indexes:
-    - name: kd-attendance-index-v1
-      type: attendance
-      id: $.id
-      isBulk: true
-      jsonPath: $.*
-      timeStampField: $.auditDetails.createdTime
-  - topic: kd-update-attendance
-    configKey: INDEX
-    indexes:
-    - name: kd-attendance-index-v1
-      type: attendance
-      id: $.id
-      isBulk: true
-      jsonPath: $.*
-      timeStampField: $.auditDetails.lastModifiedTime
-  - topic: kd-save-attendee
+  - topic: kd-transformer-producer-attendee-index
     configKey: INDEX
     indexes:
     - name: kd-attendee-index-v1
       type: attendee
-      id: $.id
+      id: $.attendee.id
       isBulk: true
       jsonPath: $.*
-      timeStampField: $.auditDetails.createdTime
-  - topic: kd-update-attendee
-    configKey: INDEX
-    indexes:
-    - name: kd-attendee-index-v1
-      type: attendee
-      id: $.id
-      isBulk: true
-      jsonPath: $.*
-      timeStampField: $.auditDetails.lastModifiedTime
-  - topic: kd-save-staff
+      customJsonMapping:
+        indexMapping:
+          Data: {}
+        fieldMapping:
+          - inJsonPath: $
+            outJsonPath: $.Data
+      timeStampField: $.attendee.auditDetails.createdTime
+  - topic: kd-transformer-producer-attendance-staff-index
     configKey: INDEX
     indexes:
     - name: kd-staff-index-v1
       type: staff
-      id: $.id
+      id: $.staff.id
       isBulk: true
       jsonPath: $.*
-      timeStampField: $.auditDetails.createdTime
-  - topic: kd-update-staff
-    configKey: INDEX
-    indexes:
-    - name: kd-staff-index-v1
-      type: staff
-      id: $.id
-      isBulk: true
-      jsonPath: $.*
-      timeStampField: $.auditDetails.lastModifiedTime
+      customJsonMapping:
+        indexMapping:
+          Data: {}
+        fieldMapping:
+          - inJsonPath: $
+            outJsonPath: $.Data
+      timeStampField: $.staff.auditDetails.createdTime
   - topic: kd-transformer-save-attendance-register
     configKey: INDEX
     indexes:
@@ -64,6 +40,12 @@ ServiceMaps:
       id: $.attendanceRegister.id
       isBulk: true
       jsonPath: $.*
+      customJsonMapping:
+        indexMapping:
+          Data: {}
+        fieldMapping:
+          - inJsonPath: $
+            outJsonPath: $.Data
       timeStampField: $.attendanceRegister.auditDetails.lastModifiedTime
   - topic: kd-transformer-save-attendance-log
     configKey: INDEX
@@ -73,13 +55,10 @@ ServiceMaps:
       id: $.attendanceLog.id
       isBulk: true
       jsonPath: $.*
+      customJsonMapping:
+        indexMapping:
+          Data: {}
+        fieldMapping:
+          - inJsonPath: $
+            outJsonPath: $.Data
       timeStampField: $.attendanceLog.auditDetails.lastModifiedTime
-  - topic: kd-update-attendance-log
-    configKey: INDEX
-    indexes:
-    - name: kd-attendance-log-index-v1
-      type: attendance-log
-      id: $.id
-      isBulk: true
-      jsonPath: $.*
-      timeStampField: $.time

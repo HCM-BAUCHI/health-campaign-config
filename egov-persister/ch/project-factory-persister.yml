@@ -7,44 +7,50 @@ serviceMaps:
       fromTopic: ch-create-resource-details
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO ch.eg_cm_resource_details(id, "status", tenantId, fileStoreId,processedFileStoreId,"action", campaignId,"type", createdBy, createdTime, lastModifiedBy, lastModifiedTime, additionalDetails, hierarchytype) VALUES (?, ?,?, ?,?,?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO ch.eg_cm_resource_details (id, tenantid, campaignid, type, parentresourceid, filestoreid, processedfilestoreid, filename, "status", "action", isactive, hierarchytype, additionaldetails, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
           basePath: $.ResourceDetails
           jsonMaps:
             - jsonPath: $.ResourceDetails.id
-            - jsonPath: $.ResourceDetails.status
             - jsonPath: $.ResourceDetails.tenantId
-            - jsonPath: $.ResourceDetails.fileStoreId
-            - jsonPath: $.ResourceDetails.processedFileStoreId
-            - jsonPath: $.ResourceDetails.action
             - jsonPath: $.ResourceDetails.campaignId
             - jsonPath: $.ResourceDetails.type
-            - jsonPath: $.ResourceDetails.auditDetails.createdBy
-            - jsonPath: $.ResourceDetails.auditDetails.createdTime
-            - jsonPath: $.ResourceDetails.auditDetails.lastModifiedBy
-            - jsonPath: $.ResourceDetails.auditDetails.lastModifiedTime
+            - jsonPath: $.ResourceDetails.parentResourceId
+            - jsonPath: $.ResourceDetails.fileStoreId
+            - jsonPath: $.ResourceDetails.processedFileStoreId
+            - jsonPath: $.ResourceDetails.filename
+            - jsonPath: $.ResourceDetails.status
+            - jsonPath: $.ResourceDetails.action
+            - jsonPath: $.ResourceDetails.isActive
+            - jsonPath: $.ResourceDetails.hierarchyType
             - jsonPath: $.ResourceDetails.additionalDetails
               type: JSON
               dbType: JSONB
-            - jsonPath: $.ResourceDetails.hierarchyType
-
+            - jsonPath: $.ResourceDetails.auditDetails.createdBy
+            - jsonPath: $.ResourceDetails.auditDetails.lastModifiedBy
+            - jsonPath: $.ResourceDetails.auditDetails.createdTime
+            - jsonPath: $.ResourceDetails.auditDetails.lastModifiedTime
     - version: 1.0
       name: UpdateResourceDetails
       description: Update resource details in the eg_cm_resource_details table
       fromTopic: ch-update-resource-details
       isTransaction: true
       queryMaps:
-        - query: UPDATE ch.eg_cm_resource_details SET "status" = ?, processedFileStoreId = ?, lastModifiedBy = ?, lastModifiedTime = ?,additionalDetails = ? WHERE id = ?;
+        - query: UPDATE ch.eg_cm_resource_details SET "status" = ?, "action" = ?, isactive = ?, filestoreid = ?, processedfilestoreid = ?, filename = ?, hierarchytype = ?, additionaldetails = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE id = ?;
           basePath: $.ResourceDetails
           jsonMaps:
             - jsonPath: $.ResourceDetails.status
+            - jsonPath: $.ResourceDetails.action
+            - jsonPath: $.ResourceDetails.isActive
+            - jsonPath: $.ResourceDetails.fileStoreId
             - jsonPath: $.ResourceDetails.processedFileStoreId
-            - jsonPath: $.ResourceDetails.auditDetails.lastModifiedBy
-            - jsonPath: $.ResourceDetails.auditDetails.lastModifiedTime
+            - jsonPath: $.ResourceDetails.filename
+            - jsonPath: $.ResourceDetails.hierarchyType
             - jsonPath: $.ResourceDetails.additionalDetails
               type: JSON
               dbType: JSONB
+            - jsonPath: $.ResourceDetails.auditDetails.lastModifiedBy
+            - jsonPath: $.ResourceDetails.auditDetails.lastModifiedTime
             - jsonPath: $.ResourceDetails.id
-
     - version: 1.0
       name: CreateResourceActivity
       description: Create resource activity in the eg_cm_resource_activity table
@@ -74,14 +80,13 @@ serviceMaps:
               type: JSON
               dbType: JSONB
             - jsonPath: $.Activities.*.resourceDetailsId
-
     - version: 1.0
       name: CreateForGenerateApiResources
       description: Create Api resource in the eg_cm_generated_resource_details table
       fromTopic: ch-create-generated-resource-details
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO ch.eg_cm_generated_resource_details (id,filestoreid, type,"status",count,tenantid,hierarchyType, createdby, createdtime, lastmodifiedby, lastmodifiedtime, additionaldetails,campaignid,locale) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+        - query: INSERT INTO ch.eg_cm_generated_resource_details (id,filestoreid, type,"status",count,tenantid,hierarchyType, createdby, createdtime, lastmodifiedby, lastmodifiedtime, additionaldetails,campaignid, locale) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);
           basePath: generatedResource.*
           jsonMaps:
             - jsonPath: $.generatedResource.*.id
@@ -100,7 +105,6 @@ serviceMaps:
               dbType: JSONB
             - jsonPath: $.generatedResource.*.campaignId
             - jsonPath: $.generatedResource.*.locale
-
     - version: 1.0
       name: UpdateForGenerateApiResources
       description: Update Api resource in the eg_cm_generated_resource_details table
@@ -119,7 +123,6 @@ serviceMaps:
               type: JSON
               dbType: JSONB
             - jsonPath: $.generatedResource.*.id
-
     - version: 1.0
       name: CreateCampaignDetails
       description: Create campaign details in the eg_cm_campaign_details table
@@ -127,9 +130,9 @@ serviceMaps:
       isTransaction: true
       isAuditEnabled: true
       module: HCM
-      objecIdJsonPath: $.id
+      objecIdJsonPath: $.campaignNumber
       tenantIdJsonPath: $.tenantId
-      transactionCodeJsonPath: $.campaignNumber
+      transactionCodeJsonPath: $.id
       auditAttributeBasePath: $.CampaignDetails
       queryMaps:
         - query: INSERT INTO ch.eg_cm_campaign_details(id, tenantId, "status","action",campaignName,projectType, campaignNumber,hierarchyType,boundaryCode, projectId,parentId,isActive,startDate,endDate, createdBy, createdTime, lastModifiedBy, lastModifiedTime, additionalDetails,campaignDetails) VALUES (?,?,?,?,?,?, ?,?, ?,?,?,?, ?, ?, ?, ?, ?, ?,?,?);
@@ -159,7 +162,6 @@ serviceMaps:
             - jsonPath: $.CampaignDetails.campaignDetails
               type: JSON
               dbType: JSONB
-
     - version: 1.0
       name: UpdateCampaignDetails
       description: Update campaign details in the eg_cm_campaign_details table
@@ -167,9 +169,9 @@ serviceMaps:
       isTransaction: true
       isAuditEnabled: true
       module: HCM
-      objecIdJsonPath: $.id
+      objecIdJsonPath: $.campaignNumber
       tenantIdJsonPath: $.tenantId
-      transactionCodeJsonPath: $.campaignNumber
+      transactionCodeJsonPath: $.id
       auditAttributeBasePath: $.CampaignDetails
       queryMaps:
         - query: UPDATE ch.eg_cm_campaign_details SET campaignName = ?, "status" = ?, action = ?, projectType = ?, hierarchyType = ?, boundaryCode = ?, projectId = ?, parentId = ?, isActive = ?,startDate=?,endDate=?, lastModifiedBy = ?, lastModifiedTime = ?, additionalDetails = ?, campaignDetails = ? WHERE id = ?;
@@ -195,7 +197,6 @@ serviceMaps:
               type: JSON
               dbType: JSONB
             - jsonPath: $.CampaignDetails.id
-
     - version: 1.0
       name: CreateProcessTrack
       description: Create process track in the eg_cm_campaign_process table
@@ -217,7 +218,6 @@ serviceMaps:
             - jsonPath: $.processDetails.*.additionalDetails
               type: JSON
               dbType: JSONB
-
     - version: 1.0
       name: UpdateProcessTrack
       description: Update process track in the eg_cm_campaign_process table
@@ -239,7 +239,6 @@ serviceMaps:
               type: JSON
               dbType: JSONB
             - jsonPath: $.processDetails.id
-
     - version: 1.0
       name: CreateSheetData
       description: Create sheet data in the eg_cm_campaign_data table
@@ -257,7 +256,6 @@ serviceMaps:
               dbType: JSONB
             - jsonPath: $.datas.*.uniqueIdAfterProcess
             - jsonPath: $.datas.*.status
-
     - version: 1.0
       name: UpdateSheetData
       description: Update sheet data in the eg_cm_campaign_data table
@@ -275,7 +273,6 @@ serviceMaps:
             - jsonPath: $.datas.*.uniqueIdentifier
             - jsonPath: $.datas.*.type
             - jsonPath: $.datas.*.campaignNumber
-
     - version: 1.0
       name: CreateMappingData
       description: Create mapping data in the eg_cm_campaign_mapping_data table
@@ -291,7 +288,6 @@ serviceMaps:
             - jsonPath: $.datas.*.boundaryCode
             - jsonPath: $.datas.*.mappingId
             - jsonPath: $.datas.*.status
-
     - version: 1.0
       name: UpdateMappingData
       description: Update mapping data in the eg_cm_campaign_mapping_data table
@@ -307,7 +303,6 @@ serviceMaps:
             - jsonPath: $.datas.*.campaignNumber
             - jsonPath: $.datas.*.type
             - jsonPath: $.datas.*.boundaryCode
-
     - version: 1.0
       name: DeleteMappingData
       description: Delete mapping data in the eg_cm_campaign_mapping_data table
@@ -321,29 +316,33 @@ serviceMaps:
             - jsonPath: $.datas.*.campaignNumber
             - jsonPath: $.datas.*.type
             - jsonPath: $.datas.*.boundaryCode
-
     - version: 1.0
       name: CreateProcessData
       description: Create process data in the eg_cm_campaign_process_data table
       fromTopic: ch-save-process-data
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO ch.eg_cm_campaign_process_data(campaignnumber,processName, "status") VALUES (?,?,?);
+        - query: INSERT INTO ch.eg_cm_campaign_process_data(campaignnumber,processName, "status", createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?,?,?,?,?,?,?);
           basePath: processes.*
           jsonMaps:
             - jsonPath: $.processes.*.campaignNumber
             - jsonPath: $.processes.*.processName
             - jsonPath: $.processes.*.status
-
+            - jsonPath: $.processes.*.auditDetails.createdBy
+            - jsonPath: $.processes.*.auditDetails.lastModifiedBy
+            - jsonPath: $.processes.*.auditDetails.createdTime
+            - jsonPath: $.processes.*.auditDetails.lastModifiedTime
     - version: 1.0
       name: UpdateProcessData
       description: Update process data in the eg_cm_campaign_process_data table
       fromTopic: ch-update-process-data
       isTransaction: true
       queryMaps:
-        - query: UPDATE ch.eg_cm_campaign_process_data SET "status" = ? WHERE campaignnumber = ? AND processName = ?;
+        - query: UPDATE ch.eg_cm_campaign_process_data SET "status" = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE campaignnumber = ? AND processName = ?;
           basePath: processes.*
           jsonMaps:
             - jsonPath: $.processes.*.status
+            - jsonPath: $.processes.*.auditDetails.lastModifiedBy
+            - jsonPath: $.processes.*.auditDetails.lastModifiedTime
             - jsonPath: $.processes.*.campaignNumber
             - jsonPath: $.processes.*.processName

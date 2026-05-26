@@ -1,0 +1,70 @@
+ServiceMaps:
+  serviceName: plan-service
+  version: 1.0.0
+  mappings:
+    - topic: kd-save-plan
+      configKey: INDEX
+      indexes:
+        - name: kd-plan-index-v1
+          type: general
+          id: $.id
+          timeStampField: $.auditDetails.createdTime
+          jsonPath: $.Plan
+          customJsonMapping:
+            indexMapping: {"Data":{}}
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+    - topic: kd-update-plan
+      configKey: INDEX
+      indexes:
+        - name: kd-plan-index-v1
+          type: general
+          id: $.id
+          timeStampField: $.auditDetails.createdTime
+          jsonPath: $.Plan
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+    - topic: kd-bulk-update-plan
+      configKey: INDEX
+      indexes:
+        - name: kd-plan-index-v1
+          type: general
+          id: $.id
+          isBulk: true
+          timeStampField: $.auditDetails.createdTime
+          jsonPath: $.Plans
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+    - topic: kd-save-plan-facility
+      configKey: INDEX
+      indexes:
+        - name: kd-plan-facility-index-v1
+          type: general
+          id: $.id
+          timeStampField: $.auditDetails.createdTime
+          jsonPath: $.PlanFacility
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+    - topic: kd-update-plan-facility
+      configKey: INDEX
+      indexes:
+        - name: kd-plan-facility-index-v1
+          type: general
+          id: $.id
+          timeStampField: $.auditDetails.createdTime
+          jsonPath: $.PlanFacility
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
