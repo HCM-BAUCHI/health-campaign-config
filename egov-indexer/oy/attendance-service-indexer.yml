@@ -2,60 +2,36 @@ ServiceMaps:
   serviceName: attendance-service
   version: 1.0.0
   mappings:
-  - topic: oy-save-attendance
-    configKey: INDEX
-    indexes:
-    - name: oy-attendance-index-v1
-      type: attendance
-      id: $.id
-      isBulk: true
-      jsonPath: $.*
-      timeStampField: $.auditDetails.createdTime
-  - topic: oy-update-attendance
-    configKey: INDEX
-    indexes:
-    - name: oy-attendance-index-v1
-      type: attendance
-      id: $.id
-      isBulk: true
-      jsonPath: $.*
-      timeStampField: $.auditDetails.lastModifiedTime
-  - topic: oy-save-attendee
+  - topic: oy-transformer-producer-attendee-index
     configKey: INDEX
     indexes:
     - name: oy-attendee-index-v1
       type: attendee
-      id: $.id
+      id: $.attendee.id
       isBulk: true
       jsonPath: $.*
-      timeStampField: $.auditDetails.createdTime
-  - topic: oy-update-attendee
-    configKey: INDEX
-    indexes:
-    - name: oy-attendee-index-v1
-      type: attendee
-      id: $.id
-      isBulk: true
-      jsonPath: $.*
-      timeStampField: $.auditDetails.lastModifiedTime
-  - topic: oy-save-staff
+      customJsonMapping:
+        indexMapping:
+          Data: {}
+        fieldMapping:
+          - inJsonPath: $
+            outJsonPath: $.Data
+      timeStampField: $.attendee.auditDetails.createdTime
+  - topic: oy-transformer-producer-attendance-staff-index
     configKey: INDEX
     indexes:
     - name: oy-staff-index-v1
       type: staff
-      id: $.id
+      id: $.staff.id
       isBulk: true
       jsonPath: $.*
-      timeStampField: $.auditDetails.createdTime
-  - topic: oy-update-staff
-    configKey: INDEX
-    indexes:
-    - name: oy-staff-index-v1
-      type: staff
-      id: $.id
-      isBulk: true
-      jsonPath: $.*
-      timeStampField: $.auditDetails.lastModifiedTime
+      customJsonMapping:
+        indexMapping:
+          Data: {}
+        fieldMapping:
+          - inJsonPath: $
+            outJsonPath: $.Data
+      timeStampField: $.staff.auditDetails.createdTime
   - topic: oy-transformer-save-attendance-register
     configKey: INDEX
     indexes:
@@ -64,6 +40,12 @@ ServiceMaps:
       id: $.attendanceRegister.id
       isBulk: true
       jsonPath: $.*
+      customJsonMapping:
+        indexMapping:
+          Data: {}
+        fieldMapping:
+          - inJsonPath: $
+            outJsonPath: $.Data
       timeStampField: $.attendanceRegister.auditDetails.lastModifiedTime
   - topic: oy-transformer-save-attendance-log
     configKey: INDEX
@@ -73,13 +55,10 @@ ServiceMaps:
       id: $.attendanceLog.id
       isBulk: true
       jsonPath: $.*
+      customJsonMapping:
+        indexMapping:
+          Data: {}
+        fieldMapping:
+          - inJsonPath: $
+            outJsonPath: $.Data
       timeStampField: $.attendanceLog.auditDetails.lastModifiedTime
-  - topic: oy-update-attendance-log
-    configKey: INDEX
-    indexes:
-    - name: oy-attendance-log-index-v1
-      type: attendance-log
-      id: $.id
-      isBulk: true
-      jsonPath: $.*
-      timeStampField: $.time
