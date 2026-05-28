@@ -14929,7 +14929,7 @@
         "module": "COMMON",
         "dateRefField": "Data.dateOfEntry",
         "requestQueryMap": "{\"campaignId\": \"Data.campaignId.keyword\"}",
-        "indexName": "bednet-stock-index-v1",
+        "indexName": "oy-stock-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "stockDataTransformer",
         "aggrQuery": "{\"size\":10000,\"_source\":[\"Data.*\"],\"aggs\":{\"by_event_type\":{\"terms\":{\"field\":\"Data.eventType.keyword\",\"size\":20},\"aggs\":{\"total_quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"by_product\":{\"terms\":{\"field\":\"Data.productName.keyword\",\"size\":100},\"aggs\":{\"by_event_type\":{\"terms\":{\"field\":\"Data.eventType.keyword\",\"size\":20},\"aggs\":{\"total_quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"total_quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"unique_facilities\":{\"cardinality\":{\"field\":\"Data.facilityId.keyword\"}},\"by_facility\":{\"terms\":{\"field\":\"Data.facilityId.keyword\",\"size\":500},\"aggs\":{\"facility_name\":{\"terms\":{\"field\":\"Data.facilityName.keyword\",\"size\":1}},\"by_event_type\":{\"terms\":{\"field\":\"Data.eventType.keyword\",\"size\":20},\"aggs\":{\"total_quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"by_projectId\":{\"terms\":{\"field\":\"Data.projectId.keyword\",\"size\":20}},\"total_quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}"
@@ -14992,7 +14992,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "bednet-project-staff-index-v1",
+        "indexName": "oy-project-staff-index-v1",
         "transformData": "linearAggregation",
         "transformKey": "totalManagersTransformer",
         "aggrQuery": "{\"size\":1,\"_source\":[\"Data.userId\"],\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"WAREHOUSE_MANAGER\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.country.keyword\"}}]}},\"aggs\":{\"total_users\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}"
@@ -15032,7 +15032,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "bednet-project-staff-index-v1",
+        "indexName": "oy-project-staff-index-v1",
         "transformData": "linearAggregation",
         "transformKey": "totalManagersTransformer",
         "aggrQuery": "{\"size\":1,\"_source\":[\"Data.userId\"],\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"WAREHOUSE_MANAGER\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.country.keyword\"}}]}},\"aggs\":{\"total_users\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}"
@@ -15041,7 +15041,7 @@
         "module": "COMMON",
         "dateRefField": "Data.syncedTimeStamp",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "bednet-user-sync-index-v1",
+        "indexName": "oy-user-sync-index-v1",
         "transformData": "linearAggregation",
         "transformKey": "syncedManagersTransformer",
         "aggrQuery": "{\"size\":1,\"_source\":[\"Data.syncedUserId\"],\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.syncedUserId.keyword\"}},{\"terms\":{\"Data.role.keyword\":[\"WAREHOUSE_MANAGER\"]}}]}},\"aggs\":{\"unique_synced_users\":{\"cardinality\":{\"field\":\"Data.syncedUserId.keyword\"}}}}"
@@ -15103,7 +15103,7 @@
         "module": "COMMON",
         "dateRefField": "Data.dateOfEntry",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "bednet-stock-index-v1",
+        "indexName": "oy-stock-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "stockBalanceTransformer",
         "aggrQuery": "{\"size\":10000,\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\",\"Data.dateOfEntry\",\"Data.createdTime\",\"Data.nameOfUser\",\"Data.userName\"]}"
@@ -15151,7 +15151,7 @@
         "module": "COMMON",
         "dateRefField": "Data.dateOfEntry",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"facilityId\": \"Data.facilityId.keyword\"}",
-        "indexName": "bednet-stock-index-v1",
+        "indexName": "oy-stock-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "facilityStockTransformer",
         "aggrQuery": "{\"size\":10000,\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\"]}"
@@ -15160,7 +15160,7 @@
         "module": "COMMON",
         "dateRefField": "Data.dateOfEntry",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"facilityId\": \"Data.transactingFacilityId.keyword\"}",
-        "indexName": "bednet-stock-index-v1",
+        "indexName": "oy-stock-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "transactingStockTransformer",
         "aggrQuery": "{\"size\":10000,\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\"]}"
