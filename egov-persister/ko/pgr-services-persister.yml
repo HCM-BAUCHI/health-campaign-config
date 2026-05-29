@@ -50,8 +50,8 @@ serviceMaps:
       - jsonPath: $.service.address.region
       - jsonPath: $.service.address.state
       - jsonPath: $.service.address.country
-      - jsonPath: $.service.address.geoLocation.latitude
-      - jsonPath: $.service.address.geoLocation.longitude
+      - jsonPath: $.service.address.locality.latitude
+      - jsonPath: $.service.address.locality.longitude
       - jsonPath: $.service.address.additionDetails
         type: JSON
         dbType: JSONB
@@ -100,8 +100,8 @@ serviceMaps:
       - jsonPath: $.service.address.region
       - jsonPath: $.service.address.state
       - jsonPath: $.service.address.country
-      - jsonPath: $.service.address.geoLocation.latitude
-      - jsonPath: $.service.address.geoLocation.longitude
+      - jsonPath: $.service.address.locality.latitude
+      - jsonPath: $.service.address.locality.longitude
       - jsonPath: $.service.address.additionDetails
         type: JSON
         dbType: JSONB
