@@ -4555,8 +4555,8 @@
             "provinceCode": "staffDocuments.provinceCode",
             "districtCode": "staffDocuments.districtCode",
             "totalRecords": "staffDocuments.totalRecords",
-            "latestSyncTime": "staffDocuments.latestSyncTime",
-            "active": "staffDocuments.active ? userSyncDocuments.active : 'INACTIVE'",
+            "latestSyncTime": "userSyncDocuments.latestSyncTime",
+            "active": "userSyncDocuments.active ? userSyncDocuments.active : 'INACTIVE'",
             "fullLocation": "concat(staffDocuments.state ? staffDocuments.state: userSyncDocuments.state, ' - ', staffDocuments.lga ? staffDocuments.lga : userSyncDocuments.lga)"
           }
         ]
