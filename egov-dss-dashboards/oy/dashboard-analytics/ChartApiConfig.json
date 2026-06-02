@@ -13168,70 +13168,21 @@
     "_comment": " "
   },
   "summaryByDistrictDayICCD": {
-    "chartName": "DSS_HEALTH_SUMMARY_BY_DISTRICT_ICCD",
+    "chartName": "DSS_HEALTH_SUMMARY_BY_DISTRICT_DAY_ICCD",
     "queries": [
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "oy-population-coverage-summary-datewise",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Individual Coverage Ratio\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"day\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Total Population covered\":{\"sum\":{\"field\":\"total_population_administered\"}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "oy-household-coverage-daily-iccd",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"day\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Households visited count\":{\"sum\":{\"field\":\"total_households_visited\"}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "oy-population-coverage-summary-datewise",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total distribution\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"day\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Total distribution count\":{\"sum\":{\"field\":\"total_administered_resources\"}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "oy-population-coverage-summary-datewise",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Beneficiary Refused\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"day\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Refused non delivery count\":{\"sum\":{\"field\":\"total_population_refused\"}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "oy-side-effect-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}},\"aggs\":{\"Total Side Effects\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"calendar_interval\":\"day\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Adverse events count\":{\"value_count\":{\"field\":\"Data.sideEffect.id.keyword\"}}}}}}}}"
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "oy-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.individualDetails.age\":{\"lte\":11}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 3-11 Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Administered 3-11 Daily count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}},\"Administered 12-59\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.individualDetails.age\":{\"gte\":12}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 12-59 Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Administered 12-59 Daily count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}},\"Administered 3-59\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 3-59 Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Administered 3-59 Daily count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}},\"Interventions distributed\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.isDelivered\":true}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Interventions distributed Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Interventions distributed count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}},\"Refused\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_REFUSED\"}}]}},\"aggs\":{\"Refused Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Refused Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"Died\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_DIED\"}}]}},\"aggs\":{\"Died Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Died Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"Migrated\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_MIGRATED\"}}]}},\"aggs\":{\"Migrated Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Migrated Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "oy-referral-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}},\"aggs\":{\"Total Referrals\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"calendar_interval\":\"day\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Referral count\":{\"value_count\":{\"field\":\"Data.referral.id.keyword\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "oy-ineligible-summary",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Ineligible\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"day\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Total children ineligible count\":{\"sum\":{\"field\":\"ineligible_population_total\"}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "oy-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"chartSpecificProperty\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Overall Household Target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "oy-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"chartSpecificProperty\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}}}}}}"
+        "indexName": "oy-household-member-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Ineligible\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.isIneligible\":true}}]}},\"aggs\":{\"Ineligible Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Ineligible Daily count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}}}"
       }
     ],
     "chartType": "xtable",
@@ -13253,107 +13204,87 @@
       "Individuals"
     ],
     "excludedColumns": [
-      "Households visited count",
-      "Overall Household Target",
-      "Total Population covered",
-      "Overall Population target",
-      "Total distribution count",
-      "Referral count",
-      "Refused non delivery count",
-      "Adverse events count",
-      "Total children ineligible count"
+      "S.N.",
+      "Administered 3-11 Daily count",
+      "Administered 12-59 Daily count",
+      "Administered 3-59 Daily count",
+      "Interventions distributed count",
+      "Refused Daily count",
+      "Died Daily count",
+      "Migrated Daily count",
+      "Ineligible Daily count"
     ],
     "computedFields": [
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Households visited count"
+          "Administered 3-11 Daily count"
         ],
-        "newField": "Households visited",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "repsonseToDifferenceOfDates",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Overall Household Target"
-        ],
-        "newField": "Household Target",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "PercentageComputedField",
-        "fields": [
-          "Households visited count",
-          "Household Target"
-        ],
-        "newField": "Target Achievement Household Visited",
+        "newField": "Administered 3-11",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Total Population covered"
+          "Administered 12-59 Daily count"
         ],
-        "newField": "Children Administered",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "PercentageComputedField",
-        "fields": [
-          "Total Population covered",
-          "Overall Population target"
-        ],
-        "newField": "Target Achievement Children Administered",
+        "newField": "Administered 12-59",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Total distribution count"
+          "Administered 3-59 Daily count"
         ],
-        "newField": "Drug administered",
+        "newField": "Administered 3-59",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Referral count"
+          "Interventions distributed count"
         ],
-        "newField": "Children non delivery referral",
+        "newField": "Interventions distributed",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Refused non delivery count"
+          "Refused Daily count"
         ],
-        "newField": "Children non delivery refused",
+        "newField": "BENEFICIARY_REFUSED",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Adverse events count"
+          "Died Daily count"
         ],
-        "newField": "Children non delivery adverse events",
+        "newField": "BENEFICIARY_DIED",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Total children ineligible count"
+          "Migrated Daily count"
         ],
-        "newField": "Children ineligible",
+        "newField": "BENEFICIARY_MIGRATED",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Ineligible Daily count"
+        ],
+        "newField": "INELIGIBLE",
         "_comments": ""
       }
     ],
@@ -17029,5 +16960,129 @@
     ],
     "ignoreSplitMetricPaths": [],
     "kind": "drillDown"
+  },
+  "summaryByAdministrativeProvinceDayICCD": {
+    "chartName": "DSS_HEALTH_SUMMARY_BY_AP_DAY_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "oy-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.individualDetails.age\":{\"lte\":11}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 3-11 Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Administered 3-11 Daily count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}},\"Administered 12-59\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.individualDetails.age\":{\"gte\":12}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 12-59 Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Administered 12-59 Daily count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}},\"Administered 3-59\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 3-59 Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Administered 3-59 Daily count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}},\"Interventions distributed\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.isDelivered\":true}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Interventions distributed Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Interventions distributed count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}},\"Refused\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_REFUSED\"}}]}},\"aggs\":{\"Refused Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Refused Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"Died\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_DIED\"}}]}},\"aggs\":{\"Died Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Died Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"Migrated\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_MIGRATED\"}}]}},\"aggs\":{\"Migrated Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Migrated Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "oy-household-member-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Ineligible\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.isIneligible\":true}}]}},\"aggs\":{\"Ineligible Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Ineligible Daily count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Daily Count",
+    "filterKeys": [
+      {
+        "key": "Daily Count",
+        "column": "Daily Count"
+      }
+    ],
+    "showFooter": true,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "excludedBucketKeys": [
+      "Individuals"
+    ],
+    "excludedColumns": [
+      "S.N.",
+      "Administered 3-11 Daily count",
+      "Administered 12-59 Daily count",
+      "Administered 3-59 Daily count",
+      "Interventions distributed count",
+      "Refused Daily count",
+      "Died Daily count",
+      "Migrated Daily count",
+      "Ineligible Daily count"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Administered 3-11 Daily count"
+        ],
+        "newField": "Administered 3-11",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Administered 12-59 Daily count"
+        ],
+        "newField": "Administered 12-59",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Administered 3-59 Daily count"
+        ],
+        "newField": "Administered 3-59",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Interventions distributed count"
+        ],
+        "newField": "Interventions distributed",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Refused Daily count"
+        ],
+        "newField": "BENEFICIARY_REFUSED",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Died Daily count"
+        ],
+        "newField": "BENEFICIARY_DIED",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Migrated Daily count"
+        ],
+        "newField": "BENEFICIARY_MIGRATED",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Ineligible Daily count"
+        ],
+        "newField": "INELIGIBLE",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "_comment": " "
   }
 }

@@ -718,7 +718,7 @@
                   "code": "",
                   "moduleName": "iccd-maps",
                   "pageName": "oy-successful-administrations-map",
-                  "chartType": "kibanaScreen",
+                  "chartType": "kibanaComponent",
                   "filter": "",
                   "headers": []
                 }
@@ -744,7 +744,7 @@
                   "code": "",
                   "moduleName": "iccd-maps",
                   "pageName": "oy-unsuccessful-administrations-map",
-                  "chartType": "kibanaScreen",
+                  "chartType": "kibanaComponent",
                   "filter": "",
                   "headers": []
                 }
@@ -2656,8 +2656,8 @@
                   "tabName": "BOUNDARY"
                 },
                 {
-                  "id": "summaryByDistrictDayICCD",
-                  "name": "DSS_HEALTH_SUMMARY_BY_DISTRICT_DAY_ICCD",
+                  "id": "summaryByAdministrativeProvinceDayICCD",
+                  "name": "DSS_HEALTH_SUMMARY_BY_AP_DAY_ICCD",
                   "code": "",
                   "chartType": "table",
                   "filter": "",
