@@ -543,24 +543,17 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"projectTypeId.keyword\", \"state\": \"boundaryHierarchy.state.keyword\", \"campaignNumber\": \"campaignNumber.keyword\"}",
-        "indexName": "oy-attendance-log-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"attendanceLog.type.keyword\":\"EXIT\"}},{\"term\":{\"attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"Attendance Logs\":{\"terms\":{\"field\":\"boundaryHierarchy.lga.keyword\",\"size\":100},\"aggs\":{\"per_day\":{\"date_histogram\":{\"field\":\"attendanceLog.time\",\"calendar_interval\":\"day\"},\"aggs\":{\"users\":{\"terms\":{\"field\":\"attendanceLog.individualId.keyword\"},\"aggs\":{\"Count\":{\"bucket_script\":{\"buckets_path\":{},\"script\":\"1.0\"}}}},\"total_unique_individuals_with_exit_logs_per_day\":{\"sum_bucket\":{\"buckets_path\":\"users>Count\"}}}},\"Total Distributors Marked Present\":{\"sum_bucket\":{\"buckets_path\":\"per_day>total_unique_individuals_with_exit_logs_per_day\"}},\"Avg Distributors Marked Present\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"Total Distributors Marked Present\",\"denom\":\"per_day._bucket_count\"},\"script\":\"params.num / params.denom\"}}}}}}}}"
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "oy-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Total Administration\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.taskId.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
         "indexName": "oy-project-staff-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.role.keyword\":[\"REGISTRAR\",\"DISTRIBUTOR\"]}}]}},\"aggs\":{\"Distributors\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Total distributors\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "oy-population-coverage-summary",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Houses Visited\":{\"terms\":{\"field\":\"lga\",\"size\":500},\"aggs\":{\"Total children administered Count\":{\"sum\":{\"field\":\"total_population_administered\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Total user created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -573,36 +566,40 @@
     "valueType": "number",
     "drillChart": "summaryTeamPerformanceByAPICCD",
     "documentType": "_doc",
-    "action": "",
+    "action": "division",
     "plotLabel": "District",
     "excludedColumns": [
       "S.N.",
-      "Total Distributors Marked Present",
-      "Avg Distributors Marked Present",
-      "Total distributors",
-      "Total children administered Count"
+      "Count"
     ],
-    "excludedBucketKeys": [
-      "per_day"
-    ],
+    "excludedBucketKeys": [],
     "computedFields": [
       {
         "postAggregationTheory": "",
-        "actionName": "PercentageComputedField",
+        "actionName": "AdditiveComputedField",
         "fields": [
-          "Avg Distributors Marked Present",
-          "Total distributors"
+          "Total user created"
         ],
-        "newField": "ATTENDANCE_PERCENT",
+        "newField": "Total user created",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Total children administered Count"
+          "Total Administration"
         ],
-        "newField": "Total Children Administered",
+        "newField": "Total Administration",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Total Administration",
+          "Total user created"
+        ],
+        "newField": "Average administrations",
         "_comments": ""
       }
     ],
@@ -611,7 +608,11 @@
     "hideInsights": true,
     "hideHeaderDenomination": true,
     "_comment": " ",
-    "kind": "drillDown"
+    "kind": "drillDown",
+    "aggregationPaths": [
+      "Total Administration",
+      "Total user created"
+    ]
   },
   "summaryTeamPerformanceByAPICCD": {
     "kind": "drillDown",
@@ -619,24 +620,17 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"projectTypeId.keyword\", \"state\": \"boundaryHierarchy.state.keyword\", \"lga\": \"boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"campaignNumber.keyword\"}",
-        "indexName": "oy-attendance-log-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"attendanceLog.type.keyword\":\"EXIT\"}},{\"term\":{\"attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"Attendance Logs\":{\"terms\":{\"field\":\"boundaryHierarchy.ward.keyword\",\"size\":100},\"aggs\":{\"per_day\":{\"date_histogram\":{\"field\":\"attendanceLog.time\",\"calendar_interval\":\"day\"},\"aggs\":{\"users\":{\"terms\":{\"field\":\"attendanceLog.individualId.keyword\"},\"aggs\":{\"Count\":{\"bucket_script\":{\"buckets_path\":{},\"script\":\"1.0\"}}}},\"total_unique_individuals_with_exit_logs_per_day\":{\"sum_bucket\":{\"buckets_path\":\"users>Count\"}}}},\"Total Distributors Marked Present\":{\"sum_bucket\":{\"buckets_path\":\"per_day>total_unique_individuals_with_exit_logs_per_day\"}},\"Avg Distributors Marked Present\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"Total Distributors Marked Present\",\"denom\":\"per_day._bucket_count\"},\"script\":\"params.num / params.denom\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "oy-project-staff-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.role.keyword\":[\"REGISTRAR\",\"DISTRIBUTOR\"]}}]}},\"aggs\":{\"Distributors\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500},\"aggs\":{\"Total distributors\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
         "indexName": "oy-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}}]}},\"aggs\":{\"Total Houses Visited\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"},\"aggs\":{\"Total children administered Count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Total Administration\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.taskId.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "oy-project-staff-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Total user created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -645,7 +639,7 @@
         "column": "AdministrativeProvince"
       }
     ],
-    "action": "",
+    "action": "division",
     "chartType": "xtable",
     "valueType": "number",
     "drillChart": "summaryTeamPerformanceByLocalityICCD",
@@ -653,32 +647,36 @@
     "plotLabel": "AdministrativeProvince",
     "excludedColumns": [
       "S.N.",
-      "Total Distributors Marked Present",
-      "Avg Distributors Marked Present",
-      "Total distributors",
-      "Total children administered Count"
+      "Count"
     ],
-    "excludedBucketKeys": [
-      "per_day"
-    ],
+    "excludedBucketKeys": [],
     "computedFields": [
       {
         "postAggregationTheory": "",
-        "actionName": "PercentageComputedField",
+        "actionName": "AdditiveComputedField",
         "fields": [
-          "Avg Distributors Marked Present",
-          "Total distributors"
+          "Total user created"
         ],
-        "newField": "ATTENDANCE_PERCENT",
+        "newField": "Total user created",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Total children administered Count"
+          "Total Administration"
         ],
-        "newField": "Total Children Administered",
+        "newField": "Total Administration",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Total Administration",
+          "Total user created"
+        ],
+        "newField": "Average administrations",
         "_comments": ""
       }
     ],
@@ -686,7 +684,11 @@
     "sort": "sortKeyAsc",
     "hideInsights": true,
     "hideHeaderDenomination": true,
-    "_comment": " "
+    "_comment": " ",
+    "aggregationPaths": [
+      "Total Administration",
+      "Total user created"
+    ]
   },
   "summaryTeamPerformanceByLocalityICCD": {
     "kind": "drillDown",
@@ -694,24 +696,17 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"projectTypeId.keyword\", \"state\": \"boundaryHierarchy.state.keyword\", \"lga\": \"boundaryHierarchy.lga.keyword\", \"ward\": \"boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"campaignNumber.keyword\"}",
-        "indexName": "oy-attendance-log-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"attendanceLog.type.keyword\":\"EXIT\"}},{\"term\":{\"attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"Attendance Logs\":{\"terms\":{\"field\":\"boundaryHierarchy.healthFacility.keyword\",\"size\":100},\"aggs\":{\"per_day\":{\"date_histogram\":{\"field\":\"attendanceLog.time\",\"calendar_interval\":\"day\"},\"aggs\":{\"users\":{\"terms\":{\"field\":\"attendanceLog.individualId.keyword\"},\"aggs\":{\"Count\":{\"bucket_script\":{\"buckets_path\":{},\"script\":\"1.0\"}}}},\"total_unique_individuals_with_exit_logs_per_day\":{\"sum_bucket\":{\"buckets_path\":\"users>Count\"}}}},\"Total Distributors Marked Present\":{\"sum_bucket\":{\"buckets_path\":\"per_day>total_unique_individuals_with_exit_logs_per_day\"}},\"Avg Distributors Marked Present\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"Total Distributors Marked Present\",\"denom\":\"per_day._bucket_count\"},\"script\":\"params.num / params.denom\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "oy-project-staff-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.role.keyword\":[\"REGISTRAR\",\"DISTRIBUTOR\"]}}]}},\"aggs\":{\"Distributors\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500},\"aggs\":{\"Total distributors\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\"}",
         "indexName": "oy-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}}]}},\"aggs\":{\"Total Houses Visited\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"},\"aggs\":{\"Total children administered Count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Total Administration\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.taskId.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\"}",
+        "indexName": "oy-project-staff-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"}}]}},\"aggs\":{\"Total user created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -724,36 +719,40 @@
     "valueType": "number",
     "drillChart": "summaryTeamPerformanceByVillageICCD",
     "documentType": "_doc",
-    "action": "",
+    "action": "division",
     "plotLabel": "Locality",
     "excludedColumns": [
       "S.N.",
-      "Total Distributors Marked Present",
-      "Avg Distributors Marked Present",
-      "Total distributors",
-      "Total children administered Count"
+      "Count"
     ],
-    "excludedBucketKeys": [
-      "per_day"
-    ],
+    "excludedBucketKeys": [],
     "computedFields": [
       {
         "postAggregationTheory": "",
-        "actionName": "PercentageComputedField",
+        "actionName": "AdditiveComputedField",
         "fields": [
-          "Avg Distributors Marked Present",
-          "Total distributors"
+          "Total user created"
         ],
-        "newField": "ATTENDANCE_PERCENT",
+        "newField": "Total user created",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Total children administered Count"
+          "Total Administration"
         ],
-        "newField": "Total Children Administered",
+        "newField": "Total Administration",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Total Administration",
+          "Total user created"
+        ],
+        "newField": "Average administrations",
         "_comments": ""
       }
     ],
@@ -761,7 +760,11 @@
     "sort": "sortKeyAsc",
     "hideInsights": true,
     "hideHeaderDenomination": true,
-    "_comment": " "
+    "_comment": " ",
+    "aggregationPaths": [
+      "Total Administration",
+      "Total user created"
+    ]
   },
   "summaryTeamPerformanceByVillageICCD": {
     "kind": "drillDown",
@@ -769,24 +772,17 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"projectTypeId.keyword\", \"state\": \"boundaryHierarchy.state.keyword\", \"lga\": \"boundaryHierarchy.lga.keyword\", \"ward\": \"boundaryHierarchy.ward.keyword\", \"healthFacility\": \"boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"campaignNumber.keyword\"}",
-        "indexName": "oy-attendance-log-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"attendanceLog.type.keyword\":\"EXIT\"}},{\"term\":{\"attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"Attendance Logs\":{\"terms\":{\"field\":\"boundaryHierarchy.community.keyword\",\"size\":100},\"aggs\":{\"per_day\":{\"date_histogram\":{\"field\":\"attendanceLog.time\",\"calendar_interval\":\"day\"},\"aggs\":{\"users\":{\"terms\":{\"field\":\"attendanceLog.individualId.keyword\"},\"aggs\":{\"Count\":{\"bucket_script\":{\"buckets_path\":{},\"script\":\"1.0\"}}}},\"total_unique_individuals_with_exit_logs_per_day\":{\"sum_bucket\":{\"buckets_path\":\"users>Count\"}}}},\"Total Distributors Marked Present\":{\"sum_bucket\":{\"buckets_path\":\"per_day>total_unique_individuals_with_exit_logs_per_day\"}},\"Avg Distributors Marked Present\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"Total Distributors Marked Present\",\"denom\":\"per_day._bucket_count\"},\"script\":\"params.num / params.denom\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "oy-project-staff-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.role.keyword\":[\"REGISTRAR\",\"DISTRIBUTOR\"]}}]}},\"aggs\":{\"Distributors\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":500},\"aggs\":{\"Total distributors\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\"}",
         "indexName": "oy-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}}]}},\"aggs\":{\"Total Houses Visited\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"},\"aggs\":{\"Total children administered Count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Total Administration\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.taskId.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\"}",
+        "indexName": "oy-project-staff-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}},\"aggs\":{\"Total user created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -799,36 +795,40 @@
     "valueType": "number",
     "drillChart": "summaryTeamPerformanceProvincialByDistributorICCD",
     "documentType": "_doc",
-    "action": "",
+    "action": "division",
     "plotLabel": "Village",
     "excludedColumns": [
       "S.N.",
-      "Total Distributors Marked Present",
-      "Avg Distributors Marked Present",
-      "Total distributors",
-      "Total children administered Count"
+      "Count"
     ],
-    "excludedBucketKeys": [
-      "per_day"
-    ],
+    "excludedBucketKeys": [],
     "computedFields": [
       {
         "postAggregationTheory": "",
-        "actionName": "PercentageComputedField",
+        "actionName": "AdditiveComputedField",
         "fields": [
-          "Avg Distributors Marked Present",
-          "Total distributors"
+          "Total user created"
         ],
-        "newField": "ATTENDANCE_PERCENT",
+        "newField": "Total user created",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Total children administered Count"
+          "Total Administration"
         ],
-        "newField": "Total Children Administered",
+        "newField": "Total Administration",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Total Administration",
+          "Total user created"
+        ],
+        "newField": "Average administrations",
         "_comments": ""
       }
     ],
@@ -836,7 +836,11 @@
     "sort": "sortKeyAsc",
     "hideInsights": true,
     "hideHeaderDenomination": true,
-    "_comment": " "
+    "_comment": " ",
+    "aggregationPaths": [
+      "Total Administration",
+      "Total user created"
+    ]
   },
   "summaryTeamPerformanceProvincialByDistributorICCD": {
     "kind": "drillDown",
@@ -4708,20 +4712,6 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "oy-household-member-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga\"}}]}},\"aggs\":{\"Total Houses Registered\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Total Children Registered Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "oy-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\",\"ADMINISTRATION_FAILED\",\"BENEFICIARY_REFUSED\",\"BENEFICIARY_DIED\",\"BENEFICIARY_MIGRATED\",\"BENEFICIARY_ABSENT\",\"CLOSED_HOUSEHOLD\"]}}]}},\"aggs\":{\"Total Houses Visited\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Positive Unique Children Visited\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}},\"Negative Unique Children Visited\":{\"bucket_script\":{\"buckets_path\":{\"pos\":\"Positive Unique Children Visited\"},\"script\":\"return -1 * params.pos\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "oy-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Suspected Frauds\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"min_doc_count\":4,\"size\":500},\"aggs\":{\"users_distributed\":{\"terms\":{\"field\":\"Data.createdBy.keyword\",\"min_doc_count\":4,\"size\":10000},\"aggs\":{\"minute_collection\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1m\",\"min_doc_count\":4}},\"users_without_empty_bucket\":{\"bucket_selector\":{\"buckets_path\":{\"distributed_count\":\"minute_collection._bucket_count\"},\"script\":\"params.distributed_count > 0\"}}}},\"users_without_empty_bucket\":{\"bucket_selector\":{\"buckets_path\":{\"distributed_count\":\"users_distributed._bucket_count\"},\"script\":\"params.distributed_count > 0\"}},\"users_with_more_than_3_count\":{\"bucket_script\":{\"buckets_path\":{\"user_count\":\"users_distributed._bucket_count\"},\"script\":\"params.user_count\"}}}}}}}}"
@@ -4749,8 +4739,6 @@
     "excludedColumns": [
       "Count",
       "WM Stock Entries Count",
-      "Total Children Registered Count",
-      "Negative Unique Children Visited",
       "users_with_more_than_3_count",
       "Household with more than 20 members"
     ],
@@ -4774,16 +4762,6 @@
           "WM Stock Entries Count"
         ],
         "newField": "WM Stock Entries",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Children Registered Count",
-          "Negative Unique Children Visited"
-        ],
-        "newField": "Incomplete Records",
         "_comments": ""
       },
       {
@@ -4814,20 +4792,6 @@
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "oy-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":{\"value\":\"WAREHOUSE_MANAGER\"}}}]}},\"aggs\":{\"WM Stock Entries\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"},\"aggs\":{\"WM Stock Entries Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "oy-household-member-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward\"}}]}},\"aggs\":{\"Total Houses Registered\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500},\"aggs\":{\"Total Children Registered Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "oy-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\",\"ADMINISTRATION_FAILED\",\"BENEFICIARY_REFUSED\",\"BENEFICIARY_DIED\",\"BENEFICIARY_MIGRATED\",\"BENEFICIARY_ABSENT\",\"CLOSED_HOUSEHOLD\"]}}]}},\"aggs\":{\"Total Houses Visited\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500},\"aggs\":{\"Positive Unique Children Visited\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}},\"Negative Unique Children Visited\":{\"bucket_script\":{\"buckets_path\":{\"pos\":\"Positive Unique Children Visited\"},\"script\":\"return -1 * params.pos\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -4884,16 +4848,6 @@
           "WM Stock Entries Count"
         ],
         "newField": "WM Stock Entries",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Children Registered Count",
-          "Negative Unique Children Visited"
-        ],
-        "newField": "Incomplete Records",
         "_comments": ""
       },
       {
@@ -9953,14 +9907,14 @@
         "dateRefField": "Data.referral.auditDetails.lastModifiedTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "oy-referral-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"ChildrenReferred\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"ChildrenReferred Count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"Referred Children Count\":{\"cardinality\":{\"field\":\"Data.referral.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"ChildrenReferred\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"ChildrenReferred Count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Referred Children Count\":{\"cardinality\":{\"field\":\"Data.referral.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.hfReferral.auditDetails.lastModifiedTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "oy-hf-referral-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"ChildrenReferredByHF\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"ChildrenReferredByHF Count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"Referred Children By HFCount\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"ChildrenReferredByHF\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"ChildrenReferredByHF Count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Referred Children By HFCount\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}}},\"SICK,FEVER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.hfReferral.symptom.keyword\":\"SICK,FEVER\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"SICK,FEVER Referred\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"SICK,FEVER Count\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}}},\"SICK\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.hfReferral.symptom.keyword\":\"SICK\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"SICK Referred\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"SICK Count\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}}},\"FEVER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.hfReferral.symptom.keyword\":\"FEVER\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"FEVER Referred\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"FEVER Count\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}}},\"DRUG_SE_PC\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.hfReferral.symptom.keyword\":\"DRUG_SE_PC\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"DRUG_SE_PC Referred\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"DRUG_SE_PC Count\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -9980,9 +9934,49 @@
       "Start Date",
       "End Date",
       "Referred Children Count",
-      "Referred Children By HFCount"
+      "Referred Children By HFCount",
+      "SICK,FEVER Count",
+      "SICK Count",
+      "FEVER Count",
+      "DRUG_SE_PC Count"
     ],
     "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "SICK,FEVER Count"
+        ],
+        "newField": "SICK,FEVER",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "SICK Count"
+        ],
+        "newField": "SICK",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "FEVER Count"
+        ],
+        "newField": "FEVER",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "DRUG_SE_PC Count"
+        ],
+        "newField": "DRUG_SE_PC",
+        "_comments": ""
+      },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
@@ -10818,33 +10812,6 @@
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Referral count"
-        ],
-        "newField": "Children non delivery referral",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Adverse events count"
-        ],
-        "newField": "Children non delivery adverse events",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total children ineligible count"
-        ],
-        "newField": "Children ineligible",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
           "Administered 3-11 count"
         ],
         "newField": "Administered 3-11",
@@ -11037,7 +11004,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "summaryByVillageICCD",
+    "drillChart": "none",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Locality",
@@ -11113,33 +11080,6 @@
           "Overall Distribution Target"
         ],
         "newField": "Intervention Coverage",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Referral count"
-        ],
-        "newField": "Children non delivery referral",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Adverse events count"
-        ],
-        "newField": "Children non delivery adverse events",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total children ineligible count"
-        ],
-        "newField": "Children ineligible",
         "_comments": ""
       },
       {

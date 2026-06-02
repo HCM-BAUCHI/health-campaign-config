@@ -440,6 +440,7 @@
             }
           ]
         },
+
         {
           "row": 1,
           "name": "DSS_HEALTH_REGISTRATION_ADMINISTRATION",
@@ -698,6 +699,7 @@
             }
           ]
         },
+
         {
           "row": 1,
           "name": "DSS_KIBANA_MAPS",
@@ -715,7 +717,7 @@
                   "name": "DASHBOARD_MAP_SUCCESSFUL_ADMINISTRATIONS",
                   "code": "",
                   "moduleName": "iccd-maps",
-                  "pageName": "ba-successful-administrations-map",
+                  "pageName": "oy-successful-administrations-map",
                   "chartType": "kibanaComponent",
                   "filter": "",
                   "headers": []
@@ -741,7 +743,7 @@
                   "name": "DASHBOARD_MAP_UNSUCCESSFUL_ADMINISTRATIONS",
                   "code": "",
                   "moduleName": "iccd-maps",
-                  "pageName": "ba-unsuccessful-administrations-map",
+                  "pageName": "oy-unsuccessful-administrations-map",
                   "chartType": "kibanaComponent",
                   "filter": "",
                   "headers": []
@@ -767,7 +769,7 @@
                   "name": "DASHBOARD_MAPS_CHECKLIST_FILLED",
                   "code": "",
                   "moduleName": "iccd-maps",
-                  "pageName": "ba-checklist-filled-map",
+                  "pageName": "oy-checklist-filled-map",
                   "chartType": "kibanaComponent",
                   "filter": "",
                   "headers": []
@@ -776,6 +778,7 @@
             }
           ]
         },
+
         {
           "row": 1,
           "name": "DSS_HEALTH_COMPLAINTS",
@@ -960,6 +963,7 @@
             }
           ]
         },
+
         {
           "row": 1,
           "name": "DSS_HEALTH_INVENTORY",
@@ -1225,20 +1229,12 @@
                   "filter": "",
                   "headers": [],
                   "tabName": "BOUNDARY"
-                },
-                {
-                  "id": "summaryTeamPerformanceDistrictByDayICCD",
-                  "name": "DSS_HEALTH_SUMMARY_TEAM_PERFORMANCE_DISTRICT_BY_DAY_ICCD",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "DAYWISE"
                 }
               ]
             }
           ]
         },
+
         {
           "row": 1,
           "name": "DSS_HEALTH_DATA_QUALITY",
@@ -1353,6 +1349,7 @@
             }
           ]
         },
+        
         {
           "row": 1,
           "name": "DSS_HEALTH_REFERRAL_AND_SIDE_EFFECTS",
