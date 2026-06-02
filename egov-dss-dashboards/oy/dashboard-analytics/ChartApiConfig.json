@@ -1777,24 +1777,30 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "oy-user-action-other-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":100},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\",\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
       }
     ],
     "chartType": "xtableNested",
-    "drillChart": "none",
-    "plotLabel": "Device Switch User Summary (Nested)",
+    "drillChart": "deviceSwitchReasonsByWardICCD",
+    "plotLabel": "Device Switch By Reason (District)",
     "hideInsights": true,
     "hideHeaderDenomination": true,
     "headerJoiner": " | ",
     "excludedColumns": [
       "S.N."
     ],
+    "filterKeys": [
+      {
+        "key": "lga",
+        "column": "District"
+      }
+    ],
     "bucketHierarchy": [
       {
         "aggName": "Boundary",
-        "plotName": "Country"
+        "plotName": "District"
       },
       {
         "aggName": "Switch Reasons",
@@ -1812,7 +1818,8 @@
     "splitMetricsPaths": [
       "Switch Reasons"
     ],
-    "ignoreSplitMetricPaths": []
+    "ignoreSplitMetricPaths": [],
+    "kind": "drillDown"
   },
   "interventionCoverageHeatMapNationalICCD": {
     "chartName": "DSS_HEALTH_INTERVENTION_COVERAGE_HEATMAP_NATIONAL_ICCD",
@@ -5710,7 +5717,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "oy-user-action-other-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":{\"value\":\"DEVICE_SWITCH\"}}},{\"term\":{\"Data.role.keyword\":{\"value\":\"NATIONAL_SUPERVISOR\"}}}]}},\"aggs\":{\"Country\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":100,\"missing\":\"N/A\"},\"aggs\":{\"UserName\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":1000,\"missing\":\"N/A\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
       }
@@ -6480,29 +6487,35 @@
     "kind": "drillDown"
   },
   "dayWiseDeviceSwitched": {
-    "chartName": "DSS_HEALTH_DEVICE_SWITCH_BY_REASON",
+    "chartName": "DSS_HEALTH_DEVICE_SWITCH_BY_DAY",
     "queries": [
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "oy-user-action-other-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":100},\"aggs\":{\"Day\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"yyyy-MM-dd\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Day\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"yyyy-MM-dd\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
       }
     ],
     "chartType": "xtableNested",
-    "drillChart": "none",
-    "plotLabel": "Device Switch Day Summary (Nested)",
+    "drillChart": "dayWiseDeviceSwitchedByWardICCD",
+    "plotLabel": "Device Switch By Day (District)",
     "hideInsights": true,
     "hideHeaderDenomination": true,
     "headerJoiner": " | ",
     "excludedColumns": [
       "S.N."
     ],
+    "filterKeys": [
+      {
+        "key": "lga",
+        "column": "District"
+      }
+    ],
     "bucketHierarchy": [
       {
         "aggName": "Boundary",
-        "plotName": "Country"
+        "plotName": "District"
       },
       {
         "aggName": "Day",
@@ -6520,7 +6533,8 @@
     "splitMetricsPaths": [
       "Day"
     ],
-    "ignoreSplitMetricPaths": []
+    "ignoreSplitMetricPaths": [],
+    "kind": "drillDown"
   },
   "paymentsBillDetailsByCountryBarChart": {
     "chartName": "DSS_HEALTH_PAYMENTS_BILLDETAILS_BY_COUNTRY",
@@ -6553,7 +6567,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"campaignId\":\"Data.campaignId.keyword\",\"projectId\":\"Data.projectId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\"}",
         "indexName": "oy-user-action-other-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}}]}},\"aggs\":{\"Day\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"yyyy-MM-dd\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}"
       }
@@ -8025,7 +8039,7 @@
         "key": "deviceSwitchOverview",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "oy-user-action-other-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"filtered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":{\"value\":\"DEVICE_SWITCH\"}}}]}},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}},\"Unique Users Switched Device\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) { for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count += 1; uniqueValueMap.put(key, key); } } } } return count;\"}},\"users\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"user_flag\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"_count\"},\"script\":\"params.count > 1 ? 1 : 0\"}}}},\"Users more than two devices\":{\"sum_bucket\":{\"buckets_path\":\"users>user_flag\"}}}}}}",
@@ -8729,7 +8743,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "oy-user-action-other-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":{\"value\":\"DEVICE_SWITCH\"}}},{\"term\":{\"Data.role.keyword\":{\"value\":\"WAREHOUSE_MANAGER\"}}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"LGA\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":5000,\"missing\":\"N/A\"},\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":5000,\"missing\":\"N/A\"},\"aggs\":{\"UserName\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":1000,\"missing\":\"N/A\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}}}}}"
       }
@@ -14177,7 +14191,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "oy-user-action-other-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}}]}},\"aggs\":{\"Switch Reasons\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"def f = 'Data.additionalDetails.DEVICE_SWITCH_REASON.keyword'; if (doc.containsKey(f) == false || doc[f].size()==0) return 'OTHER'; def v = doc[f].value; if (v == 'PHONE_BATTERY_DIED' || v == 'PHONE_LOST_OR_STOLEN' || v == 'PHONE_TECHNICAL_ISSUE' || v == 'PHONE_PERMANENTLY_DAMAGED' || v == 'PHONE_STORAGE_FULL') return v; return 'OTHER';\"},\"size\":10},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}"
       }
@@ -14200,7 +14214,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "oy-user-action-other-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":{\"value\":\"DEVICE_SWITCH\"}}},{\"term\":{\"Data.role.keyword\":{\"value\":\"DISTRIBUTOR\"}}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"LGA\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":5000,\"missing\":\"N/A\"},\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":5000,\"missing\":\"N/A\"},\"aggs\":{\"HealthFacility\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":5000,\"missing\":\"N/A\"},\"aggs\":{\"UserName\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":1000,\"missing\":\"N/A\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}}}}}}}"
       }
@@ -16515,5 +16529,505 @@
       }
     ],
     "insight": {}
+  },
+  "deviceSwitchReasonsByCountryICCD": {
+    "chartName": "DSS_HEALTH_DEVICE_SWITCH_BY_REASON",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "oy-user-action-other-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\",\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+      }
+    ],
+    "chartType": "xtableNested",
+    "drillChart": "deviceSwitchReasonsByStateICCD",
+    "plotLabel": "Device Switch By Reason (Country)",
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "headerJoiner": " | ",
+    "excludedColumns": [
+      "S.N."
+    ],
+    "filterKeys": [
+      {
+        "key": "country",
+        "column": "Country"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "Boundary",
+        "plotName": "Country"
+      },
+      {
+        "aggName": "Switch Reasons",
+        "plotName": "Reason"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Device Switch Count",
+        "path": "Device Switch Count.value",
+        "valueType": "number"
+      }
+    ],
+    "computedFields": [],
+    "splitMetricsPaths": [
+      "Switch Reasons"
+    ],
+    "ignoreSplitMetricPaths": [],
+    "kind": "drillDown"
+  },
+  "deviceSwitchReasonsByStateICCD": {
+    "chartName": "DSS_HEALTH_DEVICE_SWITCH_BY_REASON",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "oy-user-action-other-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\",\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+      }
+    ],
+    "chartType": "xtableNested",
+    "drillChart": "deviceSwitchReasonsByLgaICCD",
+    "plotLabel": "Device Switch By Reason (State)",
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "headerJoiner": " | ",
+    "excludedColumns": [
+      "S.N."
+    ],
+    "filterKeys": [
+      {
+        "key": "state",
+        "column": "State"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "Boundary",
+        "plotName": "State"
+      },
+      {
+        "aggName": "Switch Reasons",
+        "plotName": "Reason"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Device Switch Count",
+        "path": "Device Switch Count.value",
+        "valueType": "number"
+      }
+    ],
+    "computedFields": [],
+    "splitMetricsPaths": [
+      "Switch Reasons"
+    ],
+    "ignoreSplitMetricPaths": [],
+    "kind": "drillDown"
+  },
+  "deviceSwitchReasonsByWardICCD": {
+    "chartName": "DSS_HEALTH_DEVICE_SWITCH_BY_REASON",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "oy-user-action-other-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\",\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+      }
+    ],
+    "chartType": "xtableNested",
+    "drillChart": "deviceSwitchReasonsByHealthFacilityICCD",
+    "plotLabel": "Device Switch By Reason (Administrative Province)",
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "headerJoiner": " | ",
+    "excludedColumns": [
+      "S.N."
+    ],
+    "filterKeys": [
+      {
+        "key": "ward",
+        "column": "Administrative Province"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "Boundary",
+        "plotName": "Administrative Province"
+      },
+      {
+        "aggName": "Switch Reasons",
+        "plotName": "Reason"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Device Switch Count",
+        "path": "Device Switch Count.value",
+        "valueType": "number"
+      }
+    ],
+    "computedFields": [],
+    "splitMetricsPaths": [
+      "Switch Reasons"
+    ],
+    "ignoreSplitMetricPaths": [],
+    "kind": "drillDown"
+  },
+  "deviceSwitchReasonsByHealthFacilityICCD": {
+    "chartName": "DSS_HEALTH_DEVICE_SWITCH_BY_REASON",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "oy-user-action-other-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\",\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+      }
+    ],
+    "chartType": "xtableNested",
+    "drillChart": "none",
+    "plotLabel": "Device Switch By Reason (Locality)",
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "headerJoiner": " | ",
+    "excludedColumns": [
+      "S.N."
+    ],
+    "filterKeys": [
+      {
+        "key": "healthFacility",
+        "column": "Locality"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "Boundary",
+        "plotName": "Locality"
+      },
+      {
+        "aggName": "Switch Reasons",
+        "plotName": "Reason"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Device Switch Count",
+        "path": "Device Switch Count.value",
+        "valueType": "number"
+      }
+    ],
+    "computedFields": [],
+    "splitMetricsPaths": [
+      "Switch Reasons"
+    ],
+    "ignoreSplitMetricPaths": [],
+    "kind": "drillDown"
+  },
+  "dayWiseDeviceSwitchedByCountryICCD": {
+    "chartName": "DSS_HEALTH_DEVICE_SWITCH_BY_DAY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "oy-user-action-other-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Day\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"yyyy-MM-dd\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+      }
+    ],
+    "chartType": "xtableNested",
+    "drillChart": "dayWiseDeviceSwitchedByStateICCD",
+    "plotLabel": "Device Switch By Day (Country)",
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "headerJoiner": " | ",
+    "excludedColumns": [
+      "S.N."
+    ],
+    "filterKeys": [
+      {
+        "key": "country",
+        "column": "Country"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "Boundary",
+        "plotName": "Country"
+      },
+      {
+        "aggName": "Day",
+        "plotName": "Day"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Device Switch Count",
+        "path": "Device Switch Count.value",
+        "valueType": "number"
+      }
+    ],
+    "computedFields": [],
+    "splitMetricsPaths": [
+      "Day"
+    ],
+    "ignoreSplitMetricPaths": [],
+    "kind": "drillDown"
+  },
+  "dayWiseDeviceSwitchedByStateICCD": {
+    "chartName": "DSS_HEALTH_DEVICE_SWITCH_BY_DAY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "oy-user-action-other-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Day\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"yyyy-MM-dd\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+      }
+    ],
+    "chartType": "xtableNested",
+    "drillChart": "dayWiseDeviceSwitchedByLgaICCD",
+    "plotLabel": "Device Switch By Day (State)",
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "headerJoiner": " | ",
+    "excludedColumns": [
+      "S.N."
+    ],
+    "filterKeys": [
+      {
+        "key": "state",
+        "column": "State"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "Boundary",
+        "plotName": "State"
+      },
+      {
+        "aggName": "Day",
+        "plotName": "Day"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Device Switch Count",
+        "path": "Device Switch Count.value",
+        "valueType": "number"
+      }
+    ],
+    "computedFields": [],
+    "splitMetricsPaths": [
+      "Day"
+    ],
+    "ignoreSplitMetricPaths": [],
+    "kind": "drillDown"
+  },
+  "dayWiseDeviceSwitchedByWardICCD": {
+    "chartName": "DSS_HEALTH_DEVICE_SWITCH_BY_DAY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "oy-user-action-other-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Day\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"yyyy-MM-dd\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+      }
+    ],
+    "chartType": "xtableNested",
+    "drillChart": "dayWiseDeviceSwitchedByHealthFacilityICCD",
+    "plotLabel": "Device Switch By Day (Administrative Province)",
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "headerJoiner": " | ",
+    "excludedColumns": [
+      "S.N."
+    ],
+    "filterKeys": [
+      {
+        "key": "ward",
+        "column": "Administrative Province"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "Boundary",
+        "plotName": "Administrative Province"
+      },
+      {
+        "aggName": "Day",
+        "plotName": "Day"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Device Switch Count",
+        "path": "Device Switch Count.value",
+        "valueType": "number"
+      }
+    ],
+    "computedFields": [],
+    "splitMetricsPaths": [
+      "Day"
+    ],
+    "ignoreSplitMetricPaths": [],
+    "kind": "drillDown"
+  },
+  "dayWiseDeviceSwitchedByHealthFacilityICCD": {
+    "chartName": "DSS_HEALTH_DEVICE_SWITCH_BY_DAY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "oy-user-action-other-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Day\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"yyyy-MM-dd\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+      }
+    ],
+    "chartType": "xtableNested",
+    "drillChart": "none",
+    "plotLabel": "Device Switch By Day (Locality)",
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "headerJoiner": " | ",
+    "excludedColumns": [
+      "S.N."
+    ],
+    "filterKeys": [
+      {
+        "key": "healthFacility",
+        "column": "Locality"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "Boundary",
+        "plotName": "Locality"
+      },
+      {
+        "aggName": "Day",
+        "plotName": "Day"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Device Switch Count",
+        "path": "Device Switch Count.value",
+        "valueType": "number"
+      }
+    ],
+    "computedFields": [],
+    "splitMetricsPaths": [
+      "Day"
+    ],
+    "ignoreSplitMetricPaths": [],
+    "kind": "drillDown"
+  },
+  "deviceSwitchReasonsByLgaICCD": {
+    "chartName": "DSS_HEALTH_DEVICE_SWITCH_BY_REASON",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "oy-user-action-other-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\",\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+      }
+    ],
+    "chartType": "xtableNested",
+    "drillChart": "deviceSwitchReasonsByWardICCD",
+    "plotLabel": "Device Switch By Reason (District)",
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "headerJoiner": " | ",
+    "excludedColumns": [
+      "S.N."
+    ],
+    "filterKeys": [
+      {
+        "key": "lga",
+        "column": "District"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "Boundary",
+        "plotName": "District"
+      },
+      {
+        "aggName": "Switch Reasons",
+        "plotName": "Reason"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Device Switch Count",
+        "path": "Device Switch Count.value",
+        "valueType": "number"
+      }
+    ],
+    "computedFields": [],
+    "splitMetricsPaths": [
+      "Switch Reasons"
+    ],
+    "ignoreSplitMetricPaths": [],
+    "kind": "drillDown"
+  },
+  "dayWiseDeviceSwitchedByLgaICCD": {
+    "chartName": "DSS_HEALTH_DEVICE_SWITCH_BY_DAY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "oy-user-action-other-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Day\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"yyyy-MM-dd\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+      }
+    ],
+    "chartType": "xtableNested",
+    "drillChart": "dayWiseDeviceSwitchedByWardICCD",
+    "plotLabel": "Device Switch By Day (District)",
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "headerJoiner": " | ",
+    "excludedColumns": [
+      "S.N."
+    ],
+    "filterKeys": [
+      {
+        "key": "lga",
+        "column": "District"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "Boundary",
+        "plotName": "District"
+      },
+      {
+        "aggName": "Day",
+        "plotName": "Day"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Device Switch Count",
+        "path": "Device Switch Count.value",
+        "valueType": "number"
+      }
+    ],
+    "computedFields": [],
+    "splitMetricsPaths": [
+      "Day"
+    ],
+    "ignoreSplitMetricPaths": [],
+    "kind": "drillDown"
   }
 }
