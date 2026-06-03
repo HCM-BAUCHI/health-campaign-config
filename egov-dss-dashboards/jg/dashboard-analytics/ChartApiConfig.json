@@ -206,6 +206,38 @@
     "_comment": " ",
     "kind": "drillDown"
   },
+  "administeredByHeightJigawaDistrictICCD": {
+    "chartName": "DSS_HEALTH_ADMINISTERED_BY_HEIGHT_JIGAWA_DISTRICT_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "jg-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"height_LTE_122\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.additionalDetails.height\":{\"lte\":122}}}]}},\"aggs\":{\"height_LTE_122 count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"height_btw_123_138\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.additionalDetails.height\":{\"gte\":123,\"lte\":138}}}]}},\"aggs\":{\"height_btw_123_138 count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"height_gte_139\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.additionalDetails.height\":{\"gte\":139}}}]}},\"aggs\":{\"height_gte_139 count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "plotLabel": "none",
+    "drillChart": "administeredByHeightJigawaApICCD",
+    "filterKeys": [
+      {
+        "key": "lga"
+      }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "height_LTE_122",
+      "height_btw_123_138",
+      "height_gte_139"
+    ],
+    "insight": {},
+    "_comment": "Jigawa administered by height groups from project-task-index",
+    "kind": "drillDown"
+  },
   "administeredByAgeGroupApICCD": {
     "kind": "drillDown",
     "chartName": "DSS_HEALTH_ADMINISTERED_BY_AGE_GROUP_AP_ICCD",
@@ -719,7 +751,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "summaryTeamPerformanceByVillageICCD",
+    "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
     "plotLabel": "Locality",
@@ -17802,5 +17834,101 @@
     "hideHeaderDenomination": true,
     "kind": "drillDown",
     "_comment": "Health facility aggregation: Health Facility to STAFF"
+  },
+  "administeredByHeightJigawaApICCD": {
+    "chartName": "DSS_HEALTH_ADMINISTERED_BY_HEIGHT_JIGAWA_AP_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "jg-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"height_LTE_122\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.additionalDetails.height\":{\"lte\":122}}}]}},\"aggs\":{\"height_LTE_122 count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"height_btw_123_138\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.additionalDetails.height\":{\"gte\":123,\"lte\":138}}}]}},\"aggs\":{\"height_btw_123_138 count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"height_gte_139\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.additionalDetails.height\":{\"gte\":139}}}]}},\"aggs\":{\"height_gte_139 count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "plotLabel": "none",
+    "drillChart": "administeredByHeightJigawaLocalityICCD",
+    "filterKeys": [
+      {
+        "key": "ward"
+      }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "height_LTE_122",
+      "height_btw_123_138",
+      "height_gte_139"
+    ],
+    "insight": {},
+    "_comment": "Jigawa administered by height groups from project-task-index",
+    "kind": "drillDown"
+  },
+  "administeredByHeightJigawaLocalityICCD": {
+    "chartName": "DSS_HEALTH_ADMINISTERED_BY_HEIGHT_JIGAWA_LOCALITY_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "jg-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"height_LTE_122\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.additionalDetails.height\":{\"lte\":122}}}]}},\"aggs\":{\"height_LTE_122 count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"height_btw_123_138\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.additionalDetails.height\":{\"gte\":123,\"lte\":138}}}]}},\"aggs\":{\"height_btw_123_138 count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"height_gte_139\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.additionalDetails.height\":{\"gte\":139}}}]}},\"aggs\":{\"height_gte_139 count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "plotLabel": "none",
+    "drillChart": "administeredByHeightJigawaVillageICCD",
+    "filterKeys": [
+      {
+        "key": "healthFacility"
+      }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "height_LTE_122",
+      "height_btw_123_138",
+      "height_gte_139"
+    ],
+    "insight": {},
+    "_comment": "Jigawa administered by height groups from project-task-index",
+    "kind": "drillDown"
+  },
+  "administeredByHeightJigawaVillageICCD": {
+    "chartName": "DSS_HEALTH_ADMINISTERED_BY_HEIGHT_JIGAWA_VILLAGE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "jg-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"height_LTE_122\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.additionalDetails.height\":{\"lte\":122}}}]}},\"aggs\":{\"height_LTE_122 count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"height_btw_123_138\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.additionalDetails.height\":{\"gte\":123,\"lte\":138}}}]}},\"aggs\":{\"height_btw_123_138 count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"height_gte_139\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.additionalDetails.height\":{\"gte\":139}}}]}},\"aggs\":{\"height_gte_139 count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "plotLabel": "none",
+    "drillChart": "none",
+    "filterKeys": [
+      {
+        "key": "community"
+      }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "height_LTE_122",
+      "height_btw_123_138",
+      "height_gte_139"
+    ],
+    "insight": {},
+    "_comment": "Jigawa administered by height groups from project-task-index",
+    "kind": "drillDown"
   }
 }

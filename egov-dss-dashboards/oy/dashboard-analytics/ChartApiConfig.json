@@ -715,7 +715,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "summaryTeamPerformanceProvincialByDistributorICCD",
+    "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
     "plotLabel": "Locality",

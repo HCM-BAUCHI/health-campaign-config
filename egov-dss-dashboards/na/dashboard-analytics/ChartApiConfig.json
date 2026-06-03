@@ -719,7 +719,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "summaryTeamPerformanceByVillageICCD",
+    "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
     "plotLabel": "Locality",

@@ -588,15 +588,15 @@
             },
             {
               "id": 753,
-              "name": "DSS_HEALTH_REDOSE_BY_SPAQ",
-              "label": "DSS_HEALTH_REDOSE_BY_SPAQ",
+              "name": "DSS_HEALTH_ADMINISTERED_BY_HEIGHT_JIGAWA",
+              "label": "DSS_HEALTH_ADMINISTERED_BY_HEIGHT_JIGAWA",
               "vizType": "chart",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "redoseBySpaqBarChartLgaICCD",
-                  "name": "DSS_HEALTH_REDOSE_BY_SPAQ_BARCHART_LGA_ICCD",
+                  "id": "administeredByHeightJigawaDistrictICCD",
+                  "name": "DSS_HEALTH_ADMINISTERED_BY_HEIGHT_JIGAWA_DISTRICT_ICCD",
                   "code": "",
                   "chartType": "sideBySideBar",
                   "filter": "",
