@@ -9894,16 +9894,6 @@
         ],
         "newField": "Children present at Health Facility",
         "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "PercentageComputedField",
-        "fields": [
-          "Referred Children By HFCount",
-          "Referred Children Count"
-        ],
-        "newField": "% Children present at Health Facility",
-        "_comments": ""
       }
     ],
     "insight": {},
