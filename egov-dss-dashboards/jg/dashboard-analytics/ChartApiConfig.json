@@ -553,7 +553,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
         "indexName": "jg-project-staff-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Total user created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Total user created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}},\"Count scaled\":{\"bucket_script\":{\"buckets_path\":{\"c\":\"Count\"},\"script\":\"params.c * 100\"}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -570,7 +570,8 @@
     "plotLabel": "District",
     "excludedColumns": [
       "S.N.",
-      "Count"
+      "Count",
+      "Count scaled"
     ],
     "excludedBucketKeys": [],
     "computedFields": [
@@ -597,7 +598,7 @@
         "actionName": "PercentageComputedField",
         "fields": [
           "Total Administration",
-          "Total user created"
+          "Count scaled"
         ],
         "newField": "Average administrations",
         "_comments": ""
@@ -630,7 +631,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
         "indexName": "jg-project-staff-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Total user created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Total user created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}},\"Count scaled\":{\"bucket_script\":{\"buckets_path\":{\"c\":\"Count\"},\"script\":\"params.c * 100\"}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -647,7 +648,8 @@
     "plotLabel": "AdministrativeProvince",
     "excludedColumns": [
       "S.N.",
-      "Count"
+      "Count",
+      "Count scaled"
     ],
     "excludedBucketKeys": [],
     "computedFields": [
@@ -674,7 +676,7 @@
         "actionName": "PercentageComputedField",
         "fields": [
           "Total Administration",
-          "Total user created"
+          "Count scaled"
         ],
         "newField": "Average administrations",
         "_comments": ""
@@ -706,7 +708,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\"}",
         "indexName": "jg-project-staff-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"}}]}},\"aggs\":{\"Total user created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"}}]}},\"aggs\":{\"Total user created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}},\"Count scaled\":{\"bucket_script\":{\"buckets_path\":{\"c\":\"Count\"},\"script\":\"params.c * 100\"}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -723,7 +725,8 @@
     "plotLabel": "Locality",
     "excludedColumns": [
       "S.N.",
-      "Count"
+      "Count",
+      "Count scaled"
     ],
     "excludedBucketKeys": [],
     "computedFields": [
@@ -750,7 +753,7 @@
         "actionName": "PercentageComputedField",
         "fields": [
           "Total Administration",
-          "Total user created"
+          "Count scaled"
         ],
         "newField": "Average administrations",
         "_comments": ""
@@ -782,7 +785,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\"}",
         "indexName": "jg-project-staff-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}},\"aggs\":{\"Total user created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}},\"aggs\":{\"Total user created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}},\"Count scaled\":{\"bucket_script\":{\"buckets_path\":{\"c\":\"Count\"},\"script\":\"params.c * 100\"}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -799,7 +802,8 @@
     "plotLabel": "Village",
     "excludedColumns": [
       "S.N.",
-      "Count"
+      "Count",
+      "Count scaled"
     ],
     "excludedBucketKeys": [],
     "computedFields": [
@@ -826,7 +830,7 @@
         "actionName": "PercentageComputedField",
         "fields": [
           "Total Administration",
-          "Total user created"
+          "Count scaled"
         ],
         "newField": "Average administrations",
         "_comments": ""
@@ -1779,7 +1783,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-user-action-other-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\",\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":100},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}"
       }
     ],
     "chartType": "xtableNested",
@@ -16644,7 +16648,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-user-action-other-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\",\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
       }
     ],
     "chartType": "xtableNested",
@@ -16694,7 +16698,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-user-action-other-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\",\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
       }
     ],
     "chartType": "xtableNested",
@@ -16744,7 +16748,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-user-action-other-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\",\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
       }
     ],
     "chartType": "xtableNested",
@@ -16794,7 +16798,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-user-action-other-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\",\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
       }
     ],
     "chartType": "xtableNested",
@@ -17044,7 +17048,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-user-action-other-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\",\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DEVICE FILTER\":{\"filter\":{\"term\":{\"Data.userAction.beneficiaryTag.keyword\":\"DEVICE_SWITCH\"}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"missing\":\"N/A\"},\"aggs\":{\"Switch Reasons\":{\"filters\":{\"filters\":{\"PHONE_BATTERY_DIED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_BATTERY_DIED\"}},\"PHONE_LOST_OR_STOLEN\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_LOST_OR_STOLEN\"}},\"PHONE_TECHNICAL_ISSUE\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_TECHNICAL_ISSUE\"}},\"PHONE_PERMANENTLY_DAMAGED\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_PERMANENTLY_DAMAGED\"}},\"PHONE_STORAGE_FULL\":{\"term\":{\"Data.additionalDetails.DEVICE_SWITCH_REASON.keyword\":\"PHONE_STORAGE_FULL\"}}},\"other_bucket\":true,\"other_bucket_key\":\"OTHER\"},\"aggs\":{\"Device Switch Count\":{\"value_count\":{\"field\":\"Data.userAction.id.keyword\"}}}}}}}}}}"
       }
     ],
     "chartType": "xtableNested",
