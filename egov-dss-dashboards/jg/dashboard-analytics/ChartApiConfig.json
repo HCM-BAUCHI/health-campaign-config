@@ -1861,7 +1861,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Distribution Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Distribution Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -1884,20 +1884,11 @@
     ],
     "computedFields": [
       {
-        "postAggregationTheory": "repsonseToDifferenceOfDates",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Target for daterange"
-        ],
-        "newField": "Distribution Target",
-        "_comments": ""
-      },
-      {
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
         "fields": [
           "overallQuantity",
-          "Distribution Target"
+          "target"
         ],
         "newField": "percentage_value",
         "_comments": ""
@@ -1916,14 +1907,14 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Distribution Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
+        "indexName": "jg--project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Distribution Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "jg-population-coverage-summary",
+        "indexName": "jg--population-coverage-summary",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Intervention covered\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"lga\"},\"aggs\":{\"overallQuantity\":{\"sum\":{\"field\":\"total_administered_resources\"}}}}}}"
       }
     ],
@@ -1940,20 +1931,11 @@
     ],
     "computedFields": [
       {
-        "postAggregationTheory": "repsonseToDifferenceOfDates",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Target for daterange"
-        ],
-        "newField": "Distribution Target",
-        "_comments": ""
-      },
-      {
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
         "fields": [
-          "Total Intervention covered",
-          "Distribution Target"
+          "overallQuantity",
+          "target"
         ],
         "newField": "percentage_value",
         "_comments": ""
@@ -8340,7 +8322,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -8363,20 +8345,11 @@
     ],
     "computedFields": [
       {
-        "postAggregationTheory": "repsonseToDifferenceOfDates",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Target for daterange"
-        ],
-        "newField": "Population Target",
-        "_comments": ""
-      },
-      {
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
         "fields": [
           "total_count",
-          "Population Target"
+          "target"
         ],
         "newField": "percentage_value",
         "_comments": ""
@@ -8397,7 +8370,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -8420,20 +8393,11 @@
     ],
     "computedFields": [
       {
-        "postAggregationTheory": "repsonseToDifferenceOfDates",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Target for daterange"
-        ],
-        "newField": "Population Target",
-        "_comments": ""
-      },
-      {
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
         "fields": [
           "total_count",
-          "Population Target"
+          "target"
         ],
         "newField": "percentage_value",
         "_comments": ""
@@ -8453,7 +8417,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"3-11MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"3-11MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -8476,20 +8440,11 @@
     ],
     "computedFields": [
       {
-        "postAggregationTheory": "repsonseToDifferenceOfDates",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Target for daterange"
-        ],
-        "newField": "Population Target",
-        "_comments": ""
-      },
-      {
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
         "fields": [
           "total_count",
-          "Population Target"
+          "target"
         ],
         "newField": "percentage_value",
         "_comments": ""
@@ -8509,7 +8464,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -8532,20 +8487,11 @@
     ],
     "computedFields": [
       {
-        "postAggregationTheory": "repsonseToDifferenceOfDates",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Target for daterange"
-        ],
-        "newField": "Population Target",
-        "_comments": ""
-      },
-      {
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
         "fields": [
           "total_count",
-          "Population Target"
+          "target"
         ],
         "newField": "percentage_value",
         "_comments": ""
