@@ -6117,6 +6117,13 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_ABSENT\"}}]}},\"aggs\":{\"Beneficiary Absent\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "jg-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"INELIGIBLE\"}}]}},\"aggs\":{\"Beneficiary Ineligible\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
       }
     ],
     "chartType": "pie",
@@ -6129,7 +6136,8 @@
       "Beneficiary Refused",
       "Beneficiary Died",
       "Beneficiary Migrated",
-      "Beneficiary Absent"
+      "Beneficiary Absent",
+      "Beneficiary Ineligible"
     ],
     "insight": {},
     "_comment": " ",
@@ -8189,6 +8197,13 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_ABSENT\"}}]}},\"aggs\":{\"Beneficiary Absent\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "jg-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"INELIGIBLE\"}}]}},\"aggs\":{\"Beneficiary Ineligible\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
       }
     ],
     "chartType": "pie",
@@ -8201,7 +8216,8 @@
       "Beneficiary Refused",
       "Beneficiary Died",
       "Beneficiary Migrated",
-      "Beneficiary Absent"
+      "Beneficiary Absent",
+      "Beneficiary Ineligible"
     ],
     "insight": {},
     "_comment": " ",
@@ -13355,7 +13371,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 3-11 Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Administered 3-11 Daily count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}},\"Administered 12-59\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 12-59 Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Administered 12-59 Daily count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}},\"Administered 3-59\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 3-59 Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Administered 3-59 Daily count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}},\"Interventions distributed\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.isDelivered\":true}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Interventions distributed Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Interventions distributed count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}},\"Refused\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_REFUSED\"}}]}},\"aggs\":{\"Refused Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Refused Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"Died\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_DIED\"}}]}},\"aggs\":{\"Died Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Died Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"Migrated\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_MIGRATED\"}}]}},\"aggs\":{\"Migrated Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Migrated Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"Ineligible\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"INELIGIBLE\"}}]}},\"aggs\":{\"Ineligible Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Ineligible Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 3-11 Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Administered 3-11 Daily count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}},\"Administered 12-59\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 12-59 Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Administered 12-59 Daily count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}},\"Administered 3-59\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 3-59 Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Administered 3-59 Daily count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}},\"Interventions distributed\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.isDelivered\":true}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Interventions distributed Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Interventions distributed count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}},\"Refused\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_REFUSED\"}}]}},\"aggs\":{\"Refused Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Refused Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"Died\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_DIED\"}}]}},\"aggs\":{\"Died Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Died Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"Migrated\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_MIGRATED\"}}]}},\"aggs\":{\"Migrated Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Migrated Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"Absent\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_ABSENT\"}}]}},\"aggs\":{\"Absent Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Absent Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"Ineligible\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"INELIGIBLE\"}}]}},\"aggs\":{\"Ineligible Daily\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"format\":\"dd MMM yyyy\",\"min_doc_count\":1},\"aggs\":{\"Ineligible Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       }
     ],
     "chartType": "xtable",
@@ -13385,6 +13401,7 @@
       "Refused Daily count",
       "Died Daily count",
       "Migrated Daily count",
+      "Absent Daily count",
       "Ineligible Daily count"
     ],
     "computedFields": [
@@ -13449,6 +13466,15 @@
           "Migrated Daily count"
         ],
         "newField": "BENEFICIARY_MIGRATED",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Absent Daily count"
+        ],
+        "newField": "Beneficiary Absent",
         "_comments": ""
       },
       {
