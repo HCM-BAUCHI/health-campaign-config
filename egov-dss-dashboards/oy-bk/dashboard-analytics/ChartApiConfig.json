@@ -1853,7 +1853,7 @@
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
         "fields": [
-          "Total Intervention covered",
+          "overallQuantity",
           "Distribution Target"
         ],
         "newField": "percentage_value",
