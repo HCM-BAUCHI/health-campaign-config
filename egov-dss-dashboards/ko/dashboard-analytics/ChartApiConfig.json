@@ -8162,7 +8162,7 @@
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "oy-project-task-index-v1",
+        "indexName": "ko-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_REFUSED\"}}]}},\"aggs\":{\"Beneficiary Refused\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
       },
       {
