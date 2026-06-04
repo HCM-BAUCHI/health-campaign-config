@@ -6200,7 +6200,7 @@
     "chartType": "pie",
     "valueType": "number",
     "showLabel": true,
-    "drillChart": "populationNotAdministeredByReasonDrillDownNationalICCD",
+    "drillChart": "none",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
