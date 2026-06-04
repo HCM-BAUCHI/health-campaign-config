@@ -17494,7 +17494,7 @@
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
         "indexName": "jg-stock-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\": 0, \"aggs\": {\"azmSentHealthToStaff\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"STAFF\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"AZM\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}]}}, \"aggs\": {\"total\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}",
+        "aggrQuery": "{\"size\": 0, \"aggs\": {\"azmSentHealthToStaff\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"STAFF\"}}, {\"term\": {\"Data.productName.keyword\": \"AZM\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}]}}, \"aggs\": {\"total\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}",
         "select": {
           "azmSentHealthToStaff": "azmSentHealthToStaff.total.value"
         }
@@ -17506,7 +17506,7 @@
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
         "indexName": "jg-stock-index-updated-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\": 0, \"aggs\": {\"azmAcceptedAtStaff\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"STAFF\"}}, {\"term\": {\"Data.productName.keyword\": \"AZM\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"total\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}",
+        "aggrQuery": "{\"size\": 0, \"aggs\": {\"azmAcceptedAtStaff\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"STAFF\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"AZM\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"total\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}",
         "select": {
           "azmAcceptedAtStaff": "azmAcceptedAtStaff.total.value"
         }
