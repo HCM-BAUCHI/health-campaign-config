@@ -8368,7 +8368,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.date",
         "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
         "indexName": "na-population-coverage-summary",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Population covered\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"lga\"},\"aggs\":{\"total_count\":{\"sum\":{\"field\":\"total_population_administered\"}}}}}}"
@@ -8415,7 +8415,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.date",
         "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
         "indexName": "na-population-coverage-summary",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Population 3-11 covered\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"lga\"},\"aggs\":{\"total_count\":{\"sum\":{\"field\":\"total_population_3_11\"}}}}}}"
@@ -8462,7 +8462,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.date",
         "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
         "indexName": "na-population-coverage-summary",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Population 12-59 covered\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"lga\"},\"aggs\":{\"total_count\":{\"sum\":{\"field\":\"total_population_12_59\"}}}}}}"
@@ -15032,7 +15032,7 @@
       {
         "key": "redoseCounts",
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "na-project-task-index-v1",
         "transformData": "linearAggregation",
