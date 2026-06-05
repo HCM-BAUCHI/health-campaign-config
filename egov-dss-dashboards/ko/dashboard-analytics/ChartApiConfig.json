@@ -8414,10 +8414,10 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "ko-population-coverage-summary",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Population covered\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"lga\"},\"aggs\":{\"total_count\":{\"sum\":{\"field\":\"total_population_administered\"}}}}}}"
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Total Population covered\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"total_count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
       }
     ],
     "filterKeys": [],
@@ -8461,10 +8461,10 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.date",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "ko-population-coverage-summary-datewise",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Population covered\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"lga\"},\"aggs\":{\"total_count\":{\"sum\":{\"field\":\"total_population_administered\"}}}}}}"
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Total Population covered\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"total_count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
       }
     ],
     "filterKeys": [],
@@ -8508,10 +8508,10 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.date",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "ko-population-coverage-summary-datewise",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Population 3-11 covered\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"lga\"},\"aggs\":{\"total_count\":{\"sum\":{\"field\":\"total_population_3_11\"}}}}}}"
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Total Population 3-11 covered\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"total_count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
       }
     ],
     "filterKeys": [],
@@ -8555,10 +8555,10 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.date",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "ko-population-coverage-summary-datewise",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Population 12-59 covered\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"lga\"},\"aggs\":{\"total_count\":{\"sum\":{\"field\":\"total_population_12_59\"}}}}}}"
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Total Population 12-59 covered\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"total_count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
       }
     ],
     "filterKeys": [],
@@ -8597,14 +8597,14 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ko-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.ward.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.ward.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ko-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Total Population covered\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.ward.keyword\"},\"aggs\":{\"total_count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Total Population covered\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.ward.keyword\"},\"aggs\":{\"total_count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
       }
     ],
     "filterKeys": [],
@@ -8620,20 +8620,11 @@
     ],
     "computedFields": [
       {
-        "postAggregationTheory": "repsonseToDifferenceOfDates",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Target for daterange"
-        ],
-        "newField": "Population Target",
-        "_comments": ""
-      },
-      {
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
         "fields": [
           "total_count",
-          "Population Target"
+          "target"
         ],
         "newField": "percentage_value",
         "_comments": ""
@@ -16459,7 +16450,7 @@
       "total_quantity"
     ],
     "insight": {},
-    "_comment": "Stock summary for commodity dashboard. Fetches all stock transactions from os-stock-index-v1 filtered by campaignId. Returns raw hits (transformed to stock API shape) plus aggregations: by_event_type (RECEIVED/DISPATCHED/RETURNED/DAMAGED with quantity sums), by_product (per-product event type + quantity breakdown), unique_facilities (cardinality), by_facility (per-facility event type breakdown with facility name), by_projectId, and total_quantity. Used by useKibanaStockSearch.js \u2192 useStockData.js \u2192 CommodityDashboard.js for both TransactionSummaryTab and StockSummaryTab."
+    "_comment": "Stock summary for commodity dashboard. Fetches all stock transactions from os-stock-index-v1 filtered by campaignId. Returns raw hits (transformed to stock API shape) plus aggregations: by_event_type (RECEIVED/DISPATCHED/RETURNED/DAMAGED with quantity sums), by_product (per-product event type + quantity breakdown), unique_facilities (cardinality), by_facility (per-facility event type breakdown with facility name), by_projectId, and total_quantity. Used by useKibanaStockSearch.js → useStockData.js → CommodityDashboard.js for both TransactionSummaryTab and StockSummaryTab."
   },
   "commodityWarehouseManagerTotal": {
     "chartName": "DSS_COMMODITY_WAREHOUSE_MANAGER_TOTAL",
@@ -16499,7 +16490,7 @@
       "totalManagers"
     ],
     "insight": {},
-    "_comment": "Total warehouse managers assigned. Queries os-project-staff-index-v1 for all users with role=WAREHOUSE_MANAGER that have a country boundary hierarchy entry. Returns value_count of Data.userId.keyword. Used by useWarehouseManagerSync.js \u2192 CommodityDashboard.js for the Data Sync card (total warehouses)."
+    "_comment": "Total warehouse managers assigned. Queries os-project-staff-index-v1 for all users with role=WAREHOUSE_MANAGER that have a country boundary hierarchy entry. Returns value_count of Data.userId.keyword. Used by useWarehouseManagerSync.js → CommodityDashboard.js for the Data Sync card (total warehouses)."
   },
   "commodityWarehouseManagerSynced": {
     "chartName": "DSS_COMMODITY_WAREHOUSE_MANAGER_SYNCED",
@@ -16570,7 +16561,7 @@
       "syncRate"
     ],
     "insight": {},
-    "_comment": "Warehouse manager sync rate. Queries os-project-staff-index-v1 for total WAREHOUSE_MANAGER count and os-user-sync-index-v1 for unique synced managers. Merges to compute syncRate = (syncedManagers / totalManagers) * 100. Used by useWarehouseManagerSync.js \u2192 CommodityDashboard.js for the Data Sync card."
+    "_comment": "Warehouse manager sync rate. Queries os-project-staff-index-v1 for total WAREHOUSE_MANAGER count and os-user-sync-index-v1 for unique synced managers. Merges to compute syncRate = (syncedManagers / totalManagers) * 100. Used by useWarehouseManagerSync.js → CommodityDashboard.js for the Data Sync card."
   },
   "commodityFacilityStockBalance": {
     "chartName": "DSS_COMMODITY_FACILITY_STOCK_BALANCE",
