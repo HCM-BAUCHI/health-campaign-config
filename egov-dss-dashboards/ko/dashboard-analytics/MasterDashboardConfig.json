@@ -1536,7 +1536,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "deviceSwitchReasonsNumberOfDevices",
+                  "id": "deviceSwitchReasonsByCountryICCD",
                   "name": "DSS_HEALTH_DEVICE_SWITCH_BY_REASON",
                   "code": "",
                   "chartType": "table",

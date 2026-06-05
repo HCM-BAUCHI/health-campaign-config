@@ -1804,13 +1804,13 @@
     "filterKeys": [
       {
         "key": "lga",
-        "column": "District"
+        "column": "Ward"
       }
     ],
     "bucketHierarchy": [
       {
         "aggName": "Boundary",
-        "plotName": "District"
+        "plotName": "Ward"
       },
       {
         "aggName": "Switch Reasons",
@@ -16855,13 +16855,13 @@
     "filterKeys": [
       {
         "key": "ward",
-        "column": "Administrative Province"
+        "column": "Ward"
       }
     ],
     "bucketHierarchy": [
       {
         "aggName": "Boundary",
-        "plotName": "Administrative Province"
+        "plotName": "Ward"
       },
       {
         "aggName": "Switch Reasons",
@@ -16905,13 +16905,13 @@
     "filterKeys": [
       {
         "key": "healthFacility",
-        "column": "Locality"
+        "column": "healthFacility"
       }
     ],
     "bucketHierarchy": [
       {
         "aggName": "Boundary",
-        "plotName": "Locality"
+        "plotName": "Health Facility"
       },
       {
         "aggName": "Switch Reasons",
@@ -17155,13 +17155,13 @@
     "filterKeys": [
       {
         "key": "lga",
-        "column": "District"
+        "column": "LGA"
       }
     ],
     "bucketHierarchy": [
       {
         "aggName": "Boundary",
-        "plotName": "District"
+        "plotName": "LGA"
       },
       {
         "aggName": "Switch Reasons",
