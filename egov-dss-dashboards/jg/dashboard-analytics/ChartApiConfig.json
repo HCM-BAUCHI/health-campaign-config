@@ -17168,13 +17168,13 @@
     "filterKeys": [
       {
         "key": "ward",
-        "column": "Administrative Province"
+        "column": "Ward"
       }
     ],
     "bucketHierarchy": [
       {
         "aggName": "Boundary",
-        "plotName": "Administrative Province"
+        "plotName": "Ward"
       },
       {
         "aggName": "Day",
@@ -17218,13 +17218,13 @@
     "filterKeys": [
       {
         "key": "healthFacility",
-        "column": "Locality"
+        "column": "healthFacility"
       }
     ],
     "bucketHierarchy": [
       {
         "aggName": "Boundary",
-        "plotName": "Locality"
+        "plotName": "Health Facility"
       },
       {
         "aggName": "Day",
@@ -17318,13 +17318,13 @@
     "filterKeys": [
       {
         "key": "lga",
-        "column": "District"
+        "column": "LGA"
       }
     ],
     "bucketHierarchy": [
       {
         "aggName": "Boundary",
-        "plotName": "District"
+        "plotName": "LGA"
       },
       {
         "aggName": "Day",
