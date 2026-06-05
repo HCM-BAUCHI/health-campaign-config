@@ -1589,7 +1589,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "dayWiseDeviceSwitched",
+                  "id": "dayWiseDeviceSwitchedByCountryICCD",
                   "name": "DSS_HEALTH_DEVICE_SWITCH_BY_DAY",
                   "code": "",
                   "chartType": "table",
