@@ -192,7 +192,8 @@
     "drillChart": "administeredByAgeGroupApICCD",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -225,7 +226,8 @@
     "drillChart": "administeredByAgeGroupLocalityICCD",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -257,7 +259,8 @@
     "drillChart": "administeredByAgeGroupVillageICCD",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "documentType": "_doc",
@@ -289,7 +292,8 @@
     "drillChart": "none",
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "documentType": "_doc",
@@ -320,7 +324,8 @@
     "drillChart": "administeredByHeightGroupAPICCD",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -353,7 +358,8 @@
     "drillChart": "administeredByHeightGroupLocalityICCD",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -386,7 +392,8 @@
     "drillChart": "administeredByHeightGroupVillageICCD",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "documentType": "_doc",
@@ -419,7 +426,8 @@
     "drillChart": "none",
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "documentType": "_doc",
@@ -464,7 +472,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -566,7 +575,7 @@
     "filterKeys": [
       {
         "key": "lga",
-        "column": "District"
+        "column": "LGA"
       }
     ],
     "chartType": "xtable",
@@ -574,7 +583,7 @@
     "drillChart": "summaryTeamPerformanceByAPICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "District",
+    "plotLabel": "LGA",
     "excludedColumns": [
       "S.N.",
       "Total Distributors Marked Present",
@@ -642,7 +651,7 @@
     "filterKeys": [
       {
         "key": "ward",
-        "column": "AdministrativeProvince"
+        "column": "Ward"
       }
     ],
     "action": "",
@@ -650,7 +659,7 @@
     "valueType": "number",
     "drillChart": "summaryTeamPerformanceByLocalityICCD",
     "documentType": "_doc",
-    "plotLabel": "AdministrativeProvince",
+    "plotLabel": "Ward",
     "excludedColumns": [
       "S.N.",
       "Total Distributors Marked Present",
@@ -717,7 +726,7 @@
     "filterKeys": [
       {
         "key": "healthFacility",
-        "column": "Locality"
+        "column": "Health Facility"
       }
     ],
     "chartType": "xtable",
@@ -725,7 +734,7 @@
     "drillChart": "summaryTeamPerformanceByVillageICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Locality",
+    "plotLabel": "Health Facility",
     "excludedColumns": [
       "S.N.",
       "Total Distributors Marked Present",
@@ -792,7 +801,7 @@
     "filterKeys": [
       {
         "key": "community",
-        "column": "Village"
+        "column": "Community"
       }
     ],
     "chartType": "xtable",
@@ -800,7 +809,7 @@
     "drillChart": "summaryTeamPerformanceProvincialByDistributorICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Village",
+    "plotLabel": "Community",
     "excludedColumns": [
       "S.N.",
       "Total Distributors Marked Present",
@@ -867,7 +876,7 @@
     "filterKeys": [
       {
         "key": "community",
-        "column": "Village"
+        "column": "Community"
       }
     ],
     "chartType": "xtable",
@@ -966,7 +975,7 @@
     "filterKeys": [
       {
         "key": "lga",
-        "column": "Districts"
+        "column": "LGA"
       }
     ],
     "chartType": "xtable",
@@ -975,7 +984,7 @@
     "documentType": "_doc",
     "action": "",
     "showFooter": true,
-    "plotLabel": "Districts",
+    "plotLabel": "LGA",
     "excludedColumns": [
       "National Supervisors Count",
       "Provincial Supervisors Count",
@@ -1042,7 +1051,7 @@
     "filterKeys": [
       {
         "key": "ward",
-        "column": "APs"
+        "column": "Ward"
       }
     ],
     "chartType": "xtable",
@@ -1051,7 +1060,7 @@
     "documentType": "_doc",
     "action": "",
     "showFooter": true,
-    "plotLabel": "APs",
+    "plotLabel": "Ward",
     "excludedColumns": [
       "National Supervisors Count",
       "Provincial Supervisors Count",
@@ -1117,7 +1126,7 @@
     "filterKeys": [
       {
         "key": "healthFacility",
-        "column": "Locality"
+        "column": "Health Facility"
       }
     ],
     "chartType": "xtable",
@@ -1126,7 +1135,7 @@
     "documentType": "_doc",
     "action": "",
     "showFooter": true,
-    "plotLabel": "Locality",
+    "plotLabel": "Health Facility",
     "excludedColumns": [
       "National Supervisors Count",
       "Provincial Supervisors Count",
@@ -1203,7 +1212,7 @@
     ],
     "hideInsights": true,
     "hideHeaderDenomination": true,
-    "plotLabel": "Village",
+    "plotLabel": "Community",
     "computedFields": [
       {
         "postAggregationTheory": "",
@@ -1319,7 +1328,8 @@
     "drillChart": "none",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -1357,7 +1367,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -1387,7 +1398,8 @@
     ],
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "insight": {},
@@ -1416,7 +1428,8 @@
     ],
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "insight": {},
@@ -1445,7 +1458,8 @@
     ],
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "insight": {},
@@ -1760,7 +1774,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -1890,7 +1905,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Districts",
+    "plotLabel": "LGA",
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
@@ -2288,7 +2303,7 @@
     "filterKeys": [
       {
         "key": "lga",
-        "column": "Districts"
+        "column": "LGA"
       }
     ],
     "chartType": "xtable",
@@ -2296,7 +2311,7 @@
     "drillChart": "complaintsByStatusSummaryDistrictICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Districts",
+    "plotLabel": "LGA",
     "excludedColumns": [
       "Resolved Complaints Count",
       "Rejected Complaints Count",
@@ -2365,7 +2380,7 @@
     "filterKeys": [
       {
         "key": "ward",
-        "column": "APs"
+        "column": "Ward"
       }
     ],
     "chartType": "xtable",
@@ -2374,7 +2389,7 @@
     "documentType": "_doc",
     "action": "",
     "showFooter": true,
-    "plotLabel": "APs",
+    "plotLabel": "Ward",
     "excludedColumns": [
       "Resolved Complaints Count",
       "Rejected Complaints Count",
@@ -2441,7 +2456,7 @@
     "filterKeys": [
       {
         "key": "healthFacility",
-        "column": "Locality"
+        "column": "Health Facility"
       }
     ],
     "chartType": "xtable",
@@ -2450,7 +2465,7 @@
     "documentType": "_doc",
     "action": "",
     "showFooter": true,
-    "plotLabel": "Locality",
+    "plotLabel": "Health Facility",
     "excludedColumns": [
       "Resolved Complaints Count",
       "Rejected Complaints Count",
@@ -2517,7 +2532,7 @@
     "filterKeys": [
       {
         "key": "community",
-        "column": "Village"
+        "column": "Community"
       }
     ],
     "chartType": "xtable",
@@ -2526,7 +2541,7 @@
     "documentType": "_doc",
     "action": "",
     "showFooter": true,
-    "plotLabel": "Village",
+    "plotLabel": "Community",
     "excludedColumns": [
       "Resolved Complaints Count",
       "Rejected Complaints Count",
@@ -2727,7 +2742,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -2757,7 +2773,8 @@
     ],
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "insight": {},
@@ -2786,7 +2803,8 @@
     ],
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "insight": {},
@@ -2815,7 +2833,8 @@
     ],
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "insight": {},
@@ -3678,7 +3697,8 @@
     "sort": "sortKeyAsc",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -3717,7 +3737,8 @@
     "sort": "sortKeyAsc",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -3756,7 +3777,8 @@
     "sort": "sortKeyAsc",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "documentType": "_doc",
@@ -3795,7 +3817,8 @@
     "sort": "sortKeyAsc",
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "documentType": "_doc",
@@ -3822,7 +3845,7 @@
     "filterKeys": [
       {
         "key": "lga",
-        "column": "Open complaints District"
+        "column": "LGA"
       }
     ],
     "chartType": "xtable",
@@ -3831,7 +3854,7 @@
     "documentType": "_doc",
     "action": "",
     "showFooter": true,
-    "plotLabel": "Open complaints District",
+    "plotLabel": "LGA",
     "excludedColumns": [],
     "hideInsights": true,
     "hideHeaderDenomination": true,
@@ -3863,7 +3886,7 @@
     "filterKeys": [
       {
         "key": "ward",
-        "column": "Open complaints AP"
+        "column": "Ward"
       }
     ],
     "chartType": "xtable",
@@ -3872,7 +3895,7 @@
     "documentType": "_doc",
     "action": "",
     "showFooter": true,
-    "plotLabel": "Open complaints AP",
+    "plotLabel": "Ward",
     "excludedColumns": [],
     "hideInsights": true,
     "hideHeaderDenomination": true,
@@ -3903,7 +3926,7 @@
     "filterKeys": [
       {
         "key": "healthFacility",
-        "column": "Open complaints Locality"
+        "column": "Health Facility"
       }
     ],
     "chartType": "xtable",
@@ -3912,7 +3935,7 @@
     "documentType": "_doc",
     "action": "",
     "showFooter": true,
-    "plotLabel": "Open complaints Locality",
+    "plotLabel": "Health Facility",
     "excludedColumns": [],
     "hideInsights": true,
     "hideHeaderDenomination": true,
@@ -3943,7 +3966,7 @@
     "filterKeys": [
       {
         "key": "community",
-        "column": "Open complaints Village"
+        "column": "Community"
       }
     ],
     "chartType": "xtable",
@@ -3952,7 +3975,7 @@
     "documentType": "_doc",
     "action": "",
     "showFooter": true,
-    "plotLabel": "Open complaints Village",
+    "plotLabel": "Community",
     "excludedColumns": [],
     "hideInsights": true,
     "hideHeaderDenomination": true,
@@ -4046,7 +4069,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
-    "plotLabel": "District",
+    "plotLabel": "LGA",
     "isCumulative": false,
     "aggregationPaths": [
       "Will last for",
@@ -4134,7 +4157,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "District",
+    "plotLabel": "LGA",
     "isCumulative": false,
     "aggregationPaths": [
       "Stock in Hand",
@@ -4179,7 +4202,8 @@
     "_comment": " ",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "kind": "drillDown"
@@ -4218,7 +4242,8 @@
     "_comment": " ",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ]
   },
@@ -4256,7 +4281,8 @@
     "_comment": " ",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ]
   },
@@ -4294,7 +4320,8 @@
     "_comment": " ",
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ]
   },
@@ -4360,7 +4387,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -4392,7 +4420,8 @@
     "_comment": " ",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "kind": "drillDown"
@@ -4422,7 +4451,8 @@
     "_comment": " ",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "kind": "drillDown"
@@ -4452,7 +4482,8 @@
     "_comment": " ",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "kind": "drillDown"
@@ -4600,7 +4631,8 @@
     "drillChart": "referralSummaryByAPsICCD",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -4639,7 +4671,8 @@
     "drillChart": "referralSummaryByLocalityICCD",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -4677,7 +4710,8 @@
     "drillChart": "referralSummaryByVillageICCD",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "documentType": "_doc",
@@ -4715,7 +4749,8 @@
     "drillChart": "none",
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "documentType": "_doc",
@@ -4769,7 +4804,7 @@
     "filterKeys": [
       {
         "key": "lga",
-        "column": "Districts"
+        "column": "LGA"
       }
     ],
     "chartType": "xtable",
@@ -4777,7 +4812,7 @@
     "drillChart": "dataQualityRecordsSummaryAPICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Districts",
+    "plotLabel": "LGA",
     "excludedColumns": [
       "Count",
       "WM Stock Entries Count",
@@ -4879,7 +4914,7 @@
     "filterKeys": [
       {
         "key": "ward",
-        "column": "APs"
+        "column": "Ward"
       }
     ],
     "chartType": "xtable",
@@ -4887,7 +4922,7 @@
     "drillChart": "dataQualityRecordsSummaryLocalityICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "APs",
+    "plotLabel": "Ward",
     "excludedColumns": [
       "Count",
       "WM Stock Entries Count",
@@ -4988,7 +5023,7 @@
     "filterKeys": [
       {
         "key": "healthFacility",
-        "column": "Locality"
+        "column": "Health Facility"
       }
     ],
     "chartType": "xtable",
@@ -4996,7 +5031,7 @@
     "drillChart": "dataQualityRecordsSummaryVillageICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Locality",
+    "plotLabel": "Health Facility",
     "excludedColumns": [
       "Count",
       "WM Stock Entries Count",
@@ -5097,7 +5132,7 @@
     "filterKeys": [
       {
         "key": "community",
-        "column": "Village"
+        "column": "Community"
       }
     ],
     "chartType": "xtable",
@@ -5105,7 +5140,7 @@
     "drillChart": "dataQualityRecordsSummaryByDistributorICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Village",
+    "plotLabel": "Community",
     "excludedColumns": [
       "Count",
       "WM Stock Entries Count",
@@ -5201,7 +5236,7 @@
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
-    "plotLabel": "Summary Distributor",
+    "plotLabel": "Distributors",
     "showFooter": true,
     "hideInsights": true,
     "hideHeaderDenomination": true,
@@ -5267,7 +5302,8 @@
     "drillChart": "complaintsByAPTotalICCD",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -5297,7 +5333,8 @@
     "drillChart": "complaintsByLocalityTotalICCD",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -5328,7 +5365,8 @@
     "drillChart": "complaintsByVillageTotalICCD",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "documentType": "_doc",
@@ -5469,7 +5507,8 @@
     "drillChart": "complaintsByTypeBreakdownDistrictICCD",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -5506,7 +5545,8 @@
     "drillChart": "complaintsByTypeBreakdownAPICCD",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -5543,7 +5583,8 @@
     "drillChart": "complaintsByTypeBreakdownLocalityICCD",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "documentType": "_doc",
@@ -5744,7 +5785,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -5845,7 +5887,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -5875,7 +5918,8 @@
     ],
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "insight": {},
@@ -5904,7 +5948,8 @@
     ],
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "insight": {},
@@ -5933,7 +5978,8 @@
     ],
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "insight": {},
@@ -5983,11 +6029,11 @@
     "drillChart": "InventorySummaryByWarehouseSMC",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Inventory summary By AP",
+    "plotLabel": "Ward",
     "filterKeys": [
       {
         "key": "ward",
-        "column": "Inventory summary By AP"
+        "column": "Ward"
       }
     ],
     "divisorFields": [],
@@ -6475,7 +6521,8 @@
     "drillChart": "testedPositiveForMalariaAPICCD",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -6506,7 +6553,8 @@
     "drillChart": "testedPositiveForMalariaLocalityICCD",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -6537,7 +6585,8 @@
     "drillChart": "testedPositiveForMalariaVillageICCD",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "documentType": "_doc",
@@ -6568,7 +6617,8 @@
     "drillChart": "none",
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "documentType": "_doc",
@@ -6826,7 +6876,8 @@
     "drillChart": "none",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -7096,7 +7147,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -7150,7 +7202,8 @@
     ],
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "insight": {},
@@ -7203,7 +7256,8 @@
     ],
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "insight": {},
@@ -7310,7 +7364,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -7340,7 +7395,8 @@
     ],
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "insight": {},
@@ -7369,7 +7425,8 @@
     ],
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "insight": {},
@@ -7398,7 +7455,8 @@
     ],
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "insight": {},
@@ -7602,7 +7660,8 @@
     "drillChart": "none",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -7640,7 +7699,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -7670,7 +7730,8 @@
     ],
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "insight": {},
@@ -7699,7 +7760,8 @@
     ],
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "insight": {},
@@ -7728,7 +7790,8 @@
     ],
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "insight": {},
@@ -7920,7 +7983,7 @@
     "filterKeys": [
       {
         "key": "lga",
-        "column": "District"
+        "column": "LGA"
       }
     ],
     "chartType": "xtable",
@@ -7928,7 +7991,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "District",
+    "plotLabel": "LGA",
     "excludedColumns": [
       "S.N.",
       "Total Distributors Marked Present",
@@ -7985,7 +8048,8 @@
     "drillChart": "complaintsByStatusBreakdownDistrictICCD",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -8017,7 +8081,8 @@
     "drillChart": "complaintsByStatusBreakdownAPICCD",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -8050,7 +8115,8 @@
     "drillChart": "complaintsByStatusBreakdownLocalityICCD",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "documentType": "_doc",
@@ -8415,7 +8481,8 @@
     "drillChart": "none",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -8580,7 +8647,7 @@
     "drillChart": "populationCoverageHeatMapDistrictICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Districts",
+    "plotLabel": "LGA",
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
@@ -8626,7 +8693,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "APs",
+    "plotLabel": "Ward",
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
@@ -8920,7 +8987,8 @@
     "drillChart": "beneficiariesNotAdministeredApICCD",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -8997,7 +9065,8 @@
     "drillChart": "beneficiariesNotAdministeredLocalityICCD",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -9073,7 +9142,8 @@
     "drillChart": "beneficiariesNotAdministeredVillageICCD",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "documentType": "_doc",
@@ -9149,7 +9219,8 @@
     "drillChart": "none",
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "documentType": "_doc",
@@ -9216,7 +9287,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "District",
+    "plotLabel": "LGA",
     "isCumulative": false,
     "computedFields": [
       {
@@ -9511,7 +9582,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "sort": "sortValueDesc",
@@ -9544,7 +9616,8 @@
     "drillChart": "none",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -9574,7 +9647,8 @@
     "drillChart": "administeredByGenderApICCD",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -9606,7 +9680,8 @@
     "drillChart": "administeredByGenderLocalityICCD",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -9637,7 +9712,8 @@
     "drillChart": "administeredByGenderVillageICCD",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "documentType": "_doc",
@@ -9668,7 +9744,8 @@
     "drillChart": "none",
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "documentType": "_doc",
@@ -9833,7 +9910,7 @@
     "filterKeys": [
       {
         "key": "lga",
-        "column": "District"
+        "column": "LGA"
       }
     ],
     "chartType": "xtable",
@@ -9841,7 +9918,7 @@
     "drillChart": "summaryOfReferredChildrenByAPsICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "District",
+    "plotLabel": "LGA",
     "excludedColumns": [
       "S.N.",
       "Start Date",
@@ -9898,7 +9975,7 @@
     "filterKeys": [
       {
         "key": "ward",
-        "column": "AdministrativeProvince"
+        "column": "Ward"
       }
     ],
     "chartType": "xtable",
@@ -9906,7 +9983,7 @@
     "drillChart": "summaryOfReferredChildrenByLocalityICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "AdministrativeProvince",
+    "plotLabel": "Ward",
     "excludedColumns": [
       "S.N.",
       "Start Date",
@@ -9972,7 +10049,7 @@
     "filterKeys": [
       {
         "key": "healthFacility",
-        "column": "Locality"
+        "column": "Health Facility"
       }
     ],
     "chartType": "xtable",
@@ -9980,7 +10057,7 @@
     "drillChart": "summaryOfReferredChildrenByVillageICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Locality",
+    "plotLabel": "Health Facility",
     "excludedColumns": [
       "S.N.",
       "Start Date",
@@ -10046,7 +10123,7 @@
     "filterKeys": [
       {
         "key": "community",
-        "column": "Village"
+        "column": "Community"
       }
     ],
     "chartType": "xtable",
@@ -10054,7 +10131,7 @@
     "drillChart": "summaryOfReferredChildrenByHealthFaciltyICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Village",
+    "plotLabel": "Community",
     "excludedColumns": [
       "S.N.",
       "Start Date",
@@ -10300,7 +10377,7 @@
     "filterKeys": [
       {
         "key": "lga",
-        "column": "District"
+        "column": "LGA"
       }
     ],
     "chartType": "xtable",
@@ -10308,7 +10385,7 @@
     "drillChart": "summaryByAdministrativeProvinceICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "District",
+    "plotLabel": "LGA",
     "excludedBucketKeys": [
       "Individuals"
     ],
@@ -10530,7 +10607,7 @@
     "filterKeys": [
       {
         "key": "ward",
-        "column": "AdministrativeProvince"
+        "column": "Ward"
       }
     ],
     "chartType": "xtable",
@@ -10538,7 +10615,7 @@
     "drillChart": "summaryByLocalityICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "AdministrativeProvince",
+    "plotLabel": "Ward",
     "excludedBucketKeys": [
       "Individuals"
     ],
@@ -10760,7 +10837,7 @@
     "filterKeys": [
       {
         "key": "healthFacility",
-        "column": "Locality"
+        "column": "Health Facility"
       }
     ],
     "chartType": "xtable",
@@ -10768,7 +10845,7 @@
     "drillChart": "summaryByVillageICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Locality",
+    "plotLabel": "Health Facility",
     "excludedBucketKeys": [
       "Individuals"
     ],
@@ -10990,7 +11067,7 @@
     "filterKeys": [
       {
         "key": "community",
-        "column": "Village"
+        "column": "Community"
       }
     ],
     "chartType": "xtable",
@@ -10998,7 +11075,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Village",
+    "plotLabel": "Community",
     "excludedBucketKeys": [
       "Individuals"
     ],
@@ -11168,7 +11245,8 @@
     "action": "",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "plotLabel": "Incomplete record",
@@ -11220,7 +11298,8 @@
     "action": "",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "plotLabel": "Incomplete record",
@@ -11272,7 +11351,8 @@
     "action": "",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "plotLabel": "Incomplete record",
@@ -11324,7 +11404,8 @@
     "action": "",
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "plotLabel": "Incomplete record",
@@ -11582,7 +11663,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -11844,7 +11926,8 @@
     "drillChart": "beneficiariesNotAdministeredByReasonBarChartDistrictICCD",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -11920,7 +12003,8 @@
     "drillChart": "beneficiariesNotAdministeredByReasonBarChartAdministrativeProvinceICCD",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -11996,7 +12080,8 @@
     "drillChart": "beneficiariesNotAdministeredByReasonBarChartLocalityICCD",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "documentType": "_doc",
@@ -12072,7 +12157,8 @@
     "drillChart": "none",
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "documentType": "_doc",
@@ -12292,7 +12378,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "District",
+    "plotLabel": "LGA",
     "isCumulative": false,
     "aggregationPaths": [
       "No. of Warehouses"
@@ -12400,7 +12486,8 @@
     "drillChart": "beneficiariesNotAdministeredApPercentICCD",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -12494,7 +12581,8 @@
     "drillChart": "beneficiariesNotAdministeredLocalityPercentICCD",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -12587,7 +12675,8 @@
     "drillChart": "beneficiariesNotAdministeredVillagePercentICCD",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "documentType": "_doc",
@@ -12680,7 +12769,8 @@
     "drillChart": "none",
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "documentType": "_doc",
@@ -12805,7 +12895,8 @@
     "drillChart": "none",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -13054,11 +13145,11 @@
     "drillChart": "InventorySummaryByWarehouseICCD",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Inventory summary By District",
+    "plotLabel": "LGA",
     "filterKeys": [
       {
         "key": "lga",
-        "column": "Inventory summary By District"
+        "column": "LGA"
       }
     ],
     "divisorFields": [],
@@ -13242,7 +13333,8 @@
     "sort": "sortKeyAsc",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -13307,7 +13399,8 @@
     "sort": "sortKeyAsc",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -13371,7 +13464,8 @@
     "sort": "sortKeyAsc",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "documentType": "_doc",
@@ -13435,7 +13529,8 @@
     "sort": "sortKeyAsc",
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "documentType": "_doc",
@@ -13505,7 +13600,8 @@
     "sort": "sortKeyAsc",
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "documentType": "_doc",
@@ -13577,7 +13673,8 @@
     "sort": "sortKeyAsc",
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "documentType": "_doc",
@@ -13648,7 +13745,8 @@
     "sort": "sortKeyAsc",
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "documentType": "_doc",
@@ -13719,7 +13817,8 @@
     "sort": "sortKeyAsc",
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "documentType": "_doc",
@@ -14164,7 +14263,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -14203,7 +14303,8 @@
     ],
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "insight": {},
@@ -14241,7 +14342,8 @@
     ],
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "insight": {},
@@ -14311,7 +14413,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -14371,7 +14474,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -14409,7 +14513,8 @@
     ],
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "insight": {},
@@ -14447,7 +14552,8 @@
     ],
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "insight": {},
@@ -14485,7 +14591,8 @@
     ],
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "insight": {},
@@ -14673,7 +14780,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -14724,7 +14832,8 @@
     ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
@@ -14776,7 +14885,8 @@
     ],
     "filterKeys": [
       {
-        "key": "ward"
+        "key": "ward",
+        "column": "Ward"
       }
     ],
     "insight": {},
@@ -14827,7 +14937,8 @@
     ],
     "filterKeys": [
       {
-        "key": "healthFacility"
+        "key": "healthFacility",
+        "column": "Health Facility"
       }
     ],
     "insight": {},
@@ -14878,7 +14989,8 @@
     ],
     "filterKeys": [
       {
-        "key": "community"
+        "key": "community",
+        "column": "Community"
       }
     ],
     "insight": {},
