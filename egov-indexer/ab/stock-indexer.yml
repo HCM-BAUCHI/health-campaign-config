@@ -55,6 +55,23 @@ ServiceMaps:
         - inJsonPath: $.additionalDetails.cycleIndex
           outJsonPath: $.Data.additionalDetails.cycleIndex
       timeStampField: $.createdTime
+
+  - topic: ab-transformer-producer-bulk-stock-index-updated-v1-topic
+    configKey: INDEX
+    indexes:
+      - name: ab-stock-index-updated-v1
+        type: stock
+        id: $.id,$.tenantId
+        isBulk: true
+        jsonPath: $
+        customJsonMapping:
+          indexMapping:
+            Data: {}
+          fieldMapping:
+            - inJsonPath: $
+              outJsonPath: $.Data
+        timeStampField: $.createdTime
+
   - topic: ab-transformer-producer-stock-recon-index-v1-topic
     configKey: INDEX
     indexes:
