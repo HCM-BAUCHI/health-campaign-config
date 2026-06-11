@@ -1603,6 +1603,33 @@
 
         {
           "row": 1,
+          "name": "DSS_CUSTOM_KPIS_TAB",
+          "vizArray": [
+            {
+              "id": 760,
+              "name": "DSS_HEALTH_KIBANA_SCREEN",
+              "label": "DSS_HEALTH_KIBANA_SCREEN",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "successfulAdministrationsMap",
+                  "name": "DASHBOARD_MAP_SUCCESSFUL_ADMINISTRATIONS",
+                  "code": "",
+                  "moduleName": "iccd-maps",
+                  "pageName": "ab-custom-kpis-tab",
+                  "chartType": "kibanaComponent",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "row": 1,
           "name": "DSS_HEALTH_PAYMENTS",
           "vizArray": [
             {
