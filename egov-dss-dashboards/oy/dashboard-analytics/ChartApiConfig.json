@@ -724,7 +724,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "summaryTeamPerformanceByTeam",
     "documentType": "_doc",
     "action": "division",
     "plotLabel": "Health Facility",
@@ -18494,5 +18494,136 @@
     ],
     "insight": {},
     "kind": "drillDown"
+  },
+  "summaryTeamPerformanceByTeam": {
+    "kind": "drillDown",
+    "chartName": "DSS_HEALTH_SUMMARY_TEAM_PERFORMANCE_BY_TEAM_ICCD",
+    "filterKeys": [
+      {
+        "key": "healthFacility",
+        "column": "Health Facility"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Team Member",
+    "excludedColumns": [
+      "S.N.",
+      "Total Administration count",
+      "Migrated Daily count",
+      "Died Daily count",
+      "Refused Daily count",
+      "Absent Daily count",
+      "Ineligible Daily count"
+    ],
+    "excludedBucketKeys": [],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Administration count"
+        ],
+        "newField": "Total Administrations",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Migrated Daily count"
+        ],
+        "newField": "BENEFICIARY_MIGRATED",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Died Daily count"
+        ],
+        "newField": "BENEFICIARY_DIED",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Refused Daily count"
+        ],
+        "newField": "BENEFICIARY_REFUSED",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Absent Daily count"
+        ],
+        "newField": "Beneficiary Absent",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Ineligible Daily count"
+        ],
+        "newField": "INELIGIBLE",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "sort": "sortKeyAsc",
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": " ",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\"}",
+        "indexName": "oy-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Total Administration\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Total Administration count\":{\"value_count\":{\"field\":\"Data.taskId.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\"}",
+        "indexName": "oy-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_MIGRATED\"}}]}},\"aggs\":{\"Migrated\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Migrated Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\"}",
+        "indexName": "oy-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_DIED\"}}]}},\"aggs\":{\"Died\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Died Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\"}",
+        "indexName": "oy-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_REFUSED\"}}]}},\"aggs\":{\"Refused\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Refused Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\"}",
+        "indexName": "oy-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_ABSENT\"}}]}},\"aggs\":{\"Absent\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Absent Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\"}",
+        "indexName": "oy-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"INELIGIBLE\"}}]}},\"aggs\":{\"Ineligible\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Ineligible Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      }
+    ]
   }
 }
