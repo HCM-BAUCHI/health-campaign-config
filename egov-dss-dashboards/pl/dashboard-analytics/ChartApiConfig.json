@@ -10731,14 +10731,14 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "pl-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Distribution Target\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"Overall Distribution Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Distribution Target\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Overall Distribution Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "pl-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Individual Coverage Ratio\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"Total Population covered\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Individual Coverage Ratio\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Total Population covered\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -11039,14 +11039,14 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "pl-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"}}]}},\"aggs\":{\"Distribution Target\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"},\"aggs\":{\"Overall Distribution Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"}}]}},\"aggs\":{\"Distribution Target\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500},\"aggs\":{\"Overall Distribution Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "pl-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Individual Coverage Ratio\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"},\"aggs\":{\"Total Population covered\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Individual Coverage Ratio\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500},\"aggs\":{\"Total Population covered\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -11347,14 +11347,14 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "pl-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}},\"aggs\":{\"Distribution Target\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"},\"aggs\":{\"Overall Distribution Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}},\"aggs\":{\"Distribution Target\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500},\"aggs\":{\"Overall Distribution Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "pl-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Individual Coverage Ratio\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"},\"aggs\":{\"Total Population covered\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Individual Coverage Ratio\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500},\"aggs\":{\"Total Population covered\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
