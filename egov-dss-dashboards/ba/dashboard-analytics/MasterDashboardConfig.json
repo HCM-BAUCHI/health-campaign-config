@@ -2124,6 +2124,222 @@
               ]
             }
           ]
+        },
+        {
+          "row": 1,
+          "name": "DSS_HEALTH_VAS",
+          "vizArray": [
+            {
+              "id": 12008,
+              "name": "DSS_VAS_TARGET_CHILDREN",
+              "label": "DSS_VAS_TARGET_CHILDREN",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "vasTargetChildrenICCD",
+                  "name": "DSS_VAS_TARGET_CHILDREN",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_HEALTH_VAS",
+          "vizArray": [
+            {
+              "id": 12009,
+              "name": "DSS_VAS_ADMINISTERED_CHILDREN",
+              "label": "DSS_VAS_ADMINISTERED_CHILDREN",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "vasAdministeredChildrenICCD",
+                  "name": "DSS_VAS_ADMINISTERED_CHILDREN",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "DSS_HEALTH_VAS",
+          "vizArray": [
+            {
+              "id": 12010,
+              "name": "DSS_VAS_ADMINISTERED_GENDER_METRICS",
+              "label": "DSS_VAS_ADMINISTERED_GENDER_METRICS",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "vasAdministeredGenderMetricsICCD",
+                  "name": "DSS_VAS_ADMINISTERED_GENDER_METRICS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "name": "DSS_HEALTH_VAS",
+          "vizArray": [
+            {
+              "id": 12011,
+              "name": "DSS_VAS_STOCK_SUMMARY_BLUE_VAS",
+              "label": "DSS_VAS_STOCK_SUMMARY_BLUE_VAS",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "vasStockSummaryByHealthFacilityBlueVASICCD",
+                  "name": "DSS_VAS_STOCK_SUMMARY_BY_HEALTH_FACILITY_BLUE_VAS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "name": "DSS_HEALTH_VAS",
+          "vizArray": [
+            {
+              "id": 12012,
+              "name": "DSS_VAS_STOCK_SUMMARY_RED_VAS",
+              "label": "DSS_VAS_STOCK_SUMMARY_RED_VAS",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "vasStockSummaryByHealthFacilityRedVASICCD",
+                  "name": "DSS_VAS_STOCK_SUMMARY_BY_HEALTH_FACILITY_RED_VAS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "name": "DSS_HEALTH_VAS",
+          "vizArray": [
+            {
+              "id": 12013,
+              "name": "DSS_VAS_STOCK_SUMMARY_TABLE_BLUE_VAS",
+              "label": "DSS_VAS_STOCK_SUMMARY_TABLE_BLUE_VAS",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "vasStockSummaryTableLgaBlueVASICCD",
+                  "name": "DSS_VAS_STOCK_SUMMARY_TABLE_BLUE_VAS",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 7,
+          "name": "DSS_HEALTH_VAS",
+          "vizArray": [
+            {
+              "id": 12014,
+              "name": "DSS_VAS_STOCK_SUMMARY_TABLE_RED_VAS",
+              "label": "DSS_VAS_STOCK_SUMMARY_TABLE_RED_VAS",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "vasStockSummaryTableLgaRedVASICCD",
+                  "name": "DSS_VAS_STOCK_SUMMARY_TABLE_RED_VAS",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 8,
+          "name": "DSS_HEALTH_VAS",
+          "vizArray": [
+            {
+              "id": 12015,
+              "name": "DSS_VAS_STOCK_SUMMARY_CDD_TABLE_BLUE_VAS",
+              "label": "DSS_VAS_STOCK_SUMMARY_CDD_TABLE_BLUE_VAS",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "vasStockSummaryCDDTableLgaBlueVASICCD",
+                  "name": "DSS_VAS_STOCK_SUMMARY_CDD_TABLE_BLUE_VAS",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 9,
+          "name": "DSS_HEALTH_VAS",
+          "vizArray": [
+            {
+              "id": 12016,
+              "name": "DSS_VAS_STOCK_SUMMARY_CDD_TABLE_RED_VAS",
+              "label": "DSS_VAS_STOCK_SUMMARY_CDD_TABLE_RED_VAS",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "vasStockSummaryCDDTableLgaRedVASICCD",
+                  "name": "DSS_VAS_STOCK_SUMMARY_CDD_TABLE_RED_VAS",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
         }
       ]
     },
