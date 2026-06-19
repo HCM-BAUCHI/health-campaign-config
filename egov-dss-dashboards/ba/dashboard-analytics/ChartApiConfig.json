@@ -18701,7 +18701,7 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-task-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"terms\":{\"Data.productName.keyword\":[\"Blue VAS\",\"Red VAS\"]}},{\"term\":{\"Data.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"terms\":{\"Data.productName.keyword\":[\"Blue VAS\",\"Red VAS\"]}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "select": {
           "administeredMale": "Administered.Count.value"
         }
@@ -18713,7 +18713,7 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-task-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"terms\":{\"Data.productName.keyword\":[\"Blue VAS\",\"Red VAS\"]}},{\"term\":{\"Data.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"terms\":{\"Data.productName.keyword\":[\"Blue VAS\",\"Red VAS\"]}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "select": {
           "administeredFemale": "Administered.Count.value"
         }
@@ -18735,24 +18735,13 @@
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-project-task-index-v1",
+        "indexName": "ba-hf-referral-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_REFERRED\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "select": {
           "referred": "Administered.Count.value"
         }
-      },
-      {
-        "key": "vasAdministeredMaleLastMonthQuery",
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-project-task-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"terms\":{\"Data.productName.keyword\":[\"Blue VAS\",\"Red VAS\"]}},{\"term\":{\"Data.gender.keyword\":\"MALE\"}},{\"range\":{\"Data.createdTime\":{\"gte\":\"now-1M\",\"lte\":\"now\"}}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
-        "select": {
-          "administeredMaleLastMonth": "Administered.Count.value"
-        }
+      }
       }
     ],
     "chartType": "rawResponse",
@@ -18764,8 +18753,7 @@
       "administeredMale",
       "administeredFemale",
       "smcSuccess",
-      "referred",
-      "administeredMaleLastMonth"
+      "referred"
     ],
     "cardsList": [
       {
