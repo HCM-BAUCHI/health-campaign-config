@@ -154,6 +154,24 @@
                   "headers": []
                 }
               ]
+            },
+            {
+              "id": 710,
+              "name": "DSS_HEALTH_POPULATION_NOT_ADMINISTERED_BY_REASON",
+              "label": "DSS_HEALTH_POPULATION_NOT_ADMINISTERED_BY_REASON",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "populationNotAdministeredByReasonNationalICCD",
+                  "name": "DSS_HEALTH_POPULATION_NOT_ADMINISTERED_BY_REASON_NATIONAL_ICCD",
+                  "code": "",
+                  "chartType": "donut",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
             }
           ]
         },
@@ -361,6 +379,24 @@
           "name": "DSS_HEALTH_OVERVIEW",
           "vizArray": [
             {
+              "id": 712,
+              "name": "DSS_HEALTH_POPULATION_NOT_ADMINISTERED_BY_REASON",
+              "label": "DSS_HEALTH_POPULATION_NOT_ADMINISTERED_BY_REASON",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "populationNotAdministeredByReasonProvinceICCD",
+                  "name": "DSS_HEALTH_POPULATION_NOT_ADMINISTERED_BY_REASON_PROVINCE_ICCD",
+                  "code": "",
+                  "chartType": "donut",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
               "id": 713,
               "name": "DSS_HEALTH_OVERVIEW_TOTAL_COMPLAINTS",
               "label": "DSS_HEALTH_OVERVIEW_TOTAL_COMPLAINTS",
@@ -526,6 +562,24 @@
                   "code": "",
                   "chartType": "bar",
                   "tabName": "HOUSEHOLD",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 751,
+              "name": "DSS_HEALTH_POPULATION_NOT_ADMINISTERED_BY_REASON",
+              "label": "DSS_HEALTH_POPULATION_NOT_ADMINISTERED_BY_REASON",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "populationNotAdministeredByReasonProvinceICCD",
+                  "name": "DSS_HEALTH_POPULATION_NOT_ADMINISTERED_BY_REASON_PROVINCE_ICCD",
+                  "code": "",
+                  "chartType": "donut",
                   "filter": "",
                   "headers": []
                 }
