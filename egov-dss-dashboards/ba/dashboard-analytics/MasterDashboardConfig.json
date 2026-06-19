@@ -709,6 +709,78 @@
         },
         {
           "row": 1,
+          "name": "DSS_HEALTH_VAS",
+          "vizArray": [
+            {
+              "id": 12008,
+              "name": "DSS_VAS_TARGET_CHILDREN",
+              "label": "DSS_VAS_TARGET_CHILDREN",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "vasTargetChildrenICCD",
+                  "name": "DSS_VAS_TARGET_CHILDREN",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_HEALTH_VAS",
+          "vizArray": [
+            {
+              "id": 12009,
+              "name": "DSS_VAS_ADMINISTERED_CHILDREN",
+              "label": "DSS_VAS_ADMINISTERED_CHILDREN",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "vasAdministeredChildrenICCD",
+                  "name": "DSS_VAS_ADMINISTERED_CHILDREN",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "DSS_HEALTH_VAS",
+          "vizArray": [
+            {
+              "id": 12010,
+              "name": "DSS_VAS_ADMINISTERED_GENDER_METRICS",
+              "label": "DSS_VAS_ADMINISTERED_GENDER_METRICS",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "vasAdministeredGenderMetricsICCD",
+                  "name": "DSS_VAS_ADMINISTERED_GENDER_METRICS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 1,
           "name": "DSS_KIBANA_MAPS",
           "vizArray": [
             {
@@ -2234,78 +2306,6 @@
                   "name": "DSS_HEALTH_ATTENDANCE_PROOF_OF_WORK",
                   "code": "",
                   "chartType": "table",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 1,
-          "name": "DSS_HEALTH_VAS",
-          "vizArray": [
-            {
-              "id": 12008,
-              "name": "DSS_VAS_TARGET_CHILDREN",
-              "label": "DSS_VAS_TARGET_CHILDREN",
-              "vizType": "cards-list",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "vasTargetChildrenICCD",
-                  "name": "DSS_VAS_TARGET_CHILDREN",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 2,
-          "name": "DSS_HEALTH_VAS",
-          "vizArray": [
-            {
-              "id": 12009,
-              "name": "DSS_VAS_ADMINISTERED_CHILDREN",
-              "label": "DSS_VAS_ADMINISTERED_CHILDREN",
-              "vizType": "cards-list",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "vasAdministeredChildrenICCD",
-                  "name": "DSS_VAS_ADMINISTERED_CHILDREN",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 3,
-          "name": "DSS_HEALTH_VAS",
-          "vizArray": [
-            {
-              "id": 12010,
-              "name": "DSS_VAS_ADMINISTERED_GENDER_METRICS",
-              "label": "DSS_VAS_ADMINISTERED_GENDER_METRICS",
-              "vizType": "cards-list",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "vasAdministeredGenderMetricsICCD",
-                  "name": "DSS_VAS_ADMINISTERED_GENDER_METRICS",
-                  "code": "",
-                  "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }

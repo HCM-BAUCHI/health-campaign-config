@@ -18725,7 +18725,7 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-task-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.smcSuccess.keyword\":\"true\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.isSMCDone.keyword\":\"true\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "select": {
           "smcSuccess": "Administered.Count.value"
         }
@@ -18814,19 +18814,6 @@
         "valueType": "NUMBER",
         "descriptionParams": {
           "count": "referred"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      },
-      {
-        "id": "administeredMaleLastMonth",
-        "labelKey": "DSS_VAS_ADMINISTERED_VITAMIN_A_LAST_MONTH",
-        "valuePath": "administeredMaleLastMonth",
-        "valueType": "NUMBER",
-        "descriptionParams": {
-          "count": "administeredMaleLastMonth"
         },
         "colorRules": {
           "type": "constant",
