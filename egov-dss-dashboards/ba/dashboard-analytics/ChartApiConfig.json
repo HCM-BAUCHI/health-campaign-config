@@ -19779,8 +19779,8 @@
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"blueVasSentStateToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"redVasSentStateToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
         "select": {
-          "spaq1SentStateToHealth": "blueVasSentStateToHealth.total.value",
-          "spaq2SentStateToHealth": "redVasSentStateToHealth.total.value"
+          "blueVasSentStateToHealth": "blueVasSentStateToHealth.total.value",
+          "redVasSentStateToHealth": "redVasSentStateToHealth.total.value"
         }
       },
       {
@@ -19792,8 +19792,8 @@
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"blueVasAcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"redVasAcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
         "select": {
-          "spaq1AcceptedAtHealthFacility": "blueVasAcceptedAtHealthFacility.total.value",
-          "spaq2AcceptedAtHealthFacility": "redVasAcceptedAtHealthFacility.total.value"
+          "blueVasAcceptedAtHealthFacility": "blueVasAcceptedAtHealthFacility.total.value",
+          "redVasAcceptedAtHealthFacility": "redVasAcceptedAtHealthFacility.total.value"
         }
       }
     ],
@@ -19902,8 +19902,8 @@
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"blueVasSentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"redVasSentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
         "select": {
-          "spaq1SentHealthToStaff": "blueVasSentHealthToStaff.total.value",
-          "spaq2SentHealthToStaff": "redVasSentHealthToStaff.total.value"
+          "blueVasSentHealthToStaff": "blueVasSentHealthToStaff.total.value",
+          "redVasSentHealthToStaff": "redVasSentHealthToStaff.total.value"
         }
       },
       {
@@ -19915,8 +19915,8 @@
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"blueVasAcceptedAtStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"redVasAcceptedAtStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
         "select": {
-          "spaq1AcceptedAtStaff": "blueVasAcceptedAtStaff.total.value",
-          "spaq2AcceptedAtStaff": "redVasAcceptedAtStaff.total.value"
+          "blueVasAcceptedAtStaff": "blueVasAcceptedAtStaff.total.value",
+          "redVasAcceptedAtStaff": "redVasAcceptedAtStaff.total.value"
         }
       }
     ],
