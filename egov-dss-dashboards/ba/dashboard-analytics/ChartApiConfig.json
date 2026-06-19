@@ -18017,62 +18017,6 @@
         ],
         "newField": "SPAQ2 Sent Country To State",
         "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "_SPAQ1_ACCEPTED"
-        ],
-        "newField": "SPAQ1 Accepted At State Facility",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "_SPAQ2_ACCEPTED"
-        ],
-        "newField": "SPAQ2 Accepted At State Facility",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "_SPAQ1_SENT",
-          "Negative SPAQ1 Accepted at State Facility"
-        ],
-        "newField": "SPAQ1 Unaccepted Country To State",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "_SPAQ2_SENT",
-          "Negative SPAQ2 Accepted at State Facility"
-        ],
-        "newField": "SPAQ2 Unaccepted Country To State",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "_SPAQ1_REJECTED"
-        ],
-        "newField": "SPAQ1 Rejected",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "_SPAQ2_REJECTED"
-        ],
-        "newField": "SPAQ2 Rejected",
-        "_comments": ""
       }
     ],
     "insight": {},
@@ -20136,62 +20080,6 @@
           "_RED_VAS_SENT"
         ],
         "newField": "RED_VAS Sent Country To State",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "_BLUE_VAS_ACCEPTED"
-        ],
-        "newField": "BLUE_VAS Accepted At State Facility",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "_RED_VAS_ACCEPTED"
-        ],
-        "newField": "RED_VAS Accepted At State Facility",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "_BLUE_VAS_SENT",
-          "Negative BLUE_VAS Accepted at State Facility"
-        ],
-        "newField": "BLUE_VAS Unaccepted Country To State",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "_RED_VAS_SENT",
-          "Negative RED_VAS Accepted at State Facility"
-        ],
-        "newField": "RED_VAS Unaccepted Country To State",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "_BLUE_VAS_REJECTED"
-        ],
-        "newField": "BLUE_VAS Rejected",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "_RED_VAS_REJECTED"
-        ],
-        "newField": "RED_VAS Rejected",
         "_comments": ""
       }
     ],
