@@ -4991,9 +4991,11 @@
       "Count",
       "WM Stock Entries Count",
       "Total Children Registered Count",
+      "Positive Unique Children Visited",
       "Negative Unique Children Visited",
       "users_with_more_than_3_count",
-      "Household with more than 20 members"
+      "Household with more than 20 members",
+      "Incomplete Records"
     ],
     "excludedBucketKeys": [
       "users_distributed"
@@ -5015,16 +5017,6 @@
           "WM Stock Entries Count"
         ],
         "newField": "WM Stock Entries",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Children Registered Count",
-          "Negative Unique Children Visited"
-        ],
-        "newField": "Incomplete Records",
         "_comments": ""
       },
       {
@@ -5100,9 +5092,11 @@
       "Count",
       "WM Stock Entries Count",
       "Total Children Registered Count",
+      "Positive Unique Children Visited",
       "Negative Unique Children Visited",
       "users_with_more_than_3_count",
-      "Household with more than 20 members"
+      "Household with more than 20 members",
+      "Incomplete Records"
     ],
     "excludedBucketKeys": [
       "users_distributed"
@@ -5115,25 +5109,6 @@
           "Household with more than 20 members"
         ],
         "newField": "Household with more than 20 members count",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "WM Stock Entries Count"
-        ],
-        "newField": "WM Stock Entries",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Children Registered Count",
-          "Negative Unique Children Visited"
-        ],
-        "newField": "Incomplete Records",
         "_comments": ""
       },
       {
@@ -5197,10 +5172,13 @@
     "hideHeaderDenomination": true,
     "excludedColumns": [
       "Count",
+      "WM Stock Entries Count",
       "Total Children Registered Count",
+      "Positive Unique Children Visited",
       "Negative Unique Children Visited",
-      "fraud count",
-      "Household with more than 20 members"
+      "users_with_more_than_3_count",
+      "Household with more than 20 members",
+      "Incomplete Records"
     ],
     "excludedBucketKeys": [
       "minute_collection"
@@ -5213,16 +5191,6 @@
           "Household with more than 20 members"
         ],
         "newField": "Household with more than 20 members count",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Children Registered Count",
-          "Negative Unique Children Visited"
-        ],
-        "newField": "Incomplete Houses",
         "_comments": ""
       },
       {
@@ -16725,7 +16693,7 @@
       "total_quantity"
     ],
     "insight": {},
-    "_comment": "Stock summary for commodity dashboard. Fetches all stock transactions from os-stock-index-v1 filtered by campaignId. Returns raw hits (transformed to stock API shape) plus aggregations: by_event_type (RECEIVED/DISPATCHED/RETURNED/DAMAGED with quantity sums), by_product (per-product event type + quantity breakdown), unique_facilities (cardinality), by_facility (per-facility event type breakdown with facility name), by_projectId, and total_quantity. Used by useKibanaStockSearch.js → useStockData.js → CommodityDashboard.js for both TransactionSummaryTab and StockSummaryTab."
+    "_comment": "Stock summary for commodity dashboard. Fetches all stock transactions from os-stock-index-v1 filtered by campaignId. Returns raw hits (transformed to stock API shape) plus aggregations: by_event_type (RECEIVED/DISPATCHED/RETURNED/DAMAGED with quantity sums), by_product (per-product event type + quantity breakdown), unique_facilities (cardinality), by_facility (per-facility event type breakdown with facility name), by_projectId, and total_quantity. Used by useKibanaStockSearch.js \u2192 useStockData.js \u2192 CommodityDashboard.js for both TransactionSummaryTab and StockSummaryTab."
   },
   "commodityWarehouseManagerTotal": {
     "chartName": "DSS_COMMODITY_WAREHOUSE_MANAGER_TOTAL",
@@ -16765,7 +16733,7 @@
       "totalManagers"
     ],
     "insight": {},
-    "_comment": "Total warehouse managers assigned. Queries os-project-staff-index-v1 for all users with role=WAREHOUSE_MANAGER that have a country boundary hierarchy entry. Returns value_count of Data.userId.keyword. Used by useWarehouseManagerSync.js → CommodityDashboard.js for the Data Sync card (total warehouses)."
+    "_comment": "Total warehouse managers assigned. Queries os-project-staff-index-v1 for all users with role=WAREHOUSE_MANAGER that have a country boundary hierarchy entry. Returns value_count of Data.userId.keyword. Used by useWarehouseManagerSync.js \u2192 CommodityDashboard.js for the Data Sync card (total warehouses)."
   },
   "commodityWarehouseManagerSynced": {
     "chartName": "DSS_COMMODITY_WAREHOUSE_MANAGER_SYNCED",
@@ -16836,7 +16804,7 @@
       "syncRate"
     ],
     "insight": {},
-    "_comment": "Warehouse manager sync rate. Queries os-project-staff-index-v1 for total WAREHOUSE_MANAGER count and os-user-sync-index-v1 for unique synced managers. Merges to compute syncRate = (syncedManagers / totalManagers) * 100. Used by useWarehouseManagerSync.js → CommodityDashboard.js for the Data Sync card."
+    "_comment": "Warehouse manager sync rate. Queries os-project-staff-index-v1 for total WAREHOUSE_MANAGER count and os-user-sync-index-v1 for unique synced managers. Merges to compute syncRate = (syncedManagers / totalManagers) * 100. Used by useWarehouseManagerSync.js \u2192 CommodityDashboard.js for the Data Sync card."
   },
   "commodityFacilityStockBalance": {
     "chartName": "DSS_COMMODITY_FACILITY_STOCK_BALANCE",
@@ -18638,7 +18606,7 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-task-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.doseIndex.keyword\":\"01\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"range\":{\"Data.age\":{\"gte\":3,\"lt\":59}}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"range\":{\"Data.age\":{\"gte\":3,\"lt\":59}}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "select": {
           "administered3to59": "Administered.Count.value"
         }
@@ -18650,7 +18618,7 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-task-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.doseIndex.keyword\":\"01\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"range\":{\"Data.age\":{\"gte\":6,\"lt\":12}}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"range\":{\"Data.age\":{\"gte\":6,\"lt\":12}}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "select": {
           "administered6to11": "Administered.Count.value"
         }
@@ -18662,7 +18630,7 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-task-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.doseIndex.keyword\":\"01\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "select": {
           "administered12plus": "Administered.Count.value"
         }
@@ -18733,7 +18701,7 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-task-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.doseIndex.keyword\":\"01\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"terms\":{\"Data.productName.keyword\":[\"Blue VAS\",\"Red VAS\"]}},{\"term\":{\"Data.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"terms\":{\"Data.productName.keyword\":[\"Blue VAS\",\"Red VAS\"]}},{\"term\":{\"Data.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "select": {
           "administeredMale": "Administered.Count.value"
         }
@@ -18745,7 +18713,7 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-task-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.doseIndex.keyword\":\"01\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"terms\":{\"Data.productName.keyword\":[\"Blue VAS\",\"Red VAS\"]}},{\"term\":{\"Data.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"terms\":{\"Data.productName.keyword\":[\"Blue VAS\",\"Red VAS\"]}},{\"term\":{\"Data.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "select": {
           "administeredFemale": "Administered.Count.value"
         }
@@ -18781,7 +18749,7 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-task-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.doseIndex.keyword\":\"01\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"terms\":{\"Data.productName.keyword\":[\"Blue VAS\",\"Red VAS\"]}},{\"term\":{\"Data.gender.keyword\":\"MALE\"}},{\"range\":{\"Data.createdTime\":{\"gte\":\"now-1M\",\"lte\":\"now\"}}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"terms\":{\"Data.productName.keyword\":[\"Blue VAS\",\"Red VAS\"]}},{\"term\":{\"Data.gender.keyword\":\"MALE\"}},{\"range\":{\"Data.createdTime\":{\"gte\":\"now-1M\",\"lte\":\"now\"}}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "select": {
           "administeredMaleLastMonth": "Administered.Count.value"
         }
