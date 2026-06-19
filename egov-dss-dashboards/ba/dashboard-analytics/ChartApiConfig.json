@@ -17637,7 +17637,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
-        "indexName": "ba-stock-index-updated-v1",
+        "indexName": "ba-stock-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1AcceptedAtStateFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2AcceptedAtStateFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
         "select": {
@@ -17763,7 +17763,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ba-stock-index-updated-v1",
+        "indexName": "ba-stock-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1AcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2AcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
         "select": {
@@ -17886,7 +17886,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ba-stock-index-updated-v1",
+        "indexName": "ba-stock-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1AcceptedAtStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2AcceptedAtStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
         "select": {
@@ -18002,14 +18002,14 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
-        "indexName": "ba-stock-index-updated-v1",
+        "indexName": "ba-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ1 Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ1_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}},\"SPAQ2 Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ2 Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ2_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
-        "indexName": "ba-stock-index-updated-v1",
+        "indexName": "ba-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"SPAQ2 Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
       }
     ],
@@ -18132,14 +18132,14 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
-        "indexName": "ba-stock-index-updated-v1",
+        "indexName": "ba-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ1 Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ1_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}},\"SPAQ2 Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ2 Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ2_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
-        "indexName": "ba-stock-index-updated-v1",
+        "indexName": "ba-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"SPAQ2 Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
       }
     ],
@@ -18262,14 +18262,14 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
-        "indexName": "ba-stock-index-updated-v1",
+        "indexName": "ba-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ1 Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ1_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}},\"SPAQ2 Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ2 Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ2_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
-        "indexName": "ba-stock-index-updated-v1",
+        "indexName": "ba-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"SPAQ2 Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
       }
     ],
@@ -19772,5 +19772,767 @@
     "aggregationPaths": null,
     "insight": {},
     "_comment": " "
+  },
+  "inventoryVasOverviewMetrics": {
+    "chartName": "DSS_HEALTH_INVENTORY_OVERVIEW_METRICS",
+    "queries": [
+      {
+        "key": "stockIndexSent",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"blueVasSentCountryToState\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"redVasSentCountryToState\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "spaq1SentCountryToState": "blueVasSentCountryToState.total.value",
+          "spaq2SentCountryToState": "redVasSentCountryToState.total.value"
+        }
+      },
+      {
+        "key": "stockIndexUpdatedAccepted",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"blueVasAcceptedAtStateFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"redVasAcceptedAtStateFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "spaq1AcceptedAtStateFacility": "blueVasAcceptedAtStateFacility.total.value",
+          "spaq2AcceptedAtStateFacility": "redVasAcceptedAtStateFacility.total.value"
+        }
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "inventoryOverviewMetrics",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [
+      {
+        "key": "campaignNumber"
+      },
+      {
+        "key": "country"
+      },
+      {
+        "key": "state"
+      },
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "blueVasSentCountryToState",
+      "redVasSentCountryToState",
+      "blueVasAcceptedAtStateFacility",
+      "redVasAcceptedAtStateFacility"
+    ],
+    "cardsList": [
+      {
+        "id": "blueVasSentCountryToState",
+        "labelKey": "DSS_HEALTH_INVENTORY_BLUE_VAS_SENT_COUNTRY_TO_STATE",
+        "valuePath": "blueVasSentCountryToState",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "blueVasSentCountryToState"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "redVasSentCountryToState",
+        "labelKey": "DSS_HEALTH_INVENTORY_RED_VAS_SENT_COUNTRY_TO_STATE",
+        "valuePath": "redVasSentCountryToState",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "redVasSentCountryToState"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "blueVasAcceptedAtStateFacility",
+        "labelKey": "DSS_HEALTH_INVENTORY_BLUE_VAS_ACCEPTED_AT_STATE_FACILITY",
+        "valuePath": "blueVasAcceptedAtStateFacility",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "blueVasAcceptedAtStateFacility"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "redVasAcceptedAtStateFacility",
+        "labelKey": "DSS_HEALTH_INVENTORY_RED_VAS_ACCEPTED_AT_STATE_FACILITY",
+        "valuePath": "redVasAcceptedAtStateFacility",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "redVasAcceptedAtStateFacility"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Inventory overview cards: BLUE_VAS/RED_VAS sent from Central to State (stock-index) and accepted at State Facility (stock-index-updated)"
+  },
+  "inventoryVasStateToHealthMetrics": {
+    "chartName": "DSS_HEALTH_INVENTORY_STATE_TO_HEALTH_METRICS",
+    "queries": [
+      {
+        "key": "stockIndexSent",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"blueVasSentStateToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"redVasSentStateToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "spaq1SentStateToHealth": "blueVasSentStateToHealth.total.value",
+          "spaq2SentStateToHealth": "redVasSentStateToHealth.total.value"
+        }
+      },
+      {
+        "key": "stockIndexUpdatedAccepted",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"blueVasAcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"redVasAcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "spaq1AcceptedAtHealthFacility": "blueVasAcceptedAtHealthFacility.total.value",
+          "spaq2AcceptedAtHealthFacility": "redVasAcceptedAtHealthFacility.total.value"
+        }
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "inventoryStateToHealthMetrics",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [
+      {
+        "key": "campaignNumber"
+      },
+      {
+        "key": "state"
+      },
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "blueVasSentStateToHealth",
+      "redVasSentStateToHealth",
+      "blueVasAcceptedAtHealthFacility",
+      "redVasAcceptedAtHealthFacility"
+    ],
+    "cardsList": [
+      {
+        "id": "blueVasSentStateToHealth",
+        "labelKey": "DSS_HEALTH_INVENTORY_BLUE_VAS_SENT_STATE_TO_HEALTH",
+        "valuePath": "blueVasSentStateToHealth",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "blueVasSentStateToHealth"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "redVasSentStateToHealth",
+        "labelKey": "DSS_HEALTH_INVENTORY_RED_VAS_SENT_STATE_TO_HEALTH",
+        "valuePath": "redVasSentStateToHealth",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "redVasSentStateToHealth"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "blueVasAcceptedAtHealthFacility",
+        "labelKey": "DSS_HEALTH_INVENTORY_BLUE_VAS_ACCEPTED_AT_HEALTH_FACILITY",
+        "valuePath": "blueVasAcceptedAtHealthFacility",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "blueVasAcceptedAtHealthFacility"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "redVasAcceptedAtHealthFacility",
+        "labelKey": "DSS_HEALTH_INVENTORY_RED_VAS_ACCEPTED_AT_HEALTH_FACILITY",
+        "valuePath": "redVasAcceptedAtHealthFacility",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "redVasAcceptedAtHealthFacility"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "BLUE_VAS/RED_VAS sent State to Health Facility (stock-index) and accepted at Health Facility (stock-index-updated)"
+  },
+  "inventoryVasHealthToStaffMetrics": {
+    "chartName": "DSS_HEALTH_INVENTORY_HEALTH_TO_STAFF_METRICS",
+    "queries": [
+      {
+        "key": "stockIndexSent",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"blueVasSentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"redVasSentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "spaq1SentHealthToStaff": "blueVasSentHealthToStaff.total.value",
+          "spaq2SentHealthToStaff": "redVasSentHealthToStaff.total.value"
+        }
+      },
+      {
+        "key": "stockIndexUpdatedAccepted",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"blueVasAcceptedAtStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"redVasAcceptedAtStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "spaq1AcceptedAtStaff": "blueVasAcceptedAtStaff.total.value",
+          "spaq2AcceptedAtStaff": "redVasAcceptedAtStaff.total.value"
+        }
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "inventoryHealthToStaffMetrics",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [
+      {
+        "key": "campaignNumber"
+      },
+      {
+        "key": "state"
+      },
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "blueVasSentHealthToStaff",
+      "redVasSentHealthToStaff",
+      "blueVasAcceptedAtStaff",
+      "redVasAcceptedAtStaff"
+    ],
+    "cardsList": [
+      {
+        "id": "blueVasSentHealthToStaff",
+        "labelKey": "DSS_HEALTH_INVENTORY_BLUE_VAS_SENT_HEALTH_TO_STAFF",
+        "valuePath": "blueVasSentHealthToStaff",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "blueVasSentHealthToStaff"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "redVasSentHealthToStaff",
+        "labelKey": "DSS_HEALTH_INVENTORY_RED_VAS_SENT_HEALTH_TO_STAFF",
+        "valuePath": "redVasSentHealthToStaff",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "redVasSentHealthToStaff"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "blueVasAcceptedAtStaff",
+        "labelKey": "DSS_HEALTH_INVENTORY_BLUE_VAS_ACCEPTED_AT_STAFF",
+        "valuePath": "blueVasAcceptedAtStaff",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "blueVasAcceptedAtStaff"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "redVasAcceptedAtStaff",
+        "labelKey": "DSS_HEALTH_INVENTORY_RED_VAS_ACCEPTED_AT_STAFF",
+        "valuePath": "redVasAcceptedAtStaff",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "redVasAcceptedAtStaff"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "BLUE_VAS/RED_VAS sent Health Facility to STAFF (stock-index) and accepted at STAFF (stock-index-updated)"
+  },
+  "inventoryVasFlowTableByCountryICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_VAS_FLOW_TABLE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"BLUE_VAS Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_BLUE_VAS_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"RED_VAS Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_RED_VAS_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"BLUE_VAS Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_BLUE_VAS_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative BLUE_VAS Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_BLUE_VAS_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}},\"RED_VAS Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_RED_VAS_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative RED_VAS Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_RED_VAS_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"BLUE_VAS Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_BLUE_VAS_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"RED_VAS Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_RED_VAS_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "inventoryVasFlowTableByStateDrillICCD",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Country",
+    "filterKeys": [
+      {
+        "key": "country",
+        "column": "Country"
+      }
+    ],
+    "excludedColumns": [
+      "S.N.",
+      "_BLUE_VAS_SENT",
+      "_RED_VAS_SENT",
+      "_BLUE_VAS_ACCEPTED",
+      "_RED_VAS_ACCEPTED",
+      "Negative BLUE_VAS Accepted at State Facility",
+      "Negative RED_VAS Accepted at State Facility",
+      "_BLUE_VAS_REJECTED",
+      "_RED_VAS_REJECTED"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_BLUE_VAS_SENT"
+        ],
+        "newField": "BLUE_VAS Sent Country To State",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_RED_VAS_SENT"
+        ],
+        "newField": "RED_VAS Sent Country To State",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_BLUE_VAS_ACCEPTED"
+        ],
+        "newField": "BLUE_VAS Accepted At State Facility",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_RED_VAS_ACCEPTED"
+        ],
+        "newField": "RED_VAS Accepted At State Facility",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_BLUE_VAS_SENT",
+          "Negative BLUE_VAS Accepted at State Facility"
+        ],
+        "newField": "BLUE_VAS Unaccepted Country To State",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_RED_VAS_SENT",
+          "Negative RED_VAS Accepted at State Facility"
+        ],
+        "newField": "RED_VAS Unaccepted Country To State",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_BLUE_VAS_REJECTED"
+        ],
+        "newField": "BLUE_VAS Rejected",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_RED_VAS_REJECTED"
+        ],
+        "newField": "RED_VAS Rejected",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "Country aggregation: Central Facility to State Facility"
+  },
+  "inventoryVasFlowTableByStateDrillICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_VAS_FLOW_TABLE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"BLUE_VAS Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_BLUE_VAS_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"RED_VAS Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_RED_VAS_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"BLUE_VAS Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_BLUE_VAS_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative BLUE_VAS Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_BLUE_VAS_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}},\"RED_VAS Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_RED_VAS_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative RED_VAS Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_RED_VAS_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"BLUE_VAS Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_BLUE_VAS_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"RED_VAS Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_RED_VAS_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "inventoryVasFlowTableByHealthFacilityDrillICCD",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "State",
+    "filterKeys": [
+      {
+        "key": "state",
+        "column": "State"
+      }
+    ],
+    "excludedColumns": [
+      "S.N.",
+      "_BLUE_VAS_SENT",
+      "_RED_VAS_SENT",
+      "_BLUE_VAS_ACCEPTED",
+      "_RED_VAS_ACCEPTED",
+      "Negative BLUE_VAS Accepted at State Facility",
+      "Negative RED_VAS Accepted at State Facility",
+      "_BLUE_VAS_REJECTED",
+      "_RED_VAS_REJECTED"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_BLUE_VAS_SENT"
+        ],
+        "newField": "BLUE_VAS Sent State To Health",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_RED_VAS_SENT"
+        ],
+        "newField": "RED_VAS Sent State To Health",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_BLUE_VAS_ACCEPTED"
+        ],
+        "newField": "BLUE_VAS Accepted At Health Facility",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_RED_VAS_ACCEPTED"
+        ],
+        "newField": "RED_VAS Accepted At Health Facility",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_BLUE_VAS_SENT",
+          "Negative BLUE_VAS Accepted at State Facility"
+        ],
+        "newField": "BLUE_VAS Unaccepted State To Health",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_RED_VAS_SENT",
+          "Negative RED_VAS Accepted at State Facility"
+        ],
+        "newField": "RED_VAS Unaccepted State To Health",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_BLUE_VAS_REJECTED"
+        ],
+        "newField": "BLUE_VAS Rejected",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_RED_VAS_REJECTED"
+        ],
+        "newField": "RED_VAS Rejected",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "State aggregation: State Facility to Health Facility"
+  },
+  "inventoryVasFlowTableByHealthFacilityDrillICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_VAS_FLOW_TABLE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"BLUE_VAS Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_BLUE_VAS_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"RED_VAS Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_RED_VAS_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"BLUE_VAS Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_BLUE_VAS_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative BLUE_VAS Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_BLUE_VAS_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}},\"RED_VAS Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_RED_VAS_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative RED_VAS Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_RED_VAS_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "ba-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"BLUE_VAS Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_BLUE_VAS_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"RED_VAS Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_RED_VAS_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Health Facility",
+    "filterKeys": [
+      {
+        "key": "healthFacility",
+        "column": "Health Facility"
+      }
+    ],
+    "excludedColumns": [
+      "S.N.",
+      "_BLUE_VAS_SENT",
+      "_RED_VAS_SENT",
+      "_BLUE_VAS_ACCEPTED",
+      "_RED_VAS_ACCEPTED",
+      "Negative BLUE_VAS Accepted at State Facility",
+      "Negative RED_VAS Accepted at State Facility",
+      "_BLUE_VAS_REJECTED",
+      "_RED_VAS_REJECTED"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_BLUE_VAS_SENT"
+        ],
+        "newField": "BLUE_VAS Sent Health To Staff",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_RED_VAS_SENT"
+        ],
+        "newField": "RED_VAS Sent Health To Staff",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_BLUE_VAS_ACCEPTED"
+        ],
+        "newField": "BLUE_VAS Accepted At Staff",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_RED_VAS_ACCEPTED"
+        ],
+        "newField": "RED_VAS Accepted At Staff",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_BLUE_VAS_SENT",
+          "Negative BLUE_VAS Accepted at State Facility"
+        ],
+        "newField": "BLUE_VAS Unaccepted Health To Staff",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_RED_VAS_SENT",
+          "Negative RED_VAS Accepted at State Facility"
+        ],
+        "newField": "RED_VAS Unaccepted Health To Staff",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_BLUE_VAS_REJECTED"
+        ],
+        "newField": "BLUE_VAS Rejected",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_RED_VAS_REJECTED"
+        ],
+        "newField": "RED_VAS Rejected",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "Health facility aggregation: Health Facility to STAFF"
   }
 }
