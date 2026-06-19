@@ -18733,7 +18733,7 @@
       {
         "key": "vasReferredQuery",
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "Data.hfReferral.clientAuditDetails.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-hf-referral-index-v1",
         "transformData": "linearAggregation",
