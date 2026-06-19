@@ -18742,7 +18742,6 @@
           "referred": "Administered.Count.value"
         }
       }
-      }
     ],
     "chartType": "rawResponse",
     "valueType": "number",
