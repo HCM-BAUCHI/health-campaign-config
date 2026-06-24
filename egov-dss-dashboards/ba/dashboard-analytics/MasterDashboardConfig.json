@@ -780,6 +780,40 @@
           ]
         },
         {
+          "row": 4,
+          "name": "DSS_HEALTH_VAS",
+          "vizArray": [
+            {
+              "id": 12011,
+              "name": "DSS_HEALTH_VAS_DELIVERY_SUMMARY_BY_DISTRICT",
+              "label": "DSS_HEALTH_VAS_DELIVERY_SUMMARY_BY_DISTRICT",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "vasSummaryByDistrictICCD",
+                  "name": "DSS_VAS_SUMMARY_BY_DISTRICT_ICCD",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "BOUNDARY"
+                },
+                {
+                  "id": "vasSummaryByDistrictDayICCD",
+                  "name": "DSS_VAS_SUMMARY_BY_DISTRICT_DAY_ICCD",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "DAYWISE"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "row": 1,
           "name": "DSS_KIBANA_MAPS",
           "vizArray": [
