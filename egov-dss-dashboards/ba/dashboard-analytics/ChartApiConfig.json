@@ -5,28 +5,28 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-transformed-attendance-register-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Attendees Created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\"},\"aggs\":{\"Total Attendees Count\":{\"sum\":{\"field\":\"Data.attendeesCount\"}},\"Total Registers Count\":{\"value_count\":{\"field\":\"Data.attendanceRegister.id.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"MORNING\"}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}},\"Teams Took Attendance Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.attendanceLog.registerId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"MORNING\"}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Negative Attendees Attended Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count * (-1);\"}},\"Negative Teams Took Attendance Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.attendanceLog.registerId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count * (-1);\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggregationFilterPath": "aggregations.NAME.buckets.key,aggregations.NAME.buckets.Low Attendance",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"NAME\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"MORNING\"}}]}},\"aggs\":{\"Less Attended Attendees\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":100},\"aggs\":{\"by_user\":{\"terms\":{\"field\":\"Data.attendanceLog.userName.keyword\",\"size\":10000},\"aggs\":{\"active_count\":{\"filter\":{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}},\"inactive_count\":{\"filter\":{\"term\":{\"Data.attendanceLog.status.keyword\":\"INACTIVE\"}}},\"attendance_ratio_check\":{\"bucket_script\":{\"buckets_path\":{\"active\":\"active_count._count\",\"inactive\":\"inactive_count._count\"},\"script\":\"params.active <= params.inactive ? 1 : 0\"}},\"keep_only_low_attendance_users\":{\"bucket_selector\":{\"buckets_path\":{\"active\":\"active_count._count\",\"inactive\":\"inactive_count._count\"},\"script\":\"params.active <= params.inactive\"}}}},\"Low Attendance\":{\"sum_bucket\":{\"buckets_path\":\"by_user>attendance_ratio_check\"}}}}}}}}"
@@ -448,14 +448,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-transformed-attendance-register-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Attendees Created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\"},\"aggs\":{\"NAME\":{\"sum\":{\"field\":\"Data.attendeesCount\"}}}}}}"
       }
@@ -1473,21 +1473,21 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"MORNING\"}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}},\"Teams Took Attendance Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.attendanceLog.registerId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}},{\"exists\":{\"field\":\"Data.attendanceLog.additionalDetails.signatureData\"}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"MORNING\"}}]}},\"aggs\":{\"Attendees Present Atleast Once with signature\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once With Signature\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"MORNING\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.attendanceLog.additionalDetails.signatureData\"}}]}},\"aggs\":{\"Attendees Present Atleast Once without signature\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once Without Signature\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       }
@@ -1657,21 +1657,21 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}},\"Teams Took Attendance Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.attendanceLog.registerId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}},{\"exists\":{\"field\":\"Data.attendanceLog.additionalDetails.signatureData\"}}]}},\"aggs\":{\"Attendees Present Atleast Once with signature\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once With Signature\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}],\"must_not\":[{\"exists\":{\"field\":\"Data.attendanceLog.additionalDetails.signatureData\"}}]}},\"aggs\":{\"Attendees Present Atleast Once without signature\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once Without Signature\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       }
@@ -1751,14 +1751,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Teams Took Attendance Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.attendanceLog.registerId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-transformed-attendance-register-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Registers Created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\"},\"aggs\":{\"Total Attendees Count\":{\"value_count\":{\"field\":\"Data.attendanceRegister.id.keyword\"}}}}}}"
       }
@@ -2985,21 +2985,21 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"EVENING\"}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}},\"Teams Took Attendance Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.attendanceLog.registerId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}},{\"exists\":{\"field\":\"Data.attendanceLog.additionalDetails.signatureData\"}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"EVENING\"}}]}},\"aggs\":{\"Attendees Present Atleast Once with signature\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once With Signature\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"EVENING\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.attendanceLog.additionalDetails.signatureData\"}}]}},\"aggs\":{\"Attendees Present Atleast Once without signature\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once Without Signature\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       }
@@ -3282,14 +3282,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.Attendee with Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}}},\"task_count\":{\"filter\":{\"exists\":{\"field\":\"Data.taskId.keyword\"}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\"},\"script\":\"params.attendance > 0 && params.tasks > 0\"}}}},\"Attendee with Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -3297,7 +3297,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.Absentees with Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}}},\"task_count\":{\"filter\":{\"exists\":{\"field\":\"Data.taskId.keyword\"}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\"},\"script\":\"params.attendance == 0 && params.tasks > 0\"}}}},\"Absentee with Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -3305,7 +3305,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.Attendee without Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}}},\"task_count\":{\"filter\":{\"exists\":{\"field\":\"Data.taskId.keyword\"}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\"},\"script\":\"params.attendance > 0 && params.tasks == 0\"}}}},\"Attendee without Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -3313,7 +3313,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.LTE 50 Percent Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"days\":{\"cardinality\":{\"script\":\"doc['Data.attendanceTime'].value.toInstant().toEpochMilli() / 86400000L\"}}}},\"task_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"exists\":{\"field\":\"Data.taskId.keyword\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.doseIndex\":\"01\"}}]}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\",\"days\":\"attendance_count>days\"},\"script\":\"params.attendance > 0 && params.days > 0 && (params.tasks / (params.days * 200.0)) <= 0.5\"}}}},\"LTE 50 Percent Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -3321,7 +3321,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.GTE 100 Percent Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"days\":{\"cardinality\":{\"script\":\"doc['Data.attendanceTime'].value.toInstant().toEpochMilli() / 86400000L\"}}}},\"task_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"exists\":{\"field\":\"Data.taskId.keyword\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.doseIndex\":\"01\"}}]}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\",\"days\":\"attendance_count>days\"},\"script\":\"params.attendance > 0 && params.days > 0 && (params.tasks / (params.days * 200.0)) >= 1.0\"}}}},\"GTE 100 Percent Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -3426,14 +3426,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.Attendee with Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}}},\"task_count\":{\"filter\":{\"exists\":{\"field\":\"Data.taskId.keyword\"}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\"},\"script\":\"params.attendance > 0 && params.tasks > 0\"}}}},\"Attendee with Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -3441,7 +3441,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.Absentees with Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}}},\"task_count\":{\"filter\":{\"exists\":{\"field\":\"Data.taskId.keyword\"}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\"},\"script\":\"params.attendance == 0 && params.tasks > 0\"}}}},\"Absentee with Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -3449,7 +3449,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.Attendee without Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}}},\"task_count\":{\"filter\":{\"exists\":{\"field\":\"Data.taskId.keyword\"}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\"},\"script\":\"params.attendance > 0 && params.tasks == 0\"}}}},\"Attendee without Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -3457,7 +3457,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.LTE 50 Percent Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"days\":{\"cardinality\":{\"script\":\"doc['Data.attendanceTime'].value.toInstant().toEpochMilli() / 86400000L\"}}}},\"task_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"exists\":{\"field\":\"Data.taskId.keyword\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.doseIndex\":\"01\"}}]}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\",\"days\":\"attendance_count>days\"},\"script\":\"params.attendance > 0 && params.days > 0 && (params.tasks / (params.days * 200.0)) <= 0.5\"}}}},\"LTE 50 Percent Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -3465,7 +3465,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.GTE 100 Percent Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"days\":{\"cardinality\":{\"script\":\"doc['Data.attendanceTime'].value.toInstant().toEpochMilli() / 86400000L\"}}}},\"task_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"exists\":{\"field\":\"Data.taskId.keyword\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.doseIndex\":\"01\"}}]}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\",\"days\":\"attendance_count>days\"},\"script\":\"params.attendance > 0 && params.days > 0 && (params.tasks / (params.days * 200.0)) >= 1.0\"}}}},\"GTE 100 Percent Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -3570,14 +3570,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"state\":\"Data.boundaryHierarchy.state.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"state\":\"Data.boundaryHierarchy.state.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.Attendee with Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}}},\"task_count\":{\"filter\":{\"exists\":{\"field\":\"Data.taskId.keyword\"}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\"},\"script\":\"params.attendance > 0 && params.tasks > 0\"}}}},\"Attendee with Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -3585,7 +3585,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"state\":\"Data.boundaryHierarchy.state.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.Absentees with Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}}},\"task_count\":{\"filter\":{\"exists\":{\"field\":\"Data.taskId.keyword\"}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\"},\"script\":\"params.attendance == 0 && params.tasks > 0\"}}}},\"Absentee with Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -3593,7 +3593,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"state\":\"Data.boundaryHierarchy.state.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.Attendee without Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}}},\"task_count\":{\"filter\":{\"exists\":{\"field\":\"Data.taskId.keyword\"}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\"},\"script\":\"params.attendance > 0 && params.tasks == 0\"}}}},\"Attendee without Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -3601,7 +3601,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"state\":\"Data.boundaryHierarchy.state.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.LTE 50 Percent Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"days\":{\"cardinality\":{\"script\":\"doc['Data.attendanceTime'].value.toInstant().toEpochMilli() / 86400000L\"}}}},\"task_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"exists\":{\"field\":\"Data.taskId.keyword\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.doseIndex\":\"01\"}}]}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\",\"days\":\"attendance_count>days\"},\"script\":\"params.attendance > 0 && params.days > 0 && (params.tasks / (params.days * 200.0)) <= 0.5\"}}}},\"LTE 50 Percent Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -3609,7 +3609,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"state\":\"Data.boundaryHierarchy.state.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.Boundary.buckets.key,aggregations.Boundary.buckets.GTE 100 Percent Deliveries",
         "indexName": "ba-attendance-log-index-v1,ba-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":100},\"aggs\":{\"USERS\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":10000},\"aggs\":{\"attendance_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}},{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"days\":{\"cardinality\":{\"script\":\"doc['Data.attendanceTime'].value.toInstant().toEpochMilli() / 86400000L\"}}}},\"task_count\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"smcDone\"}},{\"exists\":{\"field\":\"Data.taskId.keyword\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.doseIndex\":\"01\"}}]}}},\"keep_users_with_both\":{\"bucket_selector\":{\"buckets_path\":{\"attendance\":\"attendance_count._count\",\"tasks\":\"task_count._count\",\"days\":\"attendance_count>days\"},\"script\":\"params.attendance > 0 && params.days > 0 && (params.tasks / (params.days * 200.0)) >= 1.0\"}}}},\"GTE 100 Percent Deliveries\":{\"bucket_script\":{\"buckets_path\":{\"count\":\"USERS._bucket_count\"},\"script\":\"params.count\"}}}}}}"
@@ -4212,14 +4212,14 @@
       {
         "module": "COMMON",
         "dateRefField": "attendanceLog.time",
-        "requestQueryMap": "{\"projectTypeId\": \"projectTypeId.keyword\", \"state\": \"boundaryHierarchy.state.keyword\", \"campaignNumber\": \"campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"attendanceLog.type.keyword\":\"EXIT\"}},{\"term\":{\"attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"FLWs Marked Present\":{\"terms\":{\"field\":\"boundaryHierarchy.lga.keyword\",\"size\":100},\"aggs\":{\"per_day\":{\"date_histogram\":{\"field\":\"attendanceLog.time\",\"calendar_interval\":\"day\"},\"aggs\":{\"users\":{\"terms\":{\"field\":\"attendanceLog.individualId.keyword\"},\"aggs\":{\"Count\":{\"bucket_script\":{\"buckets_path\":{},\"script\":\"1.0\"}}}},\"total_unique_individuals_with_exit_logs_per_day\":{\"sum_bucket\":{\"buckets_path\":\"users>Count\"}}}},\"Total FLWs Marked Present\":{\"sum_bucket\":{\"buckets_path\":\"per_day>total_unique_individuals_with_exit_logs_per_day\"}},\"Count\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"Total FLWs Marked Present\",\"denom\":\"per_day._bucket_count\"},\"script\":\"params.num / params.denom\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-staff-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.role.keyword\":[\"REGISTRAR\",\"DISTRIBUTOR\"]}}]}},\"aggs\":{\"Total FLWs\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       }
@@ -4252,14 +4252,14 @@
       {
         "module": "COMMON",
         "dateRefField": "attendanceLog.time",
-        "requestQueryMap": "{\"projectTypeId\": \"projectTypeId.keyword\", \"state\": \"boundaryHierarchy.state.keyword\", \"lga\": \"boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"attendanceLog.type.keyword\":\"EXIT\"}},{\"term\":{\"attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"FLWs Marked Present\":{\"terms\":{\"field\":\"boundaryHierarchy.ward.keyword\",\"size\":100},\"aggs\":{\"per_day\":{\"date_histogram\":{\"field\":\"attendanceLog.time\",\"calendar_interval\":\"day\"},\"aggs\":{\"users\":{\"terms\":{\"field\":\"attendanceLog.individualId.keyword\"},\"aggs\":{\"Count\":{\"bucket_script\":{\"buckets_path\":{},\"script\":\"1.0\"}}}},\"total_unique_individuals_with_exit_logs_per_day\":{\"sum_bucket\":{\"buckets_path\":\"users>Count\"}}}},\"Total FLWs Marked Present\":{\"sum_bucket\":{\"buckets_path\":\"per_day>total_unique_individuals_with_exit_logs_per_day\"}},\"Count\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"Total FLWs Marked Present\",\"denom\":\"per_day._bucket_count\"},\"script\":\"params.num / params.denom\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-staff-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.role.keyword\":[\"REGISTRAR\",\"DISTRIBUTOR\"]}}]}},\"aggs\":{\"Total FLWs\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       }
@@ -4291,14 +4291,14 @@
       {
         "module": "COMMON",
         "dateRefField": "attendanceLog.time",
-        "requestQueryMap": "{\"projectTypeId\": \"projectTypeId.keyword\", \"state\": \"boundaryHierarchy.state.keyword\", \"lga\": \"boundaryHierarchy.lga.keyword\", \"ward\": \"boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"attendanceLog.type.keyword\":\"EXIT\"}},{\"term\":{\"attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"FLWs Marked Present\":{\"terms\":{\"field\":\"boundaryHierarchy.healthFacility.keyword\",\"size\":100},\"aggs\":{\"per_day\":{\"date_histogram\":{\"field\":\"attendanceLog.time\",\"calendar_interval\":\"day\"},\"aggs\":{\"users\":{\"terms\":{\"field\":\"attendanceLog.individualId.keyword\"},\"aggs\":{\"Count\":{\"bucket_script\":{\"buckets_path\":{},\"script\":\"1.0\"}}}},\"total_unique_individuals_with_exit_logs_per_day\":{\"sum_bucket\":{\"buckets_path\":\"users>Count\"}}}},\"Total FLWs Marked Present\":{\"sum_bucket\":{\"buckets_path\":\"per_day>total_unique_individuals_with_exit_logs_per_day\"}},\"Count\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"Total FLWs Marked Present\",\"denom\":\"per_day._bucket_count\"},\"script\":\"params.num / params.denom\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-staff-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.role.keyword\":[\"REGISTRAR\",\"DISTRIBUTOR\"]}}]}},\"aggs\":{\"Total FLWs\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       }
@@ -4330,14 +4330,14 @@
       {
         "module": "COMMON",
         "dateRefField": "attendanceLog.time",
-        "requestQueryMap": "{\"projectTypeId\": \"projectTypeId.keyword\", \"state\": \"boundaryHierarchy.state.keyword\", \"lga\": \"boundaryHierarchy.lga.keyword\", \"ward\": \"boundaryHierarchy.ward.keyword\", \"healthFacility\": \"boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"attendanceLog.type.keyword\":\"EXIT\"}},{\"term\":{\"attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"FLWs Marked Present\":{\"terms\":{\"field\":\"boundaryHierarchy.community.keyword\",\"size\":100},\"aggs\":{\"per_day\":{\"date_histogram\":{\"field\":\"attendanceLog.time\",\"calendar_interval\":\"day\"},\"aggs\":{\"users\":{\"terms\":{\"field\":\"attendanceLog.individualId.keyword\"},\"aggs\":{\"Count\":{\"bucket_script\":{\"buckets_path\":{},\"script\":\"1.0\"}}}},\"total_unique_individuals_with_exit_logs_per_day\":{\"sum_bucket\":{\"buckets_path\":\"users>Count\"}}}},\"Total FLWs Marked Present\":{\"sum_bucket\":{\"buckets_path\":\"per_day>total_unique_individuals_with_exit_logs_per_day\"}},\"Count\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"Total FLWs Marked Present\",\"denom\":\"per_day._bucket_count\"},\"script\":\"params.num / params.denom\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-staff-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.role.keyword\":[\"REGISTRAR\",\"DISTRIBUTOR\"]}}]}},\"aggs\":{\"Total FLWs\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       }
@@ -4399,14 +4399,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"INACTIVE\"]}}]}},\"aggs\":{\"Attendees Absent Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       }
@@ -5331,7 +5331,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"ENTRY FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.attendanceLog.type.keyword\":\"ENTRY\"}}]}},\"aggs\":{\"Country\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":10},\"aggs\":{\"State\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":100},\"aggs\":{\"users\":{\"terms\":{\"field\":\"Data.attendanceTakerUserName.keyword\",\"size\":10000},\"aggs\":{\"Attendance Date\":{\"date_histogram\":{\"field\":\"Data.attendanceTime\",\"fixed_interval\":\"1d\",\"format\":\"yyyy-MM-dd\"},\"aggs\":{\"Present\":{\"filter\":{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}},\"aggs\":{\"Present Count\":{\"value_count\":{\"field\":\"Data.attendanceLog.id.keyword\"}}}}}},\"Attendees Mapped\":{\"cardinality\":{\"field\":\"Data.userName.keyword\"}},\"Total Present\":{\"filter\":{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}},\"aggs\":{\"Total Present Count\":{\"value_count\":{\"field\":\"Data.attendanceLog.id.keyword\"}}}},\"Distinct Days\":{\"cardinality\":{\"script\":\"doc['Data.attendanceTime'].value.toInstant().toEpochMilli()/86400000L\"}},\"Attendance Denominator\":{\"bucket_script\":{\"buckets_path\":{\"u\":\"Attendees Mapped\",\"d\":\"Distinct Days\"},\"script\":\"params.u * params.d\"}}}}}}}}}}}}"
       }
@@ -5683,14 +5683,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"MORNING\"}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"INACTIVE\"]}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"MORNING\"}}]}},\"aggs\":{\"Attendees Absent Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       }
@@ -7549,7 +7549,7 @@
       {
         "module": "COMMON",
         "dateRefField": "attendanceLog.time",
-        "requestQueryMap": "{\"projectTypeId\": \"projectTypeId.keyword\", \"state\": \"boundaryHierarchy.state.keyword\", \"campaignNumber\": \"campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"attendanceLog.type.keyword\":\"EXIT\"}},{\"term\":{\"attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"FLWs Marked Present\":{\"terms\":{\"field\":\"boundaryHierarchy.lga.keyword\",\"size\":100},\"aggs\":{\"per_day\":{\"date_histogram\":{\"field\":\"attendanceLog.time\",\"calendar_interval\":\"day\"},\"aggs\":{\"users\":{\"terms\":{\"field\":\"attendanceLog.individualId.keyword\"},\"aggs\":{\"Count\":{\"bucket_script\":{\"buckets_path\":{},\"script\":\"1.0\"}}}},\"total_unique_individuals_with_exit_logs_per_day\":{\"sum_bucket\":{\"buckets_path\":\"users>Count\"}}}},\"Total FLWs Marked Present\":{\"sum_bucket\":{\"buckets_path\":\"per_day>total_unique_individuals_with_exit_logs_per_day\"}},\"Count\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"Total FLWs Marked Present\",\"denom\":\"per_day._bucket_count\"},\"script\":\"params.num / params.denom\"}}}}}}}}"
       }
@@ -7580,7 +7580,7 @@
       {
         "module": "COMMON",
         "dateRefField": "attendanceLog.time",
-        "requestQueryMap": "{\"projectTypeId\": \"projectTypeId.keyword\", \"state\": \"boundaryHierarchy.state.keyword\", \"lga\": \"boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"attendanceLog.type.keyword\":\"EXIT\"}},{\"term\":{\"attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"FLWs Marked Present\":{\"terms\":{\"field\":\"boundaryHierarchy.ward.keyword\",\"size\":100},\"aggs\":{\"per_day\":{\"date_histogram\":{\"field\":\"attendanceLog.time\",\"calendar_interval\":\"day\"},\"aggs\":{\"users\":{\"terms\":{\"field\":\"attendanceLog.individualId.keyword\"},\"aggs\":{\"Count\":{\"bucket_script\":{\"buckets_path\":{},\"script\":\"1.0\"}}}},\"total_unique_individuals_with_exit_logs_per_day\":{\"sum_bucket\":{\"buckets_path\":\"users>Count\"}}}},\"Total FLWs Marked Present\":{\"sum_bucket\":{\"buckets_path\":\"per_day>total_unique_individuals_with_exit_logs_per_day\"}},\"Count\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"Total FLWs Marked Present\",\"denom\":\"per_day._bucket_count\"},\"script\":\"params.num / params.denom\"}}}}}}}}"
       }
@@ -7610,7 +7610,7 @@
       {
         "module": "COMMON",
         "dateRefField": "attendanceLog.time",
-        "requestQueryMap": "{\"projectTypeId\": \"projectTypeId.keyword\", \"state\": \"boundaryHierarchy.state.keyword\", \"lga\": \"boundaryHierarchy.lga.keyword\", \"ward\": \"boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"attendanceLog.type.keyword\":\"EXIT\"}},{\"term\":{\"attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"FLWs Marked Present\":{\"terms\":{\"field\":\"boundaryHierarchy.healthFacility.keyword\",\"size\":100},\"aggs\":{\"per_day\":{\"date_histogram\":{\"field\":\"attendanceLog.time\",\"calendar_interval\":\"day\"},\"aggs\":{\"users\":{\"terms\":{\"field\":\"attendanceLog.individualId.keyword\"},\"aggs\":{\"Count\":{\"bucket_script\":{\"buckets_path\":{},\"script\":\"1.0\"}}}},\"total_unique_individuals_with_exit_logs_per_day\":{\"sum_bucket\":{\"buckets_path\":\"users>Count\"}}}},\"Total FLWs Marked Present\":{\"sum_bucket\":{\"buckets_path\":\"per_day>total_unique_individuals_with_exit_logs_per_day\"}},\"Count\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"Total FLWs Marked Present\",\"denom\":\"per_day._bucket_count\"},\"script\":\"params.num / params.denom\"}}}}}}}}"
       }
@@ -7640,7 +7640,7 @@
       {
         "module": "COMMON",
         "dateRefField": "attendanceLog.time",
-        "requestQueryMap": "{\"projectTypeId\": \"projectTypeId.keyword\", \"state\": \"boundaryHierarchy.state.keyword\", \"lga\": \"boundaryHierarchy.lga.keyword\", \"ward\": \"boundaryHierarchy.ward.keyword\", \"healthFacility\": \"boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"attendanceLog.type.keyword\":\"EXIT\"}},{\"term\":{\"attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"FLWs Marked Present\":{\"terms\":{\"field\":\"boundaryHierarchy.community.keyword\",\"size\":100},\"aggs\":{\"per_day\":{\"date_histogram\":{\"field\":\"attendanceLog.time\",\"calendar_interval\":\"day\"},\"aggs\":{\"users\":{\"terms\":{\"field\":\"attendanceLog.individualId.keyword\"},\"aggs\":{\"Count\":{\"bucket_script\":{\"buckets_path\":{},\"script\":\"1.0\"}}}},\"total_unique_individuals_with_exit_logs_per_day\":{\"sum_bucket\":{\"buckets_path\":\"users>Count\"}}}},\"Total FLWs Marked Present\":{\"sum_bucket\":{\"buckets_path\":\"per_day>total_unique_individuals_with_exit_logs_per_day\"}},\"Count\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"Total FLWs Marked Present\",\"denom\":\"per_day._bucket_count\"},\"script\":\"params.num / params.denom\"}}}}}}}}"
       }
@@ -9681,7 +9681,7 @@
         "key": "attendanceAttendedOnce",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"filtered\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Attendees Attended Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}",
@@ -9693,7 +9693,7 @@
         "key": "attendanceAbsentOnce",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"filtered\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"INACTIVE\"]}}]}},\"aggs\":{\"Attendees Absent Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}",
@@ -9705,7 +9705,7 @@
         "key": "attendanceWithSignature",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"filtered\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}},{\"exists\":{\"field\":\"Data.attendanceLog.additionalDetails.signatureData\"}}]}},\"aggs\":{\"Attendees With Signature\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}",
@@ -9717,7 +9717,7 @@
         "key": "attendanceWithoutSignature",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}],\"must_not\":[{\"exists\":{\"field\":\"Data.attendanceLog.additionalDetails.signatureData\"}}]}},\"aggs\":{\"Attendees Without Signature\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}",
@@ -10075,7 +10075,7 @@
         "key": "attendanceTotalWorkers",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-transformed-attendance-register-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"filtered\":{\"filter\":{\"exists\":{\"field\":\"Data.attendeesCount\"}},\"aggs\":{\"Total Attendees Count\":{\"sum\":{\"field\":\"Data.attendeesCount\"}}}}}}",
@@ -10087,7 +10087,7 @@
         "key": "attendanceAttendedWorkers",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"filtered\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Attendees Attended Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) { for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}",
@@ -12153,14 +12153,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-transformed-attendance-register-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Attendees Created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\"},\"aggs\":{\"NAME\":{\"sum\":{\"field\":\"Data.attendeesCount\"}}}}}}"
       }
@@ -12191,14 +12191,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-transformed-attendance-register-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Attendees Created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"NAME\":{\"sum\":{\"field\":\"Data.attendeesCount\"}}}}}}"
       }
@@ -12229,14 +12229,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"state\":\"Data.boundaryHierarchy.state.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"state\":\"Data.boundaryHierarchy.state.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-transformed-attendance-register-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Attendees Created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"NAME\":{\"sum\":{\"field\":\"Data.attendeesCount\"}}}}}}"
       }
@@ -12795,28 +12795,28 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-transformed-attendance-register-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Attendees Created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\"},\"aggs\":{\"Total Attendees Count\":{\"sum\":{\"field\":\"Data.attendeesCount\"}},\"Total Registers Count\":{\"value_count\":{\"field\":\"Data.attendanceRegister.id.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"EVENING\"}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}},\"Teams Took Attendance Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.attendanceLog.registerId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"EVENING\"}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Negative Attendees Attended Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count * (-1);\"}},\"Negative Teams Took Attendance Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.attendanceLog.registerId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count * (-1);\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggregationFilterPath": "aggregations.NAME.buckets.key,aggregations.NAME.buckets.Low Attendance",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"NAME\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"EVENING\"}}]}},\"aggs\":{\"Less Attended Attendees\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":100},\"aggs\":{\"by_user\":{\"terms\":{\"field\":\"Data.attendanceLog.userName.keyword\",\"size\":10000},\"aggs\":{\"active_count\":{\"filter\":{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}},\"inactive_count\":{\"filter\":{\"term\":{\"Data.attendanceLog.status.keyword\":\"INACTIVE\"}}},\"attendance_ratio_check\":{\"bucket_script\":{\"buckets_path\":{\"active\":\"active_count._count\",\"inactive\":\"inactive_count._count\"},\"script\":\"params.active <= params.inactive ? 1 : 0\"}},\"keep_only_low_attendance_users\":{\"bucket_selector\":{\"buckets_path\":{\"active\":\"active_count._count\",\"inactive\":\"inactive_count._count\"},\"script\":\"params.active <= params.inactive\"}}}},\"Low Attendance\":{\"sum_bucket\":{\"buckets_path\":\"by_user>attendance_ratio_check\"}}}}}}}}"
@@ -14557,28 +14557,28 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-transformed-attendance-register-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Attendees Created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\"},\"aggs\":{\"Total Attendees Count\":{\"sum\":{\"field\":\"Data.attendeesCount\"}},\"Total Registers Count\":{\"value_count\":{\"field\":\"Data.attendanceRegister.id.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Attendees Attended Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}},\"Teams Took Attendance Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.attendanceLog.registerId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Negative Attendees Attended Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count * (-1);\"}},\"Negative Teams Took Attendance Once\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.attendanceLog.registerId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count * (-1);\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggregationFilterPath": "aggregations.NAME.buckets.key,aggregations.NAME.buckets.Low Attendance",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"NAME\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}}]}},\"aggs\":{\"Less Attended Attendees\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":100},\"aggs\":{\"by_user\":{\"terms\":{\"field\":\"Data.attendanceLog.userName.keyword\",\"size\":10000},\"aggs\":{\"active_count\":{\"filter\":{\"term\":{\"Data.attendanceLog.status.keyword\":\"ACTIVE\"}}},\"inactive_count\":{\"filter\":{\"term\":{\"Data.attendanceLog.status.keyword\":\"INACTIVE\"}}},\"attendance_ratio_check\":{\"bucket_script\":{\"buckets_path\":{\"active\":\"active_count._count\",\"inactive\":\"inactive_count._count\"},\"script\":\"params.active <= params.inactive ? 1 : 0\"}},\"keep_only_low_attendance_users\":{\"bucket_selector\":{\"buckets_path\":{\"active\":\"active_count._count\",\"inactive\":\"inactive_count._count\"},\"script\":\"params.active <= params.inactive\"}}}},\"Low Attendance\":{\"sum_bucket\":{\"buckets_path\":\"by_user>attendance_ratio_check\"}}}}}}}}"
@@ -14586,7 +14586,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1,ba-transformed-attendance-register-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"exists\":{\"field\":\"Data.boundaryHierarchy.country.keyword\"}},\"aggs\":{\"Country\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"PresentUsers\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"_index\":\"ba-attendance-log-index-v1\"}},{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Count\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) { for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}},\"TotalWorkers\":{\"filter\":{\"term\":{\"_index\":\"ba-transformed-attendance-register-index-v1\"}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"Data.attendeesCount\"}}}},\"AverageTaken\":{\"bucket_script\":{\"buckets_path\":{\"p\":\"PresentUsers>Count.value\",\"t\":\"TotalWorkers>Count.value\"},\"script\":\"params.t > 0 ? params.p / params.t : 0\"}}}}}}}}"
       }
@@ -14907,14 +14907,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"EVENING\"}}]}},\"aggs\":{\"Attendees Present Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"INACTIVE\"]}},{\"term\":{\"Data.attendanceLog.additionalDetails.SESSION_TYPE.keyword\":\"EVENING\"}}]}},\"aggs\":{\"Attendees Absent Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userName.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       }
@@ -15579,14 +15579,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.attendanceLog.type.keyword\":[\"ENTRY\"]}},{\"terms\":{\"Data.attendanceLog.status.keyword\":[\"ACTIVE\"]}}]}},\"aggs\":{\"Teams Took Attendance Atleast Once\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.attendanceLog.registerId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) state.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {  for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key); } } } } return count;\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-transformed-attendance-register-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Registers Created\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\"},\"aggs\":{\"Total Attendees Count\":{\"value_count\":{\"field\":\"Data.attendanceRegister.id.keyword\"}}}}}}"
       }
@@ -20523,7 +20523,7 @@
         ],
         "newField": "Coverage 12-59",
         "_comments": ""
-      },      
+      },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
