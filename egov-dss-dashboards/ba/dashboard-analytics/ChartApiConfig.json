@@ -8359,7 +8359,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.household.clientAuditDetails.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-household-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"houses visited total\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
@@ -16495,7 +16495,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.dateOfEntry",
+        "dateRefField": "",
         "requestQueryMap": "{\"campaignId\": \"Data.campaignId.keyword\"}",
         "indexName": "ba-stock-index-v1",
         "transformData": "rawDocuments",
@@ -16551,7 +16551,7 @@
       "total_quantity"
     ],
     "insight": {},
-    "_comment": "Stock summary for commodity dashboard. Fetches all stock transactions from os-stock-index-v1 filtered by campaignId. Returns raw hits (transformed to stock API shape) plus aggregations: by_event_type (RECEIVED/DISPATCHED/RETURNED/DAMAGED with quantity sums), by_product (per-product event type + quantity breakdown), unique_facilities (cardinality), by_facility (per-facility event type breakdown with facility name), by_projectId, and total_quantity. Used by useKibanaStockSearch.js \u2192 useStockData.js \u2192 CommodityDashboard.js for both TransactionSummaryTab and StockSummaryTab."
+    "_comment": "Stock summary for commodity dashboard. Fetches all stock transactions from os-stock-index-v1 filtered by campaignId. Returns raw hits (transformed to stock API shape) plus aggregations: by_event_type (RECEIVED/DISPATCHED/RETURNED/DAMAGED with quantity sums), by_product (per-product event type + quantity breakdown), unique_facilities (cardinality), by_facility (per-facility event type breakdown with facility name), by_projectId, and total_quantity. Used by useKibanaStockSearch.js → useStockData.js → CommodityDashboard.js for both TransactionSummaryTab and StockSummaryTab."
   },
   "commodityWarehouseManagerTotal": {
     "chartName": "DSS_COMMODITY_WAREHOUSE_MANAGER_TOTAL",
@@ -16591,7 +16591,7 @@
       "totalManagers"
     ],
     "insight": {},
-    "_comment": "Total warehouse managers assigned. Queries os-project-staff-index-v1 for all users with role=WAREHOUSE_MANAGER that have a country boundary hierarchy entry. Returns value_count of Data.userId.keyword. Used by useWarehouseManagerSync.js \u2192 CommodityDashboard.js for the Data Sync card (total warehouses)."
+    "_comment": "Total warehouse managers assigned. Queries os-project-staff-index-v1 for all users with role=WAREHOUSE_MANAGER that have a country boundary hierarchy entry. Returns value_count of Data.userId.keyword. Used by useWarehouseManagerSync.js → CommodityDashboard.js for the Data Sync card (total warehouses)."
   },
   "commodityWarehouseManagerSynced": {
     "chartName": "DSS_COMMODITY_WAREHOUSE_MANAGER_SYNCED",
@@ -16607,7 +16607,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.syncedTimeStamp",
+        "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-user-sync-index-v1",
         "transformData": "linearAggregation",
@@ -16662,14 +16662,14 @@
       "syncRate"
     ],
     "insight": {},
-    "_comment": "Warehouse manager sync rate. Queries os-project-staff-index-v1 for total WAREHOUSE_MANAGER count and os-user-sync-index-v1 for unique synced managers. Merges to compute syncRate = (syncedManagers / totalManagers) * 100. Used by useWarehouseManagerSync.js \u2192 CommodityDashboard.js for the Data Sync card."
+    "_comment": "Warehouse manager sync rate. Queries os-project-staff-index-v1 for total WAREHOUSE_MANAGER count and os-user-sync-index-v1 for unique synced managers. Merges to compute syncRate = (syncedManagers / totalManagers) * 100. Used by useWarehouseManagerSync.js → CommodityDashboard.js for the Data Sync card."
   },
   "commodityFacilityStockBalance": {
     "chartName": "DSS_COMMODITY_FACILITY_STOCK_BALANCE",
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.dateOfEntry",
+        "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-stock-index-v1",
         "transformData": "rawDocuments",
@@ -16718,7 +16718,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.dateOfEntry",
+        "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"facilityId\": \"Data.facilityId.keyword\"}",
         "indexName": "ba-stock-index-v1",
         "transformData": "rawDocuments",
@@ -16727,7 +16727,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.dateOfEntry",
+        "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"facilityId\": \"Data.transactingFacilityId.keyword\"}",
         "indexName": "ba-stock-index-v1",
         "transformData": "rawDocuments",

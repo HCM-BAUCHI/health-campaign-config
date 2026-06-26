@@ -8391,7 +8391,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.household.clientAuditDetails.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-household-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"houses visited total\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
@@ -16527,7 +16527,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.dateOfEntry",
+        "dateRefField": "",
         "requestQueryMap": "{\"campaignId\": \"Data.campaignId.keyword\"}",
         "indexName": "ch-stock-index-v1",
         "transformData": "rawDocuments",
@@ -16639,7 +16639,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.syncedTimeStamp",
+        "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-user-sync-index-v1",
         "transformData": "linearAggregation",
@@ -16701,7 +16701,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.dateOfEntry",
+        "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-stock-index-v1",
         "transformData": "rawDocuments",
@@ -16749,7 +16749,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.dateOfEntry",
+        "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"facilityId\": \"Data.facilityId.keyword\"}",
         "indexName": "ch-stock-index-v1",
         "transformData": "rawDocuments",
@@ -16758,7 +16758,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.dateOfEntry",
+        "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"facilityId\": \"Data.transactingFacilityId.keyword\"}",
         "indexName": "ch-stock-index-v1",
         "transformData": "rawDocuments",
