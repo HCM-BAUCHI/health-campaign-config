@@ -760,6 +760,30 @@
           "name": "DSS_HEALTH_VAS",
           "vizArray": [
             {
+              "id": 12012,
+              "name": "DSS_VAS_COVERAGE_METRICS",
+              "label": "DSS_VAS_COVERAGE_METRICS",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "vasCoverageMetricsICCD",
+                  "name": "DSS_VAS_COVERAGE_METRICS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "name": "DSS_HEALTH_VAS",
+          "vizArray": [
+            {
               "id": 12010,
               "name": "DSS_VAS_ADMINISTERED_GENDER_METRICS",
               "label": "DSS_VAS_ADMINISTERED_GENDER_METRICS",
@@ -778,9 +802,9 @@
               ]
             }
           ]
-        },
+        },        
         {
-          "row": 4,
+          "row": 5,
           "name": "DSS_HEALTH_VAS",
           "vizArray": [
             {
@@ -799,15 +823,6 @@
                   "filter": "",
                   "headers": [],
                   "tabName": "BOUNDARY"
-                },
-                {
-                  "id": "vasSummaryByDistrictDayICCD",
-                  "name": "DSS_VAS_SUMMARY_BY_DISTRICT_DAY_ICCD",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "DAYWISE"
                 }
               ]
             }

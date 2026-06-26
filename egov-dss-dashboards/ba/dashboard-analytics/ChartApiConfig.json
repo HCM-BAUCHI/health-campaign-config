@@ -18550,6 +18550,216 @@
     "hideInsights": true,
     "hideHeaderDenomination": true
   },
+  "vasCoverageMetricsICCD": {
+    "chartName": "DSS_VAS_COVERAGE_METRICS",
+    "queries": [
+      {
+        "key": "vasCoverageAdministered3to59Query",
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ba-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "select": {
+          "administered3to59": "Administered.Count.value"
+        }
+      },
+      {
+        "key": "vasCoverageAdministered6to11Query",
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ba-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"range\":{\"Data.age\":{\"gte\":6,\"lt\":12}}},{\"term\":{\"Data.productName.keyword\":\"Blue VAS\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "select": {
+          "administered6to11": "Administered.Count.value"
+        }
+      },
+      {
+        "key": "vasCoverageAdministered12plusQuery",
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ba-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"term\":{\"Data.productName.keyword\":\"Red VAS\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "select": {
+          "administered12plus": "Administered.Count.value"
+        }
+      },
+      {
+        "key": "vasCoverageTarget3to59Query",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ba-project-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Overall Target\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.targetType.keyword\":[\"6-11MONTH\",\"12-59MONTH\"]}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}},\"aggs\":{\"Target Sum\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}",
+        "select": {
+          "targetChildren3to59": "Overall Target.Target Sum.value"
+        }
+      },
+      {
+        "key": "vasCoverageTarget6to11Query",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ba-project-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Overall Target\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"6-11MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}},\"aggs\":{\"Target Sum\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}",
+        "select": {
+          "targetChildren6to11": "Overall Target.Target Sum.value"
+        }
+      },
+      {
+        "key": "vasCoverageTarget12to59Query",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ba-project-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Overall Target\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}},\"aggs\":{\"Target Sum\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}",
+        "select": {
+          "targetChildren12to59": "Overall Target.Target Sum.value"
+        }
+      }
+    ],
+    "chartType": "rawResponse",
+    "valueType": "number",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "vasCoverageMetrics",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": [
+          {
+            "coverage3to59": "multiply(divide(administered3to59, targetChildren3to59), 100)"
+          },
+          {
+            "coverage6to11": "multiply(divide(administered6to11, targetChildren6to11), 100)"
+          },
+          {
+            "coverage12plus": "multiply(divide(administered12plus, targetChildren12to59), 100)"
+          }
+        ]
+      }
+    ],
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "coverage3to59",
+      "coverage6to11",
+      "coverage12plus"
+    ],
+    "cardsList": [
+      {
+        "id": "coverage3to59",
+        "labelKey": "DSS_VAS_COVERAGE_3_59",
+        "valuePath": "coverage3to59",
+        "valueType": "PERCENTAGE",
+        "descriptionParams": {
+          "count": "coverage3to59"
+        },
+        "colorRules": {
+          "type": "range",
+          "valuePath": "coverage3to59",
+          "ranges": [
+            {
+              "lte": 25,
+              "color": "#D4351C"
+            },
+            {
+              "gt": 25,
+              "lte": 50,
+              "color": "#FB8C00"
+            },
+            {
+              "gt": 50,
+              "lte": 75,
+              "color": "#FDD835"
+            },
+            {
+              "gt": 75,
+              "color": "#2E7D32"
+            }
+          ]
+        }
+      },
+      {
+        "id": "coverage6to11",
+        "labelKey": "DSS_VAS_COVERAGE_6_11",
+        "valuePath": "coverage6to11",
+        "valueType": "PERCENTAGE",
+        "descriptionParams": {
+          "count": "coverage6to11"
+        },
+        "colorRules": {
+          "type": "range",
+          "valuePath": "coverage6to11",
+          "ranges": [
+            {
+              "lte": 25,
+              "color": "#D4351C"
+            },
+            {
+              "gt": 25,
+              "lte": 50,
+              "color": "#FB8C00"
+            },
+            {
+              "gt": 50,
+              "lte": 75,
+              "color": "#FDD835"
+            },
+            {
+              "gt": 75,
+              "color": "#2E7D32"
+            }
+          ]
+        }
+      },
+      {
+        "id": "coverage12plus",
+        "labelKey": "DSS_VAS_COVERAGE_12_PLUS",
+        "valuePath": "coverage12plus",
+        "valueType": "PERCENTAGE",
+        "descriptionParams": {
+          "count": "coverage12plus"
+        },
+        "colorRules": {
+          "type": "range",
+          "valuePath": "coverage12plus",
+          "ranges": [
+            {
+              "lte": 25,
+              "color": "#D4351C"
+            },
+            {
+              "gt": 25,
+              "lte": 50,
+              "color": "#FB8C00"
+            },
+            {
+              "gt": 50,
+              "lte": 75,
+              "color": "#FDD835"
+            },
+            {
+              "gt": 75,
+              "color": "#2E7D32"
+            }
+          ]
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true
+  },
   "vasAdministeredGenderMetricsICCD": {
     "chartName": "DSS_VAS_ADMINISTERED_GENDER_METRICS",
     "queries": [
@@ -20199,13 +20409,6 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"INELIGIBLE\"}}]}},\"aggs\":{\"Ineligible\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Ineligible count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-household-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.caregiverConsent.keyword\":\"FALSE\"}}]}},\"aggs\":{\"Household Refused\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Household Refused count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
@@ -20320,16 +20523,7 @@
         ],
         "newField": "Coverage 12-59",
         "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Ineligible count"
-        ],
-        "newField": "INELIGIBLE",
-        "_comments": ""
-      },
+      },      
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
@@ -20405,15 +20599,6 @@
         ],
         "newField": "Administered 3-59",
         "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Ineligible Daily count"
-        ],
-        "newField": "INELIGIBLE",
-        "_comments": ""
       }
     ],
     "insight": {},
@@ -20464,13 +20649,6 @@
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"}}]}},\"aggs\":{\"Target 12-59\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.ward.keyword\"},\"aggs\":{\"Target 12-59 count\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"INELIGIBLE\"}}]}},\"aggs\":{\"Ineligible\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Ineligible count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -20594,15 +20772,6 @@
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Ineligible count"
-        ],
-        "newField": "INELIGIBLE",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
           "Household Refused count"
         ],
         "newField": "HOUSEHOLD_REFUSED",
@@ -20660,13 +20829,6 @@
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ba-project-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}},\"aggs\":{\"Target 12-59\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\"},\"aggs\":{\"Target 12-59 count\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.flow.keyword\":\"vasDone\"}},{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"INELIGIBLE\"}}]}},\"aggs\":{\"Ineligible\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Ineligible count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -20784,15 +20946,6 @@
           "Target 12-59 count"
         ],
         "newField": "Coverage 12-59",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Ineligible count"
-        ],
-        "newField": "INELIGIBLE",
         "_comments": ""
       },
       {
