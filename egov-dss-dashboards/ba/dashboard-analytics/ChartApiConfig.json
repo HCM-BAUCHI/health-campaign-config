@@ -937,10 +937,10 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "date",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "ba-household-coverage-daily-iccd",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"houses visited today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"state\"}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"total_households_visited\"}}}}}}"
+        "dateRefField": "Data.household.clientAuditDetails.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ba-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"houses visited today\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -6296,9 +6296,9 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "ba-household-coverage-summary-iccd",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"total houses visited\":{\"sum\":{\"field\":\"total_households_visited\"}}}}"
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ba-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"total houses visited\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -8359,10 +8359,10 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "ba-household-coverage-summary-iccd",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"houses visited total\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"state\"}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"total_households_visited\"}}}}}}"
+        "dateRefField": "Data.household.clientAuditDetails.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ba-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"houses visited total\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -14534,10 +14534,10 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "date",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "ba-household-coverage-daily-iccd",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"DateRange Visited\":{\"sum\":{\"field\":\"total_households_visited\"}}}}"
+        "dateRefField": "Data.household.clientAuditDetails.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ba-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DateRange Visited\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -14717,9 +14717,9 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "ba-household-coverage-summary-iccd",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total visits\":{\"sum\":{\"field\":\"total_households_visited\"}}}}"
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ba-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total visits\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
       },
       {
         "module": "COMMON",

@@ -937,10 +937,10 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "date",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "pl-household-coverage-daily-iccd",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"houses visited today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"state\"}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"total_households_visited\"}}}}}}"
+        "dateRefField": "Data.household.clientAuditDetails.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "pl-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"houses visited today\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -6237,21 +6237,21 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"selectedType\": \"Data.sideEffect.additionalFields.schema.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-side-effect-index-v1",
+        "indexName": "pl-side-effect-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}},\"aggs\":{\"Total Side Effects\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.sideEffect.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"selectedType\": \"Data.referral.additionalFields.schema.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-referral-index-v1",
+        "indexName": "pl-referral-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}},\"aggs\":{\"Total Referrals\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.referral.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "ba-ineligible-summary",
+        "indexName": "pl-ineligible-summary",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Ineligible\":{\"terms\":{\"field\":\"state\",\"size\":500},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"ineligible_population_total\"}}}}}}"
       }
     ],
@@ -6328,9 +6328,9 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "pl-household-coverage-summary-iccd",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"total houses visited\":{\"sum\":{\"field\":\"total_households_visited\"}}}}"
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "pl-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"total houses visited\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -7860,14 +7860,14 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"projectTypeId.keyword\", \"state\": \"boundaryHierarchy.state.keyword\", \"lga\": \"boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"campaignNumber.keyword\"}",
-        "indexName": "ba-attendance-log-index-v1",
+        "indexName": "pl-attendance-log-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"attendanceLog.type.keyword\":\"EXIT\"}},{\"term\":{\"attendanceLog.status.keyword\":\"ACTIVE\"}}]}},\"aggs\":{\"Attend Daily Count\":{\"date_histogram\":{\"field\":\"@timestamp\",\"fixed_interval\":\"1d\",\"min_doc_count\":1,\"format\":\"dd-MM-yyyy\"},\"aggs\":{\"per_user_attendance\":{\"terms\":{\"field\":\"attendanceLog.individualId.keyword\"},\"aggs\":{\"Count\":{\"bucket_script\":{\"buckets_path\":{},\"script\":\"1\"}}}},\"Total Distributors Marked Present\":{\"sum_bucket\":{\"buckets_path\":\"per_user_attendance>Count\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-project-staff-index-v1",
+        "indexName": "pl-project-staff-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.role.keyword\":[\"REGISTRAR\",\"DISTRIBUTOR\"]}}]}},\"aggs\":{\"Distributors\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1d\",\"min_doc_count\":1,\"format\":\"dd-MM-yyyy\"},\"aggs\":{\"Total distributors\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       },
       {
@@ -8391,10 +8391,10 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "pl-household-coverage-summary-iccd",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"houses visited total\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"state\"}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"total_households_visited\"}}}}}}"
+        "dateRefField": "Data.household.clientAuditDetails.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "pl-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"houses visited total\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -10800,7 +10800,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-household-index-v1",
+        "indexName": "pl-household-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.caregiverConsent.keyword\":\"FALSE\"}}]}},\"aggs\":{\"Household Refused\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Household Refused count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
       }
     ],
@@ -11064,7 +11064,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-household-index-v1",
+        "indexName": "pl-household-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.caregiverConsent.keyword\":\"FALSE\"}}]}},\"aggs\":{\"Household Refused\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Household Refused count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
       }
     ],
@@ -11328,7 +11328,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-household-index-v1",
+        "indexName": "pl-household-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.caregiverConsent.keyword\":\"FALSE\"}}]}},\"aggs\":{\"Household Refused\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Household Refused count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
       }
     ],
@@ -12528,21 +12528,21 @@
         "module": "COMMON",
         "dateRefField": "Data.sideEffect.auditDetails.createdTime",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"selectedType\": \"Data.sideEffect.additionalFields.schema.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-side-effect-index-v1",
+        "indexName": "pl-side-effect-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},\"aggs\":{\"Total Side Effects\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.sideEffect.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.referral.auditDetails.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"selectedType\": \"Data.referral.additionalFields.schema.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-referral-index-v1",
+        "indexName": "pl-referral-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},\"aggs\":{\"Total Referrals\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.referral.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "date",
         "requestQueryMap": "{\"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "ba-ineligible-summary",
+        "indexName": "pl-ineligible-summary",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Ineligible\":{\"terms\":{\"field\":\"lga\",\"size\":500},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"ineligible_population_total\"}}}}}}"
       }
     ],
@@ -13081,28 +13081,28 @@
         "module": "COMMON",
         "dateRefField": "Data.sideEffect.auditDetails.createdTime",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-side-effect-index-v1",
+        "indexName": "pl-side-effect-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},\"aggs\":{\"Total Side Effects\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.sideEffect.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.referral.auditDetails.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ba-referral-index-v1",
+        "indexName": "pl-referral-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},\"aggs\":{\"Total Referrals\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.referral.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "date",
         "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "ba-ineligible-summary",
+        "indexName": "pl-ineligible-summary",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Ineligible\":{\"terms\":{\"field\":\"lga\",\"size\":500},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"ineligible_population_total\"}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "date",
         "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "ba-ineligible-summary",
+        "indexName": "pl-ineligible-summary",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Children Registered\":{\"terms\":{\"field\":\"lga\",\"size\":500},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"total_population_registered\"}}}}}}"
       }
     ],
@@ -14566,10 +14566,10 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "date",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "pl-household-coverage-daily-iccd",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"DateRange Visited\":{\"sum\":{\"field\":\"total_households_visited\"}}}}"
+        "dateRefField": "Data.household.clientAuditDetails.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "pl-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DateRange Visited\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -14749,9 +14749,9 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"cycle\", \"projectTypeId\": \"projectTypeId\", \"state\": \"state\", \"campaignNumber\": \"campaignNumber\"}",
-        "indexName": "pl-household-coverage-summary-iccd",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total visits\":{\"sum\":{\"field\":\"total_households_visited\"}}}}"
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "pl-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total visits\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
       },
       {
         "module": "COMMON",
