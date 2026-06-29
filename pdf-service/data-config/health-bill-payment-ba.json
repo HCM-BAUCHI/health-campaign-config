@@ -61,6 +61,30 @@
                                 }
                             },
                             {
+                                "variable": "label_billing_period",
+                                "value": {
+                                    "path": "PDF_STATIC_LABEL_BILL_BILLING_PERIOD"
+                                },
+                                "type": "label",
+                                "localisation": {
+                                    "required": true,
+                                    "prefix": null,
+                                    "module": "hcm-payments"
+                                }
+                            },
+                            {
+                                "variable": "label_billing_period_range",
+                                "value": {
+                                    "path": "PDF_STATIC_LABEL_BILL_BILLING_PERIOD_RANGE"
+                                },
+                                "type": "label",
+                                "localisation": {
+                                    "required": true,
+                                    "prefix": null,
+                                    "module": "hcm-payments"
+                                }
+                            },
+                            {
                                 "variable": "label_table_header_serial_number",
                                 "value": {
                                     "path": "PDF_STATIC_LABEL_BILL_TABLE_SERIAL_NUMBER"
@@ -169,6 +193,18 @@
                                 }
                             },
                             {
+                                "variable": "label_table_header_fees",
+                                "value": {
+                                    "path": "PDF_STATIC_LABEL_BILL_TABLE_FEES"
+                                },
+                                "type": "label",
+                                "localisation": {
+                                    "required": false,
+                                    "prefix": null,
+                                    "module": "hcm-payments"
+                                }
+                            },
+                            {
                                 "variable": "label_table_header_total_wage",
                                 "value": {
                                     "path": "PDF_STATIC_LABEL_BILL_TABLE_TOTAL_WAGE"
@@ -184,42 +220,6 @@
                                 "variable": "label_table_header_number_of_days",
                                 "value": {
                                     "path": "PDF_STATIC_LABEL_BILL_TABLE_NUMBER_OF_DAYS"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "hcm-payments"
-                                }
-                            },
-                            {
-                                "variable": "total_label_table_header_wage",
-                                "value": {
-                                    "path": "TOTAL_PDF_STATIC_LABEL_BILL_TABLE_WAGE"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "hcm-payments"
-                                }
-                            },
-                            {
-                                "variable": "total_label_table_header_food",
-                                "value": {
-                                    "path": "_TOTAL_PDF_STATIC_LABEL_BILL_TABLE_FOOD"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "hcm-payments"
-                                }
-                            },
-                            {
-                                "variable": "total_label_table_header_transportation",
-                                "value": {
-                                    "path": "TOTAL_PDF_STATIC_LABEL_BILL_TABLE_TRANSPORTATION"
                                 },
                                 "type": "label",
                                 "localisation": {
@@ -333,28 +333,16 @@
                                 "format": " var y=arguments[0]; y=y.toFixed(2); return y;"
                             },
                             {
-                                "variable": "totalFoodAmount",
+                                "variable": "billingPeriodLabel",
                                 "value": {
-                                    "path": "$.totalFoodAmount"
-                                },
-                                "type": "function",
-                                "format": " var y=arguments[0]; y=y.toFixed(2); return y;"
+                                    "path": "$.billingPeriodLabel"
+                                }
                             },
                             {
-                                "variable": "totalTransportAmount",
+                                "variable": "billingPeriodDateRange",
                                 "value": {
-                                    "path": "$.totalTransportAmount"
-                                },
-                                "type": "function",
-                                "format": " var y=arguments[0]; y=y.toFixed(2); return y;"
-                            },
-                            {
-                                "variable": "totalWageAmount",
-                                "value": {
-                                    "path": "$.totalWageAmount"
-                                },
-                                "type": "function",
-                                "format": " var y=arguments[0]; y=y.toFixed(2); return y;"
+                                    "path": "$.billingPeriodDateRange"
+                                }
                             },
                             {
                                 "variable": "numberOfIndividuals",
@@ -368,7 +356,7 @@
                                     "path": "$.billDetails"
                                 },
                                 "type": "function",
-                                "format": " var y=arguments[0]; for(var i =0; i<y.length;i++){y[i].wageAmount=y[i].wageAmount.toFixed(2);y[i].foodAmount=y[i].foodAmount.toFixed(2);y[i].transportAmount=y[i].transportAmount.toFixed(2);y[i].totalWages=y[i].totalWages.toFixed(2);y[i].totalwageAmount=(y[i].wageAmount*y[i].totalNumberOfDays).toFixed(2);y[i].totalfoodAmount=(y[i].foodAmount*y[i].totalNumberOfDays).toFixed(2);y[i].totalTransportAmount=(y[i].transportAmount*y[i].totalNumberOfDays).toFixed(2);y[i].totalAmount=y[i].totalAmount.toFixed(2);} return y;"
+                                "format": "var y=arguments[0]||[];for(var i=0;i<y.length;i++){var o=y[i]||{};['wageAmount','foodAmount','transportAmount','feesAmount','totalWages','totalAmount'].forEach(function(k){var v=Number(o[k]);o[k]=Number.isFinite(v)?v.toFixed(2):null;});}return y;"
                             },
                             {
                                 "variable": "createdBy",
@@ -383,21 +371,6 @@
                                 },
                                 "type": "date",
                                 "format": "DD/MM/YYYY HH:mm:ss z"
-                            }
-                        ]
-                    },
-                    {
-                        "externalAPI": [
-                            {
-                                "path": "http://health-expense-calculator.bauchi:8080/health-expense-calculator/v1/_searchMdms",
-                                "queryParam": "moduleName=tenant&masterName=tenants&tenantId=ba&filter=%5B?(@.code=='{$.tenantId}')%5D",
-                                "apiRequest": null,
-                                "responseMapping": [
-                                    {
-                                       "variable": "mdmsRes",
-                                        "value": "$.MdmsRes"
-                                    }
-                                ]
                             }
                         ]
                     }
