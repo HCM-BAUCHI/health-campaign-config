@@ -4520,7 +4520,7 @@
     "plotLabel": "none",
     "chartType": "line",
     "valueType": "number",
-    "drillChart": "entriesDoneByWMsVillageICCD",
+    "drillChart": "none",
     "isCumulative": false,
     "documentType": "_doc",
     "action": "",
