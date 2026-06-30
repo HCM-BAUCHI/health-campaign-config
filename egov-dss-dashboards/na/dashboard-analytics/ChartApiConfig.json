@@ -17383,7 +17383,7 @@
         "key": "stockIndexSent",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "na-stock-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1SentCountryToState\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2SentCountryToState\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
@@ -17396,7 +17396,7 @@
         "key": "stockIndexUpdatedAccepted",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
         "indexName": "na-stock-index-updated-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1AcceptedAtStateFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2AcceptedAtStateFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
@@ -17509,7 +17509,7 @@
         "key": "stockIndexSent",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
         "indexName": "na-stock-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1SentStateToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2SentStateToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
@@ -17522,7 +17522,7 @@
         "key": "stockIndexUpdatedAccepted",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
         "indexName": "na-stock-index-updated-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1AcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2AcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
@@ -17632,7 +17632,7 @@
         "key": "stockIndexSent",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
         "indexName": "na-stock-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1SentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2SentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
@@ -17645,7 +17645,7 @@
         "key": "stockIndexUpdatedAccepted",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
         "indexName": "na-stock-index-updated-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1AcceptedAtStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2AcceptedAtStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
@@ -17754,21 +17754,21 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "na-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"SPAQ2 Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
         "indexName": "na-stock-index-updated-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ1 Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ1_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}},\"SPAQ2 Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ2 Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ2_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
         "indexName": "na-stock-index-updated-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"SPAQ2 Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
       }
@@ -17884,21 +17884,21 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
         "indexName": "na-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"SPAQ2 Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
         "indexName": "na-stock-index-updated-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ1 Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ1_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}},\"SPAQ2 Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ2 Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ2_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
         "indexName": "na-stock-index-updated-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"SPAQ2 Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
       }
@@ -18014,21 +18014,21 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
         "indexName": "na-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"SPAQ2 Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
         "indexName": "na-stock-index-updated-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ1 Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ1_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}},\"SPAQ2 Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ2 Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ2_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
         "indexName": "na-stock-index-updated-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"SPAQ2 Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
       }
