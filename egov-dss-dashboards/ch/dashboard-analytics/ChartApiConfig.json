@@ -9829,7 +9829,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Intervention Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
