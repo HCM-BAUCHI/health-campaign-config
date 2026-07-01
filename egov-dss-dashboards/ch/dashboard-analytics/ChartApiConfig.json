@@ -17548,7 +17548,7 @@
       "module": "COMMON",
       "dateRefField": "",
       "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\"}",
-      "indexName": "ch-stock-index-updated-v1",
+      "indexName": "ch-stock-index-v1",
       "transformData": "linearAggregation",
       "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1AcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2AcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
       "select": {
@@ -17616,7 +17616,7 @@
       "module": "COMMON",
       "dateRefField": "",
       "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\"}",
-      "indexName": "ch-stock-index-updated-v1",
+      "indexName": "ch-stock-index-v1",
       "transformData": "linearAggregation",
       "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1AcceptedAtStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2AcceptedAtStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
       "select": {
