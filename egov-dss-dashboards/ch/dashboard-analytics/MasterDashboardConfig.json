@@ -436,35 +436,6 @@
                   "tabName": "NUMBER"
                 }
               ]
-            },
-            {
-              "id": 749,
-              "name": "DSS_HEALTH_BENEFICIARIES_COVERAGE_HEATMAP_PROVINCE",
-              "label": "DSS_HEALTH_BENEFICIARIES_COVERAGE_HEATMAP_PROVINCE",
-              "vizType": "chart",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-               
-                {
-                  "id": "populationCoverageHeatMapProvince3to11ICCD",
-                  "name": "DSS_HEALTH_POPULATION_COVERAGE_HEATMAP_PROVINCE_3_11_ICCD",
-                  "code": "",
-                  "chartType": "heatmap",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "3-11"
-                },
-                {
-                  "id": "populationCoverageHeatMapProvince12to59ICCD",
-                  "name": "DSS_HEALTH_POPULATION_COVERAGE_HEATMAP_PROVINCE_12_59_ICCD",
-                  "code": "",
-                  "chartType": "heatmap",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "12-59"
-                }
-              ]
             }
           ]
         },

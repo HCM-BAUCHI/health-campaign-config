@@ -6147,7 +6147,7 @@
     "_comment": " "
   },
  
- "populationNotAdministeredByReasonNationalICCD": {
+  "populationNotAdministeredByReasonNationalICCD": {
     "chartName": "DSS_HEALTH_POPULATION_NOT_ADMINISTERED_BY_REASON_NATIONAL_ICCD",
     "queries": [
       {
@@ -17430,14 +17430,16 @@
     "insight": {},
     "_comment": " "
   },
- "inventoryOverviewMetrics": {
+ 
+  
+  "inventoryOverviewMetrics": {
     "chartName": "DSS_HEALTH_INVENTORY_OVERVIEW_METRICS",
     "queries": [
       {
         "key": "stockIndexSent",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-stock-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1SentCountryToState\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2SentCountryToState\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
@@ -17450,7 +17452,7 @@
         "key": "stockIndexUpdatedAccepted",
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-stock-index-v1",
         "transformData": "linearAggregation",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1AcceptedAtStateFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"RECEIVED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2AcceptedAtStateFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"RECEIVED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
@@ -17475,6 +17477,7 @@
     "showLabel": true,
     "drillChart": "none",
     "filterKeys": [
+      { "key": "cycle" },
       { "key": "campaignNumber" },
       { "key": "country" },
       { "key": "province" },
@@ -17526,143 +17529,149 @@
     "hideInsights": true,
     "hideHeaderDenomination": true,
     "_comment": "Inventory overview cards: Warehouse to Central Facility flow"
-  },
+  }
+,
+
+  
   "inventoryStateToHealthMetrics": {
-  "chartName": "DSS_HEALTH_INVENTORY_STATE_TO_HEALTH_METRICS",
-  "queries": [
-    {
-      "key": "stockIndexSent",
-      "module": "COMMON",
-      "dateRefField": "",
-      "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\"}",
-      "indexName": "ch-stock-index-v1",
-      "transformData": "linearAggregation",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1SentStateToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2SentStateToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
-      "select": {
-        "spaq1SentStateToHealth": "spaq1SentStateToHealth.total.value",
-        "spaq2SentStateToHealth": "spaq2SentStateToHealth.total.value"
+    "chartName": "DSS_HEALTH_INVENTORY_STATE_TO_HEALTH_METRICS",
+    "queries": [
+      {
+        "key": "stockIndexSent",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "ch-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1SentStateToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2SentStateToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "spaq1SentStateToHealth": "spaq1SentStateToHealth.total.value",
+          "spaq2SentStateToHealth": "spaq2SentStateToHealth.total.value"
+        }
+      },
+      {
+        "key": "stockIndexUpdatedAccepted",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "ch-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1AcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2AcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "spaq1AcceptedAtHealthFacility": "spaq1AcceptedAtHealthFacility.total.value",
+          "spaq2AcceptedAtHealthFacility": "spaq2AcceptedAtHealthFacility.total.value"
+        }
       }
-    },
-    {
-      "key": "stockIndexUpdatedAccepted",
-      "module": "COMMON",
-      "dateRefField": "",
-      "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\"}",
-      "indexName": "ch-stock-index-v1",
-      "transformData": "linearAggregation",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1AcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2AcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
-      "select": {
-        "spaq1AcceptedAtHealthFacility": "spaq1AcceptedAtHealthFacility.total.value",
-        "spaq2AcceptedAtHealthFacility": "spaq2AcceptedAtHealthFacility.total.value"
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "inventoryStateToHealthMetrics",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
       }
-    }
-  ],
-  "chartType": "rawResponse",
-  "merges": [
-    {
-      "mergeType": "linear",
-      "mergeKey": "inventoryStateToHealthMetrics",
-      "flatten": true,
-      "datasets": [],
-      "outputMappings": []
-    }
-  ],
-  "isCumulative": false,
-  "valueType": "number",
-  "showLabel": true,
-  "drillChart": "none",
-  "filterKeys": [
-    { "key": "campaignNumber" },
-    { "key": "state" },
-    { "key": "lga", "column": "LGA" }
-  ],
-  "documentType": "_doc",
-  "action": "",
-  "aggregationPaths": [
-    "spaq1SentStateToHealth",
-    "spaq2SentStateToHealth",
-    "spaq1AcceptedAtHealthFacility",
-    "spaq2AcceptedAtHealthFacility"
-  ],
-  "cardsList": [
-    { "id": "spaq1SentStateToHealth", "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_SENT_STATE_TO_HEALTH", "valuePath": "spaq1SentStateToHealth", "valueType": "NUMBER", "descriptionParams": { "count": "spaq1SentStateToHealth" }, "colorRules": { "type": "constant", "color": "#0B4B66" } },
-    { "id": "spaq2SentStateToHealth", "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_SENT_STATE_TO_HEALTH", "valuePath": "spaq2SentStateToHealth", "valueType": "NUMBER", "descriptionParams": { "count": "spaq2SentStateToHealth" }, "colorRules": { "type": "constant", "color": "#0B4B66" } },
-    { "id": "spaq1AcceptedAtHealthFacility", "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_ACCEPTED_AT_HEALTH_FACILITY", "valuePath": "spaq1AcceptedAtHealthFacility", "valueType": "NUMBER", "descriptionParams": { "count": "spaq1AcceptedAtHealthFacility" }, "colorRules": { "type": "constant", "color": "#0B4B66" } },
-    { "id": "spaq2AcceptedAtHealthFacility", "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_ACCEPTED_AT_HEALTH_FACILITY", "valuePath": "spaq2AcceptedAtHealthFacility", "valueType": "NUMBER", "descriptionParams": { "count": "spaq2AcceptedAtHealthFacility" }, "colorRules": { "type": "constant", "color": "#0B4B66" } }
-  ],
-  "insight": {},
-  "hideInsights": true,
-  "hideHeaderDenomination": true,
-  "_comment": "SPAQ1/SPAQ2 sent State to Health Facility (stock-index) and accepted at Health Facility (stock-index-updated)"
-},
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [
+      { "key": "cycle" },
+      { "key": "campaignNumber" },
+      { "key": "state" },
+      { "key": "lga", "column": "LGA" }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "spaq1SentStateToHealth",
+      "spaq2SentStateToHealth",
+      "spaq1AcceptedAtHealthFacility",
+      "spaq2AcceptedAtHealthFacility"
+    ],
+    "cardsList": [
+      { "id": "spaq1SentStateToHealth", "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_SENT_STATE_TO_HEALTH", "valuePath": "spaq1SentStateToHealth", "valueType": "NUMBER", "descriptionParams": { "count": "spaq1SentStateToHealth" }, "colorRules": { "type": "constant", "color": "#0B4B66" } },
+      { "id": "spaq2SentStateToHealth", "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_SENT_STATE_TO_HEALTH", "valuePath": "spaq2SentStateToHealth", "valueType": "NUMBER", "descriptionParams": { "count": "spaq2SentStateToHealth" }, "colorRules": { "type": "constant", "color": "#0B4B66" } },
+      { "id": "spaq1AcceptedAtHealthFacility", "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_ACCEPTED_AT_HEALTH_FACILITY", "valuePath": "spaq1AcceptedAtHealthFacility", "valueType": "NUMBER", "descriptionParams": { "count": "spaq1AcceptedAtHealthFacility" }, "colorRules": { "type": "constant", "color": "#0B4B66" } },
+      { "id": "spaq2AcceptedAtHealthFacility", "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_ACCEPTED_AT_HEALTH_FACILITY", "valuePath": "spaq2AcceptedAtHealthFacility", "valueType": "NUMBER", "descriptionParams": { "count": "spaq2AcceptedAtHealthFacility" }, "colorRules": { "type": "constant", "color": "#0B4B66" } }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "SPAQ1/SPAQ2 sent State to Health Facility (stock-index) and accepted at Health Facility (stock-index-updated)"
+  }
+,
+ 
+  
   "inventoryHealthToStaffMetrics": {
-  "chartName": "DSS_HEALTH_INVENTORY_HEALTH_TO_STAFF_METRICS",
-  "queries": [
-    {
-      "key": "stockIndexSent",
-      "module": "COMMON",
-      "dateRefField": "",
-      "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\"}",
-      "indexName": "ch-stock-index-v1",
-      "transformData": "linearAggregation",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1SentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2SentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
-      "select": {
-        "spaq1SentHealthToStaff": "spaq1SentHealthToStaff.total.value",
-        "spaq2SentHealthToStaff": "spaq2SentHealthToStaff.total.value"
+    "chartName": "DSS_HEALTH_INVENTORY_HEALTH_TO_STAFF_METRICS",
+    "queries": [
+      {
+        "key": "stockIndexSent",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "ch-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1SentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2SentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "spaq1SentHealthToStaff": "spaq1SentHealthToStaff.total.value",
+          "spaq2SentHealthToStaff": "spaq2SentHealthToStaff.total.value"
+        }
       }
-    },
-    {
-      "key": "stockIndexUpdatedAccepted",
-      "module": "COMMON",
-      "dateRefField": "",
-      "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\"}",
-      "indexName": "ch-stock-index-v1",
-      "transformData": "linearAggregation",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1AcceptedAtStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2AcceptedAtStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
-      "select": {
-        "spaq1AcceptedAtStaff": "spaq1AcceptedAtStaff.total.value",
-        "spaq2AcceptedAtStaff": "spaq2AcceptedAtStaff.total.value"
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "inventoryHealthToStaffMetrics",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
       }
-    }
-  ],
-  "chartType": "rawResponse",
-  "merges": [
-    {
-      "mergeType": "linear",
-      "mergeKey": "inventoryHealthToStaffMetrics",
-      "flatten": true,
-      "datasets": [],
-      "outputMappings": []
-    }
-  ],
-  "isCumulative": false,
-  "valueType": "number",
-  "showLabel": true,
-  "drillChart": "none",
-  "filterKeys": [
-    { "key": "campaignNumber" },
-    { "key": "state" },
-    { "key": "lga", "column": "LGA" }
-  ],
-  "documentType": "_doc",
-  "action": "",
-  "aggregationPaths": [
-    "spaq1SentHealthToStaff",
-    "spaq2SentHealthToStaff",
-    "spaq1AcceptedAtStaff",
-    "spaq2AcceptedAtStaff"
-  ],
-  "cardsList": [
-    { "id": "spaq1SentHealthToStaff", "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_SENT_HEALTH_TO_STAFF", "valuePath": "spaq1SentHealthToStaff", "valueType": "NUMBER", "descriptionParams": { "count": "spaq1SentHealthToStaff" }, "colorRules": { "type": "constant", "color": "#0B4B66" } },
-    { "id": "spaq2SentHealthToStaff", "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_SENT_HEALTH_TO_STAFF", "valuePath": "spaq2SentHealthToStaff", "valueType": "NUMBER", "descriptionParams": { "count": "spaq2SentHealthToStaff" }, "colorRules": { "type": "constant", "color": "#0B4B66" } },
-    { "id": "spaq1AcceptedAtStaff", "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_ACCEPTED_AT_STAFF", "valuePath": "spaq1AcceptedAtStaff", "valueType": "NUMBER", "descriptionParams": { "count": "spaq1AcceptedAtStaff" }, "colorRules": { "type": "constant", "color": "#0B4B66" } },
-    { "id": "spaq2AcceptedAtStaff", "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_ACCEPTED_AT_STAFF", "valuePath": "spaq2AcceptedAtStaff", "valueType": "NUMBER", "descriptionParams": { "count": "spaq2AcceptedAtStaff" }, "colorRules": { "type": "constant", "color": "#0B4B66" } }
-  ],
-  "insight": {},
-  "hideInsights": true,
-  "hideHeaderDenomination": true,
-  "_comment": "SPAQ1/SPAQ2 sent Health Facility to STAFF (stock-index) and accepted at STAFF (stock-index-updated)"
-},
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [
+      { "key": "cycle" },
+      { "key": "campaignNumber" },
+      { "key": "state" },
+      { "key": "lga", "column": "LGA" }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "spaq1SentHealthToStaff",
+      "spaq2SentHealthToStaff"
+    ],
+    "cardsList": [
+      {
+        "id": "spaq1SentHealthToStaff",
+        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_SENT_HEALTH_TO_STAFF",
+        "valuePath": "spaq1SentHealthToStaff",
+        "valueType": "NUMBER",
+        "descriptionParams": { "count": "spaq1SentHealthToStaff" },
+        "colorRules": { "type": "constant", "color": "#0B4B66" }
+      },
+      {
+        "id": "spaq2SentHealthToStaff",
+        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_SENT_HEALTH_TO_STAFF",
+        "valuePath": "spaq2SentHealthToStaff",
+        "valueType": "NUMBER",
+        "descriptionParams": { "count": "spaq2SentHealthToStaff" },
+        "colorRules": { "type": "constant", "color": "#0B4B66" }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "SPAQ1/SPAQ2 sent Health Facility to STAFF (stock-index) — accepted cards removed as per requirement"
+  },
+
   "inventorySpaqFlowTableByCountryICCD": {
     "chartName": "DSS_HEALTH_INVENTORY_SPAQ_FLOW_TABLE_ICCD",
     "queries": [
