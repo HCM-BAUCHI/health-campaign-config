@@ -17432,7 +17432,7 @@
   },
  
   
-  "inventoryOverviewMetrics": {
+ "inventoryOverviewMetrics": {
     "chartName": "DSS_HEALTH_INVENTORY_OVERVIEW_METRICS",
     "queries": [
       {
@@ -17442,10 +17442,10 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-stock-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1SentCountryToState\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2SentCountryToState\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1SentDistrictToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2SentDistrictToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
         "select": {
-          "spaq1SentCountryToState": "spaq1SentCountryToState.total.value",
-          "spaq2SentCountryToState": "spaq2SentCountryToState.total.value"
+          "spaq1SentDistrictToHealth": "spaq1SentDistrictToHealth.total.value",
+          "spaq2SentDistrictToHealth": "spaq2SentDistrictToHealth.total.value"
         }
       },
       {
@@ -17455,10 +17455,25 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-stock-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1AcceptedAtStateFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"RECEIVED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2AcceptedAtStateFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"RECEIVED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1AcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"RECEIVED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2AcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"RECEIVED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
         "select": {
-          "spaq1AcceptedAtStateFacility": "spaq1AcceptedAtStateFacility.total.value",
-          "spaq2AcceptedAtStateFacility": "spaq2AcceptedAtStateFacility.total.value"
+          "spaq1AcceptedAtHealthFacility": "spaq1AcceptedAtHealthFacility.total.value",
+          "spaq2AcceptedAtHealthFacility": "spaq2AcceptedAtHealthFacility.total.value"
+        }
+      },
+      {
+        "key": "stockIndexLostDamaged",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1LostDistrictToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"LOST\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2LostDistrictToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"LOST\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}},\"spaq1DamagedDistrictToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"DAMAGED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2DamagedDistrictToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"DAMAGED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}",
+        "select": {
+          "spaq1LostDistrictToHealth": "spaq1LostDistrictToHealth.total.value",
+          "spaq2LostDistrictToHealth": "spaq2LostDistrictToHealth.total.value",
+          "spaq1DamagedDistrictToHealth": "spaq1DamagedDistrictToHealth.total.value",
+          "spaq2DamagedDistrictToHealth": "spaq2DamagedDistrictToHealth.total.value"
         }
       }
     ],
@@ -17486,49 +17501,85 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "spaq1SentCountryToState",
-      "spaq2SentCountryToState",
-      "spaq1AcceptedAtStateFacility",
-      "spaq2AcceptedAtStateFacility"
+      "spaq1SentDistrictToHealth",
+      "spaq2SentDistrictToHealth",
+      "spaq1AcceptedAtHealthFacility",
+      "spaq2AcceptedAtHealthFacility",
+      "spaq1LostDistrictToHealth",
+      "spaq2LostDistrictToHealth",
+      "spaq1DamagedDistrictToHealth",
+      "spaq2DamagedDistrictToHealth"
     ],
     "cardsList": [
       {
-        "id": "spaq1SentCountryToState",
-        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_SENT_COUNTRY_TO_STATE",
-        "valuePath": "spaq1SentCountryToState",
+        "id": "spaq1SentDistrictToHealth",
+        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_SENT_DISTRICT_TO_HEALTH",
+        "valuePath": "spaq1SentDistrictToHealth",
         "valueType": "NUMBER",
-        "descriptionParams": { "count": "spaq1SentCountryToState" },
+        "descriptionParams": { "count": "spaq1SentDistrictToHealth" },
         "colorRules": { "type": "constant", "color": "#0B4B66" }
       },
       {
-        "id": "spaq2SentCountryToState",
-        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_SENT_COUNTRY_TO_STATE",
-        "valuePath": "spaq2SentCountryToState",
+        "id": "spaq2SentDistrictToHealth",
+        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_SENT_DISTRICT_TO_HEALTH",
+        "valuePath": "spaq2SentDistrictToHealth",
         "valueType": "NUMBER",
-        "descriptionParams": { "count": "spaq2SentCountryToState" },
+        "descriptionParams": { "count": "spaq2SentDistrictToHealth" },
         "colorRules": { "type": "constant", "color": "#0B4B66" }
       },
       {
-        "id": "spaq1AcceptedAtStateFacility",
-        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_ACCEPTED_AT_STATE_FACILITY",
-        "valuePath": "spaq1AcceptedAtStateFacility",
+        "id": "spaq1AcceptedAtHealthFacility",
+        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_ACCEPTED_AT_HEALTH_FACILITY",
+        "valuePath": "spaq1AcceptedAtHealthFacility",
         "valueType": "NUMBER",
-        "descriptionParams": { "count": "spaq1AcceptedAtStateFacility" },
+        "descriptionParams": { "count": "spaq1AcceptedAtHealthFacility" },
         "colorRules": { "type": "constant", "color": "#0B4B66" }
       },
       {
-        "id": "spaq2AcceptedAtStateFacility",
-        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_ACCEPTED_AT_STATE_FACILITY",
-        "valuePath": "spaq2AcceptedAtStateFacility",
+        "id": "spaq2AcceptedAtHealthFacility",
+        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_ACCEPTED_AT_HEALTH_FACILITY",
+        "valuePath": "spaq2AcceptedAtHealthFacility",
         "valueType": "NUMBER",
-        "descriptionParams": { "count": "spaq2AcceptedAtStateFacility" },
+        "descriptionParams": { "count": "spaq2AcceptedAtHealthFacility" },
         "colorRules": { "type": "constant", "color": "#0B4B66" }
+      },
+      {
+        "id": "spaq1LostDistrictToHealth",
+        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_LOST_DISTRICT_TO_HEALTH",
+        "valuePath": "spaq1LostDistrictToHealth",
+        "valueType": "NUMBER",
+        "descriptionParams": { "count": "spaq1LostDistrictToHealth" },
+        "colorRules": { "type": "constant", "color": "#B00020" }
+      },
+      {
+        "id": "spaq2LostDistrictToHealth",
+        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_LOST_DISTRICT_TO_HEALTH",
+        "valuePath": "spaq2LostDistrictToHealth",
+        "valueType": "NUMBER",
+        "descriptionParams": { "count": "spaq2LostDistrictToHealth" },
+        "colorRules": { "type": "constant", "color": "#B00020" }
+      },
+      {
+        "id": "spaq1DamagedDistrictToHealth",
+        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_DAMAGED_DISTRICT_TO_HEALTH",
+        "valuePath": "spaq1DamagedDistrictToHealth",
+        "valueType": "NUMBER",
+        "descriptionParams": { "count": "spaq1DamagedDistrictToHealth" },
+        "colorRules": { "type": "constant", "color": "#B00020" }
+      },
+      {
+        "id": "spaq2DamagedDistrictToHealth",
+        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_DAMAGED_DISTRICT_TO_HEALTH",
+        "valuePath": "spaq2DamagedDistrictToHealth",
+        "valueType": "NUMBER",
+        "descriptionParams": { "count": "spaq2DamagedDistrictToHealth" },
+        "colorRules": { "type": "constant", "color": "#B00020" }
       }
     ],
     "insight": {},
     "hideInsights": true,
     "hideHeaderDenomination": true,
-    "_comment": "Inventory overview cards: Warehouse to Central Facility flow"
+    "_comment": "Inventory overview cards: Health Facility to Central Facility flow (labeled district to health per request), with Lost/Damaged added"
   }
 ,
 
@@ -17615,11 +17666,7 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\"}",
         "indexName": "ch-stock-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1SentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2SentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
-        "select": {
-          "spaq1SentHealthToStaff": "spaq1SentHealthToStaff.total.value",
-          "spaq2SentHealthToStaff": "spaq2SentHealthToStaff.total.value"
-        }
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1SentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2SentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq1LostHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"LOST\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2LostHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"LOST\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq1DamagedHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"DAMAGED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2DamagedHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"DAMAGED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}"
       }
     ],
     "chartType": "rawResponse",
@@ -17646,7 +17693,11 @@
     "action": "",
     "aggregationPaths": [
       "spaq1SentHealthToStaff",
-      "spaq2SentHealthToStaff"
+      "spaq2SentHealthToStaff",
+      "spaq1LostHealthToStaff",
+      "spaq2LostHealthToStaff",
+      "spaq1DamagedHealthToStaff",
+      "spaq2DamagedHealthToStaff"
     ],
     "cardsList": [
       {
@@ -17664,12 +17715,44 @@
         "valueType": "NUMBER",
         "descriptionParams": { "count": "spaq2SentHealthToStaff" },
         "colorRules": { "type": "constant", "color": "#0B4B66" }
+      },
+      {
+        "id": "spaq1LostHealthToStaff",
+        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_LOST_HEALTH_TO_STAFF",
+        "valuePath": "spaq1LostHealthToStaff",
+        "valueType": "NUMBER",
+        "descriptionParams": { "count": "spaq1LostHealthToStaff" },
+        "colorRules": { "type": "constant", "color": "#D4351C" }
+      },
+      {
+        "id": "spaq2LostHealthToStaff",
+        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_LOST_HEALTH_TO_STAFF",
+        "valuePath": "spaq2LostHealthToStaff",
+        "valueType": "NUMBER",
+        "descriptionParams": { "count": "spaq2LostHealthToStaff" },
+        "colorRules": { "type": "constant", "color": "#D4351C" }
+      },
+      {
+        "id": "spaq1DamagedHealthToStaff",
+        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_DAMAGED_HEALTH_TO_STAFF",
+        "valuePath": "spaq1DamagedHealthToStaff",
+        "valueType": "NUMBER",
+        "descriptionParams": { "count": "spaq1DamagedHealthToStaff" },
+        "colorRules": { "type": "constant", "color": "#F47738" }
+      },
+      {
+        "id": "spaq2DamagedHealthToStaff",
+        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_DAMAGED_HEALTH_TO_STAFF",
+        "valuePath": "spaq2DamagedHealthToStaff",
+        "valueType": "NUMBER",
+        "descriptionParams": { "count": "spaq2DamagedHealthToStaff" },
+        "colorRules": { "type": "constant", "color": "#F47738" }
       }
     ],
     "insight": {},
     "hideInsights": true,
     "hideHeaderDenomination": true,
-    "_comment": "SPAQ1/SPAQ2 sent Health Facility to STAFF (stock-index) — accepted cards removed as per requirement"
+    "_comment": "SPAQ1/SPAQ2 sent, lost and damaged Health Facility to STAFF (stock-index)"
   },
 
  "inventorySpaqFlowTableByCountryICCD": {
