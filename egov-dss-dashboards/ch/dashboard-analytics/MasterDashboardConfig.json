@@ -701,7 +701,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "inventoryOverviewMetrics",
+                  "id": "inventoryDamagedAtHealthFacilityMetrics",
                   "name": "DSS_HEALTH_INVENTORY_OVERVIEW_METRICS",
                   "code": "",
                   "chartType": "metric",
@@ -725,8 +725,8 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "inventoryStateToHealthMetrics",
-                  "name": "DSS_HEALTH_INVENTORY_STATE_TO_HEALTH_METRICS",
+                  "id": "inventoryLostAtHealthFacilityMetrics",
+                  "name": "DSS_HEALTH_INVENTORY_LOST_AT_HEALTH_FACILITY_METRICS",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",

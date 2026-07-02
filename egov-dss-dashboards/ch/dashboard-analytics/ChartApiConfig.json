@@ -17671,6 +17671,73 @@
     "hideHeaderDenomination": true,
     "_comment": "SPAQ1/SPAQ2 sent Health Facility to STAFF (stock-index) — accepted cards removed as per requirement"
   },
+  "inventoryLostAtHealthFacilityMetrics": {
+  "chartName": "DSS_HEALTH_INVENTORY_LOST_AT_HEALTH_FACILITY_METRICS",
+  "queries": [
+    {
+      "key": "stockIndexLost",
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-stock-index-v1",
+      "transformData": "linearAggregation",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1LostAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"LOST\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2LostAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"LOST\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+      "select": {
+        "spaq1LostAtHealthFacility": "spaq1LostAtHealthFacility.total.value",
+        "spaq2LostAtHealthFacility": "spaq2LostAtHealthFacility.total.value"
+      }
+    }
+  ],
+  "chartType": "rawResponse",
+  "merges": [
+    {
+      "mergeType": "linear",
+      "mergeKey": "inventoryLostAtHealthFacilityMetrics",
+      "flatten": true,
+      "datasets": [],
+      "outputMappings": []
+    }
+  ],
+  "isCumulative": false,
+  "valueType": "number",
+  "showLabel": true,
+  "drillChart": "none",
+  "filterKeys": [
+    { "key": "cycle" },
+    { "key": "campaignNumber" },
+    { "key": "country" },
+    { "key": "province" },
+    { "key": "district", "column": "district" }
+  ],
+  "documentType": "_doc",
+  "action": "",
+  "aggregationPaths": [
+    "spaq1LostAtHealthFacility",
+    "spaq2LostAtHealthFacility"
+  ],
+  "cardsList": [
+    {
+      "id": "spaq1LostAtHealthFacility",
+      "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_LOST_AT_HEALTH_FACILITY",
+      "valuePath": "spaq1LostAtHealthFacility",
+      "valueType": "NUMBER",
+      "descriptionParams": { "count": "spaq1LostAtHealthFacility" },
+      "colorRules": { "type": "constant", "color": "#0B4B66" }
+    },
+    {
+      "id": "spaq2LostAtHealthFacility",
+      "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_LOST_AT_HEALTH_FACILITY",
+      "valuePath": "spaq2LostAtHealthFacility",
+      "valueType": "NUMBER",
+      "descriptionParams": { "count": "spaq2LostAtHealthFacility" },
+      "colorRules": { "type": "constant", "color": "#0B4B66" }
+    }
+  ],
+  "insight": {},
+  "hideInsights": true,
+  "hideHeaderDenomination": true,
+  "_comment": "SPAQ1/SPAQ2 lost at Health Facility (dispatched Health Facility to Central Facility with LOST status)"
+},
 "inventoryStaffToHealthMetrics": {
   "chartName": "DSS_HEALTH_INVENTORY_STAFF_TO_HEALTH_METRICS",
   "queries": [
