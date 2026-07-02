@@ -17671,7 +17671,72 @@
     "hideHeaderDenomination": true,
     "_comment": "SPAQ1/SPAQ2 sent Health Facility to STAFF (stock-index) — accepted cards removed as per requirement"
   },
-
+"inventoryStaffToHealthMetrics": {
+  "chartName": "DSS_HEALTH_INVENTORY_STAFF_TO_HEALTH_METRICS",
+  "queries": [
+    {
+      "key": "stockIndexSent",
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\"}",
+      "indexName": "ch-stock-index-v1",
+      "transformData": "linearAggregation",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1SentStaffToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2SentStaffToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+      "select": {
+        "spaq1SentStaffToHealth": "spaq1SentStaffToHealth.total.value",
+        "spaq2SentStaffToHealth": "spaq2SentStaffToHealth.total.value"
+      }
+    }
+  ],
+  "chartType": "rawResponse",
+  "merges": [
+    {
+      "mergeType": "linear",
+      "mergeKey": "inventoryStaffToHealthMetrics",
+      "flatten": true,
+      "datasets": [],
+      "outputMappings": []
+    }
+  ],
+  "isCumulative": false,
+  "valueType": "number",
+  "showLabel": true,
+  "drillChart": "none",
+  "filterKeys": [
+    { "key": "cycle" },
+    { "key": "campaignNumber" },
+    { "key": "state" },
+    { "key": "lga", "column": "LGA" }
+  ],
+  "documentType": "_doc",
+  "action": "",
+  "aggregationPaths": [
+    "spaq1SentStaffToHealth",
+    "spaq2SentStaffToHealth"
+  ],
+  "cardsList": [
+    {
+      "id": "spaq1SentStaffToHealth",
+      "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_SENT_STAFF_TO_HEALTH",
+      "valuePath": "spaq1SentStaffToHealth",
+      "valueType": "NUMBER",
+      "descriptionParams": { "count": "spaq1SentStaffToHealth" },
+      "colorRules": { "type": "constant", "color": "#0B4B66" }
+    },
+    {
+      "id": "spaq2SentStaffToHealth",
+      "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_SENT_STAFF_TO_HEALTH",
+      "valuePath": "spaq2SentStaffToHealth",
+      "valueType": "NUMBER",
+      "descriptionParams": { "count": "spaq2SentStaffToHealth" },
+      "colorRules": { "type": "constant", "color": "#0B4B66" }
+    }
+  ],
+  "insight": {},
+  "hideInsights": true,
+  "hideHeaderDenomination": true,
+  "_comment": "SPAQ1/SPAQ2 sent STAFF to Health Facility (stock-index)"
+},
  "inventorySpaqFlowTableByCountryICCD": {
     "chartName": "DSS_HEALTH_INVENTORY_SPAQ_FLOW_TABLE_ICCD",
     "queries": [
