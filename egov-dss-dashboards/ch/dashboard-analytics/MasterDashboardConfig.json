@@ -886,16 +886,23 @@
           "name": "DSS_HEALTH_DATA_QUALITY",
           "vizArray": [
             {
-              "id": 789,
-              "name": "DSS_HOUSE_WITH_MORE_THAN_TWENTY_MEMBERS",
-              "label": "DSS_HOUSE_WITH_MORE_THAN_TWENTY_MEMBERS",
-              "vizType": "chart",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                
-              ]
+          "id": 789,
+          "name": "DSS_HOUSE_WITH_MORE_THAN_TWENTY_MEMBERS",
+          "label": "DSS_HOUSE_WITH_MORE_THAN_TWENTY_MEMBERS",
+          "vizType": "chart",
+          "noUnit": true,
+          "isCollapsible": false,
+          "charts": [
+            {
+              "id": "housesWithMoreThanTwentyMembersByDistrictICCD",
+              "name": "DSS_HOUSE_WITH_MORE_THAN_TWENTY_MEMBERS_DISTRICT_ICCD",
+              "code": "",
+              "chartType": "bar",
+              "filter": "",
+              "headers": []
             }
+          ]
+        } 
           ]
         },
         {
