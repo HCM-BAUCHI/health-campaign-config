@@ -919,6 +919,24 @@
                   "headers": []
                 }
               ]
+            },
+            {
+              "id": 793,
+              "name": "DSS_HEALTH_SUSPECTED_FRAUDS_CHILDREN",
+              "label": "DSS_HEALTH_SUSPECTED_FRAUDS_CHILDREN",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "suspectedFraudsByDistrictICCD",
+                  "name": "DSS_HEALTH_SUSPECTED_FRAUDS_CHILDREN_ICCD",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
             }
           ]
         },
