@@ -797,7 +797,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "inventorySpaqFlowTableByCountryICCD",
+                  "id": "inventorySpaqFlowTableHealthToStaffByCountryICCD",
                   "name": "DSS_HEALTH_INVENTORY_SPAQ_FLOW_TABLE_ICCD",
                   "code": "",
                   "chartType": "table",
