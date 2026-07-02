@@ -17871,118 +17871,67 @@
   "hideHeaderDenomination": true,
   "_comment": "SPAQ1/SPAQ2 sent STAFF to Health Facility (stock-index)"
 },
- "inventorySpaqFlowTableByCountryICCD": {
-    "chartName": "DSS_HEALTH_INVENTORY_SPAQ_FLOW_TABLE_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
-        "indexName": "ch-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"SPAQ2 Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
-        "indexName": "ch-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"RECEIVED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ1 Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ1_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}},\"SPAQ2 Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"RECEIVED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ2 Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ2_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
-        "indexName": "ch-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"bool\":{\"should\":[{\"term\":{\"Data.additionalDetails.status.keyword\":\"DAMAGED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"LOST\"}}]}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"SPAQ2 Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"bool\":{\"should\":[{\"term\":{\"Data.additionalDetails.status.keyword\":\"DAMAGED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"LOST\"}}]}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "drillChart": "inventorySpaqFlowTableByStateDrillICCD",
-    "documentType": "_doc",
-    "action": "",
-    "plotLabel": "Country",
-    "filterKeys": [
-      {
-        "key": "country",
-        "column": "Country"
-      }
-    ],
-    "excludedColumns": [
-      "S.N.",
-      "_SPAQ1_SENT",
-      "_SPAQ2_SENT",
-      "_SPAQ1_ACCEPTED",
-      "_SPAQ2_ACCEPTED",
-      "Negative SPAQ1 Accepted at State Facility",
-      "Negative SPAQ2 Accepted at State Facility",
-      "_SPAQ1_REJECTED",
-      "_SPAQ2_REJECTED"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": ["_SPAQ1_SENT"],
-        "newField": "SPAQ1 Sent Country To State",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": ["_SPAQ2_SENT"],
-        "newField": "SPAQ2 Sent Country To State",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": ["_SPAQ1_ACCEPTED"],
-        "newField": "SPAQ1 Accepted At State Facility",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": ["_SPAQ2_ACCEPTED"],
-        "newField": "SPAQ2 Accepted At State Facility",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": ["_SPAQ1_SENT", "Negative SPAQ1 Accepted at State Facility"],
-        "newField": "SPAQ1 Unaccepted Country To State",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": ["_SPAQ2_SENT", "Negative SPAQ2 Accepted at State Facility"],
-        "newField": "SPAQ2 Unaccepted Country To State",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": ["_SPAQ1_REJECTED"],
-        "newField": "SPAQ1 Rejected",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": ["_SPAQ2_REJECTED"],
-        "newField": "SPAQ2 Rejected",
-        "_comments": ""
-      }
-    ],
-    "insight": {},
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "kind": "drillDown",
-    "_comment": "Country aggregation: Warehouse to Central Facility flow, filtered by cycle"
-  },
+ "inventorySpaqFlowTableHealthToStaffByCountryICCD": {
+  "chartName": "DSS_HEALTH_INVENTORY_SPAQ_FLOW_TABLE_HEALTH_TO_STAFF_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+      "indexName": "ch-stock-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Sent to Staff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"SPAQ2 Sent to Staff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+      "indexName": "ch-stock-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Accepted at Staff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"RECEIVED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ1 Accepted at Staff\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ1_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}},\"SPAQ2 Accepted at Staff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"RECEIVED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative SPAQ2 Accepted at Staff\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_SPAQ2_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+      "indexName": "ch-stock-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"SPAQ1 Rejected at Staff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"bool\":{\"should\":[{\"term\":{\"Data.additionalDetails.status.keyword\":\"DAMAGED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"LOST\"}}]}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ1_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"SPAQ2 Rejected at Staff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"bool\":{\"should\":[{\"term\":{\"Data.additionalDetails.status.keyword\":\"DAMAGED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"LOST\"}}]}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_SPAQ2_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+    }
+  ],
+  "chartType": "xtable",
+  "valueType": "number",
+  "drillChart": "inventorySpaqFlowTableHealthToStaffByStateDrillICCD",
+  "documentType": "_doc",
+  "action": "",
+  "plotLabel": "Country",
+  "filterKeys": [
+    { "key": "country", "column": "Country" }
+  ],
+  "excludedColumns": [
+    "S.N.",
+    "_SPAQ1_SENT",
+    "_SPAQ2_SENT",
+    "_SPAQ1_ACCEPTED",
+    "_SPAQ2_ACCEPTED",
+    "Negative SPAQ1 Accepted at Staff",
+    "Negative SPAQ2 Accepted at Staff",
+    "_SPAQ1_REJECTED",
+    "_SPAQ2_REJECTED"
+  ],
+  "computedFields": [
+    { "postAggregationTheory": "", "actionName": "AdditiveComputedField", "fields": ["_SPAQ1_SENT"], "newField": "SPAQ1 Sent Health To Staff", "_comments": "" },
+    { "postAggregationTheory": "", "actionName": "AdditiveComputedField", "fields": ["_SPAQ2_SENT"], "newField": "SPAQ2 Sent Health To Staff", "_comments": "" },
+    { "postAggregationTheory": "", "actionName": "AdditiveComputedField", "fields": ["_SPAQ1_ACCEPTED"], "newField": "SPAQ1 Accepted At Staff", "_comments": "" },
+    { "postAggregationTheory": "", "actionName": "AdditiveComputedField", "fields": ["_SPAQ2_ACCEPTED"], "newField": "SPAQ2 Accepted At Staff", "_comments": "" },
+    { "postAggregationTheory": "", "actionName": "AdditiveComputedField", "fields": ["_SPAQ1_SENT", "Negative SPAQ1 Accepted at Staff"], "newField": "SPAQ1 Unaccepted Health To Staff", "_comments": "" },
+    { "postAggregationTheory": "", "actionName": "AdditiveComputedField", "fields": ["_SPAQ2_SENT", "Negative SPAQ2 Accepted at Staff"], "newField": "SPAQ2 Unaccepted Health To Staff", "_comments": "" },
+    { "postAggregationTheory": "", "actionName": "AdditiveComputedField", "fields": ["_SPAQ1_REJECTED"], "newField": "SPAQ1 Rejected", "_comments": "" },
+    { "postAggregationTheory": "", "actionName": "AdditiveComputedField", "fields": ["_SPAQ2_REJECTED"], "newField": "SPAQ2 Rejected", "_comments": "" }
+  ],
+  "insight": {},
+  "hideInsights": true,
+  "hideHeaderDenomination": true,
+  "kind": "drillDown",
+  "_comment": "Country aggregation: Health Facility to STAFF flow, filtered by cycle"
+},
   "inventorySpaqFlowTableByStateDrillICCD": {
     "chartName": "DSS_HEALTH_INVENTORY_SPAQ_FLOW_TABLE_ICCD",
     "queries": [
