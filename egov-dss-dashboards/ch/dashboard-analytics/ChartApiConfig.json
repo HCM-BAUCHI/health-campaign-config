@@ -10786,16 +10786,22 @@
     "excludedBucketKeys": [
       "Individuals"
     ],
-    "excludedColumns": [
-      "Total Population covered",
-      "Overall Population target",
-      "Administered 3-11 count",
-      "Target 3-11 count",
-      "Administered 12-59 count",
-      "Target 12-59 count",
-      "Refused count",
-      "Beneficiary Absent count"
-    ],
+   "excludedColumns": [
+  "Total Population covered",
+  "Overall Population target",
+  "Administered 3-11 count",
+  "Target 3-11 count",
+  "Administered 12-59 count",
+  "Target 12-59 count",
+  "Refused count",
+  "Beneficiary Absent count",
+  "Male Individual count",
+  "Female Individual count",
+  "Male 3-11 count",
+  "Female 3-11 count",
+  "Male 12-59 count",
+  "Female 12-59 count"
+],
     "computedFields": [
       {
         "postAggregationTheory": "",
