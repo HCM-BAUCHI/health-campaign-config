@@ -1112,25 +1112,26 @@
           ]
         },
         {
-          "row": 4,
+          "row": 3,
           "name": "DSS_HEALTH_TEAM_PERFORMANCE",
           "vizArray": [
             {
-              "id": 783,
-              "name": "DSS_HEALTH_SUMMARY_TEAM_PERFORMANCE",
-              "label": "DSS_HEALTH_SUMMARY_TEAM_PERFORMANCE",
+              "id": 761,
+              "name": "DSS_HEALTH_KIBANA_SCREEN",
+              "label": "DSS_HEALTH_KIBANA_SCREEN",
               "vizType": "chart",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "summaryTeamPerformanceByDistrictICCD",
-                  "name": "DSS_HEALTH_SUMMARY_TEAM_PERFORMANCE_BY_DISTRICT_ICCD",
+                  "id": "teamPerformanceSummary",
+                  "name": "DASHBOARD_TEAM_PERFORMNACE",
                   "code": "",
-                  "chartType": "table",
+                  "moduleName": "iccd-maps",
+                  "pageName": "pl-team-performance-summary",
+                  "chartType": "kibanaComponent",
                   "filter": "",
-                  "headers": [],
-                  "tabName": "BOUNDARY"
+                  "headers": []
                 }
               ]
             }
@@ -1278,18 +1279,20 @@
           "name": "DSS_HEALTH_REFERRAL_AND_SIDE_EFFECTS",
           "vizArray": [
             {
-              "id": 803,
-              "name": "DSS_HEALTH_SUMMARY_OF_REFERRED_CHILDREN",
-              "label": "DSS_HEALTH_SUMMARY_OF_REFERRED_CHILDREN",
+              "id": 761,
+              "name": "DSS_HEALTH_KIBANA_SCREEN",
+              "label": "DSS_HEALTH_KIBANA_SCREEN",
               "vizType": "chart",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "summaryOfReferredChildrenByDistrictsICCD",
-                  "name": "DSS_HEALTH_SUMMARY_REFERRED_CHILDREN_BY_DISTRICTS_ICCD",
+                 "id": "referralSummary",
+                  "name": "DASHBOARD_REFERRAL_SUMMARY",
                   "code": "",
-                  "chartType": "table",
+                  "moduleName": "iccd-maps",
+                  "pageName": "pl-referral-summary",
+                  "chartType": "kibanaComponent",
                   "filter": "",
                   "headers": []
                 }
@@ -1297,6 +1300,88 @@
             }
           ]
         },
+
+        {
+          "row": 1,
+          "name": "DSS_CUSTOM_KPIS_TAB",
+          "vizArray": [
+            {
+              "id": 760,
+              "name": "DSS_HEALTH_KIBANA_SCREEN",
+              "label": "DSS_HEALTH_KIBANA_SCREEN",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "successfulAdministrationsMap",
+                  "name": "DASHBOARD_ADMINISTRATION_SUMMARY",
+                  "code": "",
+                  "moduleName": "iccd-maps",
+                  "pageName": "pl-administration-summary",
+                  "chartType": "kibanaComponent",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_CUSTOM_KPIS_TAB",
+          "vizArray": [
+            {
+              "id": 760,
+              "name": "DSS_HEALTH_KIBANA_SCREEN",
+              "label": "DSS_HEALTH_KIBANA_SCREEN",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "syncHistogram",
+                  "name": "DASHBOARD_SYNC_HISTOGRAM",
+                  "code": "",
+                  "moduleName": "iccd-maps",
+                  "pageName": "pl-sync-histogram",
+                  "chartType": "kibanaComponent",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "row": 2,
+          "name": "DSS_COHORT",
+          "vizArray": [
+            {
+              "id": 760,
+              "name": "DSS_HEALTH_KIBANA_SCREEN",
+              "label": "DSS_HEALTH_KIBANA_SCREEN",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "syncHistogram",
+                  "name": "DASHBOARD_COHORT_CHARTS",
+                  "code": "",
+                  "moduleName": "iccd-maps",
+                  "pageName": "pl-cohort-charts",
+                  "chartType": "kibanaComponent",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+
+
         {
           "row": 1,
           "name": "DSS_HEALTH_USER_ACTIVITY",
@@ -1623,32 +1708,7 @@
             }
           ]
         },
-        {
-          "row": 1,
-          "name": "DSS_CUSTOM_KPIS_TAB",
-          "vizArray": [
-            {
-              "id": 760,
-              "name": "DSS_HEALTH_KIBANA_SCREEN",
-              "label": "DSS_HEALTH_KIBANA_SCREEN",
-              "vizType": "chart",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "successfulAdministrationsMap",
-                  "name": "DASHBOARD_MAP_SUCCESSFUL_ADMINISTRATIONS",
-                  "code": "",
-                  "moduleName": "iccd-maps",
-                  "pageName": "pl-custom-kpis-tab",
-                  "chartType": "kibanaComponent",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
+        
         {
           "row": 1,
           "name": "DSS_HEALTH_PAYMENTS",
