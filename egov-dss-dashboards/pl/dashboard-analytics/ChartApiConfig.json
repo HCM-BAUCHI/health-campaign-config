@@ -16706,7 +16706,7 @@
         "indexName": "pl-stock-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "stockBalanceTransformer",
-        "aggrQuery": "{\"size\":10000,\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\",\"Data.dateOfEntry\",\"Data.createdTime\",\"Data.nameOfUser\",\"Data.userName\", \"Data.boundaryHierarchyCode\"]}"
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must_not\":[{\"range\":{\"Data.createdTime\":{\"lte\":1782777600000}}}]}},\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\",\"Data.dateOfEntry\",\"Data.createdTime\",\"Data.nameOfUser\",\"Data.userName\"]}"      
       }
     ],
     "chartType": "rawResponse",
