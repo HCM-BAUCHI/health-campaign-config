@@ -1300,7 +1300,32 @@
             }
           ]
         },
-
+        {
+          "row": 1,
+          "name": "DSS_HEALTH_ORS",
+          "vizArray": [
+            {
+              "id": 12008,
+              "name": "DSS_HEALTH_KIBANA_SCREEN",
+              "label": "DSS_HEALTH_KIBANA_SCREEN",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "orsSummary",
+                  "name": "DASHBOARD_ORS_SUMMARY",
+                  "code": "",
+                  "moduleName": "iccd-maps",
+                  "pageName": "ke-ors-summary",
+                  "chartType": "kibanaComponent",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
         {
           "row": 1,
           "name": "DSS_CUSTOM_KPIS_TAB",
