@@ -5055,13 +5055,7 @@
         "indexName": "ch-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\",\"ADMINISTRATION_FAILED\",\"BENEFICIARY_REFUSED\",\"BENEFICIARY_DIED\",\"BENEFICIARY_MIGRATED\",\"BENEFICIARY_ABSENT\",\"CLOSED_HOUSEHOLD\"]}}]}},\"aggs\":{\"Total Houses Visited\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\",\"size\":500},\"aggs\":{\"Positive Unique Children Visited\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}},\"Negative Unique Children Visited\":{\"bucket_script\":{\"buckets_path\":{\"pos\":\"Positive Unique Children Visited\"},\"script\":\"return -1 * params.pos\"}}}}}}}}"
       },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Suspected Frauds\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\",\"min_doc_count\":4,\"size\":500},\"aggs\":{\"users_distributed\":{\"terms\":{\"field\":\"Data.createdBy.keyword\",\"min_doc_count\":4,\"size\":10000},\"aggs\":{\"minute_collection\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1m\",\"min_doc_count\":4}},\"users_without_empty_bucket\":{\"bucket_selector\":{\"buckets_path\":{\"distributed_count\":\"minute_collection._bucket_count\"},\"script\":\"params.distributed_count > 0\"}}}},\"users_without_empty_bucket\":{\"bucket_selector\":{\"buckets_path\":{\"distributed_count\":\"users_distributed._bucket_count\"},\"script\":\"params.distributed_count > 0\"}},\"users_with_more_than_3_count\":{\"bucket_script\":{\"buckets_path\":{\"user_count\":\"users_distributed._bucket_count\"},\"script\":\"params.user_count\"}}}}}}}}"
-      },
+     
       {
         "module": "COMMON",
         "dateRefField": "",
@@ -5112,16 +5106,7 @@
         "newField": "WM Stock Entries",
         "_comments": ""
       },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Children Registered Count",
-          "Negative Unique Children Visited"
-        ],
-        "newField": "Incomplete Records",
-        "_comments": ""
-      },
+     
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
@@ -5201,16 +5186,7 @@
         "newField": "Household with more than 20 members count",
         "_comments": ""
       },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Children Registered Count",
-          "Negative Unique Children Visited"
-        ],
-        "newField": "Incomplete Houses",
-        "_comments": ""
-      },
+      
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
