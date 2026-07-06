@@ -5551,73 +5551,70 @@
     "insight": {},
     "_comment": " "
   },
-  "userSyncSummaryDistrictICCD": {
-    "chartName": "DSS_HEALTH_USER_SYNC_SUMMARY_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-staff-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}},\"aggs\":{\"AGGS\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":500},\"aggs\":{\"Total FLWs\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-user-sync-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}},{\"exists\":{\"field\":\"Data.syncedUserId.keyword\"}}]}},\"aggs\":{\"AGGS\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":500},\"aggs\":{\"Unique FLWs Synced\":{\"cardinality\":{\"field\":\"Data.syncedUserId.keyword\",\"precision_threshold\":40000}}}}}}}}"
-      }
-    ],
-    "filterKeys": [],
-    "chartType": "xtable",
-    "valueType": "number",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "plotLabel": "DATA SYNC",
-    "filterForCurrentDay": true,
-    "excludedColumns": [
-      "S.N.",
-      "DATA SYNC",
-      "Total FLWs",
-      "Unique FLWs Synced"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total FLWs"
-        ],
-        "newField": "Total_FLW",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Unique FLWs Synced"
-        ],
-        "newField": "Unique_FLW_Synced",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "PercentageComputedField",
-        "fields": [
-          "Unique_FLW_Synced",
-          "Total_FLW"
-        ],
-        "newField": "User_Sync_Rate",
-        "_comments": ""
-      }
-    ],
-    "insight": {},
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "_comment": " "
-  },
+ "userSyncSummaryDistrictICCD": {
+  "chartName": "DSS_HEALTH_USER_SYNC_SUMMARY_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\":\"Data.additionalDetails.cycleIndex.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.province.keyword\",\"lga\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-staff-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}},\"aggs\":{\"AGGS\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":500},\"aggs\":{\"Total FLWs\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\":\"Data.additionalDetails.cycleIndex.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.province.keyword\",\"lga\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-user-sync-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}},{\"exists\":{\"field\":\"Data.syncedUserId.keyword\"}}]}},\"aggs\":{\"AGGS\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":500},\"aggs\":{\"Unique FLWs Synced\":{\"cardinality\":{\"field\":\"Data.syncedUserId.keyword\",\"precision_threshold\":40000}}}}}}}}"
+    }
+  ],
+  "filterKeys": [],
+  "chartType": "xtable",
+  "valueType": "number",
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "",
+  "plotLabel": "DATA SYNC",
+  "filterForCurrentDay": true,
+  "excludedColumns": [
+    "S.N.",
+    "DATA SYNC",
+    "Total FLWs",
+    "Unique FLWs Synced"
+  ],
+  "computedFields": [
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Total FLWs"
+      ],
+      "newField": "Total_FLW"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Unique FLWs Synced"
+      ],
+      "newField": "Unique_FLW_Synced"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Unique_FLW_Synced",
+        "Total_FLW"
+      ],
+      "newField": "User_Sync_Rate"
+    }
+  ],
+  "insight": {},
+  "hideInsights": true,
+  "hideHeaderDenomination": true,
+  "_comment": " "
+},
   "inventoryStockInHandDistrictICCD": {
     "chartName": "DSS_HEALTH_INVENTORY_STOCK_IN_HAND_DISTRICT_ICCD",
     "queries": [
