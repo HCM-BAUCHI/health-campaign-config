@@ -4662,8 +4662,8 @@
     "drillChart": "referralSummaryByAPsICCD",
     "filterKeys": [
       {
-        "key": "lga",
-        "column": "LGA"
+        "key": "district",
+        "column": "District"
       }
     ],
     "documentType": "_doc",
@@ -4713,7 +4713,7 @@
       {
         "module": "COMMON",
         "dateRefField": "Data.hfReferral.auditDetails.lastModifiedTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-hf-referral-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"ChildrenReferredByHF\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"}}]}},\"aggs\":{\"ChildrenReferredByHF Count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"},\"aggs\":{\"Referred Children By HFCount\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}}}}}"
       }
@@ -4744,7 +4744,7 @@
       {
         "module": "COMMON",
         "dateRefField": "Data.hfReferral.auditDetails.lastModifiedTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-hf-referral-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"ChildrenReferredByHF\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"}}]}},\"aggs\":{\"ChildrenReferredByHF Count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"},\"aggs\":{\"Referred Children By HFCount\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}}}}}"
       }
