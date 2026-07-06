@@ -9185,21 +9185,21 @@
         "postAggregationTheory": "",
         "actionName": "SumComputedField",
         "fields": [
-          "énéficiaire refusé",
-          "énéficiaire absent",
-          "Effet indésirable",
-          "énéficiaire référé"
+          "Beneficiary Refused",
+          "Beneficiary Absent",
+          "Adverse Effect",
+          "Beneficiary Referred"
         ],
         "newField": "Children Not Administered",
         "_comments": ""
       }
     ],
     "aggregationPaths": [
-  "Bénéficiaire refusé",
-  "Bénéficiaire absent",
-  "Effet indésirable",
-  "Bénéficiaire référé"
-],
+      "Beneficiary Refused",
+      "Beneficiary Absent",
+      "Adverse Effect",
+      "Beneficiary Referred"
+    ],
     "sort": "sortKeyAsc",
     "computeMultiPaths": true,
     "insight": {},
