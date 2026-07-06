@@ -6162,7 +6162,7 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"énéficiaire absent\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_ABSENT\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Bénéficiaire absent\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_ABSENT\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
@@ -8250,28 +8250,28 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Beneficiary Refused\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_REFUSED\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Bénéficiaire refusé\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_REFUSED\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Beneficiary Absent\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_ABSENT\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Bénéficiaire absent\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_ABSENT\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Adverse Effect\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"ADVERSE_EFFECT\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Effet indésirable\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"ADVERSE_EFFECT\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Beneficiary Referred\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_REFERRED\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Bénéficiaire référé\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_REFERRED\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
       }
     ],
     "chartType": "pie",
@@ -8280,12 +8280,12 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "",
-    "aggregationPaths": [
-      "Beneficiary Refused",
-      "Beneficiary Absent",
-      "Adverse Effect",
-      "Beneficiary Referred"
-    ],
+   "aggregationPaths": [
+  "Bénéficiaire refusé",
+  "Bénéficiaire absent",
+  "Effet indésirable",
+  "Bénéficiaire référé"
+],
     "insight": {},
     "_comment": " ",
     "kind": "drillDown"
