@@ -459,15 +459,6 @@
                   "tabName": "BENEFICIARY",
                   "filter": "",
                   "headers": []
-                },
-                {
-                  "id": "householdsNotAdministeredDistrictICCD",
-                  "name": "DSS_HEALTH_HOUSEHOLDS_NOT_ADMINISTERED_DISTRICT_ICCD",
-                  "code": "",
-                  "chartType": "bar",
-                  "tabName": "HOUSEHOLD",
-                  "filter": "",
-                  "headers": []
                 }
               ]
             },
