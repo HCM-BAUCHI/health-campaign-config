@@ -6185,12 +6185,12 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "",
-    "aggregationPaths": [
-      "Beneficiary Refused",
-      "Beneficiary Absent",
-      "Adverse Effect",
-      "Beneficiary Referred"
-    ],
+   "aggregationPaths": [
+  "Bénéficiaire refusé",
+  "Bénéficiaire absent",
+  "Effet indésirable",
+  "Bénéficiaire référé"
+],
     "insight": {},
     "_comment": " ",
     "kind": "drillDown"
@@ -6205,7 +6205,7 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_REFUSED\"}}]}},\"aggs\":{\"Beneficiary Refused\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_REFUSED\"}}]}},\"aggs\":{\"énéficiaire refusé\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -9185,21 +9185,21 @@
         "postAggregationTheory": "",
         "actionName": "SumComputedField",
         "fields": [
-          "Beneficiary Refused",
-          "Beneficiary Absent",
-          "Adverse Effect",
-          "Beneficiary Referred"
+          "énéficiaire refusé",
+          "énéficiaire absent",
+          "Effet indésirable",
+          "énéficiaire référé"
         ],
         "newField": "Children Not Administered",
         "_comments": ""
       }
     ],
     "aggregationPaths": [
-      "Beneficiary Refused",
-      "Beneficiary Absent",
-      "Adverse Effect",
-      "Beneficiary Referred"
-    ],
+  "Bénéficiaire refusé",
+  "Bénéficiaire absent",
+  "Effet indésirable",
+  "Bénéficiaire référé"
+],
     "sort": "sortKeyAsc",
     "computeMultiPaths": true,
     "insight": {},
