@@ -6127,7 +6127,7 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Effet indésirable\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"ADVERSE_EFFECT\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Mapi\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"ADVERSE_EFFECT\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
@@ -6146,7 +6146,7 @@
    "aggregationPaths": [
   "Bénéficiaire refusé",
   "Bénéficiaire absent",
-  "Effet indésirable",
+  "Mapi",
   "Bénéficiaire référé"
 ],
     "insight": {},
@@ -8222,7 +8222,7 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Effet indésirable\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"ADVERSE_EFFECT\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Mapi\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"ADVERSE_EFFECT\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
@@ -8241,7 +8241,7 @@
    "aggregationPaths": [
   "Bénéficiaire refusé",
   "Bénéficiaire absent",
-  "Effet indésirable",
+  "Mapi",
   "Bénéficiaire référé"
 ],
     "insight": {},
