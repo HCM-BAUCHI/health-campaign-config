@@ -17404,7 +17404,7 @@
     {
       "key": "stockIndexDamaged",
       "module": "COMMON",
-      "dateRefField": "",
+      "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-stock-index-v1",
       "transformData": "linearAggregation",
