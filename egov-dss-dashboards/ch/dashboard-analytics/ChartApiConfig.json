@@ -4675,68 +4675,68 @@
     "_comment": " ",
     "kind": "drillDown"
   },
-  "referralSummaryByAPsICCD": {
-    "kind": "drillDown",
-    "chartName": "DSS_HEALTH_REFERRAL_SUMMARY_BY_APS_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.hfReferral.auditDetails.lastModifiedTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-hf-referral-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"ChildrenReferredByHF\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}]}},\"aggs\":{\"ChildrenReferredByHF Count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"},\"aggs\":{\"Referred Children By HFCount\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}}}}}"
-      }
-    ],
-    "chartType": "line",
-    "isCumulative": false,
-    "valueType": "number",
-    "plotLabel": "none",
-    "drillChart": "referralSummaryByLocalityICCD",
-    "filterKeys": [
-      {
-        "key": "ward",
-        "column": "Ward"
-      }
-    ],
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "ChildrenReferredByHF Count"
-    ],
-    "insight": {},
-    "_comment": " "
-  },
+ "referralSummaryByAPsICCD": {
+  "kind": "drillDown",
+  "chartName": "DSS_HEALTH_REFERRAL_SUMMARY_BY_APS_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.hfReferral.auditDetails.lastModifiedTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-hf-referral-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"ChildrenReferredByHF\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}]}},\"aggs\":{\"ChildrenReferredByHF Count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"},\"aggs\":{\"Referred Children By HFCount\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}}}}}"
+    }
+  ],
+  "chartType": "line",
+  "isCumulative": false,
+  "valueType": "number",
+  "plotLabel": "none",
+  "drillChart": "referralSummaryByLocalityICCD",
+  "filterKeys": [
+    {
+      "key": "healthFacility",
+      "column": "Health Facility"
+    }
+  ],
+  "documentType": "_doc",
+  "action": "",
+  "aggregationPaths": [
+    "ChildrenReferredByHF Count"
+  ],
+  "insight": {},
+  "_comment": " "
+},
   "referralSummaryByLocalityICCD": {
-    "kind": "drillDown",
-    "chartName": "DSS_HEALTH_REFERRAL_SUMMARY_BY_LOCALITY_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.hfReferral.auditDetails.lastModifiedTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-hf-referral-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"ChildrenReferredByHF\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"}}]}},\"aggs\":{\"ChildrenReferredByHF Count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"},\"aggs\":{\"Referred Children By HFCount\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}}}}}"
-      }
-    ],
-    "chartType": "line",
-    "isCumulative": false,
-    "valueType": "number",
-    "plotLabel": "none",
-    "drillChart": "referralSummaryByVillageICCD",
-    "filterKeys": [
-      {
-        "key": "healthFacility",
-        "column": "Health Facility"
-      }
-    ],
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "ChildrenReferredByHF Count"
-    ],
-    "insight": {},
-    "_comment": " "
-  },
+  "kind": "drillDown",
+  "chartName": "DSS_HEALTH_REFERRAL_SUMMARY_BY_LOCALITY_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.hfReferral.auditDetails.lastModifiedTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-hf-referral-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"ChildrenReferredByHF\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"}}]}},\"aggs\":{\"ChildrenReferredByHF Count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"},\"aggs\":{\"Referred Children By HFCount\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}}}}}"
+    }
+  ],
+  "chartType": "line",
+  "isCumulative": false,
+  "valueType": "number",
+  "plotLabel": "none",
+  "drillChart": "referralSummaryByVillageICCD",
+  "filterKeys": [
+    {
+      "key": "healthFacility",
+      "column": "Health Facility"
+    }
+  ],
+  "documentType": "_doc",
+  "action": "",
+  "aggregationPaths": [
+    "ChildrenReferredByHF Count"
+  ],
+  "insight": {},
+  "_comment": " "
+},
   "referralSummaryByVillageICCD": {
     "kind": "drillDown",
     "chartName": "DSS_HEALTH_REFERRAL_SUMMARY_BY_VILLAGE_ICCD",
@@ -9948,7 +9948,7 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"administered male\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"administered count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}},\"administered female\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"administered count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"administered male\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"administered count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}},\"administered female\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"administered count\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -18078,14 +18078,14 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}}]}},\"aggs\":{\"SPAQ 1 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}}]}},\"aggs\":{\"SPAQ 1 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}}]}},\"aggs\":{\"SPAQ 2 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}}]}},\"aggs\":{\"SPAQ 2 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       }
     ],
     "chartType": "line",
