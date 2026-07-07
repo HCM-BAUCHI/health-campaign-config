@@ -528,7 +528,8 @@
                   "code": "",
                   "chartType": "sideBySideBar",
                   "filter": "",
-                  "headers": []
+                  "headers": [],
+                  "tabName": "NUMBER"
                 }
               ]
             }
