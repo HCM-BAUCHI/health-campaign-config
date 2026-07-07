@@ -15020,7 +15020,7 @@
     "_comment": " "
   },
  
- "redoseOverviewICCD": {
+  "redoseOverviewICCD": {
   "chartName": "DSS_HEALTH_REDOSE_OVERVIEW_ICCD",
   "queries": [
     {
@@ -15030,17 +15030,14 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "transformData": "linearAggregation",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1Redose\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}},\"spaq2Redose\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}},\"totalRedose\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}},\"administered3to11\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}},\"administered12to59\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":12}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}},\"totalAdministered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}},\"spaq1RedosePercentAgg\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"spaq1Redose>count\",\"denom\":\"administered3to11>count\"},\"script\":\"params.denom != 0 ? (params.num / params.denom) * 100 : 0\"}},\"spaq2RedosePercentAgg\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"spaq2Redose>count\",\"denom\":\"administered12to59>count\"},\"script\":\"params.denom != 0 ? (params.num / params.denom) * 100 : 0\"}},\"totalRedosePercentAgg\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"totalRedose>count\",\"denom\":\"totalAdministered>count\"},\"script\":\"params.denom != 0 ? (params.num / params.denom) * 100 : 0\"}}}}",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"spaq1Redose\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}},\"spaq2Redose\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}},\"totalRedose\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}},\"administered3to11\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}},\"administered12to59\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":12}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}},\"totalAdministered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}",
       "select": {
         "spaq1RedoseCount": "spaq1Redose.count.value",
         "spaq2RedoseCount": "spaq2Redose.count.value",
         "totalRedoseCount": "totalRedose.count.value",
         "administered3to11Count": "administered3to11.count.value",
         "administered12to59Count": "administered12to59.count.value",
-        "totalAdministeredCount": "totalAdministered.count.value",
-        "spaq1RedosePercent": "spaq1RedosePercentAgg.value",
-        "spaq2RedosePercent": "spaq2RedosePercentAgg.value",
-        "totalRedosePercent": "totalRedosePercentAgg.value"
+        "totalAdministeredCount": "totalAdministered.count.value"
       }
     }
   ],
@@ -15060,6 +15057,29 @@
   "drillChart": "none",
   "documentType": "_doc",
   "action": "",
+  "computedFields": [
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": ["spaq1RedoseCount", "administered3to11Count"],
+      "newField": "spaq1RedosePercent",
+      "_comments": "SPAQ1 redose count / total administered 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": ["spaq2RedoseCount", "administered12to59Count"],
+      "newField": "spaq2RedosePercent",
+      "_comments": "SPAQ2 redose count / total administered 12-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": ["totalRedoseCount", "totalAdministeredCount"],
+      "newField": "totalRedosePercent",
+      "_comments": "Total redose / total administered"
+    }
+  ],
   "aggregationPaths": [
     "spaq1RedoseCount",
     "spaq2RedoseCount",
@@ -15118,7 +15138,7 @@
   "insight": {},
   "hideInsights": true,
   "hideHeaderDenomination": true,
-  "_comment": "Redose overview cards - SPAQ1/SPAQ2/Total counts with % of administered, computed via ES bucket_script"
+  "_comment": "Redose overview cards - SPAQ1/SPAQ2/Total counts with % of administered"
 },
   "averageNumberOfPopulationAdministeredDistrictICCD": {
     "chartName": "AVERAGE_NO_OF_POPULATION_ADMINISTERED_ICCD",
