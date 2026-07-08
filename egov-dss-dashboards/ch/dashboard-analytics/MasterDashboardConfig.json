@@ -20,7 +20,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "todayHouseholdVisitedNationalICCD",
+                  "id": "todayPopulationRegisteredNationalICCD",
                   "name": "DSS_HEALTH_NATIONAL_HOUSEHOLDS_VISITED_TODAY_ICCD",
                   "code": "",
                   "chartType": "metric",
@@ -28,16 +28,16 @@
                   "headers": []
                 },
                 {
-                  "id": "totalHouseholdVisitedNationalICCD",
-                  "name": "DSS_HEALTH_NATIONAL_TOTAL_HOUSEHOLD_VISITED_ICCD",
+                  "id": "totalPopulationRegisteredNationalICCD",
+                  "name": "DSS_HEALTH_NATIONAL_TOTAL_POPULATION_REGISTERED_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
                 {
-                  "id": "householdCoveragePercentNationalICCD",
-                  "name": "DSS_HEALTH_NATIONAL_HOUSEHOLD_COVERAGE_PERCENT_ICCD",
+                  "id": "populationRegisteredCoveragePercentNationalICCD",
+                  "name": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_COVERAGE_PERCENT_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
