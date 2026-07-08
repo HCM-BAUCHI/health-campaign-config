@@ -9891,11 +9891,11 @@
   "documentType": "_doc",
   "action": "percentage",
   "aggregationPaths": [
-    "Total Intervention Administered.count",
-    "Product Target.target"
+    "Total Intervention Administered",
+    "Product Target"
   ],
   "insight": {},
-  "_comment": "resources coverage % = total intervention quantity administered / product target (SPAQ-1 + SPAQ-2, national level only)"
+  "_comment": "resources coverage % = total intervention quantity administered / product target (SPAQ-1 + SPAQ-2, national level only, 1,077,482)"
 },
  "totalPopulationRefusedProvinceICCD": {
     "chartName": "DSS_HEALTH_TOTAL_POPULATION_REFUSED_PROVINCE_ICCD",
