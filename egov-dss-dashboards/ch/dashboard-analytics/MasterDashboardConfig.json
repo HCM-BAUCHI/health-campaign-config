@@ -28,7 +28,7 @@
                   "headers": []
                 },
                 {
-                  "id": "totalPopulationRegisteredNationalICCD",
+                  "id": "overviewTotalPopulationRegisteredICCD",
                   "name": "DSS_HEALTH_NATIONAL_TOTAL_POPULATION_REGISTERED_ICCD",
                   "code": "",
                   "chartType": "metric",
