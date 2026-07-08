@@ -16755,7 +16755,7 @@
     "isCumulative": false,
     "valueType": "number",
     "plotLabel": "none",
-    "drillChart": "redoseBySpaqBarChartWardICCD",
+    "drillChart": "redoseBySpaqBarChartHealthFacilityICCD",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
