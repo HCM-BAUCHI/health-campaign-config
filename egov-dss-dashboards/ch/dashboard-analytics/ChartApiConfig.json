@@ -8407,10 +8407,10 @@
   "action": "percentage",
   "aggregationPaths": [
     "Households Covered",
-    "Household Target.target"
+    "Household Target"
   ],
   "insight": {},
-  "_comment": "household coverage % = households covered / household target"
+  "_comment": "household coverage % = households covered / household target (national level only, 45,100)"
 },
   "populationCoverageHeatMapNationalICCD": {
     "chartName": "DSS_HEALTH_POPULATION_COVERAGE_NATIONAL_HEATMAP_ICCD",
