@@ -36,7 +36,7 @@
                   "headers": []
                 },
                 {
-                  "id": "populationRegisteredCoveragePercentNationalICCD",
+                  "id": "overviewPopulationRegistrationCoverageProvinceICCD",
                   "name": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_COVERAGE_PERCENT_ICCD",
                   "code": "",
                   "chartType": "metric",
