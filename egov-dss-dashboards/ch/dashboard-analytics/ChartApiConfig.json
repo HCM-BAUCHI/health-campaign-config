@@ -2064,7 +2064,7 @@
     "insight": {},
     "_comment": " "
   },
- "populationCoveragePercentNationalICCD": {
+"populationCoveragePercentNationalICCD": {
   "chartName": "DSS_HEALTH_NATIONAL_POPULATION_COVERAGE_PERCENT_ICCD",
   "queries": [
     {
@@ -2089,8 +2089,8 @@
   "documentType": "_doc",
   "action": "percentage",
   "aggregationPaths": [
-    "Population Administered.count",
-    "Overall Population Target.target"
+    "Population Administered",
+    "Overall Population Target"
   ],
   "insight": {},
   "_comment": "population coverage % = population administered / overall population target (national level only, 1,077,482)"
