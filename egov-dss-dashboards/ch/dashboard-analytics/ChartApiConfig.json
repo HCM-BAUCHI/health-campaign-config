@@ -932,37 +932,37 @@
     "hideHeaderDenomination": true,
     "_comment": " "
   },
-  "todayHouseholdVisitedNationalICCD": {
-    "chartName": "DSS_HEALTH_NATIONAL_HOUSEHOLDS_VISITED_TODAY_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.household.clientAuditDetails.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-household-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"houses visited today\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
-      }
-    ],
-    "chartType": "metric",
-    "valueType": "number",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "filterForCurrentDay": true,
-    "action": "",
-    "aggregationPaths": [
-      "houses visited today"
-    ],
-    "insight": {
-      "chartResponseMap": "todayHouseholdVisited",
-      "action": "differenceOfNumbers",
-      "upwardIndicator": "positive",
-      "downwardIndicator": "negative",
-      "textMessage": "$indicator$value% than last $insightInterval",
-      "colorCode": "#228B22",
-      "insightInterval": "day"
-    },
-    "_comment": " "
+ "todayPopulationRegisteredNationalICCD": {
+  "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.additionalDetails.dateOfRegistration",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"population registered today\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "number",
+  "drillChart": "none",
+  "documentType": "_doc",
+  "filterForCurrentDay": true,
+  "action": "",
+  "aggregationPaths": [
+    "population registered today"
+  ],
+  "insight": {
+    "chartResponseMap": "todayPopulationRegistered",
+    "action": "differenceOfNumbers",
+    "upwardIndicator": "positive",
+    "downwardIndicator": "negative",
+    "textMessage": "$indicator$value% than last $insightInterval",
+    "colorCode": "#228B22",
+    "insightInterval": "day"
   },
+  "_comment": " "
+},
   "checklistCompletionRateBySupervisorsBoundarySummaryDistrictICCD": {
     "chartName": "DSS_HEALTH_SUPERVISION_SUPERVISORS_CHECKLISTS_BOUNDARY_SUMMARY_DISTRICT_ICCD",
     "queries": [
@@ -8359,44 +8359,44 @@
     "insight": {},
     "_comment": " "
   },
-  "totalHouseholdVisitedNationalICCD": {
-    "chartName": "DSS_HEALTH_NATIONAL_TOTAL_HOUSEHOLD_VISITED_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-household-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"houses visited total\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
-      }
-    ],
-    "chartType": "metric",
-    "valueType": "number",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "houses visited total"
-    ],
-    "insight": {},
-    "_comment": " "
-  },
-  "householdCoveragePercentNationalICCD": {
-  "chartName": "DSS_HEALTH_NATIONAL_HOUSEHOLD_COVERAGE_PERCENT_ICCD",
+  "totalPopulationRegisteredNationalICCD": {
+  "chartName": "DSS_HEALTH_NATIONAL_TOTAL_POPULATION_REGISTERED_ICCD",
   "queries": [
     {
       "module": "COMMON",
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-household-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Households Covered\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"population registered total\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "number",
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "",
+  "aggregationPaths": [
+    "population registered total"
+  ],
+  "insight": {},
+  "_comment": " "
+},
+ "populationRegisteredCoveragePercentNationalICCD": {
+  "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_COVERAGE_PERCENT_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Total\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}"
     },
-   {
+    {
       "module": "COMMON",
       "dateRefField": "",
       "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Household Target\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}]}},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Overall Population Target\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}]}},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
     }
   ],
   "chartType": "metric",
@@ -8406,11 +8406,11 @@
   "documentType": "_doc",
   "action": "percentage",
   "aggregationPaths": [
-    "Households Covered",
-    "Household Target"
+    "Population Registered Total",
+    "Overall Population Target"
   ],
   "insight": {},
-  "_comment": "household coverage % = households covered / household target (national level only, 45,100)"
+  "_comment": "registration coverage % = population registered / national population target"
 },
   "populationCoverageHeatMapNationalICCD": {
     "chartName": "DSS_HEALTH_POPULATION_COVERAGE_NATIONAL_HEATMAP_ICCD",
