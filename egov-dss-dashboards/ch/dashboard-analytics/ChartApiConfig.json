@@ -2064,6 +2064,37 @@
     "insight": {},
     "_comment": " "
   },
+  "populationCoveragePercentNationalICCD": {
+  "chartName": "DSS_HEALTH_NATIONAL_POPULATION_COVERAGE_PERCENT_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "percentage",
+  "isCappedTillToday": true,
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "percentage",
+  "aggregationPaths": [
+    "Population Administered",
+    "Overall Population Target"
+  ],
+  "insight": {},
+  "_comment": "population coverage % = population administered / overall population target"
+},
   "usersRecordsSummaryTable": {
     "chartName": "DSS_HEALTH_COMPLAINTS_BY_HEALTH_DISTRICT_TOTAL_BURUNDI",
     "queries": [
@@ -8350,6 +8381,37 @@
     "insight": {},
     "_comment": " "
   },
+  "householdCoveragePercentNationalICCD": {
+  "chartName": "DSS_HEALTH_NATIONAL_HOUSEHOLD_COVERAGE_PERCENT_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-household-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Households Covered\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Household Target\":{\"filter\":{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "percentage",
+  "isCappedTillToday": true,
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "percentage",
+  "aggregationPaths": [
+    "Households Covered",
+    "Household Target.target"
+  ],
+  "insight": {},
+  "_comment": "household coverage % = households covered / household target"
+},
   "populationCoverageHeatMapNationalICCD": {
     "chartName": "DSS_HEALTH_POPULATION_COVERAGE_NATIONAL_HEATMAP_ICCD",
     "queries": [
@@ -9804,7 +9866,37 @@
     "insight": {},
     "_comment": " "
   },
- 
+ "resourcesCoveragePercentNationalICCD": {
+  "chartName": "DSS_HEALTH_NATIONAL_RESOURCES_COVERAGE_PERCENT_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Intervention Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Product Target\":{\"filter\":{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "percentage",
+  "isCappedTillToday": true,
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "percentage",
+  "aggregationPaths": [
+    "Total Intervention Administered",
+    "Product Target.target"
+  ],
+  "insight": {},
+  "_comment": "resources coverage % = total intervention quantity administered / product target"
+},
  "totalPopulationRefusedProvinceICCD": {
     "chartName": "DSS_HEALTH_TOTAL_POPULATION_REFUSED_PROVINCE_ICCD",
     "queries": [

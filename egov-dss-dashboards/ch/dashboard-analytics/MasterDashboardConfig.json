@@ -34,6 +34,14 @@
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
+                },
+                {
+                  "id": "householdCoveragePercentNationalICCD",
+                  "name": "DSS_HEALTH_NATIONAL_HOUSEHOLD_COVERAGE_PERCENT_ICCD",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
                 }
               ]
             },
@@ -60,6 +68,14 @@
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
+                },
+                {
+                  "id": "populationCoveragePercentNationalICCD",
+                  "name": "DSS_HEALTH_NATIONAL_POPULATION_COVERED_PERCENTAGE_ICCD",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
                 }
               ]
             },
@@ -82,6 +98,14 @@
                 {
                   "id": "totalInterventionAdministeredNationalICCD",
                   "name": "DSS_HEALTH_NATIONAL_TOTAL_INTERVENTION_ADMINISTERED_ICCD",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "resourcesCoveragePercentNationalICCD",
+                  "name": "DSS_HEALTH_NATIONAL_RESOURCES_COVERAGE_PERCENT_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
