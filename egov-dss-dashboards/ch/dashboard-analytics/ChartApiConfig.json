@@ -15313,6 +15313,107 @@
   },
   "_comment": " "
   },
+  "todayPopulationRegisteredNationalICCD": {
+    "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.additionalDetails.dateOfRegistration",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "filterForCurrentDay": true,
+    "action": "",
+    "aggregationPaths": [
+      "Population Registered Today"
+    ],
+    "insight": {
+      "chartResponseMap": "todayPopulationRegistered",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "day"
+    },
+    "_comment": " "
+  },
+  "overviewTotalPopulationRegisteredICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Population Registered\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Population Registered"
+    ],
+    "isCappedTillToday": true,
+    "insight": {
+      "chartResponseMap": "overviewTotalPopulationRegisteredICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "dateRange"
+    },
+    "_comment": " "
+  },
+  "overviewPopulationRegistrationCoverageProvinceICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "isCappedTillToday": true,
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Population Registered till today",
+      "Overall Population Target"
+    ],
+    "insight": {
+      "chartResponseMap": "overviewPopulationRegistrationCoverageProvinceICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "dateRange"
+    },
+    "_comment": " "
+  },
   "redoseOverviewICCD": {
   "chartName": "DSS_HEALTH_REDOSE_OVERVIEW_ICCD",
   "queries": [
