@@ -381,23 +381,23 @@
             },
             {
               "id": 716,
-              "name": "DSS_HEALTH_POPULATION_ADMINISTERED_12_59",
-              "label": "DSS_HEALTH_POPULATION_ADMINISTERED_12_59",
+              "name": "DSS_HEALTH_POPULATION_REGISTERED_12_59",
+              "label": "DSS_HEALTH_POPULATION_REGISTERED_12_59",
               "vizType": "stacked-collection",
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "overviewPopulationAdministered12to59ICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_12_59_ICCD",
+                  "id": "todayPopulationRegistered12to59NationalICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_12_59_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
                 {
-                  "id": "overviewTotalPopulationAdministered12to59ICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_12_59_ICCD",
+                  "id": "overviewTotalPopulationRegistered12to59ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_12_59_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -412,8 +412,8 @@
                   "headers": []
                 },
                 {
-                  "id": "overviewPopulationCoverageAchievedProvince12to59ICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_12_59_ICCD",
+                  "id": "overviewPopulationRegistrationCoverageProvince12to59ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_12_59_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
