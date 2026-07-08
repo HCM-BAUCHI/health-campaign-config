@@ -117,7 +117,7 @@
         },
       
         {
-          "row": 4,
+          "row": 2,
           "name": "DSS_NATIONAL_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
@@ -159,7 +159,7 @@
           ]
         },
         {
-          "row": 5,
+          "row": 3,
           "name": "DSS_COVERAGE_BY_PROVINCE",
           "vizArray": [
             {
