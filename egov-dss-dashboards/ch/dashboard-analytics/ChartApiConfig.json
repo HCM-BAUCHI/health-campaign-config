@@ -18078,14 +18078,14 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}}]}},\"aggs\":{\"SPAQ 1 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}}]}},\"aggs\":{\"SPAQ 1 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}}]}},\"aggs\":{\"SPAQ 2 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}}]}},\"aggs\":{\"SPAQ 2 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       }
     ],
     "chartType": "line",
