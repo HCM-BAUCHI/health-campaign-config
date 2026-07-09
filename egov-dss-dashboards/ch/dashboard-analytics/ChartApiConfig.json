@@ -8367,7 +8367,7 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"population registered total\":{\"filter\":{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"population registered total\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}"
     }
   ],
   "chartType": "metric",
@@ -8376,7 +8376,7 @@
   "documentType": "_doc",
   "action": "",
   "aggregationPaths": [
-    "population registered total.count"
+    "population registered total"
   ],
   "insight": {},
   "_comment": " "
