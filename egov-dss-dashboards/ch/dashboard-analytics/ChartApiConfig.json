@@ -11069,8 +11069,8 @@
     ],
     "filterKeys": [
       {
-        "key": "ward",
-        "column": "Ward"
+        "key": "district",
+        "column": "district"
       }
     ],
     "chartType": "xtable",
