@@ -11300,7 +11300,7 @@
     ],
     "filterKeys": [
       {
-        "key": "healthFacility",
+        "key": "HEALTHFACILITY",
         "column": "Health Facility"
       }
     ],
