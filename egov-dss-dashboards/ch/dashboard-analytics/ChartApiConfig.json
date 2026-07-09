@@ -15228,7 +15228,6 @@
   "valueType": "number",
   "drillChart": "none",
   "documentType": "_doc",
-  "filterForCurrentDay": true,
   "action": "",
   "aggregationPaths": [
     "Population Registered Today 12-59"
@@ -15329,7 +15328,7 @@
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
-    "filterForCurrentDay": true,
+   
     "action": "",
     "aggregationPaths": [
       "Population Registered Today"
