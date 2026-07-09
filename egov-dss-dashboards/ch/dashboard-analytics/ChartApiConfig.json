@@ -15127,7 +15127,7 @@
   "valueType": "number",
   "drillChart": "none",
   "documentType": "_doc",
-  "filterForCurrentDay": true,
+  
   "action": "",
   "aggregationPaths": [
     "Population Registered Today 3-11"
