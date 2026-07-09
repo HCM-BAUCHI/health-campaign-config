@@ -28,7 +28,7 @@
                   "headers": []
                 },
                 {
-                  "id": "totalPopulationRegisteredNationalICCD",
+                  "id": "overviewTotalPopulationRegisteredICCD",
                   "name": "DSS_HEALTH_NATIONAL_TOTAL_POPULATION_REGISTERED_ICCD",
                   "code": "",
                   "chartType": "metric",
@@ -36,7 +36,7 @@
                   "headers": []
                 },
                 {
-                  "id": "populationRegisteredCoveragePercentNationalICCD",
+                  "id": "overviewPopulationRegistrationCoverageProvinceICCD",
                   "name": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_COVERAGE_PERCENT_ICCD",
                   "code": "",
                   "chartType": "metric",
@@ -438,7 +438,7 @@
                   "headers": []
                 },
                 {
-                  "id": "totalPopulationRegisteredNationalICCD",
+                  "id": "overviewTotalPopulationRegisteredICCD",
                   "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_ICCD",
                   "code": "",
                   "chartType": "metric",
@@ -454,7 +454,7 @@
                   "headers": []
                 },
                 {
-                  "id": "populationRegisteredCoveragePercentNationalICCD",
+                  "id": "overviewPopulationRegistrationCoverageProvinceICCD",
                   "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_ICCD",
                   "code": "",
                   "chartType": "metric",
