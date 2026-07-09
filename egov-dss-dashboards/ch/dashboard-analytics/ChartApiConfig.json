@@ -2077,9 +2077,9 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-project-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Overall Population Target\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}]}},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}}]}},\"aggs\":{\"count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
     }
   ],
   "chartType": "metric",
@@ -2090,10 +2090,10 @@
   "action": "percentage",
   "aggregationPaths": [
     "Population Administered",
-    "Overall Population Target"
+    "Population Registered"
   ],
   "insight": {},
-  "_comment": "population coverage % = population administered / overall population target (national level only, 1,077,482)"
+  "_comment": "population coverage % = population administered / population registered (national level)"
 },
   "usersRecordsSummaryTable": {
     "chartName": "DSS_HEALTH_COMPLAINTS_BY_HEALTH_DISTRICT_TOTAL_BURUNDI",
@@ -8192,45 +8192,45 @@
     "hideHeaderDenomination": true,
     "_comment": " "
   },
-  "overviewPopulationCoverageAchievedProvinceICCD": {
-    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Administered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
-      }
-    ],
-    "chartType": "metric",
-    "valueType": "percentage",
-    "isCappedTillToday": true,
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "percentage",
-    "aggregationPaths": [
-      "Population Administered till today",
-      "Overall Population Target"
-    ],
-    "insight": {
-      "chartResponseMap": "overviewPopulationCoverageAchievedProvinceICCD",
-      "action": "differenceOfNumbers",
-      "upwardIndicator": "positive",
-      "downwardIndicator": "negative",
-      "textMessage": "$indicator$value% than last $insightInterval",
-      "colorCode": "#228B22",
-      "insightInterval": "dateRange"
+ "overviewPopulationCoverageAchievedProvinceICCD": {
+  "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Administered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
     },
-    "_comment": " "
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}}]}},\"aggs\":{\"count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "percentage",
+  "isCappedTillToday": true,
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "percentage",
+  "aggregationPaths": [
+    "Population Administered till today",
+    "Population Registered till today"
+  ],
+  "insight": {
+    "chartResponseMap": "overviewPopulationCoverageAchievedProvinceICCD",
+    "action": "differenceOfNumbers",
+    "upwardIndicator": "positive",
+    "downwardIndicator": "negative",
+    "textMessage": "$indicator$value% than last $insightInterval",
+    "colorCode": "#228B22",
+    "insightInterval": "dateRange"
   },
+  "_comment": " "
+},
  "populationNotAdministeredByReasonProvinceICCD": {
     "chartName": "DSS_HEALTH_POPULATION_NOT_ADMINISTERED_BY_REASON_PROVINCE_ICCD",
     "queries": [
@@ -14959,43 +14959,140 @@
     "_comment": " "
   },
   "overviewPopulationCoverageAchievedProvince3to11ICCD": {
-    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_3_11_ICCD",
+  "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_3_11_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 3-11 Administered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 3-11 Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "percentage",
+  "isCappedTillToday": true,
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "percentage",
+  "aggregationPaths": [
+    "Population 3-11 Administered till today",
+    "Population 3-11 Registered till today"
+  ],
+  "insight": {
+    "chartResponseMap": "overviewPopulationCoverageAchievedProvince3to11ICCD",
+    "action": "differenceOfNumbers",
+    "upwardIndicator": "positive",
+    "downwardIndicator": "negative",
+    "textMessage": "$indicator$value% than last $insightInterval",
+    "colorCode": "#228B22",
+    "insightInterval": "dateRange"
+  },
+  "_comment": " "
+},
+  "overviewPopulationAdministered3to11MaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_3_11_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 3-11 Administered for Date Range\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population 3-11 Administered for Date Range"
+    ],
+    "insight": {},
+    "_comment": "Male Population Administered (3-11 months)"
+  },
+  "overviewTotalPopulationAdministered3to11MaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_3_11_MALE_ICCD",
     "queries": [
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 3-11 Administered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
-      },
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 3-11 Administered for Date Range\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population 3-11 Administered for Date Range"
+    ],
+    "insight": {},
+    "_comment": "Male Population Administered (3-11 months)"
+  },
+  "overviewPopulationTargetedProvince3to11MaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_3_11_MALE_ICCD",
+    "queries": [
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"3-11MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"3-11MONTH\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       }
     ],
     "chartType": "metric",
-    "valueType": "percentage",
-    "isCappedTillToday": true,
+    "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "percentage",
+    "action": "",
     "aggregationPaths": [
-      "Population 3-11 Administered till today",
-      "Overall Population Target"
+      "Overall Target"
     ],
-    "insight": {
-      "chartResponseMap": "overviewPopulationCoverageAchievedProvince3to11ICCD",
-      "action": "differenceOfNumbers",
-      "upwardIndicator": "positive",
-      "downwardIndicator": "negative",
-      "textMessage": "$indicator$value% than last $insightInterval",
-      "colorCode": "#228B22",
-      "insightInterval": "dateRange"
-    },
-    "_comment": " "
+    "insight": {},
+    "_comment": "Male Population Target (3-11 months)"
+  },
+  "overviewPopulationCoverageAchieved3to11MaleICCD": {
+      "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_3_11_MALE_ICCD",
+      "queries": [
+        {
+          "module": "COMMON",
+          "dateRefField": "",
+          "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+          "indexName": "ch-project-task-index-v1",
+          "aggrQuery": "{\"size\":0,\"aggs\":{\"Male Administered 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+        },
+        {
+          "module": "COMMON",
+          "dateRefField": "",
+          "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+          "indexName": "ch-project-task-index-v1",
+          "aggrQuery": "{\"size\":0,\"aggs\":{\"Male Registered 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+        }
+      ],
+      "chartType": "metric",
+      "valueType": "percentage",
+      "isCappedTillToday": true,
+      "drillChart": "none",
+      "documentType": "_doc",
+      "action": "percentage",
+      "aggregationPaths": [
+        "Male Administered 3-11",
+        "Male Registered 3-11"
+      ],
+      "insight": {},
+      "_comment": "male 3-11 coverage % = male administered / male registered"
   },
   "overviewPopulationAdministered12to59ICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_12_59_ICCD",
@@ -15073,21 +15170,126 @@
     "_comment": " "
   },
   "overviewPopulationCoverageAchievedProvince12to59ICCD": {
-    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_12_59_ICCD",
+  "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_12_59_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Administered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":12}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"range\":{\"Data.age\":{\"gte\":12}}}]}},\"aggs\":{\"count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "percentage",
+  "isCappedTillToday": true,
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "percentage",
+  "aggregationPaths": [
+    "Population 12-59 Administered till today",
+    "Population 12-59 Registered till today"
+  ],
+  "insight": {
+    "chartResponseMap": "overviewPopulationCoverageAchievedProvince12to59ICCD",
+    "action": "differenceOfNumbers",
+    "upwardIndicator": "positive",
+    "downwardIndicator": "negative",
+    "textMessage": "$indicator$value% than last $insightInterval",
+    "colorCode": "#228B22",
+    "insightInterval": "dateRange"
+  },
+  "_comment": " "
+  },
+  "overviewPopulationAdministered12to59MaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_12_59_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Administered for Date Range\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population 12-59 Administered for Date Range"
+    ],
+    "insight": {},
+    "_comment": "Male Population Administered (12-59 months)"
+  },
+  "overviewTotalPopulationAdministered12to59MaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_12_59_MALE_ICCD",
     "queries": [
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Administered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":12}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
-      },
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Administered for Date Range\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population 12-59 Administered for Date Range"
+    ],
+    "insight": {},
+    "_comment": "Male Population Administered (12-59 months)"
+  },
+  "overviewPopulationTargetedProvince12to59MaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_12_59_MALE_ICCD",
+    "queries": [
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Overall Target"
+    ],
+    "insight": {},
+    "_comment": "Male Population Target (12-59 months)"
+  },
+  "overviewPopulationCoverageAchievedProvince12to59MaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_12_59_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Administered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -15098,10 +15300,10 @@
     "action": "percentage",
     "aggregationPaths": [
       "Population 12-59 Administered till today",
-      "Overall Population Target"
+      "Population 12-59 Registered till today"
     ],
     "insight": {
-      "chartResponseMap": "overviewPopulationCoverageAchievedProvince12to59ICCD",
+      "chartResponseMap": "overviewPopulationCoverageAchievedProvince12to59MaleICCD",
       "action": "differenceOfNumbers",
       "upwardIndicator": "positive",
       "downwardIndicator": "negative",
@@ -15109,7 +15311,425 @@
       "colorCode": "#228B22",
       "insightInterval": "dateRange"
     },
-    "_comment": " "
+    "_comment": "Male Population Coverage Achieved (12-59 months)"
+  },
+  "overviewPopulationAdministered3to11FemaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_3_11_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 3-11 Administered for Date Range\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population 3-11 Administered for Date Range"
+    ],
+    "insight": {},
+    "_comment": "Female Population Administered (3-11 months)"
+  },
+  "overviewTotalPopulationAdministered3to11FemaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_3_11_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 3-11 Administered for Date Range\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population 3-11 Administered for Date Range"
+    ],
+    "insight": {},
+    "_comment": "Female Population Administered (3-11 months)"
+  },
+  "overviewPopulationTargetedProvince3to11FemaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_3_11_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"3-11MONTH\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Overall Target"
+    ],
+    "insight": {},
+    "_comment": "Female Population Target (3-11 months)"
+  },
+  "overviewPopulationCoverageAchieved3to11FemaleICCD": {
+      "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_3_11_FEMALE_ICCD",
+      "queries": [
+        {
+          "module": "COMMON",
+          "dateRefField": "",
+          "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+          "indexName": "ch-project-task-index-v1",
+          "aggrQuery": "{\"size\":0,\"aggs\":{\"Female Administered 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+        },
+        {
+          "module": "COMMON",
+          "dateRefField": "",
+          "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+          "indexName": "ch-project-task-index-v1",
+          "aggrQuery": "{\"size\":0,\"aggs\":{\"Female Registered 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+        }
+      ],
+      "chartType": "metric",
+      "valueType": "percentage",
+      "isCappedTillToday": true,
+      "drillChart": "none",
+      "documentType": "_doc",
+      "action": "percentage",
+      "aggregationPaths": [
+        "Female Administered 3-11",
+        "Female Registered 3-11"
+      ],
+      "insight": {},
+      "_comment": "female 3-11 coverage % = female administered / female registered"
+  },
+  
+  "overviewPopulationAdministered12to59FemaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_12_59_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Administered for Date Range\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population 12-59 Administered for Date Range"
+    ],
+    "insight": {},
+    "_comment": "Female Population Administered (12-59 months)"
+  },
+  "overviewTotalPopulationAdministered12to59FemaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_12_59_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Administered for Date Range\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population 12-59 Administered for Date Range"
+    ],
+    "insight": {},
+    "_comment": "Female Population Administered (12-59 months)"
+  },
+  "overviewPopulationTargetedProvince12to59FemaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_12_59_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Overall Target"
+    ],
+    "insight": {},
+    "_comment": "Female Population Administered (12-59 months)"
+  },
+   "overviewPopulationCoverageAchievedProvince12to59FemaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_12_59_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Administered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "isCappedTillToday": true,
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Population 12-59 Administered till today",
+      "Population 12-59 Registered till today"
+    ],
+    "insight": {
+      "chartResponseMap": "overviewPopulationCoverageAchievedProvince12to59FemaleICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "dateRange"
+    },
+    "_comment": "Female Population Administered (12-59 months)"
+  },
+
+
+
+
+
+  "overviewPopulationAdministeredMaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Administered for Date Range\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population Administered for Date Range"
+    ],
+    "insight": {},
+    "_comment": "Male Population Administered (3-59 months)"
+  },
+   "overviewTotalPopulationAdministeredMaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Administered for Date Range\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population Administered for Date Range"
+    ],
+    "insight": {},
+    "_comment": "Male Population Administered (3-59 months)"
+  },
+  "overviewPopulationTargetedProvinceMaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target per day\":{\"sum\":{\"field\":\"Data.targetPerDay\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Overall Target"
+    ],
+    "insight": {},
+    "_comment": "Male Population Target (3-59 months)"
+  },
+  "overviewPopulationCoverageAchievedProvinceMaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Administered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "isCappedTillToday": true,
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Population Administered till today",
+      "Population Registered till today"
+    ],
+    "insight": {
+      "chartResponseMap": "overviewPopulationCoverageAchievedProvinceMaleICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "dateRange"
+    },
+    "_comment": "Male Population Coverage Achieved (3-59 months)"
+  },
+  "overviewPopulationAdministeredFemaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Administered for Date Range\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population Administered for Date Range"
+    ],
+    "insight": {},
+    "_comment": "Female Population Administered (3-59 months)"
+  },
+   "overviewTotalPopulationAdministeredFemaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Administered for Date Range\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population Administered for Date Range"
+    ],
+    "insight": {},
+    "_comment": "Female Population Administered (3-59 months)"
+  },
+  "overviewPopulationTargetedProvinceFemaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target per day\":{\"sum\":{\"field\":\"Data.targetPerDay\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Overall Target"
+    ],
+    "insight": {},
+    "_comment": "Female Population Target (3-59 months)"
+  },
+  "overviewPopulationCoverageAchievedProvinceFemaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Administered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "isCappedTillToday": true,
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Population Administered till today",
+      "Population Registered till today"
+    ],
+    "insight": {
+      "chartResponseMap": "overviewPopulationCoverageAchievedProvinceFemaleICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "dateRange"
+    },
+    "_comment": "Female Population Coverage Achieved (3-59 months)"
   },
 
   "todayPopulationRegistered3to11NationalICCD": {
@@ -15414,6 +16034,608 @@
     },
     "_comment": " "
   },
+
+
+
+  "todayPopulationRegistered3to11MaleNationalICCD": {
+    "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_3_11_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"lte\":11}}},{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population Registered Today 3-11"
+    ],
+    "insight": {
+      "chartResponseMap": "todayPopulationRegistered3to11MaleNationalICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "day"
+    },
+    "_comment": "Today Male Population Registered (3-11 months)"
+  },
+  "totalPopulationRegistered3to11MaleNationalICCD": {
+    "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_3_11_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"lte\":11}}},{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population Registered Today 3-11"
+    ],
+    "insight": {
+      "chartResponseMap": "todayPopulationRegistered3to11MaleNationalICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "day"
+    },
+    "_comment": "Today Male Population Registered (3-11 months)"
+  },
+  "overviewPopulationRegistrationCoverageProvince3to11MaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_3_11_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 3-11 Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"3-11MONTH\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "isCappedTillToday": true,
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Population 3-11 Registered till today",
+      "Overall Population Target"
+    ],
+    "insight": {
+      "chartResponseMap": "overviewPopulationRegistrationCoverageProvince3to11MaleICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "dateRange"
+    },
+    "_comment": "Male Population Registration Coverage (3-11 months)"
+  },
+  "todayPopulationRegistered12to59MaleNationalICCD": {
+    "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_12_59_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today 12-59\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":12}}},{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population Registered Today 12-59"
+    ],
+    "insight": {
+      "chartResponseMap": "todayPopulationRegistered12to59MaleNationalICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "day"
+    },
+    "_comment": "Today Male Population Registered (12-59 months)"
+  },
+  "totalPopulationRegistered12to59MaleNationalICCD": {
+    "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TOTAL_12_59_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today 12-59\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":12}}},{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population Registered Today 12-59"
+    ],
+    "insight": {
+      "chartResponseMap": "todayPopulationRegistered12to59MaleNationalICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "day"
+    },
+    "_comment": "Today Male Population Registered (12-59 months)"
+  },
+  "overviewPopulationRegistrationCoverageProvince12to59MaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_12_59_MALE_ICCD",
+    "queries": [ 
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "isCappedTillToday": true,
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Population 12-59 Registered till today",
+      "Overall Population Target"
+    ],
+    "insight": {
+      "chartResponseMap": "overviewPopulationRegistrationCoverageProvince12to59MaleICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "dateRange"
+    },
+    "_comment": "Male Population Registration Coverage (12-59 months)"
+  },
+  "todayPopulationRegisteredMaleNationalICCD": {
+    "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.additionalDetails.dateOfRegistration",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population Registered Today"
+    ],
+    "insight": {
+      "chartResponseMap": "todayPopulationRegisteredMaleNationalICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "day"
+    },
+    "_comment": "Today Male Population Registered (3-59 months)"
+  },
+  "overviewTotalPopulationRegisteredMaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Population Registered\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Population Registered"
+    ],
+    "isCappedTillToday": true,
+    "insight": {
+      "chartResponseMap": "overviewTotalPopulationRegisteredMaleICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "dateRange"
+    },
+    "_comment": "Total Male Population Registered (3-59 months)"
+  },
+  "overviewPopulationRegistrationCoverageProvinceMaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_MALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "isCappedTillToday": true,
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Population Registered till today",
+      "Overall Population Target"
+    ],
+    "insight": {
+      "chartResponseMap": "overviewPopulationRegistrationCoverageProvinceMaleICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "dateRange"
+    },
+    "_comment": "Male Population Registration Coverage (3-59 months)"
+  },
+  
+  "todayPopulationRegistered3to11FemaleNationalICCD": {
+    "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_3_11_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"lte\":11}}},{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population Registered Today 3-11"
+    ],
+    "insight": {
+      "chartResponseMap": "todayPopulationRegistered3to11FemaleNationalICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "day"
+    },
+    "_comment": "Today female Population Registered (3-11 months)"
+  },
+  "totalPopulationRegistered3to11FemaleNationalICCD": {
+    "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_3_11_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"lte\":11}}},{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population Registered Today 3-11"
+    ],
+    "insight": {
+      "chartResponseMap": "todayPopulationRegistered3to11FemaleNationalICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "day"
+    },
+    "_comment": "Today Female Population Registered (3-11 months)"
+  },
+  "overviewPopulationRegistrationCoverageProvince3to11FemaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_3_11_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 3-11 Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"3-11MONTH\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "isCappedTillToday": true,
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Population 3-11 Registered till today",
+      "Overall Population Target"
+    ],
+    "insight": {
+      "chartResponseMap": "overviewPopulationRegistrationCoverageProvince3to11FemaleICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "dateRange"
+    },
+    "_comment": "Female Population Registration Coverage (3-11 months)"
+  },
+   "todayPopulationRegistered12to59FemaleNationalICCD": {
+    "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_12_59_feMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today 12-59\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":12}}},{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population Registered Today 12-59"
+    ],
+    "insight": {
+      "chartResponseMap": "todayPopulationRegistered12to59FeMaleNationalICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "day"
+    },
+    "_comment": "Today Female Population Registered (12-59 months)"
+  },
+  "totalPopulationRegistered12to59FemaleNationalICCD": {
+    "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TOTAL_12_59_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today 12-59\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":12}}},{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population Registered Today 12-59"
+    ],
+    "insight": {
+      "chartResponseMap": "todayPopulationRegistered12to59FeMaleNationalICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "day"
+    },
+    "_comment": "Today Female Population Registered (12-59 months)"
+  },
+   "overviewPopulationRegistrationCoverageProvince12to59FemaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_12_59_FEMALE_ICCD",
+    "queries": [ 
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "isCappedTillToday": true,
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Population 12-59 Registered till today",
+      "Overall Population Target"
+    ],
+    "insight": {
+      "chartResponseMap": "overviewPopulationRegistrationCoverageProvince12to59FeMaleICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "dateRange"
+    },
+    "_comment": "Female Population Registration Coverage (12-59 months)"
+  },
+  "todayPopulationRegisteredFemaleNationalICCD": {
+    "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.additionalDetails.dateOfRegistration",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population Registered Today"
+    ],
+    "insight": {
+      "chartResponseMap": "todayPopulationRegisteredFemaleNationalICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "day"
+    },
+    "_comment": "Today Female Population Registered (3-59 months)"
+  },
+  "overviewTotalPopulationRegisteredFemaleICCD": {
+    "chartName": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_FEMALE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Population Registered\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Population Registered"
+    ],
+    "isCappedTillToday": true,
+    "insight": {
+      "chartResponseMap": "overviewTotalPopulationRegisteredFemaleICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "dateRange"
+    },
+    "_comment": "Total Female Population Registered (3-59 months)"
+  },
+  "overviewPopulationRegistrationCoverageProvinceFemaleICCD": {
+  "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_FEMALE_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "percentage",
+  "isCappedTillToday": true,
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "percentage",
+  "aggregationPaths": [
+    "Population Registered till today",
+    "Overall Population Target"
+  ],
+  "insight": {
+    "chartResponseMap": "overviewPopulationRegistrationCoverageProvinceFemaleICCD",
+    "action": "differenceOfNumbers",
+    "upwardIndicator": "positive",
+    "downwardIndicator": "negative",
+    "textMessage": "$indicator$value% than last $insightInterval",
+    "colorCode": "#228B22",
+    "insightInterval": "dateRange"
+  },
+  "_comment": "Female Population Registration Coverage (3-59 months)"
+  },
+
+
   "redoseOverviewICCD": {
   "chartName": "DSS_HEALTH_REDOSE_OVERVIEW_ICCD",
   "queries": [
