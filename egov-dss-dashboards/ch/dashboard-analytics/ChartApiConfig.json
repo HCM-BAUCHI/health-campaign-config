@@ -20266,7 +20266,10 @@
     "Negative SPAQ2 Lost",
     "_SPAQ_TOTAL_RETURNED",
     "_SPAQ1_RETURNED",
-    "_SPAQ2_RETURNED"
+    "_SPAQ2_RETURNED",
+    "count",
+    "AdministeredPart",
+    "RedosePart"
   ],
   "computedFields": [
     {
