@@ -993,8 +993,92 @@
             }
           ]
         },
-        {
+         {
           "row": 7,
+          "name": "DSS_HEALTH_OVERVIEW",
+          "vizArray": [
+            {
+              "id": 715,
+              "name": "DSS_HEALTH_POPULATION_REGISTERED_3_11",
+              "label": "DSS_HEALTH_POPULATION_REGISTERED_3_11",
+              "vizType": "stacked-collection",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "overviewSPAQ3to11UtilisesCountProvinceICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_3_11_ICCD",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "overviewSPAQ3to11UtilisesPercentProvinceICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_3_11_ICCD",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 716,
+              "name": "DSS_HEALTH_POPULATION_REGISTERED_12_59",
+              "label": "DSS_HEALTH_POPULATION_REGISTERED_12_59",
+              "vizType": "stacked-collection",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "overviewSPAQ12to59UtilisesCountProvinceICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_12_59_ICCD",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "overviewSPAQ12to59UtilisesPercentProvinceICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_12_59_ICCD",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 710,
+              "name": "DSS_HEALTH_POPULATION_REGISTERED_3_59",
+              "label": "DSS_HEALTH_POPULATION_REGISTERED_3_59",
+              "vizType": "stacked-collection",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "overviewSPAQ3to59UtilisesCountProvinceICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_ICCD",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "overviewSPAQ3to59UtilisesPercentProvinceICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_ICCD",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 8,
           "name": "DSS_HEALTH_OVERVIEW",
           "vizArray": [
             {
@@ -1018,7 +1102,7 @@
           ]
         },
         {
-          "row": 8,
+          "row": 9,
           "name": "DSS_HEALTH_OVERVIEW",
           "vizArray": [
             {
@@ -1042,7 +1126,7 @@
           ]
         },
         {
-          "row": 9,
+          "row": 10,
           "name": "DSS_HEALTH_OVERVIEW",
           "vizArray": [
             {
