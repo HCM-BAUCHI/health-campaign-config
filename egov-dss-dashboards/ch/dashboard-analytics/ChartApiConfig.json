@@ -11425,126 +11425,168 @@
       "dateRefField": "",
       "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"},\"aggs\":{\"Overall Population target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
-    },
-    {
-      "module": "COMMON",
-      "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Individual Coverage Ratio\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500},\"aggs\":{\"Total Population covered\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
-    },
-    {
-      "module": "COMMON",
-      "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 3-11\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Administered 3-11 count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"},\"aggs\":{\"Overall Population target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}",
+      "_comment": "Cible 3-59"
     },
     {
       "module": "COMMON",
       "dateRefField": "",
       "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"3-11MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"}}]}},\"aggs\":{\"Target 3-11\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"},\"aggs\":{\"Target 3-11 count\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
-    },
-    {
-      "module": "COMMON",
-      "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 12-59\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Administered 12-59 count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"3-11MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"}}]}},\"aggs\":{\"Target 3-11\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"},\"aggs\":{\"Target 3-11 count\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}",
+      "_comment": "Cible 3-11"
     },
     {
       "module": "COMMON",
       "dateRefField": "",
       "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"}}]}},\"aggs\":{\"Target 12-59\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"},\"aggs\":{\"Target 12-59 count\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"}}]}},\"aggs\":{\"Target 12-59\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"},\"aggs\":{\"Target 12-59 count\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}",
+      "_comment": "Cible 12-59"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_REFUSED\"}}]}},\"aggs\":{\"Refused\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Refused count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}}]}},\"aggs\":{\"Registered 3-59\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Registered 3-59 count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}",
+      "_comment": "Couvert 3-59 (feeds Visit\u00e9 3-59 = Couvert + Refus)"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_DIED\"}}]}},\"aggs\":{\"Died\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Died count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"Registered 3-11\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Registered 3-11 count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}",
+      "_comment": "Couvert 3-11 (feeds Visit\u00e9 3-11)"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_MIGRATED\"}}]}},\"aggs\":{\"Migrated\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Migrated count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
-    },
-    {
-      "module": "COMMON",
-      "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"INELIGIBLE\"}}]}},\"aggs\":{\"Ineligible\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Ineligible count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
-    },
-    {
-      "module": "COMMON",
-      "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_ABSENT\"}}]}},\"aggs\":{\"Beneficiary Absent\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Beneficiary Absent count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
-    },
-    {
-      "module": "COMMON",
-      "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-household-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.caregiverConsent.keyword\":\"FALSE\"}}]}},\"aggs\":{\"Household Refused\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Household Refused count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"range\":{\"Data.age\":{\"gte\":12}}}]}},\"aggs\":{\"Registered 12-59\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Registered 12-59 count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}",
+      "_comment": "Couvert 12-59 (feeds Visit\u00e9 12-59)"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"Male Administered Individual\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500},\"aggs\":{\"Male Individual count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_REFUSED\"}}]}},\"aggs\":{\"Refused\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Refused count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}",
+      "_comment": "Refus 3-59 (feeds Visit\u00e9 3-59)"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"Female Administered Individual\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500},\"aggs\":{\"Female Individual count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_REFUSED\"}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"Refused 3-11\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Refused 3-11 count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}",
+      "_comment": "Refus 3-11 (feeds Visit\u00e9 3-11)"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"Male Administered 3-11\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Male 3-11 count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_REFUSED\"}},{\"range\":{\"Data.age\":{\"gte\":12}}}]}},\"aggs\":{\"Refused 12-59\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Refused 12-59 count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}",
+      "_comment": "Refus 12-59 (feeds Visit\u00e9 12-59)"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"Female Administered 3-11\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Female 3-11 count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Individual Coverage Ratio\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500},\"aggs\":{\"Total Population covered\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}",
+      "_comment": "Administr\u00e9 3-59 (also feeds SPAQ utilis\u00e9s 3-59, per bug #8)"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"MALE\"}}]}},\"aggs\":{\"Male Administered 12-59\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Male 12-59 count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.age\":{\"lte\":11}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 3-11\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Administered 3-11 count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}",
+      "_comment": "Administr\u00e9 3-11 (also feeds SPAQ utilis\u00e9s 3-11)"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"term\":{\"Data.additionalDetails.gender.keyword\":\"FEMALE\"}}]}},\"aggs\":{\"Female Administered 12-59\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Female 12-59 count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"range\":{\"Data.age\":{\"gte\":12}}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Administered 12-59\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Administered 12-59 count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}",
+      "_comment": "Administr\u00e9 12-59 (also feeds SPAQ utilis\u00e9s 12-59)"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_REFERRED\"}}]}},\"aggs\":{\"Referred 3-59\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Referred 3-59 count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}",
+      "_comment": "R\u00e9f\u00e9r\u00e9 3-59"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_REFERRED\"}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"Referred 3-11\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Referred 3-11 count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}",
+      "_comment": "R\u00e9f\u00e9r\u00e9 3-11"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_REFERRED\"}},{\"range\":{\"Data.age\":{\"gte\":12}}}]}},\"aggs\":{\"Referred 12-59\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Referred 12-59 count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}",
+      "_comment": "R\u00e9f\u00e9r\u00e9 12-59"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_ABSENT\"}}]}},\"aggs\":{\"Beneficiary Absent\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Beneficiary Absent count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}",
+      "_comment": "Absent 3-59"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_ABSENT\"}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"Absent 3-11\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Absent 3-11 count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}",
+      "_comment": "Absent 3-11"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_ABSENT\"}},{\"range\":{\"Data.age\":{\"gte\":12}}}]}},\"aggs\":{\"Absent 12-59\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Absent 12-59 count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}",
+      "_comment": "Absent 12-59"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"ADVERSE_EFFECT\"}}]}},\"aggs\":{\"MAPI 3-59\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"MAPI 3-59 count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}",
+      "_comment": "MAPI 3-59"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"ADVERSE_EFFECT\"}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"MAPI 3-11\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"MAPI 3-11 count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}",
+      "_comment": "MAPI 3-11"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"ADVERSE_EFFECT\"}},{\"range\":{\"Data.age\":{\"gte\":12}}}]}},\"aggs\":{\"MAPI 12-59\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"MAPI 12-59 count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}",
+      "_comment": "MAPI 12-59"
     }
   ],
   "filterKeys": [
@@ -11563,148 +11605,281 @@
     "Individuals"
   ],
   "excludedColumns": [
-    "Total Population covered",
     "Overall Population target",
-    "Administered 3-11 count",
     "Target 3-11 count",
-    "Administered 12-59 count",
     "Target 12-59 count",
+    "Registered 3-59 count",
+    "Registered 3-11 count",
+    "Registered 12-59 count",
     "Refused count",
+    "Refused 3-11 count",
+    "Refused 12-59 count",
+    "Total Population covered",
+    "Administered 3-11 count",
+    "Administered 12-59 count",
+    "Referred 3-59 count",
+    "Referred 3-11 count",
+    "Referred 12-59 count",
     "Beneficiary Absent count",
-    "Household Refused count",
-    "Male Individual count",
-    "Female Individual count",
-    "Male 3-11 count",
-    "Female 3-11 count",
-    "Male 12-59 count",
-    "Female 12-59 count"
+    "Absent 3-11 count",
+    "Absent 12-59 count",
+    "MAPI 3-59 count",
+    "MAPI 3-11 count",
+    "MAPI 12-59 count"
   ],
   "computedFields": [
     {
       "postAggregationTheory": "",
       "actionName": "AdditiveComputedField",
-      "fields": ["Total Population covered"],
-      "newField": "Population Administered",
-      "_comments": ""
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": ["Overall Population target"],
+      "fields": [
+        "Overall Population target"
+      ],
       "newField": "Population Target",
-      "_comments": ""
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "PercentageComputedField",
-      "fields": ["Total Population covered", "Overall Population target"],
-      "newField": "Population Coverage",
-      "_comments": ""
+      "_comments": "Col 2: Cible 3-59"
     },
     {
       "postAggregationTheory": "",
       "actionName": "AdditiveComputedField",
-      "fields": ["Administered 3-11 count"],
-      "newField": "Administered 3-11",
-      "_comments": ""
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": ["Target 3-11 count"],
+      "fields": [
+        "Target 3-11 count"
+      ],
       "newField": "Target 3-11",
-      "_comments": ""
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "PercentageComputedField",
-      "fields": ["Administered 3-11 count", "Target 3-11 count"],
-      "newField": "Coverage 3-11",
-      "_comments": ""
+      "_comments": "Col 3: Cible 3-11"
     },
     {
       "postAggregationTheory": "",
       "actionName": "AdditiveComputedField",
-      "fields": ["Administered 12-59 count"],
-      "newField": "Administered 12-59",
-      "_comments": ""
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": ["Target 12-59 count"],
+      "fields": [
+        "Target 12-59 count"
+      ],
       "newField": "Target 12-59",
-      "_comments": ""
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "PercentageComputedField",
-      "fields": ["Administered 12-59 count", "Target 12-59 count"],
-      "newField": "Coverage 12-59",
-      "_comments": ""
+      "_comments": "Col 4: Cible 12-59"
     },
     {
       "postAggregationTheory": "",
       "actionName": "AdditiveComputedField",
-      "fields": ["Refused count"],
-      "newField": "BENEFICIARY_REFUSED",
-      "_comments": ""
+      "fields": [
+        "Registered 3-59 count",
+        "Refused count"
+      ],
+      "newField": "Visit\u00e9 3-59",
+      "_comments": "Col 5: Visit\u00e9 3-59 = Couvert + Refus. UNVERIFIED: assumes AdditiveComputedField sums 2 fields; test before trusting."
     },
     {
       "postAggregationTheory": "",
       "actionName": "AdditiveComputedField",
-      "fields": ["Beneficiary Absent count"],
-      "newField": "Beneficiary Absent",
-      "_comments": ""
+      "fields": [
+        "Registered 3-11 count",
+        "Refused 3-11 count"
+      ],
+      "newField": "Visit\u00e9 3-11",
+      "_comments": "Col 6: Visit\u00e9 3-11 - same caveat as above"
     },
     {
       "postAggregationTheory": "",
       "actionName": "AdditiveComputedField",
-      "fields": ["Male Individual count"],
-      "newField": "Male Administered Individual",
-      "_comments": ""
+      "fields": [
+        "Registered 12-59 count",
+        "Refused 12-59 count"
+      ],
+      "newField": "Visit\u00e9 12-59",
+      "_comments": "Col 7: Visit\u00e9 12-59 - same caveat as above"
     },
     {
       "postAggregationTheory": "",
       "actionName": "AdditiveComputedField",
-      "fields": ["Female Individual count"],
-      "newField": "Female Administered Individual",
-      "_comments": ""
+      "fields": [
+        "Total Population covered"
+      ],
+      "newField": "Population Administered",
+      "_comments": "Col 8: Administr\u00e9 3-59"
     },
     {
       "postAggregationTheory": "",
       "actionName": "AdditiveComputedField",
-      "fields": ["Male 3-11 count"],
-      "newField": "Male Administered 3-11",
-      "_comments": ""
+      "fields": [
+        "Administered 3-11 count"
+      ],
+      "newField": "Administered 3-11",
+      "_comments": "Col 9: Administr\u00e9 3-11"
     },
     {
       "postAggregationTheory": "",
       "actionName": "AdditiveComputedField",
-      "fields": ["Female 3-11 count"],
-      "newField": "Female Administered 3-11",
-      "_comments": ""
+      "fields": [
+        "Administered 12-59 count"
+      ],
+      "newField": "Administered 12-59",
+      "_comments": "Col 10: Administr\u00e9 12-59"
     },
     {
       "postAggregationTheory": "",
       "actionName": "AdditiveComputedField",
-      "fields": ["Male 12-59 count"],
-      "newField": "Male Administered 12-59",
-      "_comments": ""
+      "fields": [
+        "Registered 3-59 count"
+      ],
+      "newField": "Couvert 3-59",
+      "_comments": "Col 11: Enfants Couverts 3-59"
     },
     {
       "postAggregationTheory": "",
       "actionName": "AdditiveComputedField",
-      "fields": ["Female 12-59 count"],
-      "newField": "Female Administered 12-59",
-      "_comments": ""
+      "fields": [
+        "Registered 3-11 count"
+      ],
+      "newField": "Couvert 3-11",
+      "_comments": "Col 12: Enfants Couverts 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Registered 12-59 count"
+      ],
+      "newField": "Couvert 12-59",
+      "_comments": "Col 13: Enfants Couverts 12-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Total Population covered"
+      ],
+      "newField": "SPAQ utilis\u00e9s 3-59",
+      "_comments": "Col 14: SPAQ utilis\u00e9s 3-59 = same count as Administered (Data.quantity always 1, bug #8)"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Administered 3-11 count"
+      ],
+      "newField": "SPAQ utilis\u00e9s 3-11",
+      "_comments": "Col 15: SPAQ utilis\u00e9s 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Administered 12-59 count"
+      ],
+      "newField": "SPAQ utilis\u00e9s 12-59",
+      "_comments": "Col 16: SPAQ utilis\u00e9s 12-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Refused count"
+      ],
+      "newField": "Refus 3-59",
+      "_comments": "Col 17: Cas de refus 3-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Refused 3-11 count"
+      ],
+      "newField": "Refus 3-11",
+      "_comments": "Col 18: Cas de refus 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Refused 12-59 count"
+      ],
+      "newField": "Refus 12-59",
+      "_comments": "Col 19: Cas de refus 12-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Referred 3-59 count"
+      ],
+      "newField": "R\u00e9f\u00e9r\u00e9 3-59",
+      "_comments": "Col 20: Enfants r\u00e9f\u00e9r\u00e9s 3-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Referred 3-11 count"
+      ],
+      "newField": "R\u00e9f\u00e9r\u00e9 3-11",
+      "_comments": "Col 21: Enfants r\u00e9f\u00e9r\u00e9s 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Referred 12-59 count"
+      ],
+      "newField": "R\u00e9f\u00e9r\u00e9 12-59",
+      "_comments": "Col 22: Enfants r\u00e9f\u00e9r\u00e9s 12-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Beneficiary Absent count"
+      ],
+      "newField": "Absent 3-59",
+      "_comments": "Col 23: Enfants Absents 3-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Absent 3-11 count"
+      ],
+      "newField": "Absent 3-11",
+      "_comments": "Col 24: Enfants Absents 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Absent 12-59 count"
+      ],
+      "newField": "Absent 12-59",
+      "_comments": "Col 25: Enfants Absents 12-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "MAPI 3-59 count"
+      ],
+      "newField": "MAPI 3-59",
+      "_comments": "Col 26: Enfants avec MAPI 3-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "MAPI 3-11 count"
+      ],
+      "newField": "MAPI 3-11",
+      "_comments": "Col 27: Enfants avec MAPI 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "MAPI 12-59 count"
+      ],
+      "newField": "MAPI 12-59",
+      "_comments": "Col 28: Enfants avec MAPI 12-59"
     }
   ],
   "insight": {},
   "sort": "sortKeyAsc",
   "hideInsights": true,
   "hideHeaderDenomination": true,
-  "_comment": " "
+  "_comment": "Reordered to match SUMMARY REPORT sheet column order exactly (Cible > Visit\u00e9 > Administre > Couvert > SPAQ utilises > Refus > Refere > Absent > MAPI, x3 brackets each). Gender-split queries/fields (Male/Female Administered Individual/3-11/12-59) removed - not part of this table's required columns. If those are used by another feature referencing this same chart config, flag before deploying."
 },
   "summaryByVillageICCD": {
     "kind": "drillDown",
