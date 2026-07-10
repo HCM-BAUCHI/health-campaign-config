@@ -1449,6 +1449,78 @@
           ]
         },
         {
+          "row": 2,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 723,
+              "name": "DSS_HEALTH_INVENTORY_RECEIVED_AT_HEALTH_FACILITY_METRICS",
+              "label": "DSS_HEALTH_INVENTORY_RECEIVED_AT_HEALTH_FACILITY_METRICS",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "inventoryReceivedAtHealthFacilityMetrics",
+                  "name": "DSS_HEALTH_INVENTORY_RECEIVED_AT_HEALTH_FACILITY_METRICS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 722,
+              "name": "DSS_HEALTH_INVENTORY_HEALTH_TO_STAFF_METRICS",
+              "label": "DSS_HEALTH_INVENTORY_HEALTH_TO_STAFF_METRICS",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "inventoryHealthToStaffMetrics",
+                  "name": "DSS_HEALTH_INVENTORY_HEALTH_TO_STAFF_METRICS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 720,
+              "name": "DSS_HEALTH_INVENTORY_STAFF_TO_HEALTH_METRICS",
+              "label": "DSS_HEALTH_INVENTORY_STAFF_TO_HEALTH_METRICS",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "inventoryStaffToHealthMetrics",
+                  "name": "DSS_HEALTH_INVENTORY_STAFF_TO_HEALTH_METRICS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
           "row": 5,
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
@@ -1496,80 +1568,8 @@
             }
           ]
         },
-       {
-          "row": 3,
-          "name": "DSS_HEALTH_INVENTORY",
-          "vizArray": [
-            {
-              "id": 722,
-              "name": "DSS_HEALTH_INVENTORY_HEALTH_TO_STAFF_METRICS",
-              "label": "DSS_HEALTH_INVENTORY_HEALTH_TO_STAFF_METRICS",
-              "vizType": "cards-list",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "inventoryHealthToStaffMetrics",
-                  "name": "DSS_HEALTH_INVENTORY_HEALTH_TO_STAFF_METRICS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
         {
-          "row": 4,
-          "name": "DSS_HEALTH_INVENTORY",
-          "vizArray": [
-            {
-              "id": 720,
-              "name": "DSS_HEALTH_INVENTORY_HEALTH_TO_STAFF_METRICS",
-              "label": "DSS_HEALTH_INVENTORY_HEALTH_TO_STAFF_METRICS",
-              "vizType": "cards-list",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "inventoryStaffToHealthMetrics",
-                  "name": "DSS_HEALTH_INVENTORY_STAFF_TO_HEALTH_METRICS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-         {
-          "row": 2,
-          "name": "DSS_HEALTH_INVENTORY",
-          "vizArray": [
-            {
-              "id": 720,
-              "name": "DSS_HEALTH_INVENTORY_HEALTH_TO_STAFF_METRICS",
-              "label": "DSS_HEALTH_INVENTORY_HEALTH_TO_STAFF_METRICS",
-              "vizType": "cards-list",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "inventoryReceivedAtHealthFacilityMetrics",
-                  "name": "DSS_HEALTH_INVENTORY_RECEIVED_AT_HEALTH_FACILITY_METRICS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 6,
+          "row": 7,
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
