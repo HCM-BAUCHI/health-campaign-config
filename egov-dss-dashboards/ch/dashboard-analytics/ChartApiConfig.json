@@ -16314,7 +16314,7 @@
     },
     "_comment": "Today Male Population Registered (12-59 months)"
   },
-   "overviewPopulationRegistrationCoverageProvince12to59MaleICCD": {
+  "overviewPopulationRegistrationCoverageProvince12to59MaleICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_12_59_MALE_ICCD",
     "queries": [
       {
@@ -16343,7 +16343,7 @@
       "Total Population 12-59 Registered"
     ],
     "insight": {
-      "chartResponseMap": "overviewPopulationRegistrationCoverageProvince12to59FemaleICCD",
+      "chartResponseMap": "overviewPopulationRegistrationCoverageProvince12to59MaleICCD",
       "action": "differenceOfNumbers",
       "upwardIndicator": "positive",
       "downwardIndicator": "negative",
@@ -16351,7 +16351,7 @@
       "colorCode": "#228B22",
       "insightInterval": "dateRange"
     },
-    "_comment": "Female Population Registration Coverage (12-59 months) — Female Registered / Total Registered (both genders)"
+    "_comment": "Male Population Registration Coverage (12-59 months) — Male Registered / Total Registered (both genders)"
   },
   "todayPopulationRegisteredMaleNationalICCD": {
     "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_MALE_ICCD",
