@@ -1449,7 +1449,7 @@
           ]
         },
         {
-          "row": 2,
+          "row": 5,
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
@@ -1473,7 +1473,7 @@
           ]
         },
         {
-          "row": 3,
+          "row": 6,
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
@@ -1497,7 +1497,7 @@
           ]
         },
        {
-          "row": 5,
+          "row": 3,
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
@@ -1545,7 +1545,7 @@
           ]
         },
          {
-          "row": 5,
+          "row": 2,
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
