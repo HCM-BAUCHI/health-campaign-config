@@ -1350,7 +1350,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "summaryByDistrictICCD",
+                  "id": "summaryByCountryICCD",
                   "name": "DSS_HEALTH_SUMMARY_BY_DISTRICT_ICCD",
                   "code": "",
                   "chartType": "table",
