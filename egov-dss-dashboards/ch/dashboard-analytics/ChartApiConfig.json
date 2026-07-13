@@ -20865,82 +20865,106 @@
 ,
  
   
- "inventoryReceivedAtHealthFacilityMetrics": {
-    "chartName": "DSS_HEALTH_INVENTORY_RECEIVED_AT_HEALTH_FACILITY_METRICS",
-    "queries": [
-      {
-        "key": "stockIndexReceived",
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "ch-stock-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"spaqTotalReceived\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq1Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"spaq2Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
-        "select": {
-          "spaqTotalReceived": "spaqTotalReceived.total.value",
-          "spaq1Received": "spaq1Received.total.value",
-          "spaq2Received": "spaq2Received.total.value"
-        }
+"inventoryReceivedAtHealthFacilityMetrics": {
+  "chartName": "DSS_HEALTH_INVENTORY_RECEIVED_AT_HEALTH_FACILITY_METRICS",
+  "queries": [
+    {
+      "key": "stockIndexReceived",
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\"}",
+      "indexName": "ch-stock-index-v1",
+      "transformData": "linearAggregation",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"spaqTotalReceived\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"total\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"spaq1Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"total\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"spaq2Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"total\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}",
+      "select": {
+        "spaqTotalReceived": "spaqTotalReceived.total.value",
+        "spaq1Received": "spaq1Received.total.value",
+        "spaq2Received": "spaq2Received.total.value"
       }
-    ],
-    "chartType": "rawResponse",
-    "merges": [
-      {
-        "mergeType": "linear",
-        "mergeKey": "inventoryReceivedAtHealthFacilityMetrics",
-        "flatten": true,
-        "datasets": [],
-        "outputMappings": []
-      }
-    ],
-    "isCumulative": false,
-    "valueType": "number",
-    "showLabel": true,
-    "drillChart": "none",
-    "filterKeys": [
-      { "key": "cycle" },
-      { "key": "campaignNumber" },
-      { "key": "state" },
-      { "key": "lga", "column": "LGA" }
-    ],
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "spaqTotalReceived",
-      "spaq1Received",
-      "spaq2Received"
-    ],
-    "cardsList": [
-      {
-        "id": "spaqTotalReceived",
-        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ_TOTAL_RECEIVED",
-        "valuePath": "spaqTotalReceived",
-        "valueType": "NUMBER",
-        "descriptionParams": { "count": "spaqTotalReceived" },
-        "colorRules": { "type": "constant", "color": "#0B4B66" }
+    }
+  ],
+  "chartType": "rawResponse",
+  "merges": [
+    {
+      "mergeType": "linear",
+      "mergeKey": "inventoryReceivedAtHealthFacilityMetrics",
+      "flatten": true,
+      "datasets": [],
+      "outputMappings": []
+    }
+  ],
+  "isCumulative": false,
+  "valueType": "number",
+  "showLabel": true,
+  "drillChart": "none",
+  "filterKeys": [
+    {
+      "key": "cycle"
+    },
+    {
+      "key": "campaignNumber"
+    },
+    {
+      "key": "state"
+    },
+    {
+      "key": "lga",
+      "column": "LGA"
+    }
+  ],
+  "documentType": "_doc",
+  "action": "",
+  "aggregationPaths": [
+    "spaqTotalReceived",
+    "spaq1Received",
+    "spaq2Received"
+  ],
+  "cardsList": [
+    {
+      "id": "spaqTotalReceived",
+      "labelKey": "DSS_HEALTH_INVENTORY_SPAQ_TOTAL_RECEIVED",
+      "valuePath": "spaqTotalReceived",
+      "valueType": "NUMBER",
+      "descriptionParams": {
+        "count": "spaqTotalReceived"
       },
-      {
-        "id": "spaq1Received",
-        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_RECEIVED",
-        "valuePath": "spaq1Received",
-        "valueType": "NUMBER",
-        "descriptionParams": { "count": "spaq1Received" },
-        "colorRules": { "type": "constant", "color": "#0B4B66" }
-      },
-      {
-        "id": "spaq2Received",
-        "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_RECEIVED",
-        "valuePath": "spaq2Received",
-        "valueType": "NUMBER",
-        "descriptionParams": { "count": "spaq2Received" },
-        "colorRules": { "type": "constant", "color": "#0B4B66" }
+      "colorRules": {
+        "type": "constant",
+        "color": "#0B4B66"
       }
-    ],
-    "insight": {},
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "_comment": "NEW - UNCONFIRMED: Entrees = Central Facility to Health Facility dispatch (initial stock receipt). Verify this mapping is correct before deploying; no prior config covered this flow."
-  },
+    },
+    {
+      "id": "spaq1Received",
+      "labelKey": "DSS_HEALTH_INVENTORY_SPAQ1_RECEIVED",
+      "valuePath": "spaq1Received",
+      "valueType": "NUMBER",
+      "descriptionParams": {
+        "count": "spaq1Received"
+      },
+      "colorRules": {
+        "type": "constant",
+        "color": "#0B4B66"
+      }
+    },
+    {
+      "id": "spaq2Received",
+      "labelKey": "DSS_HEALTH_INVENTORY_SPAQ2_RECEIVED",
+      "valuePath": "spaq2Received",
+      "valueType": "NUMBER",
+      "descriptionParams": {
+        "count": "spaq2Received"
+      },
+      "colorRules": {
+        "type": "constant",
+        "color": "#0B4B66"
+      }
+    }
+  ],
+  "insight": {},
+  "hideInsights": true,
+  "hideHeaderDenomination": true,
+  "_comment": "NEW - UNCONFIRMED: Entrees = Central Facility to Health Facility dispatch (initial stock receipt). Verify this mapping is correct before deploying; no prior config covered this flow."
+},
 
   "inventoryHealthToStaffMetrics": {
     "chartName": "DSS_HEALTH_INVENTORY_HEALTH_TO_STAFF_METRICS",
@@ -21260,7 +21284,7 @@
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
       "indexName": "ch-stock-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"SPAQ Total Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.country.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ_TOTAL_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ1 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.country.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ1_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ2 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.country.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ2_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"SPAQ Total Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.country.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ_TOTAL_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ1 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.country.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ1_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ2 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.country.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ2_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}",
       "_comment": "Entr\u00e9es"
     },
     {
@@ -21306,7 +21330,7 @@
   ],
   "chartType": "xtable",
   "valueType": "number",
-  "drillChart": "inventorySpaqFlowTableByStateDrillICCD",
+  "drillChart": "inventorySpaqFlowTableHealthToStaffByStateDrillICCD",
   "documentType": "_doc",
   "action": "",
   "plotLabel": "Country",
@@ -21571,7 +21595,7 @@
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\"}",
       "indexName": "ch-stock-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"SPAQ Total Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ_TOTAL_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ1 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ1_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ2 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ2_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"SPAQ Total Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ_TOTAL_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ1 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ1_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ2 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ2_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}",
       "_comment": "Entr\u00e9es"
     },
     {
@@ -21882,7 +21906,7 @@
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
       "indexName": "ch-stock-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"SPAQ Total Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ_TOTAL_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ1 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ1_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ2 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ2_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"SPAQ Total Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ_TOTAL_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ1 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ1_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ2 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ2_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}",
       "_comment": "Entr\u00e9es"
     },
     {
@@ -22193,7 +22217,7 @@
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\"}",
       "indexName": "ch-stock-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"SPAQ Total Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ_TOTAL_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ1 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ1_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ2 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"DISPATCHED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ2_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"SPAQ Total Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ_TOTAL_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ1 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ1_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"SPAQ2 Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"_SPAQ2_RECEIVED\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}",
       "_comment": "Entr\u00e9es"
     },
     {
