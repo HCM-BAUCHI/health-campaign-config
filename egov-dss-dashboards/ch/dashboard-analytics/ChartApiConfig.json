@@ -1082,37 +1082,7 @@
     "hideHeaderDenomination": true,
     "_comment": " "
   },
- "todayPopulationRegisteredNationalICCD": {
-  "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_ICCD",
-  "queries": [
-    {
-      "module": "COMMON",
-      "dateRefField": "Data.additionalDetails.dateOfRegistration",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"population registered today\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}"
-    }
-  ],
-  "chartType": "metric",
-  "valueType": "number",
-  "drillChart": "none",
-  "documentType": "_doc",
-  "filterForCurrentDay": true,
-  "action": "",
-  "aggregationPaths": [
-    "population registered today"
-  ],
-  "insight": {
-    "chartResponseMap": "todayPopulationRegistered",
-    "action": "differenceOfNumbers",
-    "upwardIndicator": "positive",
-    "downwardIndicator": "negative",
-    "textMessage": "$indicator$value% than last $insightInterval",
-    "colorCode": "#228B22",
-    "insightInterval": "day"
-  },
-  "_comment": " "
-},
+ 
   "checklistCompletionRateBySupervisorsBoundarySummaryDistrictICCD": {
     "chartName": "DSS_HEALTH_SUPERVISION_SUPERVISORS_CHECKLISTS_BOUNDARY_SUMMARY_DISTRICT_ICCD",
     "queries": [
@@ -17511,22 +17481,21 @@
   },
   "_comment": " "
   },
-  "todayPopulationRegisteredNationalICCD": {
+ "todayPopulationRegisteredNationalICCD": {
     "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_ICCD",
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.additionalDetails.dateOfRegistration",
+        "dateRefField": "Data.auditDetails.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+        "indexName": "ch-household-member-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
       }
     ],
     "chartType": "metric",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
-   
     "action": "",
     "aggregationPaths": [
       "Population Registered Today"
@@ -17540,17 +17509,17 @@
       "colorCode": "#228B22",
       "insightInterval": "day"
     },
-    "_comment": " "
-  },
-  "overviewTotalPopulationRegisteredICCD": {
+    "_comment": "Switched from ch-project-task-index-v1 (Data.additionalDetails.dateOfRegistration, string-mapped per bug #9) to ch-household-member-index-v1 per DST feedback. Registered = isHeadOfHousehold:false (confirmed: only one head per household, so no other adult members to accidentally include). dateRefField changed to Data.auditDetails.createdTime (genuinely numeric, usable directly for Today/Cumulative toggle, no string-date workaround needed). campaignNumber requestQueryMap now maps directly to Data.campaignNumber.keyword, which IS a real field on this index (confirmed via sample record) - unlike ch-project-beneficiary-index-v1 which only had projectId. NOTE: some older documents in this index appear to lack campaignNumber entirely (mixed schema observed across samples) - if any current-campaign data is affected, this could undercount; worth spot-checking with DST. Field name changed: Data.projectBeneficiaryClientReferenceId.keyword -> Data.householdMember.individualClientReferenceId.keyword (this index's actual field for counting individuals)."
+},
+ "overviewTotalPopulationRegisteredICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_ICCD",
     "queries": [
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Population Registered\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+        "indexName": "ch-household-member-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Population Registered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -17571,8 +17540,8 @@
       "colorCode": "#228B22",
       "insightInterval": "dateRange"
     },
-    "_comment": " "
-  },
+    "_comment": "Switched from ch-project-task-index-v1 to ch-household-member-index-v1 per DST feedback, same as todayPopulationRegisteredNationalICCD. Registered = isHeadOfHousehold:false (confirmed single head per household). dateRefField left as '' (cumulative/all-time), consistent with this card's original cumulative intent - no date-scoping needed here unlike the 'Today' card. Field changed: Data.projectBeneficiaryClientReferenceId.keyword -> Data.householdMember.individualClientReferenceId.keyword."
+},
   "overviewPopulationRegistrationCoverageProvinceICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_ICCD",
     "queries": [
@@ -17580,8 +17549,8 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+        "indexName": "ch-household-member-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
@@ -17610,7 +17579,7 @@
       "colorCode": "#228B22",
       "insightInterval": "dateRange"
     },
-    "_comment": " "
+    "_comment": "Numerator (query 1) switched from ch-project-task-index-v1 to ch-household-member-index-v1 per DST feedback, same pattern as overviewTotalPopulationRegisteredICCD. Denominator (query 2, Target) UNCHANGED - this card's formula is Registered/Target (per bug #13, correctly never changed to Registered/Administered), so ch-project-index-v1's target query stays as-is."
   },
 
 
