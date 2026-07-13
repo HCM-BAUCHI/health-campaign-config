@@ -20030,45 +20030,7 @@
     "_comment": "Two queries: facilityId and transactingFacilityId, with status for rejection detection"
   },
  
-  "redoseBySpaqBarChartLgaICCD": {
-    "chartName": "DSS_HEALTH_REDOSE_BY_SPAQ_BARCHART_District_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}}]}},\"aggs\":{\"SPAQ 1 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}}]}},\"aggs\":{\"SPAQ 2 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
-      }
-    ],
-    "chartType": "line",
-    "isCumulative": false,
-    "valueType": "number",
-    "plotLabel": "none",
-    "drillChart": "redoseBySpaqBarChartHealthFacilityICCD",
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "SPAQ 1 Redose",
-      "SPAQ 2 Redose"
-    ],
-    "sort": "sortKeyAsc",
-    "filterKeys": [
-      {
-        "key": "district",
-        "column": "District"
-      }
-    ],
-    "insight": {},
-    "kind": "drillDown"
-  },
+ 
   "deviceSwitchReasonsByCountryICCD": {
     "chartName": "DSS_HEALTH_DEVICE_SWITCH_BY_REASON",
     "queries": [
@@ -22874,28 +22836,68 @@
   "_comment": "UNCONFIRMED FIELD NAME: boundary_field is a best-guess (Data.auditDetails.createdBy.keyword), likely a UUID not a human-readable username in most DIGIT installs. VERIFY in Dev Tools before deploying - run: GET ch-stock-index-v1/_mapping and check auditDetails.createdBy vs any additionalDetails.username-style field. If createdBy is a UUID, the table will show unreadable IDs instead of names; a username-resolution/lookup field may be needed instead."
 },
   
-  "redoseBySpaqBarChartWardICCD": {
-    "chartName": "DSS_HEALTH_REDOSE_BY_SPAQ_BARCHART_WARD_ICCD",
+    "redoseBySpaqBarChartProvinceICCD": {
+    "chartName": "DSS_HEALTH_REDOSE_BY_SPAQ_BARCHART_PROVINCE_ICCD",
     "queries": [
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}}]}},\"aggs\":{\"SPAQ 1 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}]}}, \"aggs\": {\"SPAQ 1 Redose\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}}]}},\"aggs\":{\"SPAQ 2 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}]}}, \"aggs\": {\"SPAQ 2 Redose\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
       }
     ],
     "chartType": "line",
     "isCumulative": false,
     "valueType": "number",
-    "plotLabel": "Ward",
+    "plotLabel": "Province",
+    "drillChart": "redoseBySpaqBarChartLgaICCD",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "SPAQ 1 Redose",
+      "SPAQ 2 Redose"
+    ],
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "province",
+        "column": "Province"
+      }
+    ],
+    "insight": {},
+    "kind": "drillDown",
+    "_comment": "NEW: Province level, topmost of the required Province->District->HealthFacility chain. Correct SPAQ product names used from the start."
+  },
+  "redoseBySpaqBarChartLgaICCD": {
+    "chartName": "DSS_HEALTH_REDOSE_BY_SPAQ_BARCHART_District_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}]}}, \"aggs\": {\"SPAQ 1 Redose\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}]}}, \"aggs\": {\"SPAQ 2 Redose\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "plotLabel": "none",
     "drillChart": "redoseBySpaqBarChartHealthFacilityICCD",
     "documentType": "_doc",
     "action": "",
@@ -22906,12 +22908,13 @@
     "sort": "sortKeyAsc",
     "filterKeys": [
       {
-        "key": "ward",
-        "column": "Ward"
+        "key": "district",
+        "column": "District"
       }
     ],
     "insight": {},
-    "kind": "drillDown"
+    "kind": "drillDown",
+    "_comment": "Already had correct SPAQ product names. drillChart unchanged (already correctly pointed to HealthFacility). Parent context 'province' preserved."
   },
   "redoseBySpaqBarChartHealthFacilityICCD": {
     "chartName": "DSS_HEALTH_REDOSE_BY_SPAQ_BARCHART_HEALTH_FACILITY_ICCD",
@@ -22921,21 +22924,21 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}}]}},\"aggs\":{\"SPAQ 1 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}]}}, \"aggs\": {\"SPAQ 1 Redose\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}}]}},\"aggs\":{\"SPAQ 2 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}]}}, \"aggs\": {\"SPAQ 2 Redose\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
       }
     ],
     "chartType": "line",
     "isCumulative": false,
     "valueType": "number",
     "plotLabel": "Health Facility",
-    "drillChart": "redoseBySpaqBarChartCommunityICCD",
+    "drillChart": "none",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
@@ -22950,7 +22953,48 @@
       }
     ],
     "insight": {},
-    "kind": "drillDown"
+    "kind": "drillDown",
+    "_comment": "FIXED: productName filter was wrong literal 'SPAQ 1'/'SPAQ 2' (always returned zero results) - now uses correct 'SPAQ (3 \u00e0 11 mois)'/'SPAQ (12 \u00e0 59 mois)'. drillChart changed from redoseBySpaqBarChartCommunityICCD to 'none' - Health Facility is now the terminal level of the required Province->District->HealthFacility chain. Community left orphaned/unlinked."
+  },
+  "redoseBySpaqBarChartWardICCD": {
+    "chartName": "DSS_HEALTH_REDOSE_BY_SPAQ_BARCHART_WARD_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}]}}, \"aggs\": {\"SPAQ 1 Redose\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-project-task-index-v1",
+        "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}]}}, \"aggs\": {\"SPAQ 2 Redose\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "plotLabel": "Ward",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "SPAQ 1 Redose",
+      "SPAQ 2 Redose"
+    ],
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "ward",
+        "column": "Ward"
+      }
+    ],
+    "insight": {},
+    "kind": "drillDown",
+    "_comment": "FIXED product name bug only (SPAQ 1/2 -> correct names). NOT part of the required Province->District->HealthFacility chain - left unlinked (drillChart: none), same treatment as other orphaned Ward-level charts in this project. FLAG: original config's terms field was Data.boundaryHierarchy.HEALTHFACILITY.keyword despite being labeled 'Ward' (plotLabel/filterKey say Ward, but it was actually aggregating on Health Facility) - preserved as-is since fixing this mismatch wasn't requested, but worth review separately."
   },
   "redoseBySpaqBarChartCommunityICCD": {
     "chartName": "DSS_HEALTH_REDOSE_BY_SPAQ_BARCHART_COMMUNITY_ICCD",
@@ -22960,14 +23004,14 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 1\"}}]}},\"aggs\":{\"SPAQ 1 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}]}}, \"aggs\": {\"SPAQ 1 Redose\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ 2\"}}]}},\"aggs\":{\"SPAQ 2 Redose\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}]}}, \"aggs\": {\"SPAQ 2 Redose\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -22989,7 +23033,8 @@
       }
     ],
     "insight": {},
-    "kind": "drillDown"
+    "kind": "drillDown",
+    "_comment": "FIXED product name bug only (SPAQ 1/2 -> correct names). NOT part of the required chain - left unlinked (drillChart: none)."
   },
   "summaryTeamPerformanceByTeam": {
     "kind": "drillDown",

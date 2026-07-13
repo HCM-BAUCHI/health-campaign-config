@@ -770,8 +770,8 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "redoseBySpaqBarChartLgaICCD",
-                  "name": "DSS_HEALTH_REDOSE_BY_SPAQ_BARCHART_LGA_ICCD",
+                  "id": "redoseBySpaqBarChartProvinceICCD",
+                  "name": "DSS_HEALTH_REDOSE_BY_SPAQ_BARCHART_PROVINCE_ICCD",
                   "code": "",
                   "chartType": "sideBySideBar",
                   "filter": "",
