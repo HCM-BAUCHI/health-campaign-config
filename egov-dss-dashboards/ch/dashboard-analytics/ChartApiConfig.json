@@ -16520,8 +16520,8 @@
       "module": "COMMON",
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 3-11 Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      "indexName": "ch-household-member-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 3-11 Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
     }
   ],
   "chartType": "metric",
@@ -16543,7 +16543,7 @@
     "colorCode": "#228B22",
     "insightInterval": "dateRange"
   },
-  "_comment": " "
+  "_comment": "FIXED: query 2 (Registered denominator) was still on ch-project-task-index-v1 with the old exists:dateOfRegistration filter - never switched when the rest of the Registered/Couvert queries moved to ch-household-member-index-v1. Now uses isHeadOfHousehold:false + age range on ch-household-member-index-v1, consistent with the numerator's data model expectations. Query 1 (Administered) left unchanged - correctly stays on ch-project-task-index-v1. UNVERIFIED: age unit."
 },
   "overviewPopulationAdministered3to11MaleICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_3_11_MALE_ICCD",
@@ -16717,7 +16717,7 @@
     "insight": {},
     "_comment": " "
   },
-  "overviewPopulationCoverageAchievedProvince12to59ICCD": {
+ "overviewPopulationCoverageAchievedProvince12to59ICCD": {
   "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_12_59_ICCD",
   "queries": [
     {
@@ -16731,8 +16731,8 @@
       "module": "COMMON",
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}},{\"range\":{\"Data.age\":{\"gte\":12}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      "indexName": "ch-household-member-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}},{\"range\":{\"Data.age\":{\"gte\":12}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
     }
   ],
   "chartType": "metric",
@@ -16754,7 +16754,7 @@
     "colorCode": "#228B22",
     "insightInterval": "dateRange"
   },
-  "_comment": " "
+  "_comment": "FIXED: query 2 (Registered denominator) switched from ch-project-task-index-v1 (exists:dateOfRegistration) to ch-household-member-index-v1 (isHeadOfHousehold:false), same fix as the 3-11 sibling. Query 1 (Administered) unchanged. UNVERIFIED: age unit."
   },
   "overviewPopulationAdministered12to59MaleICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_12_59_MALE_ICCD",
