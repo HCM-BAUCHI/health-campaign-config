@@ -17566,7 +17566,7 @@
     },
     "_comment": "Switched from ch-project-task-index-v1 to ch-household-member-index-v1 per DST feedback, same as todayPopulationRegisteredNationalICCD. Registered = isHeadOfHousehold:false (confirmed single head per household). dateRefField left as '' (cumulative/all-time), consistent with this card's original cumulative intent - no date-scoping needed here unlike the 'Today' card. Field changed: Data.projectBeneficiaryClientReferenceId.keyword -> Data.householdMember.individualClientReferenceId.keyword."
 },
-  "overviewPopulationRegistrationCoverageProvinceICCD": {
+"overviewPopulationRegistrationCoverageProvinceICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_ICCD",
     "queries": [
       {
@@ -17579,9 +17579,9 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -17603,8 +17603,8 @@
       "colorCode": "#228B22",
       "insightInterval": "dateRange"
     },
-    "_comment": "Numerator (query 1) switched from ch-project-task-index-v1 to ch-household-member-index-v1 per DST feedback, same pattern as overviewTotalPopulationRegisteredICCD. Denominator (query 2, Target) UNCHANGED - this card's formula is Registered/Target (per bug #13, correctly never changed to Registered/Administered), so ch-project-index-v1's target query stays as-is."
-  },
+    "_comment": "FIXED: Target query (2) was isolating the NATIONAL-level record (must_not: province, no province filter in requestQueryMap) while the Registered numerator was already province-scoped - mismatched scope caused artificially wrong %. Now Target isolates PROVINCE-level records (exists: province, must_not: district) and requestQueryMap includes 'province' so it filters to the same selected province as the numerator."
+},
 
 
 
