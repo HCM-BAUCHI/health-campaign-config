@@ -1653,7 +1653,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "summaryTeamPerformanceByDistrictICCD",
+                  "id": "summaryTeamPerformanceByCountryICCD",
                   "name": "DSS_HEALTH_SUMMARY_TEAM_PERFORMANCE_BY_DISTRICT_ICCD",
                   "code": "",
                   "chartType": "table",
