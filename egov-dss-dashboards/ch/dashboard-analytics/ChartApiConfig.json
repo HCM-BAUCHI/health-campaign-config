@@ -17614,7 +17614,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.householdMember.auditDetails.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\",\"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\",  \"province\": \"Data.boundaryHierarchy.province.keyword\",\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 3-11\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}, {\"term\": {\"Data.additionalDetails.gender.keyword\": \"MALE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
     }
@@ -17636,7 +17636,7 @@
     "colorCode": "#228B22",
     "insightInterval": "day"
   },
-  "_comment": "Switched to ch-household-member-index-v1, isHeadOfHousehold:false + gender:MALE. dateRefField path fixed. UNVERIFIED: age unit."
+  "_comment": "Switched to ch-household-member-index-v1, dateRefField path fixed. UNVERIFIED: age unit."
 },
 "totalPopulationRegistered3to11MaleNationalICCD": {
   "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_3_11_MALE_ICCD",
@@ -18055,7 +18055,7 @@
     "Population Registered Today 12-59"
   ],
   "insight": {
-    "chartResponseMap": "todayPopulationRegistered12to59FeMaleNationalICCD",
+    "chartResponseMap": "todayPopulationRegistered12to59FemaleNationalICCD",
     "action": "differenceOfNumbers",
     "upwardIndicator": "positive",
     "downwardIndicator": "negative",
