@@ -7152,7 +7152,7 @@
     "_comment": " "
   },
   
-  "populationCoverageRankingBarchartByDistrictICCD": {
+ "populationCoverageRankingBarchartByDistrictICCD": {
   "chartName": "DSS_HEALTH_POPULATION_COVERAGE_BAR_CHART_BY_DISTRICT_ICCD",
   "queries": [
     {
@@ -7173,7 +7173,7 @@
   "chartType": "line",
   "isCumulative": false,
   "valueType": "percentage",
-  "drillChart": "populationCoverageRankingBarchartByAPICCD",
+  "drillChart": "populationCoverageRankingBarchartByLocalityICCD",
   "documentType": "_doc",
   "action": "percentage",
   "aggregationPaths": [
@@ -7188,7 +7188,7 @@
   ],
   "insight": {},
   "kind": "drillDown",
-  "_comment": "FIXED: Target query was missing must_not:ward - it was summing target records for EVERY level below district (ward/HealthFacility/locality all carry a district field too), massively over-counting the denominator and crushing the % (this is the likely cause of the 0.5% vs 95% bug reported earlier). Now correctly isolates district-level-only target records."
+  "_comment": "FIXED: Target query was missing must_not:ward - it was summing target records for EVERY level below district, massively over-counting the denominator (likely cause of the 0.5% vs 95% bug). Now correctly isolates district-level-only target records. drillChart now SKIPS Ward (populationCoverageRankingBarchartByAPICCD) and points directly to Health Facility (populationCoverageRankingBarchartByLocalityICCD), since this campaign has no ward-level facilities. Ward chart left orphaned/unlinked, not deleted."
 },
 "populationCoverageRankingBarchartByAPICCD": {
   "kind": "drillDown",
