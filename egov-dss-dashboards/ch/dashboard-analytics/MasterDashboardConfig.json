@@ -310,9 +310,7 @@
       "isCollapsible": false,
       "charts": [
         { "id": "todayPopulationRegistered3to11MaleNationalICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_3_11_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "totalPopulationRegistered3to11MaleNationalICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_3_11_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationTargetedProvince3to11ICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_3_11_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationRegistrationCoverageProvince3to11MaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_3_11_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        { "id": "totalPopulationRegistered3to11MaleNationalICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_3_11_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
       ]
     },
     {
@@ -324,9 +322,7 @@
       "isCollapsible": false,
       "charts": [
         { "id": "todayPopulationRegistered12to59MaleNationalICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_12_59_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "totalPopulationRegistered12to59MaleNationalICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_12_59_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationTargetedProvince12to59MaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_12_59_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationRegistrationCoverageProvince12to59MaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_12_59_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        { "id": "totalPopulationRegistered12to59MaleNationalICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_12_59_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
       ]
     },
     {
@@ -338,9 +334,7 @@
       "isCollapsible": false,
       "charts": [
         { "id": "todayPopulationRegisteredMaleNationalICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_Male_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewTotalPopulationRegisteredMaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_Male_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationTargetedProvinceICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_Male_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationRegistrationCoverageProvinceMaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_Male_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        { "id": "overviewTotalPopulationRegisteredMaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_Male_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
       ]
     }
   ]
@@ -358,9 +352,7 @@
       "isCollapsible": false,
       "charts": [
         { "id": "overviewPopulationAdministered3to11MaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_3_11_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewTotalPopulationAdministered3to11MaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_3_11_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationTargetedProvince3to11MaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_3_11_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationCoverageAchieved3to11MaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_3_11_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        { "id": "overviewTotalPopulationAdministered3to11MaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_3_11_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
       ]
     },
     {
@@ -372,9 +364,7 @@
       "isCollapsible": false,
       "charts": [
         { "id": "overviewPopulationAdministered12to59MaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_12_59_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewTotalPopulationAdministered12to59MaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_12_59_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationTargetedProvince12to59MaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_12_59_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationCoverageAchievedProvince12to59MaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_12_59_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        { "id": "overviewTotalPopulationAdministered12to59MaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_12_59_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
       ]
     },
     {
@@ -386,9 +376,8 @@
       "isCollapsible": false,
       "charts": [
         { "id": "overviewPopulationAdministeredMaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewTotalPopulationAdministeredMaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationTargetedProvinceMaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationCoverageAchievedProvinceMaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        { "id": "overviewTotalPopulationAdministeredMaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_MALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+     
       ]
     }
   ]
@@ -406,9 +395,8 @@
       "isCollapsible": false,
       "charts": [
         { "id": "todayPopulationRegistered3to11FemaleNationalICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_3_11_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "totalPopulationRegistered3to11FemaleNationalICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_3_11_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationTargetedProvince3to11ICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_3_11_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationRegistrationCoverageProvince3to11FemaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_3_11_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        { "id": "totalPopulationRegistered3to11FemaleNationalICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_3_11_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        
       ]
     },
     {
@@ -420,9 +408,8 @@
       "isCollapsible": false,
       "charts": [
         { "id": "todayPopulationRegistered12to59FemaleNationalICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_12_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "totalPopulationRegistered12to59FemaleNationalICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_12_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationTargetedProvince12to59FemaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_12_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationRegistrationCoverageProvince12to59FemaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_12_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        { "id": "totalPopulationRegistered12to59FemaleNationalICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_12_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+       
       ]
     },
     {
@@ -434,9 +421,8 @@
       "isCollapsible": false,
       "charts": [
         { "id": "todayPopulationRegisteredFemaleNationalICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_3_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewTotalPopulationRegisteredFemaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_3_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationTargetedProvinceICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_3_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationRegistrationCoverageProvinceFemaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_3_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        { "id": "overviewTotalPopulationRegisteredFemaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_3_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        
       ]
     }
   ]
@@ -454,9 +440,8 @@
       "isCollapsible": false,
       "charts": [
         { "id": "overviewPopulationAdministered3to11FemaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_3_11_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewTotalPopulationAdministered3to11FemaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_3_11_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationTargetedProvince3to11FemaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_3_11_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationCoverageAchieved3to11FemaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_3_11_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        { "id": "overviewTotalPopulationAdministered3to11FemaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_3_11_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+       
       ]
     },
     {
@@ -468,9 +453,8 @@
       "isCollapsible": false,
       "charts": [
         { "id": "overviewPopulationAdministered12to59FemaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_12_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewTotalPopulationAdministered12to59FemaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_12_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationTargetedProvince12to59FemaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_12_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationCoverageAchievedProvince12to59FemaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_12_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        { "id": "overviewTotalPopulationAdministered12to59FemaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_12_59_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        
       ]
     },
     {
@@ -482,9 +466,8 @@
       "isCollapsible": false,
       "charts": [
         { "id": "overviewPopulationAdministeredFemaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewTotalPopulationAdministeredFemaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationTargetedProvinceFemaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] },
-        { "id": "overviewPopulationCoverageAchievedProvinceFemaleICCD", "name": "DSS_HEALTH_OVERVIEW_POPULATION_COVERAGE_ACHIEVED_PROVINCE_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+        { "id": "overviewTotalPopulationAdministeredFemaleICCD", "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_FEMALE_ICCD", "code": "", "chartType": "metric", "filter": "", "headers": [] }
+       
       ]
     }
   ]
