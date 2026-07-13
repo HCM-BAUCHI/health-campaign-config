@@ -21330,7 +21330,7 @@
   ],
   "chartType": "xtable",
   "valueType": "number",
-  "drillChart": "inventorySpaqFlowTableHealthToStaffByStateDrillICCD",
+  "drillChart": "inventorySpaqFlowTableByStateDrillICCD",
   "documentType": "_doc",
   "action": "",
   "plotLabel": "Country",
