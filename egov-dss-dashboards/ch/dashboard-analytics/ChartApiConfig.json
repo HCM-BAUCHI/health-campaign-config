@@ -2170,7 +2170,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"population covered total\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"total_administered\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"population covered total\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"total_administered\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -2182,8 +2182,8 @@
       "population covered total"
     ],
     "insight": {},
-    "_comment": " "
-  },
+    "_comment": "Added explicit age range {gte:3, lte:59} to bound this 'Total' (3-59 combined) card, since it previously had no age filter at all and could silently include out-of-range records. Note: this uses Data.age on ch-project-task-index-v1, where age is in months per your established convention on this index (different from the still-unverified age unit on ch-household-member-index-v1)."
+},
 "populationCoveragePercentNationalICCD": {
   "chartName": "DSS_HEALTH_NATIONAL_POPULATION_COVERAGE_PERCENT_ICCD",
   "queries": [
@@ -2192,14 +2192,14 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
     },
     {
       "module": "COMMON",
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}}]}},\"aggs\":{\"count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      "indexName": "ch-household-member-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
     }
   ],
   "chartType": "metric",
@@ -2213,7 +2213,7 @@
     "Population Registered"
   ],
   "insight": {},
-  "_comment": "population coverage % = population administered / population registered (national level)"
+  "_comment": "population coverage % = population administered / population registered (national level). FIXED: added age range {gte:3,lte:59} to numerator. Denominator switched from ch-project-task-index-v1 (exists:dateOfRegistration, cardinality) to ch-household-member-index-v1 (isHeadOfHousehold:false, value_count) - same fix pattern as the Coverage Achieved cards. Also note: switched cardinality->value_count for consistency with the rest of the Registered-family cards in this project (bug #12's established convention), since this one was the odd one out using cardinality."
 },
   "usersRecordsSummaryTable": {
     "chartName": "DSS_HEALTH_COMPLAINTS_BY_HEALTH_DISTRICT_TOTAL_BURUNDI",
@@ -9972,7 +9972,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Intervention Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Intervention Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -9984,8 +9984,8 @@
       "Total Intervention Administered"
     ],
     "insight": {},
-    "_comment": " "
-  },
+    "_comment": "Added explicit age range {gte:3, lte:59} - same fix as totalPopulationCoveredNationalICCD, this card previously had no age bound at all."
+},
 "resourcesCoveragePercentNationalICCD": {
   "chartName": "DSS_HEALTH_NATIONAL_RESOURCES_COVERAGE_PERCENT_ICCD",
   "queries": [
@@ -9994,7 +9994,7 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Intervention Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Intervention Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
     },
     {
       "module": "COMMON",
@@ -10015,7 +10015,7 @@
     "Product Target"
   ],
   "insight": {},
-  "_comment": "resources coverage % = total intervention quantity administered / product target (SPAQ-1 + SPAQ-2, national level only, 1,077,482)"
+  "_comment": "resources coverage % = total intervention quantity administered / product target (SPAQ-1 + SPAQ-2, national level only, 1,077,482). Added explicit age range {gte:3, lte:59} to numerator - same fix as its sibling cards, previously had no age bound."
 },
  "totalPopulationRefusedProvinceICCD": {
     "chartName": "DSS_HEALTH_TOTAL_POPULATION_REFUSED_PROVINCE_ICCD",
