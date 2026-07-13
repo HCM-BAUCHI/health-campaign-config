@@ -471,15 +471,15 @@
           "vizArray": [
             {
               "id": 715,
-              "name": "DSS_HEALTH_POPULATION_ADMINISTERED_3_11",
-              "label": "DSS_HEALTH_POPULATION_ADMINISTERED_3_11",
+              "name": "DSS_HEALTH_POPULATION_ADMINISTERED_3_11_MALE",
+              "label": "DSS_HEALTH_POPULATION_ADMINISTERED_3_11_MALE",
               "vizType": "stacked-collection",
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
                 {
                   "id": "overviewPopulationAdministered3to11MaleICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_3_11_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_3_11_MALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -487,7 +487,7 @@
                 },
                 {
                   "id": "overviewTotalPopulationAdministered3to11MaleICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_3_11_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_3_11_MALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -513,8 +513,8 @@
             },
             {
               "id": 716,
-              "name": "DSS_HEALTH_POPULATION_ADMINISTERED_12_59",
-              "label": "DSS_HEALTH_POPULATION_ADMINISTERED_12_59",
+              "name": "DSS_HEALTH_POPULATION_ADMINISTERED_12_59_Male",
+              "label": "DSS_HEALTH_POPULATION_ADMINISTERED_12_59_Male",
               "vizType": "stacked-collection",
               "noUnit": false,
               "isCollapsible": false,
@@ -555,8 +555,8 @@
             },
             {
               "id": 710,
-              "name": "DSS_HEALTH_POPULATION_ADMINISTERED_3_59",
-              "label": "DSS_HEALTH_POPULATION_ADMINISTERED_3_59",
+              "name": "DSS_HEALTH_POPULATION_ADMINISTERED_3_59_Male",
+              "label": "DSS_HEALTH_POPULATION_ADMINISTERED_3_59_Male",
               "vizType": "stacked-collection",
               "noUnit": false,
               "isCollapsible": false,
@@ -603,15 +603,15 @@
           "vizArray": [
             {
               "id": 715,
-              "name": "DSS_HEALTH_POPULATION_REGISTERED_3_11",
-              "label": "DSS_HEALTH_POPULATION_REGISTERED_3_11",
+              "name": "DSS_HEALTH_POPULATION_REGISTERED_3_11_Male",
+              "label": "DSS_HEALTH_POPULATION_REGISTERED_3_11_Male",
               "vizType": "stacked-collection",
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
                 {
                   "id": "todayPopulationRegistered3to11MaleNationalICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_3_11_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_3_11_MALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -619,7 +619,7 @@
                 },
                 {
                   "id": "totalPopulationRegistered3to11MaleNationalICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_3_11_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_3_11_MALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -627,7 +627,7 @@
                 },
                 {
                   "id": "overviewPopulationTargetedProvince3to11ICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_3_11_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_3_11_MALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -635,7 +635,7 @@
                 },
                 {
                   "id": "overviewPopulationRegistrationCoverageProvince3to11MaleICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_3_11_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_3_11_MALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -645,15 +645,15 @@
             },
             {
               "id": 716,
-              "name": "DSS_HEALTH_POPULATION_REGISTERED_12_59",
-              "label": "DSS_HEALTH_POPULATION_REGISTERED_12_59",
+              "name": "DSS_HEALTH_POPULATION_REGISTERED_12_59_Male",
+              "label": "DSS_HEALTH_POPULATION_REGISTERED_12_59_Male",
               "vizType": "stacked-collection",
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
                 {
                   "id": "todayPopulationRegistered12to59MaleNationalICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_12_59_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_12_59_MALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -661,15 +661,15 @@
                 },
                 {
                   "id": "totalPopulationRegistered12to59MaleNationalICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_12_59_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_12_59_MALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
                 {
-                  "id": "overviewPopulationTargetedProvince12to59ICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_12_59_ICCD",
+                  "id": "overviewPopulationTargetedProvince12to59MaleICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_12_59_MALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -677,7 +677,7 @@
                 },
                 {
                   "id": "overviewPopulationRegistrationCoverageProvince12to59MaleICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_12_59_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_12_59_MALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -687,15 +687,15 @@
             },
             {
               "id": 710,
-              "name": "DSS_HEALTH_POPULATION_REGISTERED_3_59",
-              "label": "DSS_HEALTH_POPULATION_REGISTERED_3_59",
+              "name": "DSS_HEALTH_POPULATION_REGISTERED_3_59_Male",
+              "label": "DSS_HEALTH_POPULATION_REGISTERED_3_59_Male",
               "vizType": "stacked-collection",
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
                 {
                   "id": "todayPopulationRegisteredMaleNationalICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_Male_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -703,7 +703,7 @@
                 },
                 {
                   "id": "overviewTotalPopulationRegisteredMaleICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_Male_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -711,7 +711,7 @@
                 },
                 {
                   "id": "overviewPopulationTargetedProvinceICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_Male_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -719,7 +719,7 @@
                 },
                 {
                   "id": "overviewPopulationRegistrationCoverageProvinceMaleICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_Male_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -735,15 +735,15 @@
           "vizArray": [
             {
               "id": 715,
-              "name": "DSS_HEALTH_POPULATION_ADMINISTERED_3_11",
-              "label": "DSS_HEALTH_POPULATION_ADMINISTERED_3_11",
+              "name": "DSS_HEALTH_POPULATION_ADMINISTERED_3_11_Female",
+              "label": "DSS_HEALTH_POPULATION_ADMINISTERED_3_11_Female",
               "vizType": "stacked-collection",
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
                 {
                   "id": "overviewPopulationAdministered3to11FemaleICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_3_11_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_3_11_FEMALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -751,7 +751,7 @@
                 },
                 {
                   "id": "overviewTotalPopulationAdministered3to11FemaleICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_3_11_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_ADMINISTERED_3_11_FEMALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -777,8 +777,8 @@
             },
             {
               "id": 716,
-              "name": "DSS_HEALTH_POPULATION_ADMINISTERED_12_59",
-              "label": "DSS_HEALTH_POPULATION_ADMINISTERED_12_59",
+              "name": "DSS_HEALTH_POPULATION_ADMINISTERED_12_59_Female",
+              "label": "DSS_HEALTH_POPULATION_ADMINISTERED_12_59_Female",
               "vizType": "stacked-collection",
               "noUnit": false,
               "isCollapsible": false,
@@ -819,8 +819,8 @@
             },
             {
               "id": 710,
-              "name": "DSS_HEALTH_POPULATION_ADMINISTERED_3_59",
-              "label": "DSS_HEALTH_POPULATION_ADMINISTERED_3_59",
+              "name": "DSS_HEALTH_POPULATION_ADMINISTERED_3_59_Female",
+              "label": "DSS_HEALTH_POPULATION_ADMINISTERED_3_59_Female",
               "vizType": "stacked-collection",
               "noUnit": false,
               "isCollapsible": false,
@@ -867,15 +867,15 @@
           "vizArray": [
             {
               "id": 715,
-              "name": "DSS_HEALTH_POPULATION_REGISTERED_3_11",
-              "label": "DSS_HEALTH_POPULATION_REGISTERED_3_11",
+              "name": "DSS_HEALTH_POPULATION_REGISTERED_3_11_Female",
+              "label": "DSS_HEALTH_POPULATION_REGISTERED_3_11_Female",
               "vizType": "stacked-collection",
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
                 {
                   "id": "todayPopulationRegistered3to11FemaleNationalICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_3_11_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_3_11_FEMALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -883,7 +883,7 @@
                 },
                 {
                   "id": "totalPopulationRegistered3to11FemaleNationalICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_3_11_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_3_11_FEMALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -891,7 +891,7 @@
                 },
                 {
                   "id": "overviewPopulationTargetedProvince3to11ICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_3_11_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_3_11_FEMALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -899,7 +899,7 @@
                 },
                 {
                   "id": "overviewPopulationRegistrationCoverageProvince3to11FemaleICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_3_11_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_3_11_FEMALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -909,15 +909,15 @@
             },
             {
               "id": 716,
-              "name": "DSS_HEALTH_POPULATION_REGISTERED_12_59",
-              "label": "DSS_HEALTH_POPULATION_REGISTERED_12_59",
+              "name": "DSS_HEALTH_POPULATION_REGISTERED_12_59_Female",
+              "label": "DSS_HEALTH_POPULATION_REGISTERED_12_59_Female",
               "vizType": "stacked-collection",
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
                 {
                   "id": "todayPopulationRegistered12to59FemaleNationalICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_12_59_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_12_59_FEMALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -925,15 +925,15 @@
                 },
                 {
                   "id": "totalPopulationRegistered12to59FemaleNationalICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_12_59_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_12_59_FEMALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
                 {
-                  "id": "overviewPopulationTargetedProvince12to59ICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_12_59_ICCD",
+                  "id": "overviewPopulationTargetedProvince12to59FemaleICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_12_59_FEMALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -941,7 +941,7 @@
                 },
                 {
                   "id": "overviewPopulationRegistrationCoverageProvince12to59FemaleICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_12_59_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_12_59_FEMALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -951,15 +951,15 @@
             },
             {
               "id": 710,
-              "name": "DSS_HEALTH_POPULATION_REGISTERED_3_59",
-              "label": "DSS_HEALTH_POPULATION_REGISTERED_3_59",
+              "name": "DSS_HEALTH_POPULATION_REGISTERED_3_59_Female",
+              "label": "DSS_HEALTH_POPULATION_REGISTERED_3_59_Female",
               "vizType": "stacked-collection",
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
                 {
                   "id": "todayPopulationRegisteredFemaleNationalICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTERED_3_59_FEMALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -967,7 +967,7 @@
                 },
                 {
                   "id": "overviewTotalPopulationRegisteredFemaleICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_3_59_FEMALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -975,7 +975,7 @@
                 },
                 {
                   "id": "overviewPopulationTargetedProvinceICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_3_59_FEMALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -983,7 +983,7 @@
                 },
                 {
                   "id": "overviewPopulationRegistrationCoverageProvinceFemaleICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_ICCD",
+                  "name": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_3_59_FEMALE_ICCD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
