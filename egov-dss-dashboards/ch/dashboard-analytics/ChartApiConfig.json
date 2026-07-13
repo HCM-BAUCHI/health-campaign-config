@@ -17614,7 +17614,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.householdMember.auditDetails.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\",\"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\",\"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 3-11\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}, {\"term\": {\"Data.additionalDetails.gender.keyword\": \"MALE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
     }
@@ -17644,7 +17644,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 3-11\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}, {\"term\": {\"Data.additionalDetails.gender.keyword\": \"MALE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
     }
@@ -17743,7 +17743,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 12-59\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}, {\"term\": {\"Data.additionalDetails.gender.keyword\": \"MALE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
     }
@@ -17912,7 +17912,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.householdMember.auditDetails.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\",  \"state\": \"Data.boundaryHierarchy.province.keyword\",\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\",  \"province\": \"Data.boundaryHierarchy.province.keyword\",\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 3-11\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}, {\"term\": {\"Data.additionalDetails.gender.keyword\": \"FEMALE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
     }
@@ -17942,7 +17942,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 3-11\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}, {\"term\": {\"Data.additionalDetails.gender.keyword\": \"FEMALE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
     }
@@ -18041,7 +18041,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 12-59\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}, {\"term\": {\"Data.additionalDetails.gender.keyword\": \"FEMALE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
     }
