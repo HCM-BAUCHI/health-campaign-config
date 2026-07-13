@@ -699,8 +699,8 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "beneficiariesNotAdministeredDistrictICCD",
-                  "name": "DSS_HEALTH_BENEFICIARIES_NOT_ADMINISTERED_DISTRICT_ICCD",
+                  "id": "beneficiariesNotAdministeredProvinceICCD",
+                  "name": "DSS_HEALTH_BENEFICIARIES_NOT_ADMINISTERED_PROVINCE_ICCD",
                   "code": "",
                   "chartType": "bar",
                   "tabName": "BENEFICIARY",
