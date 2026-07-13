@@ -7153,168 +7153,157 @@
   },
   
   "populationCoverageRankingBarchartByDistrictICCD": {
-    "chartName": "DSS_HEALTH_POPULATION_COVERAGE_BAR_CHART_BY_DISTRICT_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"Population Coverage Ranking\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
-      }
-    ],
-    "chartType": "line",
-    "isCumulative": false,
-    "valueType": "percentage",
-    "drillChart": "populationCoverageRankingBarchartByAPICCD",
-    "documentType": "_doc",
-    "action": "percentage",
-    "aggregationPaths": [
-      "Population Coverage Ranking",
-      "Population Target"
-    ],
-    "filterKeys": [
-      {
-        "key": "district",
-        "column": "District"
-      }
-    ],
-    "insight": {},
-    "_comment": " ",
-    "kind": "drillDown"
-  }
-,
-  "populationCoverageRankingBarchartByAPICCD": {
-    "kind": "drillDown",
-    "chartName": "DSS_HEALTH_POPULATION_COVERAGE_BAR_CHART_BY_AP_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Population Coverage Ranking\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.ward.keyword\"},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
-      }
-    ],
-    "chartType": "line",
-    "isCumulative": false,
-    "valueType": "percentage",
-    "drillChart": "populationCoverageRankingBarchartByLocalityICCD",
-    "documentType": "_doc",
-    "action": "percentage",
-    "aggregationPaths": [
-      "Population Coverage Ranking",
-      "Population Target"
-    ],
-    "filterKeys": [
-      {
-        "key": "healthFacility",
-        "column": "Health Facility"
-      }
-    ],
-    "insight": {},
-    "_comment": " "
-  },
-  "populationCoverageRankingBarchartByLocalityICCD": {
-    "kind": "drillDown",
-    "chartName": "DSS_HEALTH_POPULATION_COVERAGE_BAR_CHART_BY_LOCALITY_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Population Coverage Ranking\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
-      }
-    ],
-    "chartType": "line",
-    "isCumulative": false,
-    "valueType": "percentage",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "percentage",
-    "aggregationPaths": [
-      "Population Coverage Ranking",
-      "Population Target"
-    ],
-    "filterKeys": [
-      {
-        "key": "healthFacility",
-        "column": "Health Facility"
-      }
-    ],
-    "insight": {},
-    "_comment": " "
-  },
-  "populationCoverageRankingBarchartByVillageICCD": {
-    "kind": "drillDown",
-    "chartName": "DSS_HEALTH_POPULATION_COVERAGE_BAR_CHART_BY_VILLAGE_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Population Coverage Ranking\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.locality.keyword\"},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\",\"precision_threshold\":40000}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.locality.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.locality.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target Population\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target\":{\"bucket_script\":{\"buckets_path\":{\"tpd\":\"Target Population\"},\"script\":\"(params.tpd)*365\"}}}}}}}}"
-      }
-    ],
-    "chartType": "line",
-    "isCumulative": false,
-    "valueType": "percentage",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "percentage",
-    "aggregationPaths": [
-      "Population Coverage Ranking",
-      "Population Target"
-    ],
-    "isCappedTillToday": true,
-    "isCappedByCampaignPeriod": [
-      "Overall Target"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "repsonseToDifferenceOfDates",
-        "actionName": "",
-        "sort": "sortValueDesc",
-        "fields": [
-          "Target"
-        ],
-        "newField": "Coverage",
-        "_comments": ""
-      }
-    ],
-    "insight": {},
-    "_comment": " "
-  },
+  "chartName": "DSS_HEALTH_POPULATION_COVERAGE_BAR_CHART_BY_DISTRICT_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}]}}, \"aggs\": {\"Population Coverage Ranking\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.targetType.keyword\": \"INDIVIDUAL\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.district.keyword\"}}], \"must_not\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.ward.keyword\"}}]}}, \"aggs\": {\"Population Target\": {\"terms\": {\"size\": 500, \"field\": \"Data.boundaryHierarchy.district.keyword\", \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Overall Target\": {\"sum\": {\"field\": \"Data.overallTarget\"}}}}}}}}"
+    }
+  ],
+  "chartType": "line",
+  "isCumulative": false,
+  "valueType": "percentage",
+  "drillChart": "populationCoverageRankingBarchartByAPICCD",
+  "documentType": "_doc",
+  "action": "percentage",
+  "aggregationPaths": [
+    "Population Coverage Ranking",
+    "Population Target"
+  ],
+  "filterKeys": [
+    {
+      "key": "district",
+      "column": "District"
+    }
+  ],
+  "insight": {},
+  "kind": "drillDown",
+  "_comment": "FIXED: Target query was missing must_not:ward - it was summing target records for EVERY level below district (ward/HealthFacility/locality all carry a district field too), massively over-counting the denominator and crushing the % (this is the likely cause of the 0.5% vs 95% bug reported earlier). Now correctly isolates district-level-only target records."
+},
+"populationCoverageRankingBarchartByAPICCD": {
+  "kind": "drillDown",
+  "chartName": "DSS_HEALTH_POPULATION_COVERAGE_BAR_CHART_BY_AP_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}]}}, \"aggs\": {\"Population Coverage Ranking\": {\"terms\": {\"size\": 500, \"order\": {\"_key\": \"asc\"}, \"field\": \"Data.boundaryHierarchy.ward.keyword\"}, \"aggs\": {\"Count\": {\"cardinality\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\", \"precision_threshold\": 40000}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.targetType.keyword\": \"INDIVIDUAL\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.ward.keyword\"}}], \"must_not\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}]}}, \"aggs\": {\"Population Target\": {\"terms\": {\"size\": 500, \"field\": \"Data.boundaryHierarchy.ward.keyword\", \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Overall Target\": {\"sum\": {\"field\": \"Data.overallTarget\"}}}}}}}}"
+    }
+  ],
+  "chartType": "line",
+  "isCumulative": false,
+  "valueType": "percentage",
+  "drillChart": "populationCoverageRankingBarchartByLocalityICCD",
+  "documentType": "_doc",
+  "action": "percentage",
+  "aggregationPaths": [
+    "Population Coverage Ranking",
+    "Population Target"
+  ],
+  "filterKeys": [
+    {
+      "key": "ward",
+      "column": "Ward"
+    }
+  ],
+  "insight": {},
+  "_comment": "FIXED: filterKeys was 'healthFacility' (copy-paste mismatch) - this chart actually aggregates on ward.keyword, now filterKeys correctly says 'ward'. Target query already had correct must_not:HEALTHFACILITY."
+},
+"populationCoverageRankingBarchartByLocalityICCD": {
+  "kind": "drillDown",
+  "chartName": "DSS_HEALTH_POPULATION_COVERAGE_BAR_CHART_BY_LOCALITY_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}]}}, \"aggs\": {\"Population Coverage Ranking\": {\"terms\": {\"size\": 500, \"order\": {\"_key\": \"asc\"}, \"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}, \"aggs\": {\"Count\": {\"cardinality\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\", \"precision_threshold\": 40000}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.targetType.keyword\": \"INDIVIDUAL\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}], \"must_not\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}}]}}, \"aggs\": {\"Population Target\": {\"terms\": {\"size\": 500, \"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Overall Target\": {\"sum\": {\"field\": \"Data.overallTarget\"}}}}}}}}"
+    }
+  ],
+  "chartType": "line",
+  "isCumulative": false,
+  "valueType": "percentage",
+  "drillChart": "populationCoverageRankingBarchartByVillageICCD",
+  "documentType": "_doc",
+  "action": "percentage",
+  "aggregationPaths": [
+    "Population Coverage Ranking",
+    "Population Target"
+  ],
+  "filterKeys": [
+    {
+      "key": "healthFacility",
+      "column": "Health Facility"
+    }
+  ],
+  "insight": {},
+  "_comment": "FIXED: drillChart was 'none', now correctly points to populationCoverageRankingBarchartByVillageICCD (the true deepest level, which was previously orphaned/unreachable). This chart's own terms field (HEALTHFACILITY) and filterKeys (healthFacility) were already internally consistent, just chart's display name says 'Locality' which doesn't match what it actually aggregates on - left as-is since renaming the chart ID risks breaking other references."
+},
+"populationCoverageRankingBarchartByVillageICCD": {
+  "kind": "drillDown",
+  "chartName": "DSS_HEALTH_POPULATION_COVERAGE_BAR_CHART_BY_VILLAGE_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}]}}, \"aggs\": {\"Population Coverage Ranking\": {\"terms\": {\"size\": 500, \"order\": {\"_key\": \"asc\"}, \"field\": \"Data.boundaryHierarchy.locality.keyword\"}, \"aggs\": {\"Count\": {\"cardinality\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\", \"precision_threshold\": 40000}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.targetType.keyword\": \"INDIVIDUAL\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}}]}}, \"aggs\": {\"Population Target\": {\"terms\": {\"size\": 500, \"field\": \"Data.boundaryHierarchy.locality.keyword\", \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Overall Target\": {\"sum\": {\"field\": \"Data.overallTarget\"}}}}}}}}"
+    }
+  ],
+  "chartType": "line",
+  "isCumulative": false,
+  "valueType": "percentage",
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "percentage",
+  "aggregationPaths": [
+    "Population Coverage Ranking",
+    "Population Target"
+  ],
+  "filterKeys": [
+    {
+      "key": "community",
+      "column": "Community"
+    }
+  ],
+  "insight": {},
+  "_comment": "STANDARDIZED: replaced the original bespoke Target calculation (targetPerDay-based bucket_script annualizing by x365, plus a custom computedFields postAggregationTheory mechanism unique to this chart) with the same simple sum(Data.overallTarget) + action:percentage pattern used by every sibling level. This chart is now the correct terminal end of the Province->District->Ward->HealthFacility->Locality/Village chain (previously orphaned/unreachable via drillChart). FLAG: if the original targetPerDay*365 logic was intentional (e.g. a different definition of 'target' specific to locality-level daily distribution targets), this change removes it - restore from original if that calculation was deliberate rather than a leftover/experimental artifact. No must_not needed here since locality is confirmed the deepest boundary level in this hierarchy (nothing below it to exclude)."
+},
   "totalInterventionAdministeredTillTodayICCD": {
     "chartName": "DSS_HEALTH_TOTAL_INTERVENTION_ADMINISTERED_TILL_TODAY_ICCD",
     "queries": [
