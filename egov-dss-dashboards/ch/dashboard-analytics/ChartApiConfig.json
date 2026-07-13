@@ -8326,8 +8326,8 @@
       "module": "COMMON",
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.additionalDetails.dateOfRegistration\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      "indexName": "ch-household-member-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
     }
   ],
   "chartType": "metric",
@@ -8349,7 +8349,7 @@
     "colorCode": "#228B22",
     "insightInterval": "dateRange"
   },
-  "_comment": " "
+  "_comment": "FIXED: query 2 (Registered denominator) switched from ch-project-task-index-v1 to ch-household-member-index-v1 (isHeadOfHousehold:false). This resolves the mismatch that was producing 85% instead of the correct ~95.5% (317 Administered / 332 Registered)."
 },
  "populationNotAdministeredByReasonProvinceICCD": {
     "chartName": "DSS_HEALTH_POPULATION_NOT_ADMINISTERED_BY_REASON_PROVINCE_ICCD",
