@@ -17486,7 +17486,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.auditDetails.createdTime",
+        "dateRefField": "Data.householdMember.auditDetails.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-household-member-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -17509,7 +17509,7 @@
       "colorCode": "#228B22",
       "insightInterval": "day"
     },
-    "_comment": "Switched from ch-project-task-index-v1 (Data.additionalDetails.dateOfRegistration, string-mapped per bug #9) to ch-household-member-index-v1 per DST feedback. Registered = isHeadOfHousehold:false (confirmed: only one head per household, so no other adult members to accidentally include). dateRefField changed to Data.auditDetails.createdTime (genuinely numeric, usable directly for Today/Cumulative toggle, no string-date workaround needed). campaignNumber requestQueryMap now maps directly to Data.campaignNumber.keyword, which IS a real field on this index (confirmed via sample record) - unlike ch-project-beneficiary-index-v1 which only had projectId. NOTE: some older documents in this index appear to lack campaignNumber entirely (mixed schema observed across samples) - if any current-campaign data is affected, this could undercount; worth spot-checking with DST. Field name changed: Data.projectBeneficiaryClientReferenceId.keyword -> Data.householdMember.individualClientReferenceId.keyword (this index's actual field for counting individuals)."
+    "_comment": "FIXED: dateRefField path corrected from Data.auditDetails.createdTime (does not exist - empty mapping lookup confirmed this) to Data.householdMember.auditDetails.createdTime (correct nested path, confirmed from sample documents). Registered = isHeadOfHousehold:false, from ch-household-member-index-v1 per DST feedback."
 },
  "overviewTotalPopulationRegisteredICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_ICCD",
