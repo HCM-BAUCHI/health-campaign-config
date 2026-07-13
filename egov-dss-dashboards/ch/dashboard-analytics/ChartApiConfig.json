@@ -17280,15 +17280,15 @@
     "_comment": "Female Population Coverage Achieved (3-59 months)"
   },
 
- "todayPopulationRegistered3to11NationalICCD": {
+"todayPopulationRegistered3to11NationalICCD": {
   "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_3_11_ICCD",
   "queries": [
     {
       "module": "COMMON",
       "dateRefField": "Data.householdMember.auditDetails.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 3-11\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
     }
   ],
   "chartType": "metric",
@@ -17296,7 +17296,9 @@
   "drillChart": "none",
   "documentType": "_doc",
   "action": "",
-  "aggregationPaths": ["Population Registered Today 3-11"],
+  "aggregationPaths": [
+    "Population Registered Today 3-11"
+  ],
   "insight": {
     "chartResponseMap": "todayPopulationRegistered3to11",
     "action": "differenceOfNumbers",
@@ -17306,7 +17308,67 @@
     "colorCode": "#228B22",
     "insightInterval": "day"
   },
-  "_comment": "Switched to ch-household-member-index-v1 (isHeadOfHousehold:false), dateRefField path fixed to Data.householdMember.auditDetails.createdTime. UNVERIFIED: age range assumes months - confirm unit before trusting this bracket split."
+  "_comment": "FIXED: added 'state' (province) scoping to requestQueryMap to match the Cumulative sibling card - previously this card ignored the selected province filter and always showed the national total, causing Today > Cumulative when a province was selected."
+},
+"todayPopulationRegistered12to59NationalICCD": {
+  "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_12_59_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-household-member-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 12-59\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "number",
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "",
+  "aggregationPaths": [
+    "Population Registered Today 12-59"
+  ],
+  "insight": {
+    "chartResponseMap": "todayPopulationRegistered12to59",
+    "action": "differenceOfNumbers",
+    "upwardIndicator": "positive",
+    "downwardIndicator": "negative",
+    "textMessage": "$indicator$value% than last $insightInterval",
+    "colorCode": "#228B22",
+    "insightInterval": "day"
+  },
+  "_comment": "FIXED: added 'state' (province) scoping - same fix as 3-11 sibling, matches its Cumulative counterpart."
+},
+"todayPopulationRegisteredNationalICCD": {
+  "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-household-member-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "number",
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "",
+  "aggregationPaths": [
+    "Population Registered Today"
+  ],
+  "insight": {
+    "chartResponseMap": "todayPopulationRegistered",
+    "action": "differenceOfNumbers",
+    "upwardIndicator": "positive",
+    "downwardIndicator": "negative",
+    "textMessage": "$indicator$value% than last $insightInterval",
+    "colorCode": "#228B22",
+    "insightInterval": "day"
+  },
+  "_comment": "FIXED: added 'state' (province) scoping - same fix, combined 3-59 bracket."
 },
 
 "overviewTotalPopulationRegistered3to11ICCD": {
