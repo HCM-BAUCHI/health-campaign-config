@@ -17432,7 +17432,7 @@
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "dateRefField": "Data.@timestamp",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 3-11\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -17462,7 +17462,7 @@
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "dateRefField": "Data.@timestamp",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 12-59\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -17492,7 +17492,7 @@
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "dateRefField": "Data.@timestamp",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -17657,7 +17657,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.householdMember.auditDetails.createdTime",
+        "dateRefField": "Data.@timestamp",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-household-member-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -17680,7 +17680,7 @@
       "colorCode": "#228B22",
       "insightInterval": "day"
     },
-    "_comment": "FIXED: dateRefField path corrected from Data.auditDetails.createdTime (does not exist - empty mapping lookup confirmed this) to Data.householdMember.auditDetails.createdTime (correct nested path, confirmed from sample documents). Registered = isHeadOfHousehold:false, from ch-household-member-index-v1 per DST feedback."
+    "_comment": "FIXED: dateRefField changed from Data.householdMember.auditDetails.createdTime (mapped as 'long', breaks date-math/now-d, caused Today card to show cumulative data instead of today's) to Data.@timestamp (confirmed 'date'-typed, supports proper date-math). Registered = isHeadOfHousehold:false."
 },
  "overviewTotalPopulationRegisteredICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_ICCD",
@@ -17760,7 +17760,7 @@
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "dateRefField": "Data.@timestamp",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\",  \"province\": \"Data.boundaryHierarchy.province.keyword\",\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 3-11\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}, {\"term\": {\"Data.additionalDetails.gender.keyword\": \"MALE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -17859,7 +17859,7 @@
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "dateRefField": "Data.@timestamp",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\",\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 12-59\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}, {\"term\": {\"Data.additionalDetails.gender.keyword\": \"MALE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -17958,7 +17958,7 @@
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "dateRefField": "Data.@timestamp",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\",  \"province\": \"Data.boundaryHierarchy.province.keyword\",\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"term\": {\"Data.additionalDetails.gender.keyword\": \"MALE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -18058,7 +18058,7 @@
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "dateRefField": "Data.@timestamp",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\",  \"province\": \"Data.boundaryHierarchy.province.keyword\",\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 3-11\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}, {\"term\": {\"Data.additionalDetails.gender.keyword\": \"FEMALE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -18157,7 +18157,7 @@
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "dateRefField": "Data.@timestamp",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 12-59\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}, {\"term\": {\"Data.additionalDetails.gender.keyword\": \"FEMALE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -18256,7 +18256,7 @@
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "dateRefField": "Data.@timestamp",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"term\": {\"Data.additionalDetails.gender.keyword\": \"FEMALE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
