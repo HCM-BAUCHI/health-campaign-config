@@ -9293,7 +9293,7 @@
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_REFERRED\"}}]}},\"aggs\":{\"Beneficiary Referred\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFERRED\"}}]}}, \"aggs\": {\"Beneficiary Referred\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
     }
   ],
   "chartType": "line",
@@ -9332,7 +9332,7 @@
   "sort": "sortKeyAsc",
   "computeMultiPaths": true,
   "insight": {},
-  "_comment": "UNCHANGED (field paths were already correct) - BUT flagged: uses a DIFFERENT status set (Refused/Absent/AdverseEffect/Referred) than every other level in this chain (which use Refused/Died/Migrated/Absent/Ineligible). NEEDS CONFIRMATION: should this match the 5-status set instead, or is Adverse Effect/Referred intentional for District specifically?",
+  "_comment": "FIXED: query 4 (Beneficiary Referred) was structurally different from every other query in this chart and every other query in the whole project - used a top-level 'query' clause + no 'AGGS' wrapper name, instead of the standard 'aggs':{'AGGS':{'filter':...,'aggs':{...}}} shape used everywhere else. Rebuilt to match the consistent pattern - likely fixes the missing/wrong 'Beneficiary Referred' and 'Children Not Administered' values. STILL OPEN: status set (Refused/Absent/AdverseEffect/Referred) differs from every other level's 5-status set (Refused/Died/Migrated/Absent/Ineligible) - needs confirmation whether this is intentional for District.",
   "kind": "drillDown"
 },
 "beneficiariesNotAdministeredApICCD": {
