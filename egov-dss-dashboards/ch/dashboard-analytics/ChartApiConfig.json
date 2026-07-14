@@ -9953,7 +9953,7 @@
     "hideHeaderDenomination": true,
     "_comment": " "
   },
-  "totalInterventionAdministeredNationalICCD": {
+ "totalInterventionAdministeredNationalICCD": {
     "chartName": "DSS_HEALTH_NATIONAL_TOTAL_INTERVENTION_ADMINISTERED_ICCD",
     "queries": [
       {
@@ -9961,7 +9961,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Intervention Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Intervention Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}}]}},\"aggs\":{\"AdministeredPart\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"Data.quantity\"}}}},\"RedosePart\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}}]}},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"Data.quantity\"}}}},\"count\":{\"bucket_script\":{\"buckets_path\":{\"admin\":\"AdministeredPart>sum\",\"redose\":\"RedosePart>sum\"},\"script\":\"return params.admin + params.redose;\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -9973,7 +9973,7 @@
       "Total Intervention Administered"
     ],
     "insight": {},
-    "_comment": "Added explicit age range {gte:3, lte:59} - same fix as totalPopulationCoveredNationalICCD, this card previously had no age bound at all."
+    "_comment": "UPDATED: now includes Redose per client request - Total Intervention Administered = Administered (dose 1/01, age 3-59) + Redose (taskType REDOSE), combined via bucket_script within a single query (same proven pattern as SPAQ Utilisées from the SPAQ Flow Table, safer than summing across separate top-level queries). aggregationPaths unchanged (still 'Total Intervention Administered' - the bucket_script result replaces the old plain sum as the value consumed downstream)."
 },
 "resourcesCoveragePercentNationalICCD": {
   "chartName": "DSS_HEALTH_NATIONAL_RESOURCES_COVERAGE_PERCENT_ICCD",
@@ -9983,7 +9983,7 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Intervention Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Intervention Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}}]}},\"aggs\":{\"AdministeredPart\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"Data.quantity\"}}}},\"RedosePart\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}}]}},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"Data.quantity\"}}}},\"count\":{\"bucket_script\":{\"buckets_path\":{\"admin\":\"AdministeredPart>sum\",\"redose\":\"RedosePart>sum\"},\"script\":\"return params.admin + params.redose;\"}}}}}}"
     },
     {
       "module": "COMMON",
@@ -10004,7 +10004,7 @@
     "Product Target"
   ],
   "insight": {},
-  "_comment": "resources coverage % = total intervention quantity administered / product target (SPAQ-1 + SPAQ-2, national level only, 1,077,482). Added explicit age range {gte:3, lte:59} to numerator - same fix as its sibling cards, previously had no age bound."
+  "_comment": "UPDATED: numerator now includes Redose (same bucket_script pattern as totalInterventionAdministeredNationalICCD) - resources coverage % = (Administered + Redose) / Product Target. Denominator unchanged."
 },
  "totalPopulationRefusedProvinceICCD": {
     "chartName": "DSS_HEALTH_TOTAL_POPULATION_REFUSED_PROVINCE_ICCD",
