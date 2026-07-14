@@ -17432,7 +17432,7 @@
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "dateRefField": "Data.@timestamp",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 3-11\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -17455,14 +17455,14 @@
     "colorCode": "#228B22",
     "insightInterval": "day"
   },
-  "_comment": "FIXED: added 'state' (province) scoping to requestQueryMap to match the Cumulative sibling card - previously this card ignored the selected province filter and always showed the national total, causing Today > Cumulative when a province was selected."
+  "_comment": "FIXED: dateRefField changed from Data.householdMember.auditDetails.createdTime (long-typed, breaks date-math) to Data.@timestamp (confirmed date-typed). This is the same root-cause fix applied to the National combined card - Province was showing 53 registered today, which is mathematically impossible since National's true today-count is only 3. Province filter scoping (already correct) unchanged. NOT adding filterForCurrentDay here, unlike National - Province has a working page-level Cumulative/Today toggle, so dateRefField + the toggle should correctly restrict once the field itself supports date-math."
 },
 "todayPopulationRegistered12to59NationalICCD": {
   "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_12_59_ICCD",
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "dateRefField": "Data.@timestamp",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 12-59\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -17492,7 +17492,7 @@
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "dateRefField": "Data.@timestamp",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
