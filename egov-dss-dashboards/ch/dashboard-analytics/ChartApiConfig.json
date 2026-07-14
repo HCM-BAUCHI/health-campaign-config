@@ -4842,7 +4842,7 @@
   "isCumulative": false,
   "valueType": "number",
   "plotLabel": "none",
-  "drillChart": "referralSummaryByLocalityICCD",
+  "drillChart": "none",
   "filterKeys": [
     {
       "key": "healthFacility",
