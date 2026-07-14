@@ -19063,7 +19063,7 @@
     "isCumulative": false,
     "valueType": "number",
     "plotLabel": "none",
-    "drillChart": "averageNumberOfPopulationAdministeredByVillageICCD",
+    "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
     "aggregationPaths": [
