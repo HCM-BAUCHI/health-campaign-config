@@ -17435,7 +17435,7 @@
       "dateRefField": "Data.@timestamp",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 3-11\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
     }
   ],
   "chartType": "metric",
@@ -17455,7 +17455,7 @@
     "colorCode": "#228B22",
     "insightInterval": "day"
   },
-  "_comment": "FIXED: dateRefField changed from Data.householdMember.auditDetails.createdTime (long-typed, breaks date-math) to Data.@timestamp (confirmed date-typed). This is the same root-cause fix applied to the National combined card - Province was showing 53 registered today, which is mathematically impossible since National's true today-count is only 3. Province filter scoping (already correct) unchanged. NOT adding filterForCurrentDay here, unlike National - Province has a working page-level Cumulative/Today toggle, so dateRefField + the toggle should correctly restrict once the field itself supports date-math."
+  "_comment": "Uses Data.@timestamp as the dateRefField. Province and campaign filters are applied through requestQueryMap by DSS. isHeadOfHousehold=false and age<=11 are applied in the aggregation filter."
 },
 "todayPopulationRegistered12to59NationalICCD": {
   "chartName": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_TODAY_12_59_ICCD",
