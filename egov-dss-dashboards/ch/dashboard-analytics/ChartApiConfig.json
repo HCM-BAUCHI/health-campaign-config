@@ -17432,7 +17432,7 @@
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.@timestamp",
+      "dateRefField": "Data.householdMember.auditDetails.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered Today 3-11\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -17462,7 +17462,7 @@
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.@timestamp",
+      "dateRefField": "Data.householdMember.auditDetails.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today 12-59\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -17492,7 +17492,7 @@
   "queries": [
     {
       "module": "COMMON",
-      "dateRefField": "Data.@timestamp",
+      "dateRefField": "Data.householdMember.auditDetails.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered Today\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
@@ -18552,7 +18552,7 @@
     },
     "_comment": "SPAQ 3-59m (combined) Administered / Target percentage (new 'utilisés' card, from scratch)"
   },
-  "redoseOverviewICCD": {
+ "redoseOverviewICCD": {
   "chartName": "DSS_HEALTH_REDOSE_OVERVIEW_ICCD",
   "queries": [
     {
@@ -18562,18 +18562,18 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "transformData": "linearAggregation",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"allData\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"spaq1Redose\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}},\"spaq2Redose\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}},\"totalRedose\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}},\"administered3to11\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (3 à 11 mois)\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}},\"administered12to59\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"term\":{\"Data.productName.keyword\":\"SPAQ (12 à 59 mois)\"}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}},\"totalAdministered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}},\"spaq1RedosePercentAgg\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"spaq1Redose>count\",\"denom\":\"administered3to11>count\"},\"script\":\"params.denom != 0 ? ((double) params.num / params.denom) * 100 : 0\"}},\"spaq2RedosePercentAgg\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"spaq2Redose>count\",\"denom\":\"administered12to59>count\"},\"script\":\"params.denom != 0 ? ((double) params.num / params.denom) * 100 : 0\"}},\"totalRedosePercentAgg\":{\"bucket_script\":{\"buckets_path\":{\"num\":\"totalRedose>count\",\"denom\":\"totalAdministered>count\"},\"script\":\"params.denom != 0 ? ((double) params.num / params.denom) * 100 : 0\"}}}}}}",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"allData\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"spaq1Redose\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"spaq2Redose\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"totalRedose\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"administered3to11\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"administered12to59\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"totalAdministered\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"spaq1RedosePercentAgg\": {\"bucket_script\": {\"buckets_path\": {\"num\": \"spaq1Redose>count\", \"denom\": \"administered3to11>count\"}, \"script\": \"params.denom != 0 ? ((double) params.num / params.denom) * 100 : 0\"}}, \"spaq2RedosePercentAgg\": {\"bucket_script\": {\"buckets_path\": {\"num\": \"spaq2Redose>count\", \"denom\": \"administered12to59>count\"}, \"script\": \"params.denom != 0 ? ((double) params.num / params.denom) * 100 : 0\"}}, \"totalRedosePercentAgg\": {\"bucket_script\": {\"buckets_path\": {\"num\": \"totalRedose>count\", \"denom\": \"totalAdministered>count\"}, \"script\": \"params.denom != 0 ? ((double) params.num / params.denom) * 100 : 0\"}}}}}}",
       "select": {
-  "spaq1RedoseCount": "allData.buckets.all.spaq1Redose.count.value",
-  "spaq2RedoseCount": "allData.buckets.all.spaq2Redose.count.value",
-  "totalRedoseCount": "allData.buckets.all.totalRedose.count.value",
-  "administered3to11Count": "allData.buckets.all.administered3to11.count.value",
-  "administered12to59Count": "allData.buckets.all.administered12to59.count.value",
-  "totalAdministeredCount": "allData.buckets.all.totalAdministered.count.value",
-  "spaq1RedosePercent": "allData.buckets.all.spaq1RedosePercentAgg.value",
-  "spaq2RedosePercent": "allData.buckets.all.spaq2RedosePercentAgg.value",
-  "totalRedosePercent": "allData.buckets.all.totalRedosePercentAgg.value"
-}
+        "spaq1RedoseCount": "allData.buckets.all.spaq1Redose.count.value",
+        "spaq2RedoseCount": "allData.buckets.all.spaq2Redose.count.value",
+        "totalRedoseCount": "allData.buckets.all.totalRedose.count.value",
+        "administered3to11Count": "allData.buckets.all.administered3to11.count.value",
+        "administered12to59Count": "allData.buckets.all.administered12to59.count.value",
+        "totalAdministeredCount": "allData.buckets.all.totalAdministered.count.value",
+        "spaq1RedosePercent": "allData.buckets.all.spaq1RedosePercentAgg.value",
+        "spaq2RedosePercent": "allData.buckets.all.spaq2RedosePercentAgg.value",
+        "totalRedosePercent": "allData.buckets.all.totalRedosePercentAgg.value"
+      }
     }
   ],
   "chartType": "rawResponse",
@@ -18609,48 +18609,66 @@
       "labelKey": "DSS_HEALTH_SPAQ1_REDOSE_ICCD",
       "valuePath": "spaq1RedoseCount",
       "valueType": "NUMBER",
-      "colorRules": { "type": "constant", "color": "#0B4B66" }
+      "colorRules": {
+        "type": "constant",
+        "color": "#0B4B66"
+      }
     },
     {
       "id": "spaq1RedosePercent",
       "labelKey": "DSS_HEALTH_SPAQ1_REDOSE_PERCENT_ICCD",
       "valuePath": "spaq1RedosePercent",
       "valueType": "PERCENT",
-      "colorRules": { "type": "constant", "color": "#0B4B66" }
+      "colorRules": {
+        "type": "constant",
+        "color": "#0B4B66"
+      }
     },
     {
       "id": "spaq2RedoseCount",
       "labelKey": "DSS_HEALTH_SPAQ2_REDOSE_ICCD",
       "valuePath": "spaq2RedoseCount",
       "valueType": "NUMBER",
-      "colorRules": { "type": "constant", "color": "#0B4B66" }
+      "colorRules": {
+        "type": "constant",
+        "color": "#0B4B66"
+      }
     },
     {
       "id": "spaq2RedosePercent",
       "labelKey": "DSS_HEALTH_SPAQ2_REDOSE_PERCENT_ICCD",
       "valuePath": "spaq2RedosePercent",
       "valueType": "PERCENT",
-      "colorRules": { "type": "constant", "color": "#0B4B66" }
+      "colorRules": {
+        "type": "constant",
+        "color": "#0B4B66"
+      }
     },
     {
       "id": "totalRedoseCount",
       "labelKey": "DSS_HEALTH_TOTAL_REDOSE_ICCD",
       "valuePath": "totalRedoseCount",
       "valueType": "NUMBER",
-      "colorRules": { "type": "constant", "color": "#0B4B66" }
+      "colorRules": {
+        "type": "constant",
+        "color": "#0B4B66"
+      }
     },
     {
       "id": "totalRedosePercent",
       "labelKey": "DSS_HEALTH_TOTAL_REDOSE_PERCENT_ICCD",
       "valuePath": "totalRedosePercent",
       "valueType": "PERCENT",
-      "colorRules": { "type": "constant", "color": "#0B4B66" }
+      "colorRules": {
+        "type": "constant",
+        "color": "#0B4B66"
+      }
     }
   ],
   "insight": {},
   "hideInsights": true,
   "hideHeaderDenomination": true,
-  "_comment": "Redose overview cards - SPAQ1/SPAQ2/Total counts with % of administered, computed via ES bucket_script inside global agg wrapper"
+  "_comment": "FIXED: administered3to11/administered12to59/totalAdministered now use Data.age range filters (lte:11 / gte:12 / gte:3,lte:59) instead of Data.productName matching, since productName data had inconsistencies. Redose queries (spaq1Redose/spaq2Redose/totalRedose) left on productName matching - not part of this specific fix request; flag if these also need to switch to age-based filtering for consistency."
 },
   "averageNumberOfPopulationAdministeredDistrictICCD": {
     "chartName": "AVERAGE_NO_OF_POPULATION_ADMINISTERED_ICCD",
