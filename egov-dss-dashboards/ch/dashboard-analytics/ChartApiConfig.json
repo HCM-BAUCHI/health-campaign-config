@@ -10861,7 +10861,7 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}]}}, \"aggs\": {\"Registered 3-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.country.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Registered 3-59 count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
-      "_comment": "Couvert 3-59 - FIXED: ch-household-member-index-v1"
+      "_comment": "Couvert 3-59"
     },
     {
       "module": "COMMON",
@@ -10869,7 +10869,7 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"Registered 3-11\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.country.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Registered 3-11 count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
-      "_comment": "Couvert 3-11 - FIXED: ch-household-member-index-v1"
+      "_comment": "Couvert 3-11"
     },
     {
       "module": "COMMON",
@@ -10877,7 +10877,7 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"Registered 12-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.country.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Registered 12-59 count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
-      "_comment": "Couvert 12-59 - FIXED: ch-household-member-index-v1"
+      "_comment": "Couvert 12-59"
     },
     {
       "module": "COMMON",
@@ -11046,7 +11046,7 @@
         "Overall Population target"
       ],
       "newField": "Population Target",
-      "_comments": "Col 2"
+      "_comments": "Col 2: Cible 3-59"
     },
     {
       "postAggregationTheory": "",
@@ -11055,7 +11055,7 @@
         "Target 3-11 count"
       ],
       "newField": "Target 3-11",
-      "_comments": "Col 3"
+      "_comments": "Col 3: Cible 3-11"
     },
     {
       "postAggregationTheory": "",
@@ -11064,7 +11064,7 @@
         "Target 12-59 count"
       ],
       "newField": "Target 12-59",
-      "_comments": "Col 4"
+      "_comments": "Col 4: Cible 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -11074,7 +11074,7 @@
         "Refused count"
       ],
       "newField": "Visité 3-59",
-      "_comments": "Col 5 - UNVERIFIED sum"
+      "_comments": "Col 5"
     },
     {
       "postAggregationTheory": "",
@@ -11103,7 +11103,7 @@
         "Total Population covered"
       ],
       "newField": "Population Administered",
-      "_comments": "Col 8"
+      "_comments": "Col 8: Administré 3-59"
     },
     {
       "postAggregationTheory": "",
@@ -11122,6 +11122,36 @@
       ],
       "newField": "Administered 12-59",
       "_comments": "Col 10"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Total Population covered",
+        "Registered 3-59 count"
+      ],
+      "newField": "Administered Coverage 3-59",
+      "_comments": "Col 10a: NEW - Administered/Registered 3-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Administered 3-11 count",
+        "Registered 3-11 count"
+      ],
+      "newField": "Administered Coverage 3-11",
+      "_comments": "Col 10b: NEW - Administered/Registered 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Administered 12-59 count",
+        "Registered 12-59 count"
+      ],
+      "newField": "Administered Coverage 12-59",
+      "_comments": "Col 10c: NEW - Administered/Registered 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -11149,6 +11179,36 @@
       ],
       "newField": "Couvert 12-59",
       "_comments": "Col 13"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 3-59 count",
+        "Overall Population target"
+      ],
+      "newField": "Registration Coverage 3-59",
+      "_comments": "Col 13a: NEW - Registered/Target 3-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 3-11 count",
+        "Target 3-11 count"
+      ],
+      "newField": "Registration Coverage 3-11",
+      "_comments": "Col 13b: NEW - Registered/Target 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 12-59 count",
+        "Target 12-59 count"
+      ],
+      "newField": "Registration Coverage 12-59",
+      "_comments": "Col 13c: NEW - Registered/Target 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -11290,7 +11350,7 @@
   "sort": "sortKeyAsc",
   "hideInsights": true,
   "hideHeaderDenomination": true,
-  "_comment": "FIXED: Couvert 3-59/3-11/12-59 switched from ch-project-task-index-v1 to ch-household-member-index-v1 (isHeadOfHousehold:false)."
+  "_comment": "UPDATED: added Administered Coverage (Administered/Registered) and Registration Coverage (Registered/Target) % columns, placed immediately after their respective count columns (Col 10a-c after Administered, Col 13a-c after Couvert)."
 },
 "summaryByProvinceICCD": {
   "kind": "drillDown",
@@ -11326,7 +11386,7 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}]}}, \"aggs\": {\"Registered 3-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Registered 3-59 count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
-      "_comment": "Couvert 3-59 - FIXED: ch-household-member-index-v1"
+      "_comment": "Couvert 3-59"
     },
     {
       "module": "COMMON",
@@ -11334,7 +11394,7 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"Registered 3-11\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Registered 3-11 count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
-      "_comment": "Couvert 3-11 - FIXED: ch-household-member-index-v1"
+      "_comment": "Couvert 3-11"
     },
     {
       "module": "COMMON",
@@ -11342,7 +11402,7 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"Registered 12-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Registered 12-59 count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
-      "_comment": "Couvert 12-59 - FIXED: ch-household-member-index-v1"
+      "_comment": "Couvert 12-59"
     },
     {
       "module": "COMMON",
@@ -11511,7 +11571,7 @@
         "Overall Population target"
       ],
       "newField": "Population Target",
-      "_comments": "Col 2"
+      "_comments": "Col 2: Cible 3-59"
     },
     {
       "postAggregationTheory": "",
@@ -11520,7 +11580,7 @@
         "Target 3-11 count"
       ],
       "newField": "Target 3-11",
-      "_comments": "Col 3"
+      "_comments": "Col 3: Cible 3-11"
     },
     {
       "postAggregationTheory": "",
@@ -11529,7 +11589,7 @@
         "Target 12-59 count"
       ],
       "newField": "Target 12-59",
-      "_comments": "Col 4"
+      "_comments": "Col 4: Cible 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -11539,7 +11599,7 @@
         "Refused count"
       ],
       "newField": "Visité 3-59",
-      "_comments": "Col 5 - UNVERIFIED sum"
+      "_comments": "Col 5"
     },
     {
       "postAggregationTheory": "",
@@ -11568,7 +11628,7 @@
         "Total Population covered"
       ],
       "newField": "Population Administered",
-      "_comments": "Col 8"
+      "_comments": "Col 8: Administré 3-59"
     },
     {
       "postAggregationTheory": "",
@@ -11587,6 +11647,36 @@
       ],
       "newField": "Administered 12-59",
       "_comments": "Col 10"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Total Population covered",
+        "Registered 3-59 count"
+      ],
+      "newField": "Administered Coverage 3-59",
+      "_comments": "Col 10a: NEW - Administered/Registered 3-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Administered 3-11 count",
+        "Registered 3-11 count"
+      ],
+      "newField": "Administered Coverage 3-11",
+      "_comments": "Col 10b: NEW - Administered/Registered 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Administered 12-59 count",
+        "Registered 12-59 count"
+      ],
+      "newField": "Administered Coverage 12-59",
+      "_comments": "Col 10c: NEW - Administered/Registered 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -11614,6 +11704,36 @@
       ],
       "newField": "Couvert 12-59",
       "_comments": "Col 13"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 3-59 count",
+        "Overall Population target"
+      ],
+      "newField": "Registration Coverage 3-59",
+      "_comments": "Col 13a: NEW - Registered/Target 3-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 3-11 count",
+        "Target 3-11 count"
+      ],
+      "newField": "Registration Coverage 3-11",
+      "_comments": "Col 13b: NEW - Registered/Target 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 12-59 count",
+        "Target 12-59 count"
+      ],
+      "newField": "Registration Coverage 12-59",
+      "_comments": "Col 13c: NEW - Registered/Target 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -11755,7 +11875,7 @@
   "sort": "sortKeyAsc",
   "hideInsights": true,
   "hideHeaderDenomination": true,
-  "_comment": "FIXED: Couvert queries switched to ch-household-member-index-v1."
+  "_comment": "UPDATED: added Administered Coverage and Registration Coverage % columns, placed immediately after their count columns."
 },
 "summaryByDistrictICCD": {
   "kind": "drillDown",
@@ -11791,7 +11911,7 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}]}}, \"aggs\": {\"Registered 3-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Registered 3-59 count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
-      "_comment": "Couvert 3-59 - FIXED: ch-household-member-index-v1"
+      "_comment": "Couvert 3-59"
     },
     {
       "module": "COMMON",
@@ -11799,7 +11919,7 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"Registered 3-11\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Registered 3-11 count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
-      "_comment": "Couvert 3-11 - FIXED: ch-household-member-index-v1"
+      "_comment": "Couvert 3-11"
     },
     {
       "module": "COMMON",
@@ -11807,7 +11927,7 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"Registered 12-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Registered 12-59 count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
-      "_comment": "Couvert 12-59 - FIXED: ch-household-member-index-v1"
+      "_comment": "Couvert 12-59"
     },
     {
       "module": "COMMON",
@@ -11976,7 +12096,7 @@
         "Overall Population target"
       ],
       "newField": "Population Target",
-      "_comments": "Col 2"
+      "_comments": "Col 2: Cible 3-59"
     },
     {
       "postAggregationTheory": "",
@@ -11985,7 +12105,7 @@
         "Target 3-11 count"
       ],
       "newField": "Target 3-11",
-      "_comments": "Col 3"
+      "_comments": "Col 3: Cible 3-11"
     },
     {
       "postAggregationTheory": "",
@@ -11994,7 +12114,7 @@
         "Target 12-59 count"
       ],
       "newField": "Target 12-59",
-      "_comments": "Col 4"
+      "_comments": "Col 4: Cible 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -12004,7 +12124,7 @@
         "Refused count"
       ],
       "newField": "Visité 3-59",
-      "_comments": "Col 5 - UNVERIFIED sum"
+      "_comments": "Col 5"
     },
     {
       "postAggregationTheory": "",
@@ -12033,7 +12153,7 @@
         "Total Population covered"
       ],
       "newField": "Population Administered",
-      "_comments": "Col 8"
+      "_comments": "Col 8: Administré 3-59"
     },
     {
       "postAggregationTheory": "",
@@ -12052,6 +12172,36 @@
       ],
       "newField": "Administered 12-59",
       "_comments": "Col 10"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Total Population covered",
+        "Registered 3-59 count"
+      ],
+      "newField": "Administered Coverage 3-59",
+      "_comments": "Col 10a: NEW - Administered/Registered 3-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Administered 3-11 count",
+        "Registered 3-11 count"
+      ],
+      "newField": "Administered Coverage 3-11",
+      "_comments": "Col 10b: NEW - Administered/Registered 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Administered 12-59 count",
+        "Registered 12-59 count"
+      ],
+      "newField": "Administered Coverage 12-59",
+      "_comments": "Col 10c: NEW - Administered/Registered 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -12079,6 +12229,36 @@
       ],
       "newField": "Couvert 12-59",
       "_comments": "Col 13"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 3-59 count",
+        "Overall Population target"
+      ],
+      "newField": "Registration Coverage 3-59",
+      "_comments": "Col 13a: NEW - Registered/Target 3-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 3-11 count",
+        "Target 3-11 count"
+      ],
+      "newField": "Registration Coverage 3-11",
+      "_comments": "Col 13b: NEW - Registered/Target 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 12-59 count",
+        "Target 12-59 count"
+      ],
+      "newField": "Registration Coverage 12-59",
+      "_comments": "Col 13c: NEW - Registered/Target 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -12220,9 +12400,9 @@
   "sort": "sortKeyAsc",
   "hideInsights": true,
   "hideHeaderDenomination": true,
-  "_comment": "FIXED: Couvert queries switched to ch-household-member-index-v1. drillChart now SKIPS Ward and points directly to summaryByLocalityICCD (Health Facility), since this campaign has no ward-level facilities."
+  "_comment": "UPDATED: added Administered Coverage and Registration Coverage % columns, placed immediately after their count columns. drillChart skips Ward per no-ward-facilities instruction."
 },
- "summaryByAdministrativeProvinceICCD": {
+"summaryByAdministrativeProvinceICCD": {
   "kind": "drillDown",
   "chartName": "DSS_HEALTH_SUMMARY_BY_AP_ICCD",
   "queries": [
@@ -12441,7 +12621,7 @@
         "Overall Population target"
       ],
       "newField": "Population Target",
-      "_comments": "Col 2"
+      "_comments": "Col 2: Cible 3-59"
     },
     {
       "postAggregationTheory": "",
@@ -12450,7 +12630,7 @@
         "Target 3-11 count"
       ],
       "newField": "Target 3-11",
-      "_comments": "Col 3"
+      "_comments": "Col 3: Cible 3-11"
     },
     {
       "postAggregationTheory": "",
@@ -12459,7 +12639,7 @@
         "Target 12-59 count"
       ],
       "newField": "Target 12-59",
-      "_comments": "Col 4"
+      "_comments": "Col 4: Cible 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -12469,7 +12649,7 @@
         "Refused count"
       ],
       "newField": "Visité 3-59",
-      "_comments": "Col 5 - UNVERIFIED sum"
+      "_comments": "Col 5"
     },
     {
       "postAggregationTheory": "",
@@ -12498,7 +12678,7 @@
         "Total Population covered"
       ],
       "newField": "Population Administered",
-      "_comments": "Col 8"
+      "_comments": "Col 8: Administré 3-59"
     },
     {
       "postAggregationTheory": "",
@@ -12517,6 +12697,36 @@
       ],
       "newField": "Administered 12-59",
       "_comments": "Col 10"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Total Population covered",
+        "Registered 3-59 count"
+      ],
+      "newField": "Administered Coverage 3-59",
+      "_comments": "Col 10a: NEW - Administered/Registered 3-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Administered 3-11 count",
+        "Registered 3-11 count"
+      ],
+      "newField": "Administered Coverage 3-11",
+      "_comments": "Col 10b: NEW - Administered/Registered 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Administered 12-59 count",
+        "Registered 12-59 count"
+      ],
+      "newField": "Administered Coverage 12-59",
+      "_comments": "Col 10c: NEW - Administered/Registered 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -12544,6 +12754,36 @@
       ],
       "newField": "Couvert 12-59",
       "_comments": "Col 13"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 3-59 count",
+        "Overall Population target"
+      ],
+      "newField": "Registration Coverage 3-59",
+      "_comments": "Col 13a: NEW - Registered/Target 3-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 3-11 count",
+        "Target 3-11 count"
+      ],
+      "newField": "Registration Coverage 3-11",
+      "_comments": "Col 13b: NEW - Registered/Target 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 12-59 count",
+        "Target 12-59 count"
+      ],
+      "newField": "Registration Coverage 12-59",
+      "_comments": "Col 13c: NEW - Registered/Target 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -12685,7 +12925,7 @@
   "sort": "sortKeyAsc",
   "hideInsights": true,
   "hideHeaderDenomination": true,
-  "_comment": "REBUILT to match 27-column schema. Currently ORPHANED - District's drillChart skips this level (no ward-level facilities in this campaign). Kept for consistency in case relinked later. drillChart points to summaryByLocalityICCD (would be the natural next step if reconnected)."
+  "_comment": "UPDATED: added Administered Coverage and Registration Coverage % columns. Still orphaned (District skips Ward), kept consistent in case relinked."
 },
 "summaryByLocalityICCD": {
   "kind": "drillDown",
@@ -12906,7 +13146,7 @@
         "Overall Population target"
       ],
       "newField": "Population Target",
-      "_comments": "Col 2"
+      "_comments": "Col 2: Cible 3-59"
     },
     {
       "postAggregationTheory": "",
@@ -12915,7 +13155,7 @@
         "Target 3-11 count"
       ],
       "newField": "Target 3-11",
-      "_comments": "Col 3"
+      "_comments": "Col 3: Cible 3-11"
     },
     {
       "postAggregationTheory": "",
@@ -12924,7 +13164,7 @@
         "Target 12-59 count"
       ],
       "newField": "Target 12-59",
-      "_comments": "Col 4"
+      "_comments": "Col 4: Cible 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -12934,7 +13174,7 @@
         "Refused count"
       ],
       "newField": "Visité 3-59",
-      "_comments": "Col 5 - UNVERIFIED sum"
+      "_comments": "Col 5"
     },
     {
       "postAggregationTheory": "",
@@ -12963,7 +13203,7 @@
         "Total Population covered"
       ],
       "newField": "Population Administered",
-      "_comments": "Col 8"
+      "_comments": "Col 8: Administré 3-59"
     },
     {
       "postAggregationTheory": "",
@@ -12982,6 +13222,36 @@
       ],
       "newField": "Administered 12-59",
       "_comments": "Col 10"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Total Population covered",
+        "Registered 3-59 count"
+      ],
+      "newField": "Administered Coverage 3-59",
+      "_comments": "Col 10a: NEW - Administered/Registered 3-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Administered 3-11 count",
+        "Registered 3-11 count"
+      ],
+      "newField": "Administered Coverage 3-11",
+      "_comments": "Col 10b: NEW - Administered/Registered 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Administered 12-59 count",
+        "Registered 12-59 count"
+      ],
+      "newField": "Administered Coverage 12-59",
+      "_comments": "Col 10c: NEW - Administered/Registered 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -13009,6 +13279,36 @@
       ],
       "newField": "Couvert 12-59",
       "_comments": "Col 13"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 3-59 count",
+        "Overall Population target"
+      ],
+      "newField": "Registration Coverage 3-59",
+      "_comments": "Col 13a: NEW - Registered/Target 3-59"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 3-11 count",
+        "Target 3-11 count"
+      ],
+      "newField": "Registration Coverage 3-11",
+      "_comments": "Col 13b: NEW - Registered/Target 3-11"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Registered 12-59 count",
+        "Target 12-59 count"
+      ],
+      "newField": "Registration Coverage 12-59",
+      "_comments": "Col 13c: NEW - Registered/Target 12-59"
     },
     {
       "postAggregationTheory": "",
@@ -13150,7 +13450,7 @@
   "sort": "sortKeyAsc",
   "hideInsights": true,
   "hideHeaderDenomination": true,
-  "_comment": "REBUILT to match 27-column schema (was old Population Coverage %/Died/Migrated/Ineligible/gender-split schema). Actively in the chain - District drills directly here. drillChart now points to summaryByVillageICCD, continuing the chain consistently."
+  "_comment": "UPDATED: added Administered Coverage and Registration Coverage % columns, placed immediately after their count columns."
 },
   "summaryByVillageICCD": {
   "chartName": "DSS_HEALTH_SUMMARY_BY_VILLAGE_ICCD",
