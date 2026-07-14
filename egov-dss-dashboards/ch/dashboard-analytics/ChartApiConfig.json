@@ -15735,7 +15735,7 @@
     "sort": "sortKeyAsc",
     "_comment": " "
   },
-  "administeredByGenderDistrictPercentICCD": {
+ "administeredByGenderDistrictPercentICCD": {
     "chartName": "DSS_HEALTH_ADMINISTERED_BY_GENDER_DISTRICT_PERCENT_ICCD",
     "queries": [
       {
@@ -15757,7 +15757,7 @@
     "isCumulative": false,
     "valueType": "percentage",
     "plotLabel": "none",
-    "drillChart": "administeredByGenderApPercentICCD",
+    "drillChart": "administeredByGenderLocalityPercentICCD",
     "computeMultiPaths": true,
     "sort": "sortKeyAsc",
     "filterKeys": [
@@ -15778,26 +15778,20 @@
       {
         "postAggregationTheory": "",
         "actionName": "StackPercentageComputedField",
-        "fields": [
-          "administered male",
-          "administered all male"
-        ],
+        "fields": ["administered male", "administered all male"],
         "newField": "Male Administered",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "StackPercentageComputedField",
-        "fields": [
-          "administered female",
-          "administered all female"
-        ],
+        "fields": ["administered female", "administered all female"],
         "newField": "Female Administered",
         "_comments": ""
       }
     ],
     "insight": {},
-    "_comment": " ",
+    "_comment": "FIXED: drillChart changed from administeredByGenderApPercentICCD (Ward) to administeredByGenderLocalityPercentICCD (Health Facility), skipping Ward since this campaign has no ward-level facilities. Ward chart left orphaned, unchanged.",
     "kind": "drillDown"
   },
   "administeredByGenderApPercentICCD": {
