@@ -9961,7 +9961,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Intervention Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}}]}},\"aggs\":{\"AdministeredPart\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"Data.quantity\"}}}},\"RedosePart\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}}]}},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"Data.quantity\"}}}},\"count\":{\"bucket_script\":{\"buckets_path\":{\"admin\":\"AdministeredPart>sum\",\"redose\":\"RedosePart>sum\"},\"script\":\"return params.admin + params.redose;\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered Quantity\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"Data.quantity\"}}}},\"Redose Quantity\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}}]}},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -9970,10 +9970,20 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Total Intervention Administered"
+      "Administered Quantity",
+      "Redose Quantity"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["Administered Quantity", "Redose Quantity"],
+        "newField": "Total Intervention Administered",
+        "_comments": "Total Intervention Administered = Administered + Redose"
+      }
     ],
     "insight": {},
-    "_comment": "UPDATED: now includes Redose per client request - Total Intervention Administered = Administered (dose 1/01, age 3-59) + Redose (taskType REDOSE), combined via bucket_script within a single query (same proven pattern as SPAQ Utilisées from the SPAQ Flow Table, safer than summing across separate top-level queries). aggregationPaths unchanged (still 'Total Intervention Administered' - the bucket_script result replaces the old plain sum as the value consumed downstream)."
+    "_comment": "REBUILT: bucket_script under a filter agg caused a class_cast_exception (InternalFilter cannot be cast to InternalMultiBucketAggregation) - known ES limitation, pipeline aggs don't work reliably as siblings under single-bucket filter aggs. Switched to two separate top-level filter aggregations (Administered Quantity, Redose Quantity) summed via AdditiveComputedField, same pattern as Visité elsewhere in this project. UNVERIFIED: confirm AdditiveComputedField correctly sums these two aggregationPaths."
 },
 "resourcesCoveragePercentNationalICCD": {
   "chartName": "DSS_HEALTH_NATIONAL_RESOURCES_COVERAGE_PERCENT_ICCD",
@@ -9983,7 +9993,7 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Intervention Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}}]}},\"aggs\":{\"AdministeredPart\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"Data.quantity\"}}}},\"RedosePart\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}}]}},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"Data.quantity\"}}}},\"count\":{\"bucket_script\":{\"buckets_path\":{\"admin\":\"AdministeredPart>sum\",\"redose\":\"RedosePart>sum\"},\"script\":\"return params.admin + params.redose;\"}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered Quantity\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"Data.quantity\"}}}},\"Redose Quantity\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.taskType.keyword\":\"REDOSE\"}}]}},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
     },
     {
       "module": "COMMON",
@@ -10000,11 +10010,21 @@
   "documentType": "_doc",
   "action": "percentage",
   "aggregationPaths": [
-    "Total Intervention Administered",
+    "Administered Quantity",
+    "Redose Quantity",
     "Product Target"
   ],
+  "computedFields": [
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": ["Administered Quantity", "Redose Quantity"],
+      "newField": "Total Intervention Administered",
+      "_comments": "Numerator = Administered + Redose"
+    }
+  ],
   "insight": {},
-  "_comment": "UPDATED: numerator now includes Redose (same bucket_script pattern as totalInterventionAdministeredNationalICCD) - resources coverage % = (Administered + Redose) / Product Target. Denominator unchanged."
+  "_comment": "REBUILT: same bucket_script/class_cast_exception fix as totalInterventionAdministeredNationalICCD. UNVERIFIED: confirm the platform's 'percentage' action correctly uses the AdditiveComputedField-derived 'Total Intervention Administered' as numerator against 'Product Target', rather than defaulting to the first raw aggregationPath."
 },
  "totalPopulationRefusedProvinceICCD": {
     "chartName": "DSS_HEALTH_TOTAL_POPULATION_REFUSED_PROVINCE_ICCD",
