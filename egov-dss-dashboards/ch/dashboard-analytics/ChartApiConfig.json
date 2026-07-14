@@ -14211,7 +14211,6 @@
     "_comment": " ",
     "kind": "drillDown"
   },
- 
 "coverageByProvinceICCD": {
   "chartName": "DSS_COVERAGE_BY_PROVINCE_ICCD",
   "queries": [
@@ -14262,7 +14261,8 @@
     "End Date",
     "Start Date",
     "Refused Total",
-    "Refused count"
+    "Refused count",
+    "Visité"
   ],
   "hideInsights": true,
   "hideHeaderDenomination": true,
