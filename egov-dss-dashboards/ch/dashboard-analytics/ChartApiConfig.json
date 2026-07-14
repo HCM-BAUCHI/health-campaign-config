@@ -17453,7 +17453,6 @@
     "downwardIndicator": "negative",
     "textMessage": "$indicator$value% than last $insightInterval",
     "colorCode": "#228B22",
-    "filterPerCurrentDay": true,
     "insightInterval": "day"
   },
   "_comment": "FIXED: dateRefField changed from Data.householdMember.auditDetails.createdTime (long-typed, breaks date-math) to Data.@timestamp (confirmed date-typed). This is the same root-cause fix applied to the National combined card - Province was showing 53 registered today, which is mathematically impossible since National's true today-count is only 3. Province filter scoping (already correct) unchanged. NOT adding filterForCurrentDay here, unlike National - Province has a working page-level Cumulative/Today toggle, so dateRefField + the toggle should correctly restrict once the field itself supports date-math."
