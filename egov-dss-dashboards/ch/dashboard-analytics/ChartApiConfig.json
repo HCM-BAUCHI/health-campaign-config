@@ -14221,7 +14221,7 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"Population Total\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500}, \"aggs\": {\"Total Count Population Administered Cumulative\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}",
-      "_comment": "Unchanged - Administered count per province"
+      "_comment": "Administered count per province (Row 1 + numerator for Row 3)"
     },
     {
       "module": "COMMON",
@@ -14229,15 +14229,7 @@
       "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.targetType.keyword\": \"INDIVIDUAL\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.province.keyword\"}}], \"must_not\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.district.keyword\"}}]}}, \"aggs\": {\"Population Target\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\"}, \"aggs\": {\"Overall Population Target\": {\"sum\": {\"field\": \"Data.overallTarget\"}}}}}}}}",
-      "_comment": "Unchanged - correctly isolates province-level INDIVIDUAL target."
-    },
-    {
-      "module": "COMMON",
-      "dateRefField": "",
-      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-project-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"terms\": {\"Data.targetType.keyword\": [\"SPAQ-1\", \"SPAQ-2\"]}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.province.keyword\"}}], \"must_not\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.district.keyword\"}}]}}, \"aggs\": {\"Product Target\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\"}, \"aggs\": {\"Overall Product Target\": {\"sum\": {\"field\": \"Data.overallTarget\"}}}}}}}}",
-      "_comment": "Unchanged - SPAQ target, kept for the distribution-based Intervention Coverage which may still be needed; flag if this column should be removed given new spec doesn't mention it."
+      "_comment": "Province-level target, denominator for Row 2"
     },
     {
       "module": "COMMON",
@@ -14245,15 +14237,7 @@
       "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.targetType.keyword\": \"INDIVIDUAL\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.province.keyword\"}}], \"must_not\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.district.keyword\"}}]}}, \"aggs\": {\"Project Start and End Dates\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\"}, \"aggs\": {\"Start Date\": {\"min\": {\"field\": \"Data.startDate\"}}, \"End Date\": {\"max\": {\"field\": \"Data.endDate\"}}}}}}}}",
-      "_comment": "Unchanged - date metadata"
-    },
-    {
-      "module": "COMMON",
-      "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"Total distribution\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500}, \"aggs\": {\"Total distribution count\": {\"sum\": {\"field\": \"Data.quantity\"}}}}}}}}",
-      "_comment": "Unchanged - distribution quantity, kept for the same reason as query 3"
+      "_comment": "Unchanged - date metadata, kept since it feeds startDate/endDate fields used elsewhere"
     },
     {
       "module": "COMMON",
@@ -14261,7 +14245,7 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFUSED\"}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"Refused Total\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500}, \"aggs\": {\"Refused count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
-      "_comment": "NEW: Refused count per province, needed to compute Visité (Administered + Refused) per the new formula requirement"
+      "_comment": "Refused count per province, needed for Visité (Administered + Refused)"
     }
   ],
   "chartType": "xtable",
@@ -14275,8 +14259,6 @@
     "Total Count Population Administered Cumulative",
     "Population Target",
     "Overall Population Target",
-    "Overall Product Target",
-    "Total distribution count",
     "End Date",
     "Start Date",
     "Refused Total",
@@ -14302,7 +14284,7 @@
         "Refused count"
       ],
       "newField": "Visité",
-      "_comments": "NEW: Visité = Administered + Refused"
+      "_comments": "Intermediate: Visité = Administered + Refused"
     },
     {
       "postAggregationTheory": "",
@@ -14326,16 +14308,6 @@
     },
     {
       "postAggregationTheory": "",
-      "actionName": "PercentageComputedField",
-      "fields": [
-        "Total distribution count",
-        "Overall Product Target"
-      ],
-      "newField": "Intervention Coverage",
-      "_comments": "UNCHANGED - kept as-is pending confirmation on whether still needed"
-    },
-    {
-      "postAggregationTheory": "",
       "actionName": "AdditiveComputedField",
       "fields": [
         "Start Date"
@@ -14352,7 +14324,7 @@
     }
   ],
   "insight": {},
-  "_comment": "UPDATED per new feedback requirement: added Refused query. Replaced old Administered/Target % with Couverture du denombrement (Visite/Target) and Couverture de l'administration (Administered/Visite)."
+  "_comment": "TRIMMED to exactly the 3 required columns from feedback: Nombre total d'enfant administrés, Couverture du denombrement (Visite/Target), Couverture de l'administration (Administered/Visite). Removed: SPAQ/Product Target query, Total distribution query, and old Intervention Coverage field entirely - not part of the new spec."
 },
   "overviewPopulationTargetedProvinceICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_ICCD",
