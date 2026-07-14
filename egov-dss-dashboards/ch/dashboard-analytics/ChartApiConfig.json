@@ -4876,8 +4876,8 @@
   "drillChart": "referralSummaryByVillageICCD",
   "filterKeys": [
     {
-      "key": "healthFacility",
-      "column": "Health Facility"
+      "key": "locality",
+      "column": "Locality"
     }
   ],
   "documentType": "_doc",
@@ -4886,7 +4886,7 @@
     "ChildrenReferredByHF Count"
   ],
   "insight": {},
-  "_comment": " "
+  "_comment": "FIXED: filterKeys was 'healthFacility' (copy-pasted from parent AP level) - now correctly says 'locality', matching this chart's own terms field. This is the same filterKeys mismatch bug caught earlier in the Beneficiaries Not Administered chain."
 },
   "referralSummaryByVillageICCD": {
     "kind": "drillDown",
