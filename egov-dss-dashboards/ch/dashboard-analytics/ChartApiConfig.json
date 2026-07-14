@@ -14221,7 +14221,7 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"Population Total\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500}, \"aggs\": {\"Total Count Population Administered Cumulative\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}",
-      "_comment": "FIXED: added age range {gte:3,lte:59}"
+      "_comment": "Unchanged - Administered count per province"
     },
     {
       "module": "COMMON",
@@ -14237,7 +14237,7 @@
       "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"terms\": {\"Data.targetType.keyword\": [\"SPAQ-1\", \"SPAQ-2\"]}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.province.keyword\"}}], \"must_not\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.district.keyword\"}}]}}, \"aggs\": {\"Product Target\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\"}, \"aggs\": {\"Overall Product Target\": {\"sum\": {\"field\": \"Data.overallTarget\"}}}}}}}}",
-      "_comment": "FIXED: targetType changed from 'PRODUCT' (which is actually Milda/mosquito nets per project history, a different commodity entirely) to ['SPAQ-1','SPAQ-2'] - this now correctly targets the SPAQ commodity being distributed/administered in query 5, matching resourcesCoveragePercentNationalICCD's established pattern."
+      "_comment": "Unchanged - SPAQ target, kept for the distribution-based Intervention Coverage which may still be needed; flag if this column should be removed given new spec doesn't mention it."
     },
     {
       "module": "COMMON",
@@ -14245,7 +14245,7 @@
       "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.targetType.keyword\": \"INDIVIDUAL\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.province.keyword\"}}], \"must_not\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.district.keyword\"}}]}}, \"aggs\": {\"Project Start and End Dates\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\"}, \"aggs\": {\"Start Date\": {\"min\": {\"field\": \"Data.startDate\"}}, \"End Date\": {\"max\": {\"field\": \"Data.endDate\"}}}}}}}}",
-      "_comment": "Unchanged - date metadata query, no age filter needed."
+      "_comment": "Unchanged - date metadata"
     },
     {
       "module": "COMMON",
@@ -14253,7 +14253,15 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"Total distribution\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500}, \"aggs\": {\"Total distribution count\": {\"sum\": {\"field\": \"Data.quantity\"}}}}}}}}",
-      "_comment": "FIXED: added age range {gte:3,lte:59}"
+      "_comment": "Unchanged - distribution quantity, kept for the same reason as query 3"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFUSED\"}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"Refused Total\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500}, \"aggs\": {\"Refused count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
+      "_comment": "NEW: Refused count per province, needed to compute Visité (Administered + Refused) per the new formula requirement"
     }
   ],
   "chartType": "xtable",
@@ -14270,7 +14278,9 @@
     "Overall Product Target",
     "Total distribution count",
     "End Date",
-    "Start Date"
+    "Start Date",
+    "Refused Total",
+    "Refused count"
   ],
   "hideInsights": true,
   "hideHeaderDenomination": true,
@@ -14281,16 +14291,38 @@
       "fields": [
         "Total Count Population Administered Cumulative"
       ],
-      "newField": "Total Population Administered"
+      "newField": "Nombre total d'enfant administrés",
+      "_comments": "Row 1: Total number of administered children"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Total Count Population Administered Cumulative",
+        "Refused count"
+      ],
+      "newField": "Visité",
+      "_comments": "NEW: Visité = Administered + Refused"
     },
     {
       "postAggregationTheory": "",
       "actionName": "PercentageComputedField",
       "fields": [
-        "Total Population Administered",
+        "Visité",
         "Overall Population Target"
       ],
-      "newField": " Population Coverage"
+      "newField": "Couverture du dénombrement",
+      "_comments": "Row 2: Visité / Target"
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "PercentageComputedField",
+      "fields": [
+        "Total Count Population Administered Cumulative",
+        "Visité"
+      ],
+      "newField": "Couverture de l'administration",
+      "_comments": "Row 3: Administered / Visité"
     },
     {
       "postAggregationTheory": "",
@@ -14299,7 +14331,8 @@
         "Total distribution count",
         "Overall Product Target"
       ],
-      "newField": "Intervention Coverage"
+      "newField": "Intervention Coverage",
+      "_comments": "UNCHANGED - kept as-is pending confirmation on whether still needed"
     },
     {
       "postAggregationTheory": "",
@@ -14319,7 +14352,7 @@
     }
   ],
   "insight": {},
-  "_comment": "FIXED: (1) targetType PRODUCT -> [SPAQ-1,SPAQ-2] in query 3, since PRODUCT actually refers to Milda/mosquito nets, a different commodity - Intervention Coverage was comparing SPAQ distribution against the wrong target entirely. (2) Added age range {gte:3,lte:59} to queries 1 and 5, which previously had no age bound."
+  "_comment": "UPDATED per new feedback requirement: added Refused query. Replaced old Administered/Target % with Couverture du denombrement (Visite/Target) and Couverture de l'administration (Administered/Visite)."
 },
   "overviewPopulationTargetedProvinceICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_ICCD",
