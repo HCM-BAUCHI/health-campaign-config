@@ -10038,76 +10038,70 @@
     "kind": "drillDown"
   }
 ,
-  "totalPopulationRefusedDistrictICCD": {
-    "chartName": "DSS_HEALTH_TOTAL_POPULATION_REFUSED_DISTRICT_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.additionalDetails.taskStatus.keyword\":\"BENEFICIARY_REFUSED\"}}]}},\"aggs\":{\"Beneficiaries Refused\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
-      }
-    ],
-    "chartType": "line",
-    "valueType": "number",
-    "showLabel": true,
-    "isCumulative": false,
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "Beneficiaries Refused"
-    ],
-    "filterKeys": [
-      {
-        "key": "district",
-        "column": "District"
-      }
-    ],
-    "sort": "sortValueDesc",
-    "insight": {},
-    "_comment": "FIXED: requestQueryMap was missing 'province' entirely - drilling from a specific province into District showed every district nationwide instead of just that province's districts, since nothing carried the province context forward. Also aligned dateRefField to Data.createdTime, matching the Province-level sibling (was empty string).",
-    "kind": "drillDown"
-  },
-  "inventoryTheoreticalVsManualStockDistrictICCD": {
-    "chartName": "DSS_HEALTH_THEORETICAL_VS_MANUAL_STOCK_DISTRICT_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}]}}}},\"aggs\":{\"Theoretical Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\"},\"script\":\"params.IS-params.OS\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.stockReconciliation.clientAuditDetails.createdTime",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-stock-reconciliation-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}]}}}},\"aggs\":{\"Manual Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"latest_docs\":{\"terms\":{\"field\":\"Data.stockReconciliation.facilityId.keyword\",\"size\":10000},\"aggs\":{\"latest\":{\"top_hits\":{\"sort\":[{\"Data.stockReconciliation.clientAuditDetails.lastModifiedTime\":{\"order\":\"desc\"}}],\"size\":1}},\"sum_calculatedCount\":{\"sum\":{\"field\":\"Data.stockReconciliation.physicalCount\"}}}},\"Total Stock\":{\"sum_bucket\":{\"buckets_path\":\"latest_docs>sum_calculatedCount\"}}}}}}}}"
-      }
-    ],
-    "chartType": "line",
-    "isCumulative": false,
-    "valueType": "number",
-    "plotLabel": "none",
-    "drillChart": "none",
-    "filterKeys": [
-      {
-        "key": "district",
-        "column": "District"
-      }
-    ],
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "Theoretical Stock",
-      "Manual Stock"
-    ],
-    "insight": {},
-    "_comment": " "
-  },
+ "totalPopulationRefusedDistrictICCD": {
+  "chartName": "DSS_HEALTH_TOTAL_POPULATION_REFUSED_DISTRICT_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFUSED\"}}]}}, \"aggs\": {\"Beneficiaries Refused\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 1000}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
+    }
+  ],
+  "chartType": "line",
+  "valueType": "number",
+  "showLabel": true,
+  "isCumulative": false,
+  "drillChart": "totalPopulationRefusedHealthFacilityICCD",
+  "documentType": "_doc",
+  "action": "",
+  "aggregationPaths": [
+    "Beneficiaries Refused"
+  ],
+  "filterKeys": [
+    {
+      "key": "district",
+      "column": "District"
+    }
+  ],
+  "sort": "sortValueDesc",
+  "insight": {},
+  "kind": "drillDown",
+  "_comment": "FIXED: added missing 'province' to requestQueryMap, aligned dateRefField. drillChart now extended to Health Facility level (totalPopulationRefusedHealthFacilityICCD)."
+},
+"totalPopulationRefusedHealthFacilityICCD": {
+  "chartName": "DSS_HEALTH_TOTAL_POPULATION_REFUSED_HEALTH_FACILITY_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFUSED\"}}]}}, \"aggs\": {\"Beneficiaries Refused\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 1000}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
+    }
+  ],
+  "chartType": "line",
+  "valueType": "number",
+  "showLabel": true,
+  "isCumulative": false,
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "",
+  "aggregationPaths": [
+    "Beneficiaries Refused"
+  ],
+  "filterKeys": [
+    {
+      "key": "healthFacility",
+      "column": "Health Facility"
+    }
+  ],
+  "sort": "sortValueDesc",
+  "insight": {},
+  "kind": "drillDown",
+  "_comment": "NEW: Health Facility level, terminal end of Province->District->HealthFacility chain, matching the established pattern used across every other drilldown family this session."
+},
   "administeredByGenderDistrictICCD": {
     "chartName": "DSS_HEALTH_ADMINISTERED_BY_GENDER_DISTRICT_ICCD",
     "queries": [
