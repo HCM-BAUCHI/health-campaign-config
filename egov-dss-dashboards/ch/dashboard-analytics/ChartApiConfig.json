@@ -19010,21 +19010,21 @@
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}]}}, \"aggs\": {\"Avg distributed beneficiaries\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500}, \"aggs\": {\"Houses sprayed\": {\"value_count\": {\"field\": \"Data.taskId.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Avg distributed beneficiaries\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500},\"aggs\":{\"Houses sprayed\":{\"value_count\":{\"field\":\"Data.taskId.keyword\"}}}}}}}}"
     },
     {
       "module": "COMMON",
       "dateRefField": "",
       "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-staff-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.role.keyword\": \"DISTRIBUTOR\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}]}}, \"aggs\": {\"Total_FLWs\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.userId.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}]}},\"aggs\":{\"Total_FLWs\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.HEALTHFACILITY.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}}}}}"
     }
   ],
   "chartType": "line",
   "isCumulative": false,
   "valueType": "number",
   "plotLabel": "none",
-  "drillChart": "averageNumberOfPopulationAdministeredByVillageICCD",
+  "drillChart": "averageNumberOfPopulationAdministeredByLocalityICCD",
   "documentType": "_doc",
   "action": "division",
   "aggregationPaths": [
@@ -19033,13 +19033,13 @@
   ],
   "filterKeys": [
     {
-      "key": "healthFacility",
+      "key": "hf",
       "column": "Health Facility"
     }
   ],
   "insight": {},
-  "kind": "drillDown",
-  "_comment": "FIXED: filterKeys changed from 'hf' to 'healthFacility' matching every other chart's convention. drillChart changed to skip Locality (duplicate - it aggregated on the same HEALTHFACILITY field as this AP level) and point directly to Village, which correctly aggregates on the genuinely deeper locality field. Locality chart left orphaned, unchanged."
+  "_comment": " ",
+  "kind": "drillDown"
 },
   "averageNumberOfPopulationAdministeredByLocalityICCD": {
     "chartName": "AVERAGE_NO_OF_POPULATION_ADMINISTERED_ICCD",
