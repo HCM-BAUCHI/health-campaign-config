@@ -874,7 +874,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "summaryTeamPerformanceProvincialByDistributorICCD",
+    "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
     "plotLabel": "Health Facility",
@@ -4629,7 +4629,7 @@
     "plotLabel": "none",
     "chartType": "line",
     "valueType": "number",
-    "drillChart": "entriesDoneByWMsLocalityICCD",
+    "drillChart": "entriesDoneByWMsVillageICCD",
     "isCumulative": false,
     "documentType": "_doc",
     "action": "",
@@ -4637,7 +4637,7 @@
       "WM Stock Entries"
     ],
     "insight": {},
-    "_comment": " ",
+    "_comment": "FIXED: drillChart changed from entriesDoneByWMsLocalityICCD to entriesDoneByWMsVillageICCD directly - Locality was a duplicate of this AP level (identical requestQueryMap AND identical terms field, HEALTHFACILITY.keyword), guaranteed to always show the same data. Village already had the correct, genuinely deeper query (locality.keyword field, proper healthFacility parent context) but was never linked into the chain. Locality chart left orphaned, unchanged.",
     "filterKeys": [
       {
         "key": "ward",
@@ -4677,7 +4677,7 @@
     ],
     "kind": "drillDown"
   },
-  "entriesDoneByWMsVillageICCD": {
+ "entriesDoneByWMsVillageICCD": {
     "chartName": "DSS_HEALTH_ENTRIES_DONE_BY_WMS_VILLAGE_ICCD",
     "queries": [
       {
@@ -4699,7 +4699,14 @@
       "WM Stock Entries"
     ],
     "insight": {},
-    "_comment": " "
+    "_comment": "ADDED: drillChart explicitly set to 'none' - was previously missing entirely, now the terminal end of the chain.",
+    "filterKeys": [
+      {
+        "key": "community",
+        "column": "Community"
+      }
+    ],
+    "kind": "drillDown"
   },
   "usersSummaryTable": {
     "chartName": "DSS_HEALTH_COMPLAINTS_BY_HEALTH_DISTRICT_TOTAL_BURUNDI",
