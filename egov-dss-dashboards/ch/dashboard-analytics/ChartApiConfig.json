@@ -19585,7 +19585,7 @@
     "insight": {},
     "_comment": " "
   },
-  "administrationCoverageBarChartDistrict3to11to59ICCD": {
+ "administrationCoverageBarChartDistrict3to11to59ICCD": {
     "chartName": "DSS_HEALTH_ADMINISTRATION_COVERAGE_DISTRICT_3_11_59_ICCD",
     "queries": [
       {
@@ -19613,7 +19613,7 @@
     "chartType": "line",
     "isCumulative": false,
     "valueType": "number",
-    "drillChart": "administrationCoverageBarChartAP3to11to59ICCD",
+    "drillChart": "administrationCoverageBarChartLocality3to11to59ICCD",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
@@ -19628,7 +19628,7 @@
       }
     ],
     "insight": {},
-    "_comment": " ",
+    "_comment": "FIXED: drillChart changed from administrationCoverageBarChartAP3to11to59ICCD (Ward) to administrationCoverageBarChartLocality3to11to59ICCD (Health Facility), skipping Ward since this campaign has no ward-level facilities. Ward chart left orphaned, not deleted.",
     "kind": "drillDown"
   },
   "administrationCoverageBarChartAP3to11to59ICCD": {
