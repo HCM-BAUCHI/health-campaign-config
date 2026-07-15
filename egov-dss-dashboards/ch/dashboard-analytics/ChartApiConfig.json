@@ -9279,28 +9279,40 @@
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFUSED\"}}]}}, \"aggs\": {\"Beneficiary Refused\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFUSED\"}}]}}, \"aggs\": {\"Beneficiary Refused\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
+      "_comment": "Refused"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_ABSENT\"}}]}}, \"aggs\": {\"Beneficiary Absent\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"BENEFICIARY_DIED\"}}]}}, \"aggs\": {\"Beneficiary Died\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
+      "_comment": "Died"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"ADVERSE_EFFECT\"}}]}}, \"aggs\": {\"Adverse Effect\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"BENEFICIARY_MIGRATED\"}}]}}, \"aggs\": {\"Beneficiary Migrated\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
+      "_comment": "Migrated"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFERRED\"}}]}}, \"aggs\": {\"Beneficiary Referred\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_ABSENT\"}}]}}, \"aggs\": {\"Beneficiary Absent\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
+      "_comment": "Absent"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"INELIGIBLE\"}}]}}, \"aggs\": {\"Beneficiary Ineligible\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
+      "_comment": "Ineligible"
     }
   ],
   "chartType": "line",
@@ -9322,9 +9334,10 @@
       "actionName": "SumComputedField",
       "fields": [
         "Beneficiary Refused",
+        "Beneficiary Died",
+        "Beneficiary Migrated",
         "Beneficiary Absent",
-        "Adverse Effect",
-        "Beneficiary Referred"
+        "Beneficiary Ineligible"
       ],
       "newField": "Children Not Administered",
       "_comments": ""
@@ -9332,15 +9345,16 @@
   ],
   "aggregationPaths": [
     "Beneficiary Refused",
+    "Beneficiary Died",
+    "Beneficiary Migrated",
     "Beneficiary Absent",
-    "Adverse Effect",
-    "Beneficiary Referred"
+    "Beneficiary Ineligible"
   ],
   "sort": "sortKeyAsc",
   "computeMultiPaths": true,
   "insight": {},
-  "_comment": "FIXED: query 4 (Beneficiary Referred) was structurally different from every other query in this chart and every other query in the whole project - used a top-level 'query' clause + no 'AGGS' wrapper name, instead of the standard 'aggs':{'AGGS':{'filter':...,'aggs':{...}}} shape used everywhere else. Rebuilt to match the consistent pattern - likely fixes the missing/wrong 'Beneficiary Referred' and 'Children Not Administered' values. STILL OPEN: status set (Refused/Absent/AdverseEffect/Referred) differs from every other level's 5-status set (Refused/Died/Migrated/Absent/Ineligible) - needs confirmation whether this is intentional for District.",
-  "kind": "drillDown"
+  "kind": "drillDown",
+  "_comment": "FIXED: District now uses the STANDARD 5-status set (Refused/Died/Migrated/Absent/Ineligible) matching Province and AP, replacing the old 4-status set (Refused/Absent/AdverseEffect/Referred). This resolves the reported inconsistency where Province=11 and AP=11 but District=111 - District was summing a completely different, unrelated set of statuses. Field-path split preserved: Refused/Absent use taskStatus, Died/Migrated/Ineligible use administrationStatus, matching the established convention."
 },
 "beneficiariesNotAdministeredApICCD": {
   "chartName": "DSS_HEALTH_BENEFICIARIES_NOT_ADMINISTERED_AP_ICCD",
