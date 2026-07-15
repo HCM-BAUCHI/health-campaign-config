@@ -9348,35 +9348,35 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFUSED\"}}]}}, \"aggs\": {\"Beneficiary Refused\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"BENEFICIARY_DIED\"}}]}}, \"aggs\": {\"Beneficiary Died\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"BENEFICIARY_MIGRATED\"}}]}}, \"aggs\": {\"Beneficiary Migrated\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_ABSENT\"}}]}}, \"aggs\": {\"Beneficiary Absent\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
     },
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"INELIGIBLE\"}}]}}, \"aggs\": {\"Beneficiary Ineligible\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500}, \"aggs\": {\"Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
     }
