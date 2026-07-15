@@ -18583,6 +18583,32 @@
     ],
     "cardsList": [
       {
+        "id": "eligibleChildrenEnumeratedCount",
+        "labelKey": "DSS_HEALTH_ORS_ELIGIBLE_CHILDREN_ENUMERATED_COUNT",
+        "valuePath": "eligibleChildrenEnumeratedCount",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "eligibleChildrenEnumeratedCount"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "orszAdministeredCount",
+        "labelKey": "DSS_HEALTH_ORSZ_PACKS_DISTRIBUTED_COUNT",
+        "valuePath": "orszAdministeredCount",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "orszAdministeredCount"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
         "id": "orszCoveragePercent",
         "labelKey": "DSS_HEALTH_ORS_DISTRIBUTION_COVERAGE_PERCENT",
         "valuePath": "orszCoveragePercent",
@@ -18591,6 +18617,19 @@
           "count": "orszCoveragePercent",
           "administeredCount": "orszAdministeredCount",
           "eligibleCount": "eligibleChildrenEnumeratedCount"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "smcAndOrszAdministeredCount",
+        "labelKey": "DSS_HEALTH_CHILDREN_RECEIVING_SMC_AND_ORSZ_COUNT",
+        "valuePath": "smcAndOrszAdministeredCount",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "smcAndOrszAdministeredCount"
         },
         "colorRules": {
           "type": "constant",
@@ -18613,6 +18652,19 @@
         }
       },
       {
+        "id": "orszPacksIssuedCount",
+        "labelKey": "DSS_HEALTH_ORSZ_PACKS_ISSUED_COUNT",
+        "valuePath": "orszPacksIssuedCount",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "orszPacksIssuedCount"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
         "id": "orszDistributionRatePercent",
         "labelKey": "DSS_HEALTH_ORS_DISTRIBUTION_RATE_PERCENT",
         "valuePath": "orszDistributionRatePercent",
@@ -18621,6 +18673,19 @@
           "count": "orszDistributionRatePercent",
           "distributedCount": "orszAdministeredCount",
           "issuedCount": "orszPacksIssuedCount"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "orszPacksReturnedCount",
+        "labelKey": "DSS_HEALTH_ORSZ_PACKS_RETURNED_COUNT",
+        "valuePath": "orszPacksReturnedCount",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "orszPacksReturnedCount"
         },
         "colorRules": {
           "type": "constant",
