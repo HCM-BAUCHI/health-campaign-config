@@ -1329,6 +1329,40 @@
           "name": "DSS_HEALTH_ORS",
           "vizArray": [
             {
+              "id": 12010,
+              "name": "DSS_HEALTH_ORS_COVERAGE_BY_DISTRICT",
+              "label": "DSS_HEALTH_ORS_COVERAGE_BY_DISTRICT",
+              "vizType": "chart",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "orszCoverageBarChartDistrictPercentICCD",
+                  "name": "DSS_HEALTH_ORS_COVERAGE_DISTRICT_PERCENT_ICCD",
+                  "code": "",
+                  "chartType": "sideBySideBar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "PERCENT"
+                },
+                {
+                  "id": "orszCoverageBarChartDistrictICCD",
+                  "name": "DSS_HEALTH_ORS_COVERAGE_DISTRICT_ICCD",
+                  "code": "",
+                  "chartType": "sideBySideBar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "NUMBER"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "DSS_HEALTH_ORS",
+          "vizArray": [
+            {
               "id": 12008,
               "name": "DSS_HEALTH_KIBANA_SCREEN",
               "label": "DSS_HEALTH_KIBANA_SCREEN",
@@ -1349,7 +1383,7 @@
               ]
             }
           ]
-        },
+        },        
         {
           "row": 1,
           "name": "DSS_CUSTOM_KPIS_TAB",

@@ -18713,5 +18713,248 @@
     "hideInsights": true,
     "hideHeaderDenomination": true,
     "_comment": "ORSZ Distribution Coverage (%) = eligible children (0-59 months, not head of household, not ineligible) who received a complete ORS-Zinc package (orsDone flow, ADMINISTRATION_SUCCESS) / total eligible children enumerated x 100. Eligible Children Receiving Both SMC & ORSZ (%) = same numerator query additionally filtered by isSmcDelivered=true, over the same eligible children enumerated denominator. ORSZ Distribution Rate (%) = orszAdministeredCount (packs distributed) / ORS-Zinc packs dispatched Health Facility to Staff (so-stock-index-v1) x 100. ORSZ Stock Accountability Rate (%) = (orszAdministeredCount + orszPacksReturnedCount [RECEIVED/RETURNED, Health Facility from Staff]) / orszPacksIssuedCount x 100"
+  },
+  "orszCoverageBarChartDistrictICCD": {
+    "chartName": "DSS_HEALTH_ORS_COVERAGE_DISTRICT_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Total ORSZ administered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "drillChart": "orszCoverageBarChartAPICCD",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total ORSZ administered"
+    ],
+    "filterKeys": [
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "insight": {},
+    "_comment": " ",
+    "kind": "drillDown"
+  },
+  "orszCoverageBarChartAPICCD": {
+    "kind": "drillDown",
+    "chartName": "DSS_HEALTH_ORS_COVERAGE_AP_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Total ORSZ administered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "drillChart": "orszCoverageBarChartLocalityICCD",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total ORSZ administered"
+    ],
+    "filterKeys": [
+      {
+        "key": "ward",
+        "column": "Ward"
+      }
+    ],
+    "insight": {},
+    "_comment": " "
+  },
+  "orszCoverageBarChartLocalityICCD": {
+    "kind": "drillDown",
+    "chartName": "DSS_HEALTH_ORS_COVERAGE_LOCALITY_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Total ORSZ administered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total ORSZ administered"
+    ],
+    "filterKeys": [
+      {
+        "key": "healthFacility",
+        "column": "Health Facility"
+      }
+    ],
+    "insight": {},
+    "_comment": " "
+  },
+  "orszCoverageBarChartDistrictPercentICCD": {
+    "chartName": "DSS_HEALTH_ORS_COVERAGE_DISTRICT_PERCENT_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Total ORSZ administered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-household-member-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}},{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"Eligible Children Enumerated\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "percentage",
+    "drillChart": "orszCoverageBarChartAPPercentICCD",
+    "documentType": "_doc",
+    "computeMultiPaths": true,
+    "action": "",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "StackPercentageComputedField",
+        "fields": [
+          "Total ORSZ administered",
+          "Eligible Children Enumerated"
+        ],
+        "newField": "ORSZ Administered",
+        "_comments": ""
+      }
+    ],
+    "aggregationPaths": [
+      "Total ORSZ administered",
+      "Eligible Children Enumerated"
+    ],
+    "filterKeys": [
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "insight": {},
+    "_comment": " ",
+    "kind": "drillDown"
+  },
+  "orszCoverageBarChartAPPercentICCD": {
+    "kind": "drillDown",
+    "chartName": "DSS_HEALTH_ORS_COVERAGE_AP_PERCENT_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Total ORSZ administered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-household-member-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}},{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"Eligible Children Enumerated\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "percentage",
+    "drillChart": "orszCoverageBarChartLocalityPercentICCD",
+    "documentType": "_doc",
+    "computeMultiPaths": true,
+    "action": "",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "StackPercentageComputedField",
+        "fields": [
+          "Total ORSZ administered",
+          "Eligible Children Enumerated"
+        ],
+        "newField": "ORSZ Administered",
+        "_comments": ""
+      }
+    ],
+    "aggregationPaths": [
+      "Total ORSZ administered",
+      "Eligible Children Enumerated"
+    ],
+    "filterKeys": [
+      {
+        "key": "ward",
+        "column": "Ward"
+      }
+    ],
+    "insight": {},
+    "_comment": " "
+  },
+  "orszCoverageBarChartLocalityPercentICCD": {
+    "kind": "drillDown",
+    "chartName": "DSS_HEALTH_ORS_COVERAGE_LOCALITY_PERCENT_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Total ORSZ administered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-household-member-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}},{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"Eligible Children Enumerated\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "computeMultiPaths": true,
+    "action": "",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "StackPercentageComputedField",
+        "fields": [
+          "Total ORSZ administered",
+          "Eligible Children Enumerated"
+        ],
+        "newField": "ORSZ Administered",
+        "_comments": ""
+      }
+    ],
+    "aggregationPaths": [
+      "Total ORSZ administered",
+      "Eligible Children Enumerated"
+    ],
+    "filterKeys": [
+      {
+        "key": "healthFacility",
+        "column": "Health Facility"
+      }
+    ],
+    "insight": {},
+    "_comment": " "
   }
 }
