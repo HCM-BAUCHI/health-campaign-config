@@ -12935,7 +12935,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.targetType.keyword\": \"INDIVIDUAL\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}], \"must_not\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}}]}}, \"aggs\": {\"Population Target\": {\"terms\": {\"size\": 500, \"order\": {\"_key\": \"asc\"}, \"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}, \"aggs\": {\"Overall Population target\": {\"sum\": {\"field\": \"Data.overallTarget\"}}}}}}}}",
       "_comment": "Cible 3-59"
@@ -12943,7 +12943,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.targetType.keyword\": \"3-11MONTH\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}], \"must_not\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}}]}}, \"aggs\": {\"Target 3-11\": {\"terms\": {\"size\": 500, \"order\": {\"_key\": \"asc\"}, \"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}, \"aggs\": {\"Target 3-11 count\": {\"sum\": {\"field\": \"Data.overallTarget\"}}}}}}}}",
       "_comment": "Cible 3-11"
@@ -12951,7 +12951,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.targetType.keyword\": \"12-59MONTH\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}], \"must_not\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}}]}}, \"aggs\": {\"Target 12-59\": {\"terms\": {\"size\": 500, \"order\": {\"_key\": \"asc\"}, \"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}, \"aggs\": {\"Target 12-59 count\": {\"sum\": {\"field\": \"Data.overallTarget\"}}}}}}}}",
       "_comment": "Cible 12-59"
@@ -12959,7 +12959,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.householdMember.auditDetails.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}]}}, \"aggs\": {\"Registered 3-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Registered 3-59 count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
       "_comment": "Couvert 3-59"
@@ -12967,7 +12967,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.householdMember.auditDetails.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"Registered 3-11\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Registered 3-11 count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
       "_comment": "Couvert 3-11"
@@ -12975,7 +12975,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.householdMember.auditDetails.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"Registered 12-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Registered 12-59 count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
       "_comment": "Couvert 12-59"
@@ -12983,7 +12983,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFUSED\"}}]}}, \"aggs\": {\"Refused\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Refused count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Refus 3-59"
@@ -12991,7 +12991,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFUSED\"}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"Refused 3-11\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Refused 3-11 count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Refus 3-11"
@@ -12999,7 +12999,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFUSED\"}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"Refused 12-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Refused 12-59 count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Refus 12-59"
@@ -13007,7 +13007,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}]}}, \"aggs\": {\"Individual Coverage Ratio\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500}, \"aggs\": {\"Total Population covered\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}",
       "_comment": "Administré 3-59"
@@ -13015,7 +13015,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}]}}, \"aggs\": {\"Administered 3-11\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500}, \"aggs\": {\"Administered 3-11 count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}",
       "_comment": "Administré 3-11"
@@ -13023,7 +13023,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}]}}, \"aggs\": {\"Administered 12-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500}, \"aggs\": {\"Administered 12-59 count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}",
       "_comment": "Administré 12-59"
@@ -13031,7 +13031,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFERRED\"}}]}}, \"aggs\": {\"Referred 3-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Referred 3-59 count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Référé 3-59"
@@ -13039,7 +13039,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFERRED\"}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"Referred 3-11\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Referred 3-11 count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Référé 3-11"
@@ -13047,7 +13047,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFERRED\"}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"Referred 12-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Referred 12-59 count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Référé 12-59"
@@ -13055,7 +13055,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_ABSENT\"}}]}}, \"aggs\": {\"Beneficiary Absent\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Beneficiary Absent count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Absent 3-59"
@@ -13063,7 +13063,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_ABSENT\"}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"Absent 3-11\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Absent 3-11 count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Absent 3-11"
@@ -13071,7 +13071,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_ABSENT\"}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"Absent 12-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Absent 12-59 count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Absent 12-59"
@@ -13079,7 +13079,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"ADVERSE_EFFECT\"}}]}}, \"aggs\": {\"MAPI 3-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"MAPI 3-59 count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "MAPI 3-59"
@@ -13087,7 +13087,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"ADVERSE_EFFECT\"}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"MAPI 3-11\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"MAPI 3-11 count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "MAPI 3-11"
@@ -13095,7 +13095,7 @@
     {
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"ADVERSE_EFFECT\"}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"MAPI 12-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"MAPI 12-59 count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "MAPI 12-59"
@@ -13459,7 +13459,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.targetType.keyword\": \"INDIVIDUAL\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}}]}}, \"aggs\": {\"Population Target\": {\"terms\": {\"size\": 500, \"order\": {\"_key\": \"asc\"}, \"field\": \"Data.boundaryHierarchy.locality.keyword\"}, \"aggs\": {\"Overall Population target\": {\"sum\": {\"field\": \"Data.overallTarget\"}}}}}}}}",
       "_comment": "Unchanged - Cible 3-59, already correct"
@@ -13467,7 +13467,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"terms\": {\"Data.targetType.keyword\": [\"SPAQ-1\", \"SPAQ-2\"]}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}}]}}, \"aggs\": {\"Distribution Target\": {\"terms\": {\"size\": 500, \"order\": {\"_key\": \"asc\"}, \"field\": \"Data.boundaryHierarchy.locality.keyword\"}, \"aggs\": {\"Overall Distribution Target\": {\"sum\": {\"field\": \"Data.overallTarget\"}}}}}}}}",
       "_comment": "FIXED: targetType 'PRODUCT' (actually Milda/mosquito nets, a different commodity per project history) changed to ['SPAQ-1','SPAQ-2'], matching resourcesCoveragePercentNationalICCD's established pattern. 'Intervention Coverage' was comparing SPAQ distribution against the wrong commodity's target."
@@ -13475,7 +13475,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"Individual Coverage Ratio\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}, \"aggs\": {\"Total Population covered\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}",
       "_comment": "FIXED: added age range {gte:3,lte:59} - was missing entirely"
@@ -13483,7 +13483,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.isDelivered\": true}}, {\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"Total distribution\": {\"terms\": {\"size\": 500, \"order\": {\"_key\": \"asc\"}, \"field\": \"Data.boundaryHierarchy.locality.keyword\"}, \"aggs\": {\"Total distribution count\": {\"sum\": {\"field\": \"Data.quantity\"}}}}}}}}",
       "_comment": "FIXED: added age range. FLAG UNVERIFIED: 'Data.isDelivered' field is not used anywhere else in this entire project - confirm this is a real, correctly-mapped field before trusting this metric."
@@ -13491,7 +13491,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.targetType.keyword\": \"3-11MONTH\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}}]}}, \"aggs\": {\"Target 3-11\": {\"terms\": {\"size\": 500, \"order\": {\"_key\": \"asc\"}, \"field\": \"Data.boundaryHierarchy.locality.keyword\"}, \"aggs\": {\"Target 3-11 count\": {\"sum\": {\"field\": \"Data.overallTarget\"}}}}}}}}",
       "_comment": "Unchanged - correct"
@@ -13499,7 +13499,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}]}}, \"aggs\": {\"Administered 12-59\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Administered 12-59 count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}",
       "_comment": "Unchanged - already had age bound (gte:12), correct"
@@ -13507,7 +13507,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.targetType.keyword\": \"12-59MONTH\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}}]}}, \"aggs\": {\"Target 12-59\": {\"terms\": {\"size\": 500, \"order\": {\"_key\": \"asc\"}, \"field\": \"Data.boundaryHierarchy.locality.keyword\"}, \"aggs\": {\"Target 12-59 count\": {\"sum\": {\"field\": \"Data.overallTarget\"}}}}}}}}",
       "_comment": "Unchanged - correct"
@@ -13515,7 +13515,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"BENEFICIARY_REFUSED\"}}]}}, \"aggs\": {\"Refused\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Refused count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Unchanged"
@@ -13523,7 +13523,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"BENEFICIARY_DIED\"}}]}}, \"aggs\": {\"Died\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Died count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Unchanged"
@@ -13531,7 +13531,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"BENEFICIARY_MIGRATED\"}}]}}, \"aggs\": {\"Migrated\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Migrated count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Unchanged"
@@ -13539,7 +13539,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"INELIGIBLE\"}}]}}, \"aggs\": {\"Ineligible\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Ineligible count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Unchanged"
@@ -13547,7 +13547,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"BENEFICIARY_ABSENT\"}}]}}, \"aggs\": {\"Beneficiary Absent\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Beneficiary Absent count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Unchanged"
@@ -13555,7 +13555,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.caregiverConsent.keyword\": \"FALSE\"}}]}}, \"aggs\": {\"Household Refused\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\", \"size\": 500, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Household Refused count\": {\"value_count\": {\"field\": \"Data.household.id.keyword\"}}}}}}}}",
       "_comment": "Unchanged"
