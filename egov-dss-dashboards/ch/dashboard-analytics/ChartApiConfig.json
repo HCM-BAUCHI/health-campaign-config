@@ -21292,7 +21292,7 @@
       "key": "inventoryReceivedAtHealthFacilityMetrics",
       "module": "COMMON",
       "dateRefField": "Data.createdTime",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"lga\": \"Data.boundaryHierarchy.district.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\"}",
       "indexName": "ch-stock-index-v1",
       "transformData": "linearAggregation",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"spaqTotalReceived\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"total\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"spaq1Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"total\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"spaq2Received\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.facilityType.keyword\": \"Health Facility\"}}, {\"term\": {\"Data.transactingFacilityType.keyword\": \"Central Facility\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}, {\"term\": {\"Data.eventType.keyword\": \"RECEIVED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"RECEIVED\"}}]}}, \"aggs\": {\"total\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}",
@@ -21328,8 +21328,8 @@
       "key": "province"
     },
     {
-      "key": "lga",
-      "column": "LGA"
+      "key": "district",
+      "column": "District"
     }
   ],
   "documentType": "_doc",
