@@ -1305,6 +1305,30 @@
           "name": "DSS_HEALTH_ORS",
           "vizArray": [
             {
+              "id": 12009,
+              "name": "DSS_HEALTH_ORS_OVERVIEW",
+              "label": "DSS_HEALTH_ORS_OVERVIEW",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "orsOverviewBanner",
+                  "name": "DSS_HEALTH_ORS_OVERVIEW",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_HEALTH_ORS",
+          "vizArray": [
+            {
               "id": 12008,
               "name": "DSS_HEALTH_KIBANA_SCREEN",
               "label": "DSS_HEALTH_KIBANA_SCREEN",
