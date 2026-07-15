@@ -9235,7 +9235,7 @@
   "isCumulative": false,
   "valueType": "number",
   "plotLabel": "none",
-  "drillChart": "beneficiariesNotAdministeredApICCD",
+  "drillChart": "beneficiariesNotAdministeredDistrictICCD",
   "filterKeys": [
     {
       "key": "province"
@@ -10124,7 +10124,7 @@
     "isCumulative": false,
     "valueType": "number",
     "plotLabel": "none",
-    "drillChart": "administeredByGenderApICCD",
+    "drillChart": "administeredByGenderLocalityICCD",
     "filterKeys": [
       {
         "key": "district",
