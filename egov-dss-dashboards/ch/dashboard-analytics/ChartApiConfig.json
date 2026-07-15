@@ -22251,7 +22251,7 @@
   ],
   "chartType": "xtable",
   "valueType": "number",
-  "drillChart": "inventorySpaqFlowTableByUsernameDrillICCD",
+  "drillChart": "none",
   "documentType": "_doc",
   "action": "",
   "plotLabel": "Health Facility",
