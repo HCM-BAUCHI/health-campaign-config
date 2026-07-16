@@ -1404,7 +1404,7 @@
               "id": 12015,
               "name": "DSS_HEALTH_ORS_DISTRIBUTION_COVERAGE_PERCENT",
               "label": "DSS_HEALTH_ORS_DISTRIBUTION_COVERAGE_PERCENT",
-              "vizType": "stacked-collection",
+              "vizType": "stacked-collection-vertical",
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
@@ -1438,7 +1438,7 @@
               "id": 12016,
               "name": "DSS_HEALTH_ELIGIBLE_CHILDREN_RECEIVING_SMC_AND_ORSZ_PERCENT",
               "label": "DSS_HEALTH_ELIGIBLE_CHILDREN_RECEIVING_SMC_AND_ORSZ_PERCENT",
-              "vizType": "stacked-collection",
+              "vizType": "stacked-collection-vertical",
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
@@ -1478,7 +1478,7 @@
               "id": 12017,
               "name": "DSS_HEALTH_ORS_DISTRIBUTION_RATE_PERCENT",
               "label": "DSS_HEALTH_ORS_DISTRIBUTION_RATE_PERCENT",
-              "vizType": "stacked-collection",
+              "vizType": "stacked-collection-vertical",
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
@@ -1512,7 +1512,7 @@
               "id": 12018,
               "name": "DSS_HEALTH_ORS_STOCK_ACCOUNTABILITY_RATE_PERCENT",
               "label": "DSS_HEALTH_ORS_STOCK_ACCOUNTABILITY_RATE_PERCENT",
-              "vizType": "stacked-collection",
+              "vizType": "stacked-collection-vertical",
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
