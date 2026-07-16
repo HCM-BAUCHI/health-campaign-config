@@ -11142,7 +11142,7 @@
         "Overall Population target"
       ],
       "newField": "Registration Coverage 3-59",
-      "valueType": "percentage",
+      "valueType": "PERCENTAGE",
       "_comments": "Col 8"
     },
     {
@@ -11153,7 +11153,7 @@
         "Target 3-11 count"
       ],
       "newField": "Registration Coverage 3-11",
-      "valueType": "percentage",
+      "valueType": "PERCENTAGE",
       "_comments": "Col 9"
     },
     {
@@ -11164,7 +11164,7 @@
         "Target 12-59 count"
       ],
       "newField": "Registration Coverage 12-59",
-      "valueType": "percentage",
+      "valueType": "PERCENTAGE",
       "_comments": "Col 10"
     },
     {
@@ -11202,7 +11202,7 @@
         "Registered 3-59 count"
       ],
       "newField": "Administered Coverage 3-59",
-      "valueType": "percentage",
+      "valueType": "PERCENTAGE",
       "_comments": "Col 14"
     },
     {
@@ -11213,7 +11213,7 @@
         "Registered 3-11 count"
       ],
       "newField": "Administered Coverage 3-11",
-      "valueType": "percentage",
+      "valueType": "PERCENTAGE",
       "_comments": "Col 15"
     },
     {
@@ -11224,7 +11224,7 @@
         "Registered 12-59 count"
       ],
       "newField": "Administered Coverage 12-59",
-      "valueType": "percentage",
+      "valueType": "PERCENTAGE",
       "_comments": "Col 16"
     },
     {
