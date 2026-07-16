@@ -1064,6 +1064,102 @@
           ]
         },
         {
+          "row": 6,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 12011,
+              "name": "DSS_HEALTH_INVENTORY_ORSZ_OVERVIEW_METRICS",
+              "label": "DSS_HEALTH_INVENTORY_ORSZ_OVERVIEW_METRICS",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "orszInventoryOverviewMetrics",
+                  "name": "DSS_HEALTH_INVENTORY_ORSZ_OVERVIEW_METRICS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 7,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 12012,
+              "name": "DSS_HEALTH_INVENTORY_ORSZ_STATE_TO_HEALTH_METRICS",
+              "label": "DSS_HEALTH_INVENTORY_ORSZ_STATE_TO_HEALTH_METRICS",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "orszInventoryStateToHealthMetrics",
+                  "name": "DSS_HEALTH_INVENTORY_ORSZ_STATE_TO_HEALTH_METRICS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 8,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 12013,
+              "name": "DSS_HEALTH_INVENTORY_ORSZ_HEALTH_TO_STAFF_METRICS",
+              "label": "DSS_HEALTH_INVENTORY_ORSZ_HEALTH_TO_STAFF_METRICS",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "orszInventoryHealthToStaffMetrics",
+                  "name": "DSS_HEALTH_INVENTORY_ORSZ_HEALTH_TO_STAFF_METRICS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 9,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 12014,
+              "name": "DSS_HEALTH_INVENTORY_ORSZ_FLOW_TABLE",
+              "label": "DSS_HEALTH_INVENTORY_ORSZ_FLOW_TABLE",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "orszInventoryFlowTableByCountryICCD",
+                  "name": "DSS_HEALTH_INVENTORY_ORSZ_FLOW_TABLE_ICCD",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
           "row": 1,
           "name": "DSS_HEALTH_TEAM_PERFORMANCE",
           "vizArray": [

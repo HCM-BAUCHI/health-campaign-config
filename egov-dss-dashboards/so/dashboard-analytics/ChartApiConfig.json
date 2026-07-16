@@ -18237,6 +18237,555 @@
     "kind": "drillDown",
     "_comment": "Health facility aggregation: Health Facility to STAFF"
   },
+  "orszInventoryOverviewMetrics": {
+    "chartName": "DSS_HEALTH_INVENTORY_ORSZ_OVERVIEW_METRICS",
+    "queries": [
+      {
+        "key": "stockIndexSent",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszSentCountryToState\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "orszSentCountryToState": "orszSentCountryToState.total.value"
+        }
+      },
+      {
+        "key": "stockIndexUpdatedAccepted",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "so-stock-index-updated-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszAcceptedAtStateFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "orszAcceptedAtStateFacility": "orszAcceptedAtStateFacility.total.value"
+        }
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "orszInventoryOverviewMetrics",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [
+      {
+        "key": "campaignNumber"
+      },
+      {
+        "key": "country"
+      },
+      {
+        "key": "state"
+      },
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "orszSentCountryToState",
+      "orszAcceptedAtStateFacility"
+    ],
+    "cardsList": [
+      {
+        "id": "orszSentCountryToState",
+        "labelKey": "DSS_HEALTH_INVENTORY_ORSZ_SENT_COUNTRY_TO_STATE",
+        "valuePath": "orszSentCountryToState",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "orszSentCountryToState"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "orszAcceptedAtStateFacility",
+        "labelKey": "DSS_HEALTH_INVENTORY_ORSZ_ACCEPTED_AT_STATE_FACILITY",
+        "valuePath": "orszAcceptedAtStateFacility",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "orszAcceptedAtStateFacility"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Inventory overview cards: ORS-Zinc sent from Central to State (stock-index) and accepted at State Facility (stock-index-updated)"
+  },
+  "orszInventoryStateToHealthMetrics": {
+    "chartName": "DSS_HEALTH_INVENTORY_ORSZ_STATE_TO_HEALTH_METRICS",
+    "queries": [
+      {
+        "key": "stockIndexSent",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "so-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszSentStateToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "orszSentStateToHealth": "orszSentStateToHealth.total.value"
+        }
+      },
+      {
+        "key": "stockIndexUpdatedAccepted",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "so-stock-index-updated-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszAcceptedAtHealthFacility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "orszAcceptedAtHealthFacility": "orszAcceptedAtHealthFacility.total.value"
+        }
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "orszInventoryStateToHealthMetrics",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [
+      {
+        "key": "campaignNumber"
+      },
+      {
+        "key": "state"
+      },
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "orszSentStateToHealth",
+      "orszAcceptedAtHealthFacility"
+    ],
+    "cardsList": [
+      {
+        "id": "orszSentStateToHealth",
+        "labelKey": "DSS_HEALTH_INVENTORY_ORSZ_SENT_STATE_TO_HEALTH",
+        "valuePath": "orszSentStateToHealth",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "orszSentStateToHealth"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "orszAcceptedAtHealthFacility",
+        "labelKey": "DSS_HEALTH_INVENTORY_ORSZ_ACCEPTED_AT_HEALTH_FACILITY",
+        "valuePath": "orszAcceptedAtHealthFacility",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "orszAcceptedAtHealthFacility"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "ORS-Zinc sent State to Health Facility (stock-index) and accepted at Health Facility (stock-index-updated)"
+  },
+  "orszInventoryHealthToStaffMetrics": {
+    "chartName": "DSS_HEALTH_INVENTORY_ORSZ_HEALTH_TO_STAFF_METRICS",
+    "queries": [
+      {
+        "key": "stockIndexSent",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "so-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszSentHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "orszSentHealthToStaff": "orszSentHealthToStaff.total.value"
+        }
+      },
+      {
+        "key": "stockIndexUpdatedAccepted",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "so-stock-index-updated-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszAcceptedAtStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "orszAcceptedAtStaff": "orszAcceptedAtStaff.total.value"
+        }
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "orszInventoryHealthToStaffMetrics",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [
+      {
+        "key": "campaignNumber"
+      },
+      {
+        "key": "state"
+      },
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "orszSentHealthToStaff",
+      "orszAcceptedAtStaff"
+    ],
+    "cardsList": [
+      {
+        "id": "orszSentHealthToStaff",
+        "labelKey": "DSS_HEALTH_INVENTORY_ORSZ_SENT_HEALTH_TO_STAFF",
+        "valuePath": "orszSentHealthToStaff",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "orszSentHealthToStaff"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "orszAcceptedAtStaff",
+        "labelKey": "DSS_HEALTH_INVENTORY_ORSZ_ACCEPTED_AT_STAFF",
+        "valuePath": "orszAcceptedAtStaff",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "orszAcceptedAtStaff"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "ORS-Zinc sent Health Facility to STAFF (stock-index) and accepted at STAFF (stock-index-updated)"
+  },
+  "orszInventoryFlowTableByCountryICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_ORSZ_FLOW_TABLE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"ORSZ Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_ORSZ_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
+        "indexName": "so-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"ORSZ Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_ORSZ_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative ORSZ Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_ORSZ_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
+        "indexName": "so-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"ORSZ Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.country.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_ORSZ_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "orszInventoryFlowTableByStateDrillICCD",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Country",
+    "filterKeys": [
+      {
+        "key": "country",
+        "column": "Country"
+      }
+    ],
+    "excludedColumns": [
+      "S.N.",
+      "_ORSZ_SENT",
+      "_ORSZ_ACCEPTED",
+      "Negative ORSZ Accepted at State Facility",
+      "_ORSZ_REJECTED"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_ORSZ_SENT"
+        ],
+        "newField": "ORSZ Sent Country To State",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_ORSZ_ACCEPTED"
+        ],
+        "newField": "ORSZ Accepted At State Facility",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_ORSZ_SENT",
+          "Negative ORSZ Accepted at State Facility"
+        ],
+        "newField": "ORSZ Unaccepted Country To State",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_ORSZ_REJECTED"
+        ],
+        "newField": "ORSZ Rejected",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "Country aggregation: Central Facility to State Facility"
+  },
+  "orszInventoryFlowTableByStateDrillICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_ORSZ_FLOW_TABLE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\"}",
+        "indexName": "so-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"ORSZ Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_ORSZ_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "so-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"ORSZ Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_ORSZ_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative ORSZ Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_ORSZ_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "so-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"ORSZ Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_ORSZ_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "orszInventoryFlowTableByHealthFacilityDrillICCD",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "State",
+    "filterKeys": [
+      {
+        "key": "state",
+        "column": "State"
+      }
+    ],
+    "excludedColumns": [
+      "S.N.",
+      "_ORSZ_SENT",
+      "_ORSZ_ACCEPTED",
+      "Negative ORSZ Accepted at State Facility",
+      "_ORSZ_REJECTED"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_ORSZ_SENT"
+        ],
+        "newField": "ORSZ Sent State To Health",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_ORSZ_ACCEPTED"
+        ],
+        "newField": "ORSZ Accepted At Health Facility",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_ORSZ_SENT",
+          "Negative ORSZ Accepted at State Facility"
+        ],
+        "newField": "ORSZ Unaccepted State To Health",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_ORSZ_REJECTED"
+        ],
+        "newField": "ORSZ Rejected",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "State aggregation: State Facility to Health Facility"
+  },
+  "orszInventoryFlowTableByHealthFacilityDrillICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_ORSZ_FLOW_TABLE_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "so-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"ORSZ Sent to State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_ORSZ_SENT\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "so-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"ORSZ Accepted at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_ORSZ_ACCEPTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}},\"Negative ORSZ Accepted at State Facility\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"_ORSZ_ACCEPTED\"},\"script\":\"return -1 * params.v\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "so-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"ORSZ Rejected at State Facility\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Boundary\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"_ORSZ_REJECTED\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Health Facility",
+    "filterKeys": [
+      {
+        "key": "healthFacility",
+        "column": "Health Facility"
+      }
+    ],
+    "excludedColumns": [
+      "S.N.",
+      "_ORSZ_SENT",
+      "_ORSZ_ACCEPTED",
+      "Negative ORSZ Accepted at State Facility",
+      "_ORSZ_REJECTED"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_ORSZ_SENT"
+        ],
+        "newField": "ORSZ Sent Health To Staff",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_ORSZ_ACCEPTED"
+        ],
+        "newField": "ORSZ Accepted At Staff",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_ORSZ_SENT",
+          "Negative ORSZ Accepted at State Facility"
+        ],
+        "newField": "ORSZ Unaccepted Health To Staff",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_ORSZ_REJECTED"
+        ],
+        "newField": "ORSZ Rejected",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "Health facility aggregation: Health Facility to STAFF"
+  },
   "redoseBySpaqBarChartWardICCD": {
     "chartName": "DSS_HEALTH_REDOSE_BY_SPAQ_BARCHART_WARD_ICCD",
     "queries": [
