@@ -18519,7 +18519,7 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "so-project-task-index-v1",
         "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"SmcAndOrsz\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.additionalDetails.isSmcDelivered\":true}},{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"SmcAndOrsz\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.additionalDetails.isSMCDelivered\":true}},{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "select": {
           "smcAndOrszAdministeredCount": "SmcAndOrsz.Count.value"
         }
@@ -18712,7 +18712,7 @@
     "insight": {},
     "hideInsights": true,
     "hideHeaderDenomination": true,
-    "_comment": "ORSZ Distribution Coverage (%) = eligible children (0-59 months, not head of household, not ineligible) who received a complete ORS-Zinc package (orsDone flow, ADMINISTRATION_SUCCESS) / total eligible children enumerated x 100. Eligible Children Receiving Both SMC & ORSZ (%) = same numerator query additionally filtered by isSmcDelivered=true, over the same eligible children enumerated denominator. ORSZ Distribution Rate (%) = orszAdministeredCount (packs distributed) / ORS-Zinc packs dispatched Health Facility to Staff (so-stock-index-v1) x 100. ORSZ Stock Accountability Rate (%) = (orszAdministeredCount + orszPacksReturnedCount [RECEIVED/RETURNED, Health Facility from Staff]) / orszPacksIssuedCount x 100"
+    "_comment": "ORSZ Distribution Coverage (%) = eligible children (0-59 months, not head of household, not ineligible) who received a complete ORS-Zinc package (orsDone flow, ADMINISTRATION_SUCCESS) / total eligible children enumerated x 100. Eligible Children Receiving Both SMC & ORSZ (%) = same numerator query additionally filtered by isSMCDelivered=true, over the same eligible children enumerated denominator. ORSZ Distribution Rate (%) = orszAdministeredCount (packs distributed) / ORS-Zinc packs dispatched Health Facility to Staff (so-stock-index-v1) x 100. ORSZ Stock Accountability Rate (%) = (orszAdministeredCount + orszPacksReturnedCount [RECEIVED/RETURNED, Health Facility from Staff]) / orszPacksIssuedCount x 100"
   },
   "orszCoverageBarChartDistrictICCD": {
     "chartName": "DSS_HEALTH_ORS_COVERAGE_DISTRICT_ICCD",
