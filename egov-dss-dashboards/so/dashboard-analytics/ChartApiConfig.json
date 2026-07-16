@@ -19571,12 +19571,23 @@
     "merges": [
       {
         "mergeType": "linear",
+        "mergeKey": "orszAccountedForMetrics",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": [
+          {
+            "orszAccountedForCount": "add(orszAdministeredCount, orszPacksReturnedCount)"
+          }
+        ]
+      },
+      {
+        "mergeType": "linear",
         "mergeKey": "orszStockAccountabilityMetrics",
         "flatten": true,
         "datasets": [],
         "outputMappings": [
           {
-            "orszStockAccountabilityRatePercent": "multiply(divide(add(orszAdministeredCount, orszPacksReturnedCount), orszPacksIssuedCount), 100)"
+            "orszStockAccountabilityRatePercent": "multiply(divide(orszAccountedForCount, orszPacksIssuedCount), 100)"
           }
         ]
       }
@@ -19588,6 +19599,7 @@
       "orszAdministeredCount",
       "orszPacksReturnedCount",
       "orszPacksIssuedCount",
+      "orszAccountedForCount",
       "orszStockAccountabilityRatePercent"
     ],
     "cardsList": [
@@ -19611,6 +19623,6 @@
     "insight": {},
     "hideInsights": true,
     "hideHeaderDenomination": true,
-    "_comment": "ORSZ Stock Accountability Rate (%) = (orszAdministeredCount + orszPacksReturnedCount) / orszPacksIssuedCount x 100"
+    "_comment": "ORSZ Stock Accountability Rate (%) = (orszAdministeredCount + orszPacksReturnedCount) / orszPacksIssuedCount x 100. Split into two merge steps because divide()/multiply() only accept plain field args — add() nested inside divide() isn't supported by the merge expression evaluator."
   }
 }
