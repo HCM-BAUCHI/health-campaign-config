@@ -19034,235 +19034,6 @@
       }
     ]
   },
-  "orsOverviewBanner": {
-    "chartName": "DSS_HEALTH_ORS_OVERVIEW",
-    "queries": [
-      {
-        "key": "orszAdministered",
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "so-project-task-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
-        "select": {
-          "orszAdministeredCount": "Administered.Count.value"
-        }
-      },
-      {
-        "key": "eligibleChildrenEnumerated",
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "so-household-member-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Eligible\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}},{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}",
-        "select": {
-          "eligibleChildrenEnumeratedCount": "Eligible.Count.value"
-        }
-      },
-      {
-        "key": "smcAndOrszAdministered",
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "so-project-task-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"SmcAndOrsz\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.additionalDetails.isSMCDelivered\":true}},{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
-        "select": {
-          "smcAndOrszAdministeredCount": "SmcAndOrsz.Count.value"
-        }
-      },
-      {
-        "key": "orszPacksIssued",
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
-        "indexName": "so-stock-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszIssuedHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
-        "select": {
-          "orszPacksIssuedCount": "orszIssuedHealthToStaff.total.value"
-        }
-      },
-      {
-        "key": "orszPacksReturned",
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
-        "indexName": "so-stock-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszReturnedStaffToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.reason.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
-        "select": {
-          "orszPacksReturnedCount": "orszReturnedStaffToHealth.total.value"
-        }
-      }
-    ],
-    "chartType": "rawResponse",
-    "valueType": "number",
-    "merges": [
-      {
-        "mergeType": "linear",
-        "mergeKey": "orsOverviewMetrics",
-        "flatten": true,
-        "datasets": [],
-        "outputMappings": [
-          {
-            "orszCoveragePercent": "multiply(divide(orszAdministeredCount, eligibleChildrenEnumeratedCount), 100)",
-            "smcAndOrszCoveragePercent": "multiply(divide(smcAndOrszAdministeredCount, eligibleChildrenEnumeratedCount), 100)",
-            "orszDistributionRatePercent": "multiply(divide(orszAdministeredCount, orszPacksIssuedCount), 100)",
-            "orszStockAccountabilityRatePercent": "multiply(divide(add(orszAdministeredCount, orszPacksReturnedCount), orszPacksIssuedCount), 100)"
-          }
-        ]
-      }
-    ],
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "orszAdministeredCount",
-      "eligibleChildrenEnumeratedCount",
-      "smcAndOrszAdministeredCount",
-      "orszPacksIssuedCount",
-      "orszPacksReturnedCount",
-      "orszCoveragePercent",
-      "smcAndOrszCoveragePercent",
-      "orszDistributionRatePercent",
-      "orszStockAccountabilityRatePercent"
-    ],
-    "cardsList": [
-      {
-        "id": "eligibleChildrenEnumeratedCount",
-        "labelKey": "DSS_HEALTH_ORS_ELIGIBLE_CHILDREN_ENUMERATED_COUNT",
-        "valuePath": "eligibleChildrenEnumeratedCount",
-        "valueType": "NUMBER",
-        "descriptionParams": {
-          "count": "eligibleChildrenEnumeratedCount"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      },
-      {
-        "id": "orszAdministeredCount",
-        "labelKey": "DSS_HEALTH_ORSZ_PACKS_DISTRIBUTED_COUNT",
-        "valuePath": "orszAdministeredCount",
-        "valueType": "NUMBER",
-        "descriptionParams": {
-          "count": "orszAdministeredCount"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      },
-      {
-        "id": "orszCoveragePercent",
-        "labelKey": "DSS_HEALTH_ORS_DISTRIBUTION_COVERAGE_PERCENT",
-        "valuePath": "orszCoveragePercent",
-        "valueType": "PERCENTAGE",
-        "descriptionParams": {
-          "count": "orszCoveragePercent",
-          "administeredCount": "orszAdministeredCount",
-          "eligibleCount": "eligibleChildrenEnumeratedCount"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      },
-      {
-        "id": "smcAndOrszAdministeredCount",
-        "labelKey": "DSS_HEALTH_CHILDREN_RECEIVING_SMC_AND_ORSZ_COUNT",
-        "valuePath": "smcAndOrszAdministeredCount",
-        "valueType": "NUMBER",
-        "descriptionParams": {
-          "count": "smcAndOrszAdministeredCount"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      },
-      {
-        "id": "smcAndOrszCoveragePercent",
-        "labelKey": "DSS_HEALTH_ELIGIBLE_CHILDREN_RECEIVING_SMC_AND_ORSZ_PERCENT",
-        "valuePath": "smcAndOrszCoveragePercent",
-        "valueType": "PERCENTAGE",
-        "descriptionParams": {
-          "count": "smcAndOrszCoveragePercent",
-          "administeredCount": "smcAndOrszAdministeredCount",
-          "eligibleCount": "eligibleChildrenEnumeratedCount"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      },
-      {
-        "id": "orszPacksIssuedCount",
-        "labelKey": "DSS_HEALTH_ORSZ_PACKS_ISSUED_COUNT",
-        "valuePath": "orszPacksIssuedCount",
-        "valueType": "NUMBER",
-        "descriptionParams": {
-          "count": "orszPacksIssuedCount"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      },
-      {
-        "id": "orszDistributionRatePercent",
-        "labelKey": "DSS_HEALTH_ORS_DISTRIBUTION_RATE_PERCENT",
-        "valuePath": "orszDistributionRatePercent",
-        "valueType": "PERCENTAGE",
-        "descriptionParams": {
-          "count": "orszDistributionRatePercent",
-          "distributedCount": "orszAdministeredCount",
-          "issuedCount": "orszPacksIssuedCount"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      },
-      {
-        "id": "orszPacksReturnedCount",
-        "labelKey": "DSS_HEALTH_ORSZ_PACKS_RETURNED_COUNT",
-        "valuePath": "orszPacksReturnedCount",
-        "valueType": "NUMBER",
-        "descriptionParams": {
-          "count": "orszPacksReturnedCount"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      },
-      {
-        "id": "orszStockAccountabilityRatePercent",
-        "labelKey": "DSS_HEALTH_ORS_STOCK_ACCOUNTABILITY_RATE_PERCENT",
-        "valuePath": "orszStockAccountabilityRatePercent",
-        "valueType": "PERCENTAGE",
-        "descriptionParams": {
-          "count": "orszStockAccountabilityRatePercent",
-          "distributedCount": "orszAdministeredCount",
-          "returnedCount": "orszPacksReturnedCount",
-          "issuedCount": "orszPacksIssuedCount"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      }
-    ],
-    "insight": {},
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "_comment": "ORSZ Distribution Coverage (%) = eligible children (0-59 months, not head of household, not ineligible) who received a complete ORS-Zinc package (orsDone flow, ADMINISTRATION_SUCCESS) / total eligible children enumerated x 100. Eligible Children Receiving Both SMC & ORSZ (%) = same numerator query additionally filtered by isSMCDelivered=true, over the same eligible children enumerated denominator. ORSZ Distribution Rate (%) = orszAdministeredCount (packs distributed) / ORS-Zinc packs dispatched Health Facility to Staff (so-stock-index-v1) x 100. ORSZ Stock Accountability Rate (%) = (orszAdministeredCount + orszPacksReturnedCount [RECEIVED/RETURNED, Health Facility from Staff]) / orszPacksIssuedCount x 100"
-  },
   "orszCoverageBarChartDistrictICCD": {
     "chartName": "DSS_HEALTH_ORS_COVERAGE_DISTRICT_ICCD",
     "queries": [
@@ -19505,5 +19276,341 @@
     ],
     "insight": {},
     "_comment": " "
+  },
+  "orszAdministeredCountMetric": {
+    "chartName": "DSS_HEALTH_ORSZ_PACKS_DISTRIBUTED_COUNT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Administered"
+    ],
+    "insight": {},
+    "_comment": "ORSZ packs distributed (administered) count, standalone metric for stacked-collection card component"
+  },
+  "eligibleChildrenEnumeratedCountMetric": {
+    "chartName": "DSS_HEALTH_ORS_ELIGIBLE_CHILDREN_ENUMERATED_COUNT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-household-member-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Eligible\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}},{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Eligible"
+    ],
+    "insight": {},
+    "_comment": "Total eligible children (0-59 months) enumerated, standalone metric for stacked-collection card component"
+  },
+  "smcAndOrszAdministeredCountMetric": {
+    "chartName": "DSS_HEALTH_CHILDREN_RECEIVING_SMC_AND_ORSZ_COUNT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"SmcAndOrsz\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.additionalDetails.isSMCDelivered\":true}},{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "SmcAndOrsz"
+    ],
+    "insight": {},
+    "_comment": "Children receiving both Day-1 SMC and complete ORSZ package, standalone metric for stacked-collection card component"
+  },
+  "orszPacksIssuedCountMetric": {
+    "chartName": "DSS_HEALTH_ORSZ_PACKS_ISSUED_COUNT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "so-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszIssuedHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "orszIssuedHealthToStaff"
+    ],
+    "insight": {},
+    "_comment": "ORS-Zinc packs dispatched Health Facility to Staff, standalone metric for stacked-collection card component"
+  },
+  "orszCoveragePercentMetric": {
+    "chartName": "DSS_HEALTH_ORS_DISTRIBUTION_COVERAGE_PERCENT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-household-member-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Eligible\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}},{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Administered",
+      "Eligible"
+    ],
+    "insight": {},
+    "_comment": "ORSZ Distribution Coverage (%) = orszAdministeredCount / eligibleChildrenEnumeratedCount x 100"
+  },
+  "smcAndOrszCoveragePercentMetric": {
+    "chartName": "DSS_HEALTH_ELIGIBLE_CHILDREN_RECEIVING_SMC_AND_ORSZ_PERCENT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"SmcAndOrsz\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.additionalDetails.isSMCDelivered\":true}},{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-household-member-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Eligible\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}},{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "SmcAndOrsz",
+      "Eligible"
+    ],
+    "insight": {},
+    "_comment": "Eligible Children Receiving Both SMC & ORSZ (%) = smcAndOrszAdministeredCount / eligibleChildrenEnumeratedCount x 100"
+  },
+  "orszDistributionRatePercentMetric": {
+    "chartName": "DSS_HEALTH_ORS_DISTRIBUTION_RATE_PERCENT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "so-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszIssuedHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Administered",
+      "orszIssuedHealthToStaff"
+    ],
+    "insight": {},
+    "_comment": "ORSZ Distribution Rate (%) = orszAdministeredCount / orszPacksIssuedCount x 100"
+  },
+  "orszAccountedForCountMetric": {
+    "chartName": "DSS_HEALTH_ORSZ_PACKS_ACCOUNTED_FOR_COUNT",
+    "queries": [
+      {
+        "key": "orszAdministered",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "select": {
+          "orszAdministeredCount": "Administered.Count.value"
+        }
+      },
+      {
+        "key": "orszPacksReturned",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "so-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszReturnedStaffToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.reason.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "orszPacksReturnedCount": "orszReturnedStaffToHealth.total.value"
+        }
+      }
+    ],
+    "chartType": "rawResponse",
+    "valueType": "number",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "orszAccountedForMetrics",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": [
+          {
+            "orszAccountedForCount": "add(orszAdministeredCount, orszPacksReturnedCount)"
+          }
+        ]
+      }
+    ],
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "orszAdministeredCount",
+      "orszPacksReturnedCount",
+      "orszAccountedForCount"
+    ],
+    "cardsList": [
+      {
+        "id": "orszAccountedForCount",
+        "labelKey": "DSS_HEALTH_ORSZ_PACKS_ACCOUNTED_FOR_COUNT",
+        "valuePath": "orszAccountedForCount",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "orszAccountedForCount"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "ORSZ packs accounted for = orszAdministeredCount (distributed) + orszPacksReturnedCount, standalone metric for stacked-collection card component"
+  },
+  "orszStockAccountabilityRatePercentMetric": {
+    "chartName": "DSS_HEALTH_ORS_STOCK_ACCOUNTABILITY_RATE_PERCENT",
+    "queries": [
+      {
+        "key": "orszAdministered",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "so-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "select": {
+          "orszAdministeredCount": "Administered.Count.value"
+        }
+      },
+      {
+        "key": "orszPacksReturned",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "so-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszReturnedStaffToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.reason.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "orszPacksReturnedCount": "orszReturnedStaffToHealth.total.value"
+        }
+      },
+      {
+        "key": "orszPacksIssued",
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "so-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszIssuedHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
+        "select": {
+          "orszPacksIssuedCount": "orszIssuedHealthToStaff.total.value"
+        }
+      }
+    ],
+    "chartType": "rawResponse",
+    "valueType": "number",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "orszStockAccountabilityMetrics",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": [
+          {
+            "orszStockAccountabilityRatePercent": "multiply(divide(add(orszAdministeredCount, orszPacksReturnedCount), orszPacksIssuedCount), 100)"
+          }
+        ]
+      }
+    ],
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "orszAdministeredCount",
+      "orszPacksReturnedCount",
+      "orszPacksIssuedCount",
+      "orszStockAccountabilityRatePercent"
+    ],
+    "cardsList": [
+      {
+        "id": "orszStockAccountabilityRatePercent",
+        "labelKey": "DSS_HEALTH_ORS_STOCK_ACCOUNTABILITY_RATE_PERCENT",
+        "valuePath": "orszStockAccountabilityRatePercent",
+        "valueType": "PERCENTAGE",
+        "descriptionParams": {
+          "count": "orszStockAccountabilityRatePercent",
+          "distributedCount": "orszAdministeredCount",
+          "returnedCount": "orszPacksReturnedCount",
+          "issuedCount": "orszPacksIssuedCount"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "ORSZ Stock Accountability Rate (%) = (orszAdministeredCount + orszPacksReturnedCount) / orszPacksIssuedCount x 100"
   }
 }

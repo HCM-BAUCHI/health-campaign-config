@@ -1401,16 +1401,66 @@
           "name": "DSS_HEALTH_ORS",
           "vizArray": [
             {
-              "id": 12009,
-              "name": "DSS_HEALTH_ORS_OVERVIEW",
-              "label": "DSS_HEALTH_ORS_OVERVIEW",
-              "vizType": "cards-list",
-              "noUnit": true,
+              "id": 12015,
+              "name": "DSS_HEALTH_ORS_DISTRIBUTION_COVERAGE_PERCENT",
+              "label": "DSS_HEALTH_ORS_DISTRIBUTION_COVERAGE_PERCENT",
+              "vizType": "stacked-collection",
+              "noUnit": false,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "orsOverviewBanner",
-                  "name": "DSS_HEALTH_ORS_OVERVIEW",
+                  "id": "orszAdministeredCountMetric",
+                  "name": "DSS_HEALTH_ORSZ_PACKS_DISTRIBUTED_COUNT",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "eligibleChildrenEnumeratedCountMetric",
+                  "name": "DSS_HEALTH_ORS_ELIGIBLE_CHILDREN_ENUMERATED_COUNT",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "orszCoveragePercentMetric",
+                  "name": "DSS_HEALTH_ORS_DISTRIBUTION_COVERAGE_PERCENT",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 12016,
+              "name": "DSS_HEALTH_ELIGIBLE_CHILDREN_RECEIVING_SMC_AND_ORSZ_PERCENT",
+              "label": "DSS_HEALTH_ELIGIBLE_CHILDREN_RECEIVING_SMC_AND_ORSZ_PERCENT",
+              "vizType": "stacked-collection",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "smcAndOrszAdministeredCountMetric",
+                  "name": "DSS_HEALTH_CHILDREN_RECEIVING_SMC_AND_ORSZ_COUNT",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "eligibleChildrenEnumeratedCountMetric",
+                  "name": "DSS_HEALTH_ORS_ELIGIBLE_CHILDREN_ENUMERATED_COUNT",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "smcAndOrszCoveragePercentMetric",
+                  "name": "DSS_HEALTH_ELIGIBLE_CHILDREN_RECEIVING_SMC_AND_ORSZ_PERCENT",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -1422,6 +1472,80 @@
         },
         {
           "row": 2,
+          "name": "DSS_HEALTH_ORS",
+          "vizArray": [
+            {
+              "id": 12017,
+              "name": "DSS_HEALTH_ORS_DISTRIBUTION_RATE_PERCENT",
+              "label": "DSS_HEALTH_ORS_DISTRIBUTION_RATE_PERCENT",
+              "vizType": "stacked-collection",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "orszAdministeredCountMetric",
+                  "name": "DSS_HEALTH_ORSZ_PACKS_DISTRIBUTED_COUNT",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "orszPacksIssuedCountMetric",
+                  "name": "DSS_HEALTH_ORSZ_PACKS_ISSUED_COUNT",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "orszDistributionRatePercentMetric",
+                  "name": "DSS_HEALTH_ORS_DISTRIBUTION_RATE_PERCENT",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 12018,
+              "name": "DSS_HEALTH_ORS_STOCK_ACCOUNTABILITY_RATE_PERCENT",
+              "label": "DSS_HEALTH_ORS_STOCK_ACCOUNTABILITY_RATE_PERCENT",
+              "vizType": "stacked-collection",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "orszAccountedForCountMetric",
+                  "name": "DSS_HEALTH_ORSZ_PACKS_ACCOUNTED_FOR_COUNT",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "orszPacksIssuedCountMetric",
+                  "name": "DSS_HEALTH_ORSZ_PACKS_ISSUED_COUNT",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "orszStockAccountabilityRatePercentMetric",
+                  "name": "DSS_HEALTH_ORS_STOCK_ACCOUNTABILITY_RATE_PERCENT",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
           "name": "DSS_HEALTH_ORS",
           "vizArray": [
             {
@@ -1455,7 +1579,7 @@
           ]
         },
         {
-          "row": 3,
+          "row": 4,
           "name": "DSS_HEALTH_ORS",
           "vizArray": [
             {
