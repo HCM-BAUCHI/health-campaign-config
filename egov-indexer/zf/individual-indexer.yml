@@ -1,0 +1,31 @@
+ServiceMaps:
+  serviceName: individual
+  version: 1.0.0
+  mappings:
+  - topic: zf-save-individual-topic
+    configKey: INDEX
+    indexes:
+    - name: zf-individual-index-v1
+      type: individual
+      id: $.clientReferenceId
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.createdTime
+  - topic: zf-update-individual-topic
+    configKey: INDEX
+    indexes:
+    - name: zf-individual-index-v1
+      type: individual
+      id: $.clientReferenceId
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.lastModifiedTime
+  - topic: zf-delete-individual-topic
+    configKey: INDEX
+    indexes:
+    - name: zf-individual-index-v1
+      type: individual
+      id: $.clientReferenceId
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.lastModifiedTime

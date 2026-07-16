@@ -1,0 +1,70 @@
+ServiceMaps:
+  serviceName: plan-service
+  version: 1.0.0
+  mappings:
+    - topic: zf-save-plan
+      configKey: INDEX
+      indexes:
+        - name: zf-plan-index-v1
+          type: general
+          id: $.id
+          timeStampField: $.auditDetails.createdTime
+          jsonPath: $.Plan
+          customJsonMapping:
+            indexMapping: {"Data":{}}
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+    - topic: zf-update-plan
+      configKey: INDEX
+      indexes:
+        - name: zf-plan-index-v1
+          type: general
+          id: $.id
+          timeStampField: $.auditDetails.createdTime
+          jsonPath: $.Plan
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+    - topic: zf-bulk-update-plan
+      configKey: INDEX
+      indexes:
+        - name: zf-plan-index-v1
+          type: general
+          id: $.id
+          isBulk: true
+          timeStampField: $.auditDetails.createdTime
+          jsonPath: $.Plans
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+    - topic: zf-save-plan-facility
+      configKey: INDEX
+      indexes:
+        - name: zf-plan-facility-index-v1
+          type: general
+          id: $.id
+          timeStampField: $.auditDetails.createdTime
+          jsonPath: $.PlanFacility
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+    - topic: zf-update-plan-facility
+      configKey: INDEX
+      indexes:
+        - name: zf-plan-facility-index-v1
+          type: general
+          id: $.id
+          timeStampField: $.auditDetails.createdTime
+          jsonPath: $.PlanFacility
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data

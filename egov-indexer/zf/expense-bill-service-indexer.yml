@@ -1,0 +1,49 @@
+ServiceMaps:
+  serviceName: Billing Service
+  version: 1.0.0
+  mappings:
+    - topic: zf-transformer-bill-index-topic
+      configKey: INDEX
+      indexes:
+        - name: zf-transform-bill-index-v1
+          type: bill
+          id: $.bill.id
+          isBulk: false
+          jsonPath: $
+          customJsonMapping:
+            indexMapping:
+              Data: {}
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+          timeStampField: $.bill.auditDetails.lastModifiedTime
+    - topic: zf-transformer-billdetail-index-topic
+      configKey: INDEX
+      indexes:
+        - name: zf-transform-billdetail-index-v1
+          type: billdetail
+          id: $.id
+          isBulk: true
+          jsonPath: $
+          customJsonMapping:
+            indexMapping:
+              Data: { }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+          timeStampField: $.billDetail.auditDetails.lastModifiedTime
+    - topic: zf-transformer-billreport-index-topic
+      configKey: INDEX
+      indexes:
+        - name: zf-transform-billreport-index-v1
+          type: billreport
+          id: $.billReport.id
+          isBulk: false
+          jsonPath: $
+          customJsonMapping:
+            indexMapping:
+              Data: { }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+          timeStampField: $.billReport.auditDetails.lastModifiedTime

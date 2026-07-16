@@ -1,0 +1,64 @@
+ServiceMaps:
+  serviceName: attendance-service
+  version: 1.0.0
+  mappings:
+  - topic: zf-transformer-producer-attendee-index
+    configKey: INDEX
+    indexes:
+    - name: zf-attendee-index-v1
+      type: attendee
+      id: $.attendee.id
+      isBulk: true
+      jsonPath: $.*
+      customJsonMapping:
+        indexMapping:
+          Data: {}
+        fieldMapping:
+          - inJsonPath: $
+            outJsonPath: $.Data
+      timeStampField: $.attendee.auditDetails.createdTime
+  - topic: zf-transformer-producer-attendance-staff-index
+    configKey: INDEX
+    indexes:
+    - name: zf-staff-index-v1
+      type: staff
+      id: $.staff.id
+      isBulk: true
+      jsonPath: $.*
+      customJsonMapping:
+        indexMapping:
+          Data: {}
+        fieldMapping:
+          - inJsonPath: $
+            outJsonPath: $.Data
+      timeStampField: $.staff.auditDetails.createdTime
+  - topic: zf-transformer-save-attendance-register
+    configKey: INDEX
+    indexes:
+    - name: zf-transformed-attendance-register-index-v1
+      type: attendance-register
+      id: $.attendanceRegister.id
+      isBulk: true
+      jsonPath: $.*
+      customJsonMapping:
+        indexMapping:
+          Data: {}
+        fieldMapping:
+          - inJsonPath: $
+            outJsonPath: $.Data
+      timeStampField: $.attendanceRegister.auditDetails.lastModifiedTime
+  - topic: zf-transformer-save-attendance-log
+    configKey: INDEX
+    indexes:
+    - name: zf-attendance-log-index-v1
+      type: attendance-log
+      id: $.attendanceLog.id
+      isBulk: true
+      jsonPath: $.*
+      customJsonMapping:
+        indexMapping:
+          Data: {}
+        fieldMapping:
+          - inJsonPath: $
+            outJsonPath: $.Data
+      timeStampField: $.attendanceLog.auditDetails.lastModifiedTime

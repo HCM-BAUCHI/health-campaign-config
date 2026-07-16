@@ -1,0 +1,22 @@
+ServiceMaps:
+  serviceName: facility
+  version: 1.0.0
+  mappings:
+  - topic: zf-save-facility-topic
+    configKey: INDEX
+    indexes:
+    - name: zf-facility-index-v1
+      type: facility
+      id: $.clientReferenceId
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.createdTime
+  - topic: zf-update-facility-topic
+    configKey: INDEX
+    indexes:
+    - name: zf-facility-index-v1
+      type: facility
+      id: $.clientReferenceId
+      isBulk: true
+      jsonPath: $.*
+      timeStampField: $.auditDetails.lastModifiedTime
