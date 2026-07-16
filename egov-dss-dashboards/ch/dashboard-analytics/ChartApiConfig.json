@@ -11045,7 +11045,7 @@
     }
   ],
   "chartType": "xtable",
-  "valueType": "number",
+  "valueType": "percentage",
   "drillChart": "summaryByProvinceICCD",
   "documentType": "_doc",
   "action": "",
