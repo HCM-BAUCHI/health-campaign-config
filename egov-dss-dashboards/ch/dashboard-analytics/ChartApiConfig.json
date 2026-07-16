@@ -5095,28 +5095,267 @@
     "_comment": " "
   },
  "dataQualityRecordsSummaryLocalityICCD": {
-  "module": "COMMON",
-  "dateRefField": "",
-  "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-  "indexName": "ch-household-member-index-v1",
-  "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}]}}, \"aggs\": {\"Total Houses Registered\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500}, \"aggs\": {\"Total Children Registered Count\": {\"value_count\": {\"field\": \"Data.householdMember.id.keyword\"}}}}}}}}",
-  "_comment": "FIXED: exists filter was checking 'Data.boundaryHierarchy.healthFacility' (lowercase, likely non-existent field) instead of the actual field used in the aggregation, 'Data.boundaryHierarchy.HEALTHFACILITY.keyword'. This mismatch caused the query to return nothing for districts whose records don't happen to have that stray lowercase field."
+  "kind": "drillDown",
+  "chartName": "DSS_HEALTH_DATA_QUALITY_RECORDS_SUMMARY_LOCALITY_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-stock-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.role.keyword\": {\"value\": \"WAREHOUSE_MANAGER\"}}}]}}, \"aggs\": {\"WM Stock Entries\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}, \"aggs\": {\"WM Stock Entries Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-household-member-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\"}}]}}, \"aggs\": {\"Total Houses Registered\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500}, \"aggs\": {\"Total Children Registered Count\": {\"value_count\": {\"field\": \"Data.householdMember.id.keyword\"}}}}}}}}",
+      "_comment": "FIXED: exists filter now checks Data.boundaryHierarchy.HEALTHFACILITY.keyword (matches own aggregation field), was wrongly checking lowercase 'healthFacility'."
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\", \"ADMINISTRATION_FAILED\", \"BENEFICIARY_REFUSED\", \"BENEFICIARY_DIED\", \"BENEFICIARY_MIGRATED\", \"BENEFICIARY_ABSENT\", \"CLOSED_HOUSEHOLD\"]}}]}}, \"aggs\": {\"Total Houses Visited\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"size\": 500}, \"aggs\": {\"Positive Unique Children Visited\": {\"cardinality\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\", \"precision_threshold\": 40000}}, \"Negative Unique Children Visited\": {\"bucket_script\": {\"buckets_path\": {\"pos\": \"Positive Unique Children Visited\"}, \"script\": \"return -1 * params.pos\"}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-household-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"range\": {\"Data.household.memberCount\": {\"gt\": 20}}}]}}, \"aggs\": {\"Household with more than 20 members filter\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"min_doc_count\": 1, \"size\": 1000}, \"aggs\": {\"Household with more than 20 members\": {\"value_count\": {\"field\": \"Data.household.id.keyword\"}}}}}}}}"
+    }
+  ],
+  "filterKeys": [
+    {
+      "key": "healthFacility",
+      "column": "Health Facility"
+    }
+  ],
+  "chartType": "xtable",
+  "valueType": "number",
+  "drillChart": "dataQualityRecordsSummaryVillageICCD",
+  "documentType": "_doc",
+  "action": "",
+  "plotLabel": "Health Facility",
+  "excludedColumns": [
+    "Count",
+    "WM Stock Entries Count",
+    "Total Children Registered Count",
+    "Negative Unique Children Visited",
+    "users_with_more_than_3_count",
+    "Household with more than 20 members"
+  ],
+  "excludedBucketKeys": [
+    "users_distributed"
+  ],
+  "computedFields": [
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Household with more than 20 members"
+      ],
+      "newField": "Household with more than 20 members count",
+      "_comments": ""
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "WM Stock Entries Count"
+      ],
+      "newField": "WM Stock Entries",
+      "_comments": ""
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "users_with_more_than_3_count"
+      ],
+      "newField": "Suspected Frauds",
+      "_comments": ""
+    }
+  ],
+  "hideInsights": true,
+  "showFooter": true,
+  "hideHeaderDenomination": true,
+  "insight": {},
+  "sort": "sortKeyAsc",
+  "_comment": "FIXED: query 2 (Total Houses Registered) exists-filter corrected to match its own field (HEALTHFACILITY.keyword) instead of a mismatched lowercase variant."
 },
 "dataQualityRecordsSummaryVillageICCD": {
-  "module": "COMMON",
-  "dateRefField": "",
-  "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-  "indexName": "ch-household-member-index-v1",
-  "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}}]}}, \"aggs\": {\"Total Houses Registered\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\", \"size\": 500}, \"aggs\": {\"Total Children Registered Count\": {\"value_count\": {\"field\": \"Data.householdMember.id.keyword\"}}}}}}}}",
-  "_comment": "FIXED: exists filter was checking 'Data.boundaryHierarchy.community' (not the real hierarchy field name anywhere in this project) instead of 'Data.boundaryHierarchy.locality.keyword', which is what the aggregation actually buckets on."
+  "kind": "drillDown",
+  "chartName": "DSS_HEALTH_DATA_QUALITY_RECORDS_SUMMARY_VILLAGE_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-stock-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.role.keyword\": {\"value\": \"WAREHOUSE_MANAGER\"}}}]}}, \"aggs\": {\"WM Stock Entries\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}, \"aggs\": {\"WM Stock Entries Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-household-member-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}}]}}, \"aggs\": {\"Total Houses Registered\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\", \"size\": 500}, \"aggs\": {\"Total Children Registered Count\": {\"value_count\": {\"field\": \"Data.householdMember.id.keyword\"}}}}}}}}",
+      "_comment": "FIXED: exists filter now checks Data.boundaryHierarchy.locality.keyword (matches own aggregation field), was wrongly checking 'community'."
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\", \"ADMINISTRATION_FAILED\", \"BENEFICIARY_REFUSED\", \"BENEFICIARY_DIED\", \"BENEFICIARY_MIGRATED\", \"BENEFICIARY_ABSENT\", \"CLOSED_HOUSEHOLD\"]}}]}}, \"aggs\": {\"Total Houses Visited\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\", \"size\": 500}, \"aggs\": {\"Positive Unique Children Visited\": {\"cardinality\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\", \"precision_threshold\": 40000}}, \"Negative Unique Children Visited\": {\"bucket_script\": {\"buckets_path\": {\"pos\": \"Positive Unique Children Visited\"}, \"script\": \"return -1 * params.pos\"}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-household-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"range\": {\"Data.household.memberCount\": {\"gt\": 20}}}]}}, \"aggs\": {\"Household with more than 20 members filter\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\", \"min_doc_count\": 1, \"size\": 1000}, \"aggs\": {\"Household with more than 20 members\": {\"value_count\": {\"field\": \"Data.household.id.keyword\"}}}}}}}}"
+    }
+  ],
+  "filterKeys": [
+    {
+      "key": "community",
+      "column": "Community"
+    }
+  ],
+  "chartType": "xtable",
+  "valueType": "number",
+  "drillChart": "dataQualityRecordsSummaryByDistributorICCD",
+  "documentType": "_doc",
+  "action": "",
+  "plotLabel": "Community",
+  "excludedColumns": [
+    "Count",
+    "WM Stock Entries Count",
+    "Total Children Registered Count",
+    "Negative Unique Children Visited",
+    "users_with_more_than_3_count",
+    "Household with more than 20 members"
+  ],
+  "excludedBucketKeys": [
+    "users_distributed"
+  ],
+  "computedFields": [
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Household with more than 20 members"
+      ],
+      "newField": "Household with more than 20 members count",
+      "_comments": ""
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "WM Stock Entries Count"
+      ],
+      "newField": "WM Stock Entries",
+      "_comments": ""
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "users_with_more_than_3_count"
+      ],
+      "newField": "Suspected Frauds",
+      "_comments": ""
+    }
+  ],
+  "hideInsights": true,
+  "showFooter": true,
+  "hideHeaderDenomination": true,
+  "insight": {},
+  "sort": "sortKeyAsc",
+  "_comment": "FIXED: query 2 (Total Houses Registered) exists-filter corrected to match its own field (locality.keyword) instead of a mismatched 'community' field."
 },
 "dataQualityRecordsSummaryByDistributorICCD": {
-  "module": "COMMON",
-  "dateRefField": "",
-  "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"community\": \"Data.boundaryHierarchy.locality.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-  "indexName": "ch-household-member-index-v1",
-  "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}}]}}, \"aggs\": {\"Total Children Registered\": {\"terms\": {\"field\": \"Data.userName.keyword\", \"size\": 500}, \"aggs\": {\"Total Children Registered Count\": {\"value_count\": {\"field\": \"Data.householdMember.id.keyword\"}}}}}}}}",
-  "_comment": "FIXED: same wrong 'Data.boundaryHierarchy.community' exists filter, replaced with 'Data.boundaryHierarchy.locality.keyword' - this level buckets by userName, but was still incorrectly gated by the broken community-existence check, which would silently drop most districts' data."
+  "kind": "drillDown",
+  "chartName": "DSS_HEALTH_DATA_QUALITY_RECORDS_SUMMARY_VILLAGE_BY_DISTRIBUTOR_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"community\": \"Data.boundaryHierarchy.locality.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-household-member-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.locality.keyword\"}}]}}, \"aggs\": {\"Total Children Registered\": {\"terms\": {\"field\": \"Data.userName.keyword\", \"size\": 500}, \"aggs\": {\"Total Children Registered Count\": {\"value_count\": {\"field\": \"Data.householdMember.id.keyword\"}}}}}}}}",
+      "_comment": "FIXED: exists filter corrected to Data.boundaryHierarchy.locality.keyword, was wrongly checking 'community'."
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"community\": \"Data.boundaryHierarchy.locality.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\", \"ADMINISTRATION_FAILED\", \"BENEFICIARY_REFUSED\", \"BENEFICIARY_DIED\", \"BENEFICIARY_MIGRATED\", \"BENEFICIARY_ABSENT\", \"CLOSED_HOUSEHOLD\"]}}]}}, \"aggs\": {\"Total Houses Visited\": {\"terms\": {\"field\": \"Data.userName.keyword\"}, \"aggs\": {\"Positive Unique Children Visited\": {\"cardinality\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\", \"precision_threshold\": 40000}}, \"Negative Unique Children Visited\": {\"bucket_script\": {\"buckets_path\": {\"pos\": \"Positive Unique Children Visited\"}, \"script\": \"return -1 * params.pos\"}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"community\": \"Data.boundaryHierarchy.locality.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}]}}, \"aggs\": {\"users_distributed\": {\"terms\": {\"field\": \"Data.userName.keyword\", \"min_doc_count\": 4, \"size\": 10000}, \"aggs\": {\"minute_collection\": {\"date_histogram\": {\"field\": \"Data.@timestamp\", \"fixed_interval\": \"1m\", \"min_doc_count\": 4}}, \"users_without_empty_bucket\": {\"bucket_selector\": {\"buckets_path\": {\"distributed_count\": \"minute_collection._bucket_count\"}, \"script\": \"params.distributed_count > 0\"}}, \"fraud count\": {\"bucket_script\": {\"buckets_path\": {\"distributed_count\": \"minute_collection._bucket_count\"}, \"script\": \"params.distributed_count\"}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"district\": \"Data.boundaryHierarchy.district.keyword\", \"healthFacility\": \"Data.boundaryHierarchy.HEALTHFACILITY.keyword\", \"community\": \"Data.boundaryHierarchy.locality.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-household-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"range\": {\"Data.household.memberCount\": {\"gt\": 20}}}]}}, \"aggs\": {\"Household with more than 20 members filter\": {\"terms\": {\"field\": \"Data.userName.keyword\", \"min_doc_count\": 1, \"size\": 1000}, \"aggs\": {\"Household with more than 20 members\": {\"value_count\": {\"field\": \"Data.household.id.keyword\"}}}}}}}}"
+    }
+  ],
+  "action": "",
+  "chartType": "xtable",
+  "valueType": "number",
+  "drillChart": "none",
+  "documentType": "_doc",
+  "plotLabel": "Distributors",
+  "showFooter": true,
+  "hideInsights": true,
+  "hideHeaderDenomination": true,
+  "excludedColumns": [
+    "Count",
+    "Total Children Registered Count",
+    "Negative Unique Children Visited",
+    "fraud count",
+    "Household with more than 20 members"
+  ],
+  "excludedBucketKeys": [
+    "minute_collection"
+  ],
+  "computedFields": [
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Household with more than 20 members"
+      ],
+      "newField": "Household with more than 20 members count",
+      "_comments": ""
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "fraud count"
+      ],
+      "newField": "Suspected Frauds",
+      "_comments": ""
+    }
+  ],
+  "insight": {},
+  "sort": "sortKeyAsc",
+  "_comment": "FIXED: query 1 (Total Children Registered) exists-filter corrected to match locality.keyword, was wrongly checking 'community'."
 },
   "complaintsByDistrictTotalICCD": {
     "chartName": "DSS_HEALTH_COMPLAINTS_BY_DISTRICT_TOTAL_ICCD",
