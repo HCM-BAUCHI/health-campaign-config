@@ -4927,88 +4927,88 @@
     "_comment": " "
   },
   "dataQualityRecordsSummaryDistrictICCD": {
-    "chartName": "DSS_HEALTH_DATA_QUALITY_RECORDS_SUMMARY_DISTRICT_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":{\"value\":\"WAREHOUSE_MANAGER\"}}}]}},\"aggs\":{\"WM Stock Entries\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"},\"aggs\":{\"WM Stock Entries Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}]}},\"aggs\":{\"Suspected Frauds\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"min_doc_count\":4,\"size\":500},\"aggs\":{\"users_distributed\":{\"terms\":{\"field\":\"Data.createdBy.keyword\",\"min_doc_count\":4,\"size\":10000},\"aggs\":{\"minute_collection\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"fixed_interval\":\"1m\",\"min_doc_count\":4}},\"users_without_empty_bucket\":{\"bucket_selector\":{\"buckets_path\":{\"distributed_count\":\"minute_collection._bucket_count\"},\"script\":\"params.distributed_count > 0\"}}}},\"users_without_empty_bucket\":{\"bucket_selector\":{\"buckets_path\":{\"distributed_count\":\"users_distributed._bucket_count\"},\"script\":\"params.distributed_count > 0\"}},\"users_with_more_than_3_count\":{\"bucket_script\":{\"buckets_path\":{\"user_count\":\"users_distributed._bucket_count\"},\"script\":\"params.user_count\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-household-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.household.memberCount\":{\"gt\":20}}}]}},\"aggs\":{\"Household with more than 20 members filter\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"min_doc_count\":1,\"size\":1000},\"aggs\":{\"Household with more than 20 members\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
-      }
-    ],
-    "filterKeys": [
-      {
-        "key": "district",
-        "column": "District"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "drillChart": "dataQualityRecordsSummaryAPICCD",
-    "documentType": "_doc",
-    "action": "",
-    "plotLabel": "District",
-    "excludedColumns": [
-      "Count",
-      "WM Stock Entries Count",
-      "users_with_more_than_3_count",
-      "Household with more than 20 members"
-    ],
-    "excludedBucketKeys": [
-      "users_distributed"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Household with more than 20 members"
-        ],
-        "newField": "Household with more than 20 members count",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "WM Stock Entries Count"
-        ],
-        "newField": "WM Stock Entries",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "users_with_more_than_3_count"
-        ],
-        "newField": "Suspected Frauds",
-        "_comments": ""
-      }
-    ],
-    "hideInsights": true,
-    "showFooter": true,
-    "hideHeaderDenomination": true,
-    "insight": {},
-    "sort": "sortKeyAsc",
-    "_comment": " ",
-    "kind": "drillDown"
-  },
+  "chartName": "DSS_HEALTH_DATA_QUALITY_RECORDS_SUMMARY_DISTRICT_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-stock-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.role.keyword\": {\"value\": \"WAREHOUSE_MANAGER\"}}}]}}, \"aggs\": {\"WM Stock Entries\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\"}, \"aggs\": {\"WM Stock Entries Count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}]}}, \"aggs\": {\"Suspected Frauds\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"min_doc_count\": 4, \"size\": 500}, \"aggs\": {\"users_distributed\": {\"terms\": {\"field\": \"Data.createdBy.keyword\", \"min_doc_count\": 4, \"size\": 10000}, \"aggs\": {\"minute_collection\": {\"date_histogram\": {\"field\": \"Data.@timestamp\", \"fixed_interval\": \"1m\", \"min_doc_count\": 4}}, \"users_without_empty_bucket\": {\"bucket_selector\": {\"buckets_path\": {\"distributed_count\": \"minute_collection._bucket_count\"}, \"script\": \"params.distributed_count > 0\"}}}}, \"users_without_empty_bucket\": {\"bucket_selector\": {\"buckets_path\": {\"distributed_count\": \"users_distributed._bucket_count\"}, \"script\": \"params.distributed_count > 0\"}}, \"users_with_more_than_3_count\": {\"bucket_script\": {\"buckets_path\": {\"user_count\": \"users_distributed._bucket_count\"}, \"script\": \"params.user_count\"}}}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-household-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"range\": {\"Data.household.memberCount\": {\"gt\": 20}}}]}}, \"aggs\": {\"Household with more than 20 members filter\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.district.keyword\", \"min_doc_count\": 1, \"size\": 1000}, \"aggs\": {\"Household with more than 20 members\": {\"value_count\": {\"field\": \"Data.household.id.keyword\"}}}}}}}}"
+    }
+  ],
+  "filterKeys": [
+    {
+      "key": "district",
+      "column": "District"
+    }
+  ],
+  "chartType": "xtable",
+  "valueType": "number",
+  "drillChart": "dataQualityRecordsSummaryLocalityICCD",
+  "documentType": "_doc",
+  "action": "",
+  "plotLabel": "District",
+  "excludedColumns": [
+    "Count",
+    "WM Stock Entries Count",
+    "users_with_more_than_3_count",
+    "Household with more than 20 members"
+  ],
+  "excludedBucketKeys": [
+    "users_distributed"
+  ],
+  "computedFields": [
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "Household with more than 20 members"
+      ],
+      "newField": "Household with more than 20 members count",
+      "_comments": ""
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "WM Stock Entries Count"
+      ],
+      "newField": "WM Stock Entries",
+      "_comments": ""
+    },
+    {
+      "postAggregationTheory": "",
+      "actionName": "AdditiveComputedField",
+      "fields": [
+        "users_with_more_than_3_count"
+      ],
+      "newField": "Suspected Frauds",
+      "_comments": ""
+    }
+  ],
+  "hideInsights": true,
+  "showFooter": true,
+  "hideHeaderDenomination": true,
+  "insight": {},
+  "sort": "sortKeyAsc",
+  "_comment": "FIXED: drillChart changed from dataQualityRecordsSummaryAPICCD (Ward) to dataQualityRecordsSummaryLocalityICCD directly - the Ward-level chart aggregates on Data.boundaryHierarchy.ward.keyword, but this campaign has no ward-level facilities at all, so every aggregation in that chart returns completely empty (zero buckets), which was likely triggering the NullPointerException when navigating from any district (including BOL). AP/Ward chart left orphaned, not deleted.",
+  "kind": "drillDown"
+},
   "dataQualityRecordsSummaryAPICCD": {
     "kind": "drillDown",
     "chartName": "DSS_HEALTH_DATA_QUALITY_RECORDS_SUMMARY_AP_ICCD",
