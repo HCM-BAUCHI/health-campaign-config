@@ -17883,6 +17883,62 @@
         ],
         "newField": "SPAQ2 Sent Country To State",
         "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_SPAQ1_ACCEPTED"
+        ],
+        "newField": "SPAQ1 Accepted At State Facility",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_SPAQ2_ACCEPTED"
+        ],
+        "newField": "SPAQ2 Accepted At State Facility",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_SPAQ1_SENT",
+          "Negative SPAQ1 Accepted at State Facility"
+        ],
+        "newField": "SPAQ1 Unaccepted Country To State",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_SPAQ2_SENT",
+          "Negative SPAQ2 Accepted at State Facility"
+        ],
+        "newField": "SPAQ2 Unaccepted Country To State",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_SPAQ1_REJECTED"
+        ],
+        "newField": "SPAQ1 Rejected",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "_SPAQ2_REJECTED"
+        ],
+        "newField": "SPAQ2 Rejected",
+        "_comments": ""
       }
     ],
     "insight": {},
