@@ -19136,7 +19136,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.householdMember.auditDetails.createdTime",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "so-household-member-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}},{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"Eligible Children Enumerated\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}}}"
@@ -19188,7 +19188,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.householdMember.auditDetails.createdTime",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "so-household-member-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}},{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"Eligible Children Enumerated\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}}}"
@@ -19239,7 +19239,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.householdMember.auditDetails.createdTime",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "so-household-member-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}},{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"Eligible Children Enumerated\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.healthFacility.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}}}"
@@ -19282,7 +19282,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "so-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
@@ -19304,7 +19304,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.householdMember.auditDetails.createdTime",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "so-household-member-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Eligible\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}},{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}"
@@ -19326,7 +19326,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "so-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SmcAndOrsz\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.additionalDetails.isSMCDelivered\":true}},{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
@@ -19348,7 +19348,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
         "indexName": "so-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"orszIssuedHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}"
@@ -19370,14 +19370,14 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "so-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.householdMember.auditDetails.createdTime",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "so-household-member-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Eligible\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}},{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}"
@@ -19400,14 +19400,14 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "so-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"SmcAndOrsz\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.additionalDetails.isSMCDelivered\":true}},{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.householdMember.auditDetails.createdTime",
         "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "so-household-member-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Eligible\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"Data.age\":{\"gte\":0,\"lte\":59}}},{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.householdMember.id.keyword\"}}}}}}"
@@ -19430,14 +19430,14 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "so-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
         "indexName": "so-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"orszIssuedHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}"
@@ -19461,7 +19461,7 @@
       {
         "key": "orszAdministered",
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "so-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
@@ -19469,7 +19469,7 @@
       {
         "key": "orszPacksReturned",
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
         "indexName": "so-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"orszReturnedStaffToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.reason.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}"
@@ -19494,7 +19494,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "aggregationFilterPath": "aggregations.All.buckets.all.AdministeredPlusReturned",
         "indexName": "so-stock-index-v1,so-project-task-index-v1",
@@ -19502,7 +19502,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
         "indexName": "so-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"orszIssuedHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}"
