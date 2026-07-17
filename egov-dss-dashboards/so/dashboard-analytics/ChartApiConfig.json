@@ -19493,95 +19493,29 @@
     "chartName": "DSS_HEALTH_ORS_STOCK_ACCOUNTABILITY_RATE_PERCENT",
     "queries": [
       {
-        "key": "orszAdministered",
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "so-project-task-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
-        "select": {
-          "orszAdministeredCount": "Administered.Count.value"
-        }
+        "aggregationFilterPath": "aggregations.All.buckets.all.AdministeredPlusReturned",
+        "indexName": "so-stock-index-v1,so-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"All\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}},\"orszReturnedStaffToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.reason.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"AdministeredPlusReturned\":{\"bucket_script\":{\"buckets_path\":{\"administered\":\"Administered>Count\",\"returned\":\"orszReturnedStaffToHealth>total\"},\"script\":\"params.administered + params.returned\"}}}}}}"
       },
       {
-        "key": "orszPacksReturned",
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
         "indexName": "so-stock-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszReturnedStaffToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.reason.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
-        "select": {
-          "orszPacksReturnedCount": "orszReturnedStaffToHealth.total.value"
-        }
-      },
-      {
-        "key": "orszPacksIssued",
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
-        "indexName": "so-stock-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszIssuedHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
-        "select": {
-          "orszPacksIssuedCount": "orszIssuedHealthToStaff.total.value"
-        }
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszIssuedHealthToStaff\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}"
       }
     ],
-    "chartType": "rawResponse",
-    "valueType": "number",
-    "merges": [
-      {
-        "mergeType": "linear",
-        "mergeKey": "orszAccountedForMetrics",
-        "flatten": true,
-        "datasets": [],
-        "outputMappings": [
-          {
-            "orszAccountedForCount": "add(orszAdministeredCount, orszPacksReturnedCount)"
-          }
-        ]
-      },
-      {
-        "mergeType": "linear",
-        "mergeKey": "orszStockAccountabilityMetrics",
-        "flatten": true,
-        "datasets": [],
-        "outputMappings": [
-          {
-            "orszStockAccountabilityRatePercent": "multiply(divide(orszAccountedForCount, orszPacksIssuedCount), 100)"
-          }
-        ]
-      }
-    ],
+    "chartType": "metric",
+    "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "",
+    "action": "percentage",
     "aggregationPaths": [
-      "orszAdministeredCount",
-      "orszPacksReturnedCount",
-      "orszPacksIssuedCount",
-      "orszAccountedForCount",
-      "orszStockAccountabilityRatePercent"
-    ],
-    "cardsList": [
-      {
-        "id": "orszStockAccountabilityRatePercent",
-        "labelKey": "DSS_HEALTH_ORS_STOCK_ACCOUNTABILITY_RATE_PERCENT",
-        "valuePath": "orszStockAccountabilityRatePercent",
-        "valueType": "PERCENTAGE",
-        "descriptionParams": {
-          "count": "orszStockAccountabilityRatePercent",
-          "distributedCount": "orszAdministeredCount",
-          "returnedCount": "orszPacksReturnedCount",
-          "issuedCount": "orszPacksIssuedCount"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      }
+      "AdministeredPlusReturned",
+      "orszIssuedHealthToStaff"
     ],
     "insight": {},
     "hideInsights": true,
