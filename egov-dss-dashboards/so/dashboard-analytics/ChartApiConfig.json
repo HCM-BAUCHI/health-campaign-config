@@ -19464,11 +19464,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "so-project-task-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
-        "select": {
-          "orszAdministeredCount": "Administered.Count.value"
-        }
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.additionalDetails.flow.keyword\":\"orsDone\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
       },
       {
         "key": "orszPacksReturned",
@@ -19476,50 +19472,17 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\"}",
         "indexName": "so-stock-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszReturnedStaffToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.reason.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}",
-        "select": {
-          "orszPacksReturnedCount": "orszReturnedStaffToHealth.total.value"
-        }
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"orszReturnedStaffToHealth\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.productName.keyword\":\"ORS-Zinc\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.reason.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"total\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}"
       }
     ],
-    "chartType": "rawResponse",
+    "chartType": "metric",
     "valueType": "number",
-    "merges": [
-      {
-        "mergeType": "linear",
-        "mergeKey": "orszAccountedForMetrics",
-        "flatten": true,
-        "datasets": [],
-        "outputMappings": [
-          {
-            "orszAccountedForCount": "add(orszAdministeredCount, orszPacksReturnedCount)"
-          }
-        ]
-      }
-    ],
     "drillChart": "none",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "orszAdministeredCount",
-      "orszPacksReturnedCount",
-      "orszAccountedForCount"
-    ],
-    "cardsList": [
-      {
-        "id": "orszAccountedForCount",
-        "labelKey": "DSS_HEALTH_ORSZ_PACKS_ACCOUNTED_FOR_COUNT",
-        "valuePath": "orszAccountedForCount",
-        "valueType": "NUMBER",
-        "descriptionParams": {
-          "count": "orszAccountedForCount"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      }
+      "Administered",
+      "orszReturnedStaffToHealth"
     ],
     "insight": {},
     "hideInsights": true,
