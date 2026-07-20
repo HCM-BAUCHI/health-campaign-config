@@ -14378,7 +14378,7 @@
       "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"AGGS\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.targetType.keyword\": \"INDIVIDUAL\"}}, {\"exists\": {\"field\": \"Data.boundaryHierarchy.province.keyword\"}}], \"must_not\": [{\"exists\": {\"field\": \"Data.boundaryHierarchy.district.keyword\"}}]}}, \"aggs\": {\"Project Start and End Dates\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\"}, \"aggs\": {\"Start Date\": {\"min\": {\"field\": \"Data.startDate\"}}, \"End Date\": {\"max\": {\"field\": \"Data.endDate\"}}}}}}}}",
-      "_comment": "Unchanged - date metadata, kept since it feeds startDate/endDate fields used elsewhere"
+      "_comment": "Unchanged - date metadata"
     },
     {
       "module": "COMMON",
@@ -14387,6 +14387,14 @@
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFUSED\"}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"Refused Total\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500}, \"aggs\": {\"Refused count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
       "_comment": "Refused count per province, needed for Visité (Administered + Refused)"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-household-member-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}]}}, \"aggs\": {\"Registered Total\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500}, \"aggs\": {\"Registered count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
+      "_comment": "NEW: Registered (Couvert) count per province - added only so Row 3 can use Administered/Registered instead of Administered/Visité."
     }
   ],
   "chartType": "xtable",
@@ -14404,7 +14412,9 @@
     "Start Date",
     "Refused Total",
     "Refused count",
-    "Visité"
+    "Visité",
+    "Registered Total",
+    "Registered count"
   ],
   "hideInsights": true,
   "hideHeaderDenomination": true,
@@ -14426,7 +14436,7 @@
         "Refused count"
       ],
       "newField": "Visité",
-      "_comments": "Intermediate: Visité = Administered + Refused"
+      "_comments": "Intermediate: Visité = Administered + Refused (unchanged)"
     },
     {
       "postAggregationTheory": "",
@@ -14436,17 +14446,17 @@
         "Overall Population Target"
       ],
       "newField": "Couverture du dénombrement",
-      "_comments": "Row 2: Visité / Target"
+      "_comments": "Row 2: Visité / Target (unchanged)"
     },
     {
       "postAggregationTheory": "",
       "actionName": "PercentageComputedField",
       "fields": [
         "Total Count Population Administered Cumulative",
-        "Visité"
+        "Registered count"
       ],
       "newField": "Couverture de l'administration",
-      "_comments": "Row 3: Administered / Visité"
+      "_comments": "Row 3: CHANGED - now Administered / Registered (was Administered / Visité)"
     },
     {
       "postAggregationTheory": "",
@@ -14466,7 +14476,7 @@
     }
   ],
   "insight": {},
-  "_comment": "TRIMMED to exactly the 3 required columns from feedback: Nombre total d'enfant administrés, Couverture du denombrement (Visite/Target), Couverture de l'administration (Administered/Visite). Removed: SPAQ/Product Target query, Total distribution query, and old Intervention Coverage field entirely - not part of the new spec."
+  "_comment": "MINIMAL CHANGE: only Row 3 (Couverture de l'administration) denominator changed from Visité to Registered. Added one new query (Registered count) to support this. Everything else - Row 1, Row 2, Visité computedField, Refused query - left exactly as before."
 },
   "overviewPopulationTargetedProvinceICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_ICCD",
