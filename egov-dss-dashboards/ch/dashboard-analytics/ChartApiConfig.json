@@ -11211,40 +11211,10 @@
       "actionName": "AdditiveComputedField",
       "fields": [
         "Total Population covered",
-        "Refused count"
-      ],
-      "newField": "Visité 3-59",
-      "_comments": "Col 17"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Administered 3-11 count",
-        "Refused 3-11 count"
-      ],
-      "newField": "Visité 3-11",
-      "_comments": "Col 18"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Administered 12-59 count",
-        "Refused 12-59 count"
-      ],
-      "newField": "Visité 12-59",
-      "_comments": "Col 19"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Total Population covered",
         "Redose Total count"
       ],
       "newField": "SPAQ utilisés 3-59",
-      "_comments": "Col 20: Administered + Redose"
+      "_comments": "Col 17: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -11254,7 +11224,7 @@
         "Redose 3-11 count"
       ],
       "newField": "SPAQ utilisés 3-11",
-      "_comments": "Col 21: Administered + Redose"
+      "_comments": "Col 18: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -11264,7 +11234,7 @@
         "Redose 12-59 count"
       ],
       "newField": "SPAQ utilisés 12-59",
-      "_comments": "Col 22: Administered + Redose"
+      "_comments": "Col 19: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -11273,7 +11243,7 @@
         "Refused count"
       ],
       "newField": "Refus 3-59",
-      "_comments": "Col 23"
+      "_comments": "Col 20"
     },
     {
       "postAggregationTheory": "",
@@ -11282,7 +11252,7 @@
         "Refused 3-11 count"
       ],
       "newField": "Refus 3-11",
-      "_comments": "Col 24"
+      "_comments": "Col 21"
     },
     {
       "postAggregationTheory": "",
@@ -11291,7 +11261,7 @@
         "Refused 12-59 count"
       ],
       "newField": "Refus 12-59",
-      "_comments": "Col 25"
+      "_comments": "Col 22"
     },
     {
       "postAggregationTheory": "",
@@ -11300,7 +11270,7 @@
         "Referred 3-59 count"
       ],
       "newField": "Référé 3-59",
-      "_comments": "Col 26"
+      "_comments": "Col 23"
     },
     {
       "postAggregationTheory": "",
@@ -11309,7 +11279,7 @@
         "Referred 3-11 count"
       ],
       "newField": "Référé 3-11",
-      "_comments": "Col 27"
+      "_comments": "Col 24"
     },
     {
       "postAggregationTheory": "",
@@ -11318,7 +11288,7 @@
         "Referred 12-59 count"
       ],
       "newField": "Référé 12-59",
-      "_comments": "Col 28"
+      "_comments": "Col 25"
     },
     {
       "postAggregationTheory": "",
@@ -11327,7 +11297,7 @@
         "Beneficiary Absent count"
       ],
       "newField": "Absent 3-59",
-      "_comments": "Col 29"
+      "_comments": "Col 26"
     },
     {
       "postAggregationTheory": "",
@@ -11336,7 +11306,7 @@
         "Absent 3-11 count"
       ],
       "newField": "Absent 3-11",
-      "_comments": "Col 30"
+      "_comments": "Col 27"
     },
     {
       "postAggregationTheory": "",
@@ -11345,7 +11315,7 @@
         "Absent 12-59 count"
       ],
       "newField": "Absent 12-59",
-      "_comments": "Col 31"
+      "_comments": "Col 28"
     },
     {
       "postAggregationTheory": "",
@@ -11354,7 +11324,7 @@
         "MAPI 3-59 count"
       ],
       "newField": "MAPI 3-59",
-      "_comments": "Col 32"
+      "_comments": "Col 29"
     },
     {
       "postAggregationTheory": "",
@@ -11363,7 +11333,7 @@
         "MAPI 3-11 count"
       ],
       "newField": "MAPI 3-11",
-      "_comments": "Col 33"
+      "_comments": "Col 30"
     },
     {
       "postAggregationTheory": "",
@@ -11372,14 +11342,14 @@
         "MAPI 12-59 count"
       ],
       "newField": "MAPI 12-59",
-      "_comments": "Col 34"
+      "_comments": "Col 31"
     }
   ],
   "insight": {},
   "sort": "sortKeyAsc",
   "hideInsights": true,
   "hideHeaderDenomination": true,
-  "_comment": "FIXED: chart-level valueType reverted from 'PERCENTAGE' back to 'number' (was accidentally changed - this describes the whole mixed table, not just the % columns). All 6 percentage computedFields already correctly have valueType:PERCENTAGE."
+  "_comment": "REMOVED: Visité 3-59/3-11/12-59 columns entirely, per feedback. Underlying Refused/Administered queries kept since they still feed Refus and Administered Coverage columns."
 },
 "summaryByProvinceICCD": {
   "kind": "drillDown",
@@ -11751,40 +11721,10 @@
       "actionName": "AdditiveComputedField",
       "fields": [
         "Total Population covered",
-        "Refused count"
-      ],
-      "newField": "Visité 3-59",
-      "_comments": "Col 17"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Administered 3-11 count",
-        "Refused 3-11 count"
-      ],
-      "newField": "Visité 3-11",
-      "_comments": "Col 18"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Administered 12-59 count",
-        "Refused 12-59 count"
-      ],
-      "newField": "Visité 12-59",
-      "_comments": "Col 19"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Total Population covered",
         "Redose Total count"
       ],
       "newField": "SPAQ utilisés 3-59",
-      "_comments": "Col 20: Administered + Redose"
+      "_comments": "Col 17: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -11794,7 +11734,7 @@
         "Redose 3-11 count"
       ],
       "newField": "SPAQ utilisés 3-11",
-      "_comments": "Col 21: Administered + Redose"
+      "_comments": "Col 18: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -11804,7 +11744,7 @@
         "Redose 12-59 count"
       ],
       "newField": "SPAQ utilisés 12-59",
-      "_comments": "Col 22: Administered + Redose"
+      "_comments": "Col 19: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -11813,7 +11753,7 @@
         "Refused count"
       ],
       "newField": "Refus 3-59",
-      "_comments": "Col 23"
+      "_comments": "Col 20"
     },
     {
       "postAggregationTheory": "",
@@ -11822,7 +11762,7 @@
         "Refused 3-11 count"
       ],
       "newField": "Refus 3-11",
-      "_comments": "Col 24"
+      "_comments": "Col 21"
     },
     {
       "postAggregationTheory": "",
@@ -11831,7 +11771,7 @@
         "Refused 12-59 count"
       ],
       "newField": "Refus 12-59",
-      "_comments": "Col 25"
+      "_comments": "Col 22"
     },
     {
       "postAggregationTheory": "",
@@ -11840,7 +11780,7 @@
         "Referred 3-59 count"
       ],
       "newField": "Référé 3-59",
-      "_comments": "Col 26"
+      "_comments": "Col 23"
     },
     {
       "postAggregationTheory": "",
@@ -11849,7 +11789,7 @@
         "Referred 3-11 count"
       ],
       "newField": "Référé 3-11",
-      "_comments": "Col 27"
+      "_comments": "Col 24"
     },
     {
       "postAggregationTheory": "",
@@ -11858,7 +11798,7 @@
         "Referred 12-59 count"
       ],
       "newField": "Référé 12-59",
-      "_comments": "Col 28"
+      "_comments": "Col 25"
     },
     {
       "postAggregationTheory": "",
@@ -11867,7 +11807,7 @@
         "Beneficiary Absent count"
       ],
       "newField": "Absent 3-59",
-      "_comments": "Col 29"
+      "_comments": "Col 26"
     },
     {
       "postAggregationTheory": "",
@@ -11876,7 +11816,7 @@
         "Absent 3-11 count"
       ],
       "newField": "Absent 3-11",
-      "_comments": "Col 30"
+      "_comments": "Col 27"
     },
     {
       "postAggregationTheory": "",
@@ -11885,7 +11825,7 @@
         "Absent 12-59 count"
       ],
       "newField": "Absent 12-59",
-      "_comments": "Col 31"
+      "_comments": "Col 28"
     },
     {
       "postAggregationTheory": "",
@@ -11894,7 +11834,7 @@
         "MAPI 3-59 count"
       ],
       "newField": "MAPI 3-59",
-      "_comments": "Col 32"
+      "_comments": "Col 29"
     },
     {
       "postAggregationTheory": "",
@@ -11903,7 +11843,7 @@
         "MAPI 3-11 count"
       ],
       "newField": "MAPI 3-11",
-      "_comments": "Col 33"
+      "_comments": "Col 30"
     },
     {
       "postAggregationTheory": "",
@@ -11912,14 +11852,14 @@
         "MAPI 12-59 count"
       ],
       "newField": "MAPI 12-59",
-      "_comments": "Col 34"
+      "_comments": "Col 31"
     }
   ],
   "insight": {},
   "sort": "sortKeyAsc",
   "hideInsights": true,
   "hideHeaderDenomination": true,
-  "_comment": "FIXED: added valueType:PERCENTAGE to all 6 percentage computedFields (was missing entirely)."
+  "_comment": "REMOVED: Visité 3-59/3-11/12-59 columns entirely, per feedback."
 },
 "summaryByDistrictICCD": {
   "kind": "drillDown",
@@ -12291,40 +12231,10 @@
       "actionName": "AdditiveComputedField",
       "fields": [
         "Total Population covered",
-        "Refused count"
-      ],
-      "newField": "Visité 3-59",
-      "_comments": "Col 17"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Administered 3-11 count",
-        "Refused 3-11 count"
-      ],
-      "newField": "Visité 3-11",
-      "_comments": "Col 18"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Administered 12-59 count",
-        "Refused 12-59 count"
-      ],
-      "newField": "Visité 12-59",
-      "_comments": "Col 19"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Total Population covered",
         "Redose Total count"
       ],
       "newField": "SPAQ utilisés 3-59",
-      "_comments": "Col 20: Administered + Redose"
+      "_comments": "Col 17: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -12334,7 +12244,7 @@
         "Redose 3-11 count"
       ],
       "newField": "SPAQ utilisés 3-11",
-      "_comments": "Col 21: Administered + Redose"
+      "_comments": "Col 18: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -12344,7 +12254,7 @@
         "Redose 12-59 count"
       ],
       "newField": "SPAQ utilisés 12-59",
-      "_comments": "Col 22: Administered + Redose"
+      "_comments": "Col 19: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -12353,7 +12263,7 @@
         "Refused count"
       ],
       "newField": "Refus 3-59",
-      "_comments": "Col 23"
+      "_comments": "Col 20"
     },
     {
       "postAggregationTheory": "",
@@ -12362,7 +12272,7 @@
         "Refused 3-11 count"
       ],
       "newField": "Refus 3-11",
-      "_comments": "Col 24"
+      "_comments": "Col 21"
     },
     {
       "postAggregationTheory": "",
@@ -12371,7 +12281,7 @@
         "Refused 12-59 count"
       ],
       "newField": "Refus 12-59",
-      "_comments": "Col 25"
+      "_comments": "Col 22"
     },
     {
       "postAggregationTheory": "",
@@ -12380,7 +12290,7 @@
         "Referred 3-59 count"
       ],
       "newField": "Référé 3-59",
-      "_comments": "Col 26"
+      "_comments": "Col 23"
     },
     {
       "postAggregationTheory": "",
@@ -12389,7 +12299,7 @@
         "Referred 3-11 count"
       ],
       "newField": "Référé 3-11",
-      "_comments": "Col 27"
+      "_comments": "Col 24"
     },
     {
       "postAggregationTheory": "",
@@ -12398,7 +12308,7 @@
         "Referred 12-59 count"
       ],
       "newField": "Référé 12-59",
-      "_comments": "Col 28"
+      "_comments": "Col 25"
     },
     {
       "postAggregationTheory": "",
@@ -12407,7 +12317,7 @@
         "Beneficiary Absent count"
       ],
       "newField": "Absent 3-59",
-      "_comments": "Col 29"
+      "_comments": "Col 26"
     },
     {
       "postAggregationTheory": "",
@@ -12416,7 +12326,7 @@
         "Absent 3-11 count"
       ],
       "newField": "Absent 3-11",
-      "_comments": "Col 30"
+      "_comments": "Col 27"
     },
     {
       "postAggregationTheory": "",
@@ -12425,7 +12335,7 @@
         "Absent 12-59 count"
       ],
       "newField": "Absent 12-59",
-      "_comments": "Col 31"
+      "_comments": "Col 28"
     },
     {
       "postAggregationTheory": "",
@@ -12434,7 +12344,7 @@
         "MAPI 3-59 count"
       ],
       "newField": "MAPI 3-59",
-      "_comments": "Col 32"
+      "_comments": "Col 29"
     },
     {
       "postAggregationTheory": "",
@@ -12443,7 +12353,7 @@
         "MAPI 3-11 count"
       ],
       "newField": "MAPI 3-11",
-      "_comments": "Col 33"
+      "_comments": "Col 30"
     },
     {
       "postAggregationTheory": "",
@@ -12452,14 +12362,14 @@
         "MAPI 12-59 count"
       ],
       "newField": "MAPI 12-59",
-      "_comments": "Col 34"
+      "_comments": "Col 31"
     }
   ],
   "insight": {},
   "sort": "sortKeyAsc",
   "hideInsights": true,
   "hideHeaderDenomination": true,
-  "_comment": "FIXED: added valueType:PERCENTAGE to all 6 percentage computedFields (was missing entirely). drillChart still skips Ward per no-ward-facilities instruction."
+  "_comment": "REMOVED: Visité 3-59/3-11/12-59 columns entirely, per feedback. drillChart still skips Ward per no-ward-facilities instruction."
 },
 "summaryByAdministrativeProvinceICCD": {
   "kind": "drillDown",
@@ -12831,40 +12741,10 @@
       "actionName": "AdditiveComputedField",
       "fields": [
         "Total Population covered",
-        "Refused count"
-      ],
-      "newField": "Visité 3-59",
-      "_comments": "Col 17"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Administered 3-11 count",
-        "Refused 3-11 count"
-      ],
-      "newField": "Visité 3-11",
-      "_comments": "Col 18"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Administered 12-59 count",
-        "Refused 12-59 count"
-      ],
-      "newField": "Visité 12-59",
-      "_comments": "Col 19"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Total Population covered",
         "Redose Total count"
       ],
       "newField": "SPAQ utilisés 3-59",
-      "_comments": "Col 20: Administered + Redose"
+      "_comments": "Col 17: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -12874,7 +12754,7 @@
         "Redose 3-11 count"
       ],
       "newField": "SPAQ utilisés 3-11",
-      "_comments": "Col 21: Administered + Redose"
+      "_comments": "Col 18: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -12884,7 +12764,7 @@
         "Redose 12-59 count"
       ],
       "newField": "SPAQ utilisés 12-59",
-      "_comments": "Col 22: Administered + Redose"
+      "_comments": "Col 19: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -12893,7 +12773,7 @@
         "Refused count"
       ],
       "newField": "Refus 3-59",
-      "_comments": "Col 23"
+      "_comments": "Col 20"
     },
     {
       "postAggregationTheory": "",
@@ -12902,7 +12782,7 @@
         "Refused 3-11 count"
       ],
       "newField": "Refus 3-11",
-      "_comments": "Col 24"
+      "_comments": "Col 21"
     },
     {
       "postAggregationTheory": "",
@@ -12911,7 +12791,7 @@
         "Refused 12-59 count"
       ],
       "newField": "Refus 12-59",
-      "_comments": "Col 25"
+      "_comments": "Col 22"
     },
     {
       "postAggregationTheory": "",
@@ -12920,7 +12800,7 @@
         "Referred 3-59 count"
       ],
       "newField": "Référé 3-59",
-      "_comments": "Col 26"
+      "_comments": "Col 23"
     },
     {
       "postAggregationTheory": "",
@@ -12929,7 +12809,7 @@
         "Referred 3-11 count"
       ],
       "newField": "Référé 3-11",
-      "_comments": "Col 27"
+      "_comments": "Col 24"
     },
     {
       "postAggregationTheory": "",
@@ -12938,7 +12818,7 @@
         "Referred 12-59 count"
       ],
       "newField": "Référé 12-59",
-      "_comments": "Col 28"
+      "_comments": "Col 25"
     },
     {
       "postAggregationTheory": "",
@@ -12947,7 +12827,7 @@
         "Beneficiary Absent count"
       ],
       "newField": "Absent 3-59",
-      "_comments": "Col 29"
+      "_comments": "Col 26"
     },
     {
       "postAggregationTheory": "",
@@ -12956,7 +12836,7 @@
         "Absent 3-11 count"
       ],
       "newField": "Absent 3-11",
-      "_comments": "Col 30"
+      "_comments": "Col 27"
     },
     {
       "postAggregationTheory": "",
@@ -12965,7 +12845,7 @@
         "Absent 12-59 count"
       ],
       "newField": "Absent 12-59",
-      "_comments": "Col 31"
+      "_comments": "Col 28"
     },
     {
       "postAggregationTheory": "",
@@ -12974,7 +12854,7 @@
         "MAPI 3-59 count"
       ],
       "newField": "MAPI 3-59",
-      "_comments": "Col 32"
+      "_comments": "Col 29"
     },
     {
       "postAggregationTheory": "",
@@ -12983,7 +12863,7 @@
         "MAPI 3-11 count"
       ],
       "newField": "MAPI 3-11",
-      "_comments": "Col 33"
+      "_comments": "Col 30"
     },
     {
       "postAggregationTheory": "",
@@ -12992,14 +12872,14 @@
         "MAPI 12-59 count"
       ],
       "newField": "MAPI 12-59",
-      "_comments": "Col 34"
+      "_comments": "Col 31"
     }
   ],
   "insight": {},
   "sort": "sortKeyAsc",
   "hideInsights": true,
   "hideHeaderDenomination": true,
-  "_comment": "FIXED: added valueType:PERCENTAGE to all 6 percentage computedFields (was missing entirely). Still orphaned (District skips Ward), kept consistent."
+  "_comment": "REMOVED: Visité 3-59/3-11/12-59 columns entirely, per feedback. Still orphaned (District skips Ward), kept consistent."
 },
 "summaryByLocalityICCD": {
   "kind": "drillDown",
@@ -13371,40 +13251,10 @@
       "actionName": "AdditiveComputedField",
       "fields": [
         "Total Population covered",
-        "Refused count"
-      ],
-      "newField": "Visité 3-59",
-      "_comments": "Col 17"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Administered 3-11 count",
-        "Refused 3-11 count"
-      ],
-      "newField": "Visité 3-11",
-      "_comments": "Col 18"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Administered 12-59 count",
-        "Refused 12-59 count"
-      ],
-      "newField": "Visité 12-59",
-      "_comments": "Col 19"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Total Population covered",
         "Redose Total count"
       ],
       "newField": "SPAQ utilisés 3-59",
-      "_comments": "Col 20: Administered + Redose"
+      "_comments": "Col 17: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -13414,7 +13264,7 @@
         "Redose 3-11 count"
       ],
       "newField": "SPAQ utilisés 3-11",
-      "_comments": "Col 21: Administered + Redose"
+      "_comments": "Col 18: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -13424,7 +13274,7 @@
         "Redose 12-59 count"
       ],
       "newField": "SPAQ utilisés 12-59",
-      "_comments": "Col 22: Administered + Redose"
+      "_comments": "Col 19: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -13433,7 +13283,7 @@
         "Refused count"
       ],
       "newField": "Refus 3-59",
-      "_comments": "Col 23"
+      "_comments": "Col 20"
     },
     {
       "postAggregationTheory": "",
@@ -13442,7 +13292,7 @@
         "Refused 3-11 count"
       ],
       "newField": "Refus 3-11",
-      "_comments": "Col 24"
+      "_comments": "Col 21"
     },
     {
       "postAggregationTheory": "",
@@ -13451,7 +13301,7 @@
         "Refused 12-59 count"
       ],
       "newField": "Refus 12-59",
-      "_comments": "Col 25"
+      "_comments": "Col 22"
     },
     {
       "postAggregationTheory": "",
@@ -13460,7 +13310,7 @@
         "Referred 3-59 count"
       ],
       "newField": "Référé 3-59",
-      "_comments": "Col 26"
+      "_comments": "Col 23"
     },
     {
       "postAggregationTheory": "",
@@ -13469,7 +13319,7 @@
         "Referred 3-11 count"
       ],
       "newField": "Référé 3-11",
-      "_comments": "Col 27"
+      "_comments": "Col 24"
     },
     {
       "postAggregationTheory": "",
@@ -13478,7 +13328,7 @@
         "Referred 12-59 count"
       ],
       "newField": "Référé 12-59",
-      "_comments": "Col 28"
+      "_comments": "Col 25"
     },
     {
       "postAggregationTheory": "",
@@ -13487,7 +13337,7 @@
         "Beneficiary Absent count"
       ],
       "newField": "Absent 3-59",
-      "_comments": "Col 29"
+      "_comments": "Col 26"
     },
     {
       "postAggregationTheory": "",
@@ -13496,7 +13346,7 @@
         "Absent 3-11 count"
       ],
       "newField": "Absent 3-11",
-      "_comments": "Col 30"
+      "_comments": "Col 27"
     },
     {
       "postAggregationTheory": "",
@@ -13505,7 +13355,7 @@
         "Absent 12-59 count"
       ],
       "newField": "Absent 12-59",
-      "_comments": "Col 31"
+      "_comments": "Col 28"
     },
     {
       "postAggregationTheory": "",
@@ -13514,7 +13364,7 @@
         "MAPI 3-59 count"
       ],
       "newField": "MAPI 3-59",
-      "_comments": "Col 32"
+      "_comments": "Col 29"
     },
     {
       "postAggregationTheory": "",
@@ -13523,7 +13373,7 @@
         "MAPI 3-11 count"
       ],
       "newField": "MAPI 3-11",
-      "_comments": "Col 33"
+      "_comments": "Col 30"
     },
     {
       "postAggregationTheory": "",
@@ -13532,14 +13382,14 @@
         "MAPI 12-59 count"
       ],
       "newField": "MAPI 12-59",
-      "_comments": "Col 34"
+      "_comments": "Col 31"
     }
   ],
   "insight": {},
   "sort": "sortKeyAsc",
   "hideInsights": true,
   "hideHeaderDenomination": true,
-  "_comment": "FIXED: added valueType:PERCENTAGE to all 6 percentage computedFields (was missing entirely). Retains 'state' key matching this level's existing convention."
+  "_comment": "REMOVED: Visité 3-59/3-11/12-59 columns entirely, per feedback. Retains 'state' key matching this level's existing convention."
 },
 "summaryByVillageICCD": {
   "kind": "drillDown",
@@ -13911,40 +13761,10 @@
       "actionName": "AdditiveComputedField",
       "fields": [
         "Total Population covered",
-        "Refused count"
-      ],
-      "newField": "Visité 3-59",
-      "_comments": "Col 17"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Administered 3-11 count",
-        "Refused 3-11 count"
-      ],
-      "newField": "Visité 3-11",
-      "_comments": "Col 18"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Administered 12-59 count",
-        "Refused 12-59 count"
-      ],
-      "newField": "Visité 12-59",
-      "_comments": "Col 19"
-    },
-    {
-      "postAggregationTheory": "",
-      "actionName": "AdditiveComputedField",
-      "fields": [
-        "Total Population covered",
         "Redose Total count"
       ],
       "newField": "SPAQ utilisés 3-59",
-      "_comments": "Col 20: Administered + Redose"
+      "_comments": "Col 17: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -13954,7 +13774,7 @@
         "Redose 3-11 count"
       ],
       "newField": "SPAQ utilisés 3-11",
-      "_comments": "Col 21: Administered + Redose"
+      "_comments": "Col 18: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -13964,7 +13784,7 @@
         "Redose 12-59 count"
       ],
       "newField": "SPAQ utilisés 12-59",
-      "_comments": "Col 22: Administered + Redose"
+      "_comments": "Col 19: Administered + Redose"
     },
     {
       "postAggregationTheory": "",
@@ -13973,7 +13793,7 @@
         "Refused count"
       ],
       "newField": "Refus 3-59",
-      "_comments": "Col 23"
+      "_comments": "Col 20"
     },
     {
       "postAggregationTheory": "",
@@ -13982,7 +13802,7 @@
         "Refused 3-11 count"
       ],
       "newField": "Refus 3-11",
-      "_comments": "Col 24"
+      "_comments": "Col 21"
     },
     {
       "postAggregationTheory": "",
@@ -13991,7 +13811,7 @@
         "Refused 12-59 count"
       ],
       "newField": "Refus 12-59",
-      "_comments": "Col 25"
+      "_comments": "Col 22"
     },
     {
       "postAggregationTheory": "",
@@ -14000,7 +13820,7 @@
         "Referred 3-59 count"
       ],
       "newField": "Référé 3-59",
-      "_comments": "Col 26"
+      "_comments": "Col 23"
     },
     {
       "postAggregationTheory": "",
@@ -14009,7 +13829,7 @@
         "Referred 3-11 count"
       ],
       "newField": "Référé 3-11",
-      "_comments": "Col 27"
+      "_comments": "Col 24"
     },
     {
       "postAggregationTheory": "",
@@ -14018,7 +13838,7 @@
         "Referred 12-59 count"
       ],
       "newField": "Référé 12-59",
-      "_comments": "Col 28"
+      "_comments": "Col 25"
     },
     {
       "postAggregationTheory": "",
@@ -14027,7 +13847,7 @@
         "Beneficiary Absent count"
       ],
       "newField": "Absent 3-59",
-      "_comments": "Col 29"
+      "_comments": "Col 26"
     },
     {
       "postAggregationTheory": "",
@@ -14036,7 +13856,7 @@
         "Absent 3-11 count"
       ],
       "newField": "Absent 3-11",
-      "_comments": "Col 30"
+      "_comments": "Col 27"
     },
     {
       "postAggregationTheory": "",
@@ -14045,7 +13865,7 @@
         "Absent 12-59 count"
       ],
       "newField": "Absent 12-59",
-      "_comments": "Col 31"
+      "_comments": "Col 28"
     },
     {
       "postAggregationTheory": "",
@@ -14054,7 +13874,7 @@
         "MAPI 3-59 count"
       ],
       "newField": "MAPI 3-59",
-      "_comments": "Col 32"
+      "_comments": "Col 29"
     },
     {
       "postAggregationTheory": "",
@@ -14063,7 +13883,7 @@
         "MAPI 3-11 count"
       ],
       "newField": "MAPI 3-11",
-      "_comments": "Col 33"
+      "_comments": "Col 30"
     },
     {
       "postAggregationTheory": "",
@@ -14072,14 +13892,14 @@
         "MAPI 12-59 count"
       ],
       "newField": "MAPI 12-59",
-      "_comments": "Col 34"
+      "_comments": "Col 31"
     }
   ],
   "insight": {},
   "sort": "sortKeyAsc",
   "hideInsights": true,
   "hideHeaderDenomination": true,
-  "_comment": "Full standard schema (rebuilt earlier). valueType:PERCENTAGE already correctly present on all 6 percentage computedFields."
+  "_comment": "REMOVED: Visité 3-59/3-11/12-59 columns entirely, per feedback."
 },
   "incompleteRecordsByDistrictICCD": {
     "chartName": "DSS_HEALTH_INCOMPLETE_HOUSES_ICCD",
