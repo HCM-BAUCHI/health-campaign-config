@@ -4514,37 +4514,38 @@
       }
     ]
   },
-  "todayInterventionAdministeredNationalICCD": {
-    "chartName": "DSS_HEALTH_NATIONAL_TODAY_INTERVENTION_ADMINISTERED_ICCD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-        "indexName": "ch-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Today Intervention Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
-      }
-    ],
-    "chartType": "metric",
-    "valueType": "number",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "filterForCurrentDay": true,
-    "action": "",
-    "aggregationPaths": [
-      "Today Intervention Administered"
-    ],
-    "insight": {
-      "chartResponseMap": "todayInterventionAdministered",
-      "action": "differenceOfNumbers",
-      "upwardIndicator": "positive",
-      "downwardIndicator": "negative",
-      "textMessage": "$indicator$value% than last $insightInterval",
-      "colorCode": "#228B22",
-      "insightInterval": "day"
-    },
-    "_comment": " "
+ "todayInterventionAdministeredNationalICCD": {
+  "chartName": "DSS_HEALTH_NATIONAL_TODAY_INTERVENTION_ADMINISTERED_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "indexName": "ch-project-task-index-v1",
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"allData\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"AdministeredPart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}]}}, \"aggs\": {\"count\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"RedosePart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}]}}, \"aggs\": {\"count\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"Today Intervention Administered\": {\"bucket_script\": {\"buckets_path\": {\"a\": \"AdministeredPart>count\", \"r\": \"RedosePart>count\"}, \"script\": \"params.a + params.r\"}}}}}}",
+      "_comment": "FIXED: Today Intervention Administered now = Administered quantity + Redose quantity (was Administered only). Uses same outer 'filters' wrapper pattern as other fixed cards, to avoid the bucket_script/single-filter NPE bug. ASSUMPTION: Redose part sums Data.quantity to match this card's quantity-based (not headcount-based) semantics - flag if Redose quantity isn't the intended measure here."
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "number",
+  "drillChart": "none",
+  "documentType": "_doc",
+  "filterForCurrentDay": true,
+  "action": "",
+  "aggregationPaths": [
+    "Today Intervention Administered"
+  ],
+  "insight": {
+    "chartResponseMap": "todayInterventionAdministered",
+    "action": "differenceOfNumbers",
+    "upwardIndicator": "positive",
+    "downwardIndicator": "negative",
+    "textMessage": "$indicator$value% than last $insightInterval",
+    "colorCode": "#228B22",
+    "insightInterval": "day"
   },
+  "_comment": "FIXED: added Redose to the Today Intervention Administered total, matching the same Administered+Redose pattern applied elsewhere in this project."
+},
   "attendeesMarkedPresentAbsent": {
     "chartName": "DSS_HEALTH_ATTENDANCE_WORKERS_PRESENT_NUMBER",
     "queries": [
