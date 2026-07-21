@@ -18805,8 +18805,8 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AdministeredPart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"RedosePart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"SPAQ 3-11 Utilis\\u00e9s\": {\"bucket_script\": {\"buckets_path\": {\"a\": \"AdministeredPart>count\", \"r\": \"RedosePart>count\"}, \"script\": \"params.a + params.r\"}}}}",
-      "_comment": "FIXED: SPAQ 3-11 Utilisés now = Administered + Redose (bucket_script), was Administered only"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"allData\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"AdministeredPart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"RedosePart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"SPAQ 3-11 Utilis\\u00e9s\": {\"bucket_script\": {\"buckets_path\": {\"a\": \"AdministeredPart>count\", \"r\": \"RedosePart>count\"}, \"script\": \"params.a + params.r\"}}}}}}",
+      "_comment": "FIXED: wrapped AdministeredPart/RedosePart/bucket_script inside outer 'filters' (plural) wrapper, matching redoseOverviewICCD's working pattern - previous version had bucket_script directly sibling to filter aggs at root, causing NullPointerException/InternalFilter cast error."
     }
   ],
   "chartType": "metric",
@@ -18827,7 +18827,7 @@
     "colorCode": "#228B22",
     "insightInterval": "dateRange"
   },
-  "_comment": "FIXED: SPAQ 3-11m Utilisés = Administered + Redose (was Administered only)"
+  "_comment": "FIXED (NPE): wrapped bucket_script setup inside outer filters wrapper. SPAQ 3-11m Utilisés = Administered + Redose."
 },
 "overviewSPAQ3to11UtilisesPercentProvinceICCD": {
   "chartName": "DSS_HEALTH_OVERVIEW_SPAQ_3_11_UTILISES_PERCENT_PROVINCE_ICCD",
@@ -18837,8 +18837,8 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AdministeredPart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"RedosePart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"SPAQ 3-11 Utilis\\u00e9s\": {\"bucket_script\": {\"buckets_path\": {\"a\": \"AdministeredPart>count\", \"r\": \"RedosePart>count\"}, \"script\": \"params.a + params.r\"}}}}",
-      "_comment": "FIXED: SPAQ 3-11 Utilisés now = Administered + Redose (bucket_script), was Administered only"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"allData\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"AdministeredPart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"RedosePart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (3 \\u00e0 11 mois)\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"SPAQ 3-11 Utilis\\u00e9s\": {\"bucket_script\": {\"buckets_path\": {\"a\": \"AdministeredPart>count\", \"r\": \"RedosePart>count\"}, \"script\": \"params.a + params.r\"}}}}}}",
+      "_comment": "FIXED: wrapped AdministeredPart/RedosePart/bucket_script inside outer 'filters' (plural) wrapper, matching redoseOverviewICCD's working pattern - previous version had bucket_script directly sibling to filter aggs at root, causing NullPointerException/InternalFilter cast error."
     },
     {
       "module": "COMMON",
@@ -18867,7 +18867,7 @@
     "colorCode": "#228B22",
     "insightInterval": "dateRange"
   },
-  "_comment": "FIXED: numerator now Administered + Redose, denominator (Target) unchanged"
+  "_comment": "FIXED (NPE): same outer filters wrapper fix. Numerator = Administered + Redose, denominator (Target) unchanged."
 },
 "overviewSPAQ12to59UtilisesCountProvinceICCD": {
   "chartName": "DSS_HEALTH_OVERVIEW_SPAQ_12_59_UTILISES_COUNT_PROVINCE_ICCD",
@@ -18877,8 +18877,8 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AdministeredPart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"RedosePart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"SPAQ 12-59 Utilis\\u00e9s\": {\"bucket_script\": {\"buckets_path\": {\"a\": \"AdministeredPart>count\", \"r\": \"RedosePart>count\"}, \"script\": \"params.a + params.r\"}}}}",
-      "_comment": "FIXED: SPAQ 12-59 Utilisés now = Administered + Redose (bucket_script), was Administered only"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"allData\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"AdministeredPart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"RedosePart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"SPAQ 12-59 Utilis\\u00e9s\": {\"bucket_script\": {\"buckets_path\": {\"a\": \"AdministeredPart>count\", \"r\": \"RedosePart>count\"}, \"script\": \"params.a + params.r\"}}}}}}",
+      "_comment": "FIXED: wrapped AdministeredPart/RedosePart/bucket_script inside outer 'filters' (plural) wrapper, matching redoseOverviewICCD's working pattern - previous version had bucket_script directly sibling to filter aggs at root, causing NullPointerException/InternalFilter cast error."
     }
   ],
   "chartType": "metric",
@@ -18899,7 +18899,7 @@
     "colorCode": "#228B22",
     "insightInterval": "dateRange"
   },
-  "_comment": "FIXED: SPAQ 12-59m Utilisés = Administered + Redose (was Administered only)"
+  "_comment": "FIXED (NPE): wrapped bucket_script setup inside outer filters wrapper. SPAQ 12-59m Utilisés = Administered + Redose."
 },
 "overviewSPAQ12to59UtilisesPercentProvinceICCD": {
   "chartName": "DSS_HEALTH_OVERVIEW_SPAQ_12_59_UTILISES_PERCENT_PROVINCE_ICCD",
@@ -18909,8 +18909,8 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AdministeredPart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"RedosePart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"SPAQ 12-59 Utilis\\u00e9s\": {\"bucket_script\": {\"buckets_path\": {\"a\": \"AdministeredPart>count\", \"r\": \"RedosePart>count\"}, \"script\": \"params.a + params.r\"}}}}",
-      "_comment": "FIXED: SPAQ 12-59 Utilisés now = Administered + Redose (bucket_script), was Administered only"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"allData\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"AdministeredPart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"RedosePart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}, {\"term\": {\"Data.productName.keyword\": \"SPAQ (12 \\u00e0 59 mois)\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"SPAQ 12-59 Utilis\\u00e9s\": {\"bucket_script\": {\"buckets_path\": {\"a\": \"AdministeredPart>count\", \"r\": \"RedosePart>count\"}, \"script\": \"params.a + params.r\"}}}}}}",
+      "_comment": "FIXED: wrapped AdministeredPart/RedosePart/bucket_script inside outer 'filters' (plural) wrapper, matching redoseOverviewICCD's working pattern - previous version had bucket_script directly sibling to filter aggs at root, causing NullPointerException/InternalFilter cast error."
     },
     {
       "module": "COMMON",
@@ -18939,7 +18939,7 @@
     "colorCode": "#228B22",
     "insightInterval": "dateRange"
   },
-  "_comment": "FIXED: numerator now Administered + Redose, denominator (Target) unchanged"
+  "_comment": "FIXED (NPE): same outer filters wrapper fix. Numerator = Administered + Redose, denominator (Target) unchanged."
 },
 "overviewSPAQ3to59UtilisesCountProvinceICCD": {
   "chartName": "DSS_HEALTH_OVERVIEW_SPAQ_3_59_UTILISES_COUNT_PROVINCE_ICCD",
@@ -18949,8 +18949,8 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AdministeredPart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"RedosePart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"SPAQ 3-59 Utilis\\u00e9s\": {\"bucket_script\": {\"buckets_path\": {\"a\": \"AdministeredPart>count\", \"r\": \"RedosePart>count\"}, \"script\": \"params.a + params.r\"}}}}",
-      "_comment": "FIXED: SPAQ 3-59 Utilisés now = Administered + Redose (bucket_script), was Administered only"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"allData\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"AdministeredPart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"RedosePart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"SPAQ 3-59 Utilis\\u00e9s\": {\"bucket_script\": {\"buckets_path\": {\"a\": \"AdministeredPart>count\", \"r\": \"RedosePart>count\"}, \"script\": \"params.a + params.r\"}}}}}}",
+      "_comment": "FIXED: wrapped AdministeredPart/RedosePart/bucket_script inside outer 'filters' (plural) wrapper, matching redoseOverviewICCD's working pattern - previous version had bucket_script directly sibling to filter aggs at root, causing NullPointerException/InternalFilter cast error."
     }
   ],
   "chartType": "metric",
@@ -18971,7 +18971,7 @@
     "colorCode": "#228B22",
     "insightInterval": "dateRange"
   },
-  "_comment": "FIXED: SPAQ 3-59m (combined) Utilisés = Administered + Redose (was Administered only). Redose part uses taskType:REDOSE with no product filter, covering both SPAQ1 and SPAQ2 redoses combined."
+  "_comment": "FIXED (NPE): wrapped bucket_script setup inside outer filters wrapper. SPAQ 3-59m combined Utilisés = Administered + Redose."
 },
 "overviewSPAQ3to59UtilisesPercentProvinceICCD": {
   "chartName": "DSS_HEALTH_OVERVIEW_SPAQ_3_59_UTILISES_PERCENT_PROVINCE_ICCD",
@@ -18981,8 +18981,8 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"AdministeredPart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"RedosePart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"SPAQ 3-59 Utilis\\u00e9s\": {\"bucket_script\": {\"buckets_path\": {\"a\": \"AdministeredPart>count\", \"r\": \"RedosePart>count\"}, \"script\": \"params.a + params.r\"}}}}",
-      "_comment": "FIXED: SPAQ 3-59 Utilisés now = Administered + Redose (bucket_script), was Administered only"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"allData\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"AdministeredPart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}, \"RedosePart\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.additionalDetails.taskType.keyword\": \"REDOSE\"}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}, \"SPAQ 3-59 Utilis\\u00e9s\": {\"bucket_script\": {\"buckets_path\": {\"a\": \"AdministeredPart>count\", \"r\": \"RedosePart>count\"}, \"script\": \"params.a + params.r\"}}}}}}",
+      "_comment": "FIXED: wrapped AdministeredPart/RedosePart/bucket_script inside outer 'filters' (plural) wrapper, matching redoseOverviewICCD's working pattern - previous version had bucket_script directly sibling to filter aggs at root, causing NullPointerException/InternalFilter cast error."
     },
     {
       "module": "COMMON",
@@ -19011,7 +19011,7 @@
     "colorCode": "#228B22",
     "insightInterval": "dateRange"
   },
-  "_comment": "FIXED: numerator now Administered + Redose (combined), denominator (Target) unchanged"
+  "_comment": "FIXED (NPE): same outer filters wrapper fix. Numerator = Administered + Redose (combined), denominator (Target) unchanged."
 },
  "redoseOverviewICCD": {
   "chartName": "DSS_HEALTH_REDOSE_OVERVIEW_ICCD",
