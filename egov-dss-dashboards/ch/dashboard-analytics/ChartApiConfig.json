@@ -14390,11 +14390,11 @@
     },
     {
       "module": "COMMON",
-      "dateRefField": "Data.householdMember.auditDetails.createdTime",
+      "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}]}}, \"aggs\": {\"Registered Total\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500}, \"aggs\": {\"Registered count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
-      "_comment": "NEW: Registered (Couvert) count per province - added only so Row 3 can use Administered/Registered instead of Administered/Visité."
+      "_comment": "FIXED: dateRefField changed to empty string '', matching the exact pattern used by the confirmed-working overviewPopulationCoverageAchievedProvinceICCD's Registered query. Previously used the long-typed 'Data.householdMember.auditDetails.createdTime' field, which very likely caused the ~10x undercount producing impossible >100% coverage percentages."
     }
   ],
   "chartType": "xtable",
