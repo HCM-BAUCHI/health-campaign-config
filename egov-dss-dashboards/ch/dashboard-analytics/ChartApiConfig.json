@@ -18132,68 +18132,35 @@
     "_comment": "FIXED: added filterForCurrentDay:true. This National dashboard has NO Cumulative/Today toggle, so dateRefField alone had nothing to combine with (per bug #10's established mechanism, dateRefField only restricts date range when paired with an external page-level toggle). Without a toggle, the query was running unrestricted, showing 62 (cumulative-looking) instead of the true today-count of 3. filterForCurrentDay forces the today-restriction directly, independent of any toggle."
 },
  "overviewTotalPopulationRegisteredICCD": {
-  "chartName": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_ICCD",
-  "queries": [
-    {
-      "module": "COMMON",
-      "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-household-member-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"Total Population Registered\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}",
-      "_comment": "FIXED: added age range {gte:3,lte:59} - was completely unbounded, silently including tens of thousands of non-head-of-household members with no age data at all (spouses, other adults, etc.), which inflated Total Registered above what its own 3-11/12-59 brackets summed to."
-    }
-  ],
-  "chartType": "metric",
-  "valueType": "number",
-  "drillChart": "none",
-  "documentType": "_doc",
-  "action": "",
-  "aggregationPaths": [
-    "Total Population Registered"
-  ],
-  "isCappedTillToday": true,
-  "insight": {
-    "chartResponseMap": "overviewTotalPopulationRegisteredICCD",
-    "action": "differenceOfNumbers",
-    "upwardIndicator": "positive",
-    "downwardIndicator": "negative",
-    "textMessage": "$indicator$value% than last $insightInterval",
-    "colorCode": "#228B22",
-    "insightInterval": "dateRange"
-  },
-  "_comment": "FIXED: added age {gte:3,lte:59} to align Total Registered with its own age-bracketed siblings and with Administered's already age-bounded totals."
-},
-"overviewTotalPopulationNationalRegisteredICCD": {
-  "chartName": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_ICCD",
-  "queries": [
-    {
-      "module": "COMMON",
-      "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\",  \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
-      "indexName": "ch-household-member-index-v1",
-      "aggrQuery": "{\"size\": 0, \"aggs\": {\"Total Population Registered\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}",
-      "_comment": "FIXED: added age range {gte:3,lte:59} - was completely unbounded, silently including tens of thousands of non-head-of-household members with no age data at all (spouses, other adults, etc.), which inflated Total Registered above what its own 3-11/12-59 brackets summed to."
-    }
-  ],
-  "chartType": "metric",
-  "valueType": "number",
-  "drillChart": "none",
-  "documentType": "_doc",
-  "action": "",
-  "aggregationPaths": [
-    "Total Population Registered"
-  ],
-  "isCappedTillToday": true,
-  "insight": {
-    "chartResponseMap": "overviewTotalPopulationNationalRegisteredICCD",
-    "action": "differenceOfNumbers",
-    "upwardIndicator": "positive",
-    "downwardIndicator": "negative",
-    "textMessage": "$indicator$value% than last $insightInterval",
-    "colorCode": "#228B22",
-    "insightInterval": "dateRange"
-  },
-  "_comment": "FIXED: added age {gte:3,lte:59} to align Total Registered with its own age-bracketed siblings and with Administered's already age-bounded totals."
+    "chartName": "DSS_HEALTH_OVERVIEW_TOTAL_POPULATION_REGISTERED_ICCD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "indexName": "ch-household-member-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Population Registered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Population Registered"
+    ],
+    "isCappedTillToday": true,
+    "insight": {
+      "chartResponseMap": "overviewTotalPopulationRegisteredICCD",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "dateRange"
+    },
+    "_comment": "Switched from ch-project-task-index-v1 to ch-household-member-index-v1 per DST feedback, same as todayPopulationRegisteredNationalICCD. Registered = isHeadOfHousehold:false (confirmed single head per household). dateRefField left as '' (cumulative/all-time), consistent with this card's original cumulative intent - no date-scoping needed here unlike the 'Today' card. Field changed: Data.projectBeneficiaryClientReferenceId.keyword -> Data.householdMember.individualClientReferenceId.keyword."
 },
 "overviewPopulationRegistrationCoverageProvinceICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_REGISTRATION_COVERAGE_PROVINCE_ICCD",
