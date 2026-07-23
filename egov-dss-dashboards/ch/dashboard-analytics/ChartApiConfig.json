@@ -2192,14 +2192,16 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Administered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"population covered total\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"total_administered\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}",
+      "_comment": "Numerator: mirrors totalPopulationCoveredNationalICCD exactly (agg name 'population covered total' > 'total_administered'), per user-confirmed correct definition."
     },
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}},{\"range\":{\"Data.age\":{\"gte\":3,\"lte\":59}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"Total Population Registered\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}",
+      "_comment": "Denominator: mirrors overviewTotalPopulationRegisteredICCD exactly (agg name 'Total Population Registered' > 'count'). FIXED: removed the age {gte:3,lte:59} filter that was previously here - the confirmed-correct reference card has no age bound at all on Registered."
     }
   ],
   "chartType": "metric",
@@ -2209,11 +2211,11 @@
   "documentType": "_doc",
   "action": "percentage",
   "aggregationPaths": [
-    "Population Administered",
-    "Population Registered"
+    "population covered total",
+    "Total Population Registered"
   ],
   "insight": {},
-  "_comment": "population coverage % = population administered / population registered (national level). FIXED: added age range {gte:3,lte:59} to numerator. Denominator switched from ch-project-task-index-v1 (exists:dateOfRegistration, cardinality) to ch-household-member-index-v1 (isHeadOfHousehold:false, value_count) - same fix pattern as the Coverage Achieved cards. Also note: switched cardinality->value_count for consistency with the rest of the Registered-family cards in this project (bug #12's established convention), since this one was the odd one out using cardinality."
+  "_comment": "FIXED: numerator and denominator queries now exactly mirror the two confirmed-correct canonical cards (totalPopulationCoveredNationalICCD and overviewTotalPopulationRegisteredICCD), rather than a separately-built approximation. Key change: denominator no longer applies an age filter, matching the reference card's definition of 'Total Population Registered' as the full registered population, not just the 3-59 bracket."
 },
   "usersRecordsSummaryTable": {
     "chartName": "DSS_HEALTH_COMPLAINTS_BY_HEALTH_DISTRICT_TOTAL_BURUNDI",
