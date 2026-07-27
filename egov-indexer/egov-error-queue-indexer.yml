@@ -16,3 +16,101 @@ ServiceMaps:
             fieldMapping:
               - inJsonPath: $
                 outJsonPath: $.Data
+    - topic: egov-persister-deadletter-ba-bo-ke
+      configKey: INDEX
+      indexes:
+        - name: egov-tracer-error-details-persister
+          type: general
+          id: $.id
+          isBulk: false
+          jsonPath: $.*
+          timeStampField: $.ts
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+    - topic: egov-persister-deadletter-ch
+      configKey: INDEX
+      indexes:
+        - name: egov-tracer-error-details-persister
+          type: general
+          id: $.id
+          isBulk: false
+          jsonPath: $.*
+          timeStampField: $.ts
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+    - topic: egov-persister-deadletter-chad-kb-kd
+      configKey: INDEX
+      indexes:
+        - name: egov-tracer-error-details-persister
+          type: general
+          id: $.id
+          isBulk: false
+          jsonPath: $.*
+          timeStampField: $.ts
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+    - topic: egov-persister-deadletter-ht
+      configKey: INDEX
+      indexes:
+        - name: egov-tracer-error-details-persister
+          type: general
+          id: $.id
+          isBulk: false
+          jsonPath: $.*
+          timeStampField: $.ts
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+    - topic: egov-persister-deadletter-kd-pl-ab
+      configKey: INDEX
+      indexes:
+        - name: egov-tracer-error-details-persister
+          type: general
+          id: $.id
+          isBulk: false
+          jsonPath: $.*
+          timeStampField: $.ts
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+    - topic: egov-persister-deadletter-na-oy-ko-jg
+      configKey: INDEX
+      indexes:
+        - name: egov-tracer-error-details-persister
+          type: general
+          id: $.id
+          isBulk: false
+          jsonPath: $.*
+          timeStampField: $.ts
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+    - topic: egov-persister-deadletter-so-zf
+      configKey: INDEX
+      indexes:
+        - name: egov-tracer-error-details-persister
+          type: general
+          id: $.id
+          isBulk: false
+          jsonPath: $.*
+          timeStampField: $.ts
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
