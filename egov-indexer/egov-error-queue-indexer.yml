@@ -23,7 +23,6 @@ ServiceMaps:
           type: general
           id: $.id
           isBulk: false
-          jsonPath: $.*
           timeStampField: $.ts
           customJsonMapping:
             indexMapping: { "Data": { } }
@@ -37,7 +36,6 @@ ServiceMaps:
           type: general
           id: $.id
           isBulk: false
-          jsonPath: $.*
           timeStampField: $.ts
           customJsonMapping:
             indexMapping: { "Data": { } }
@@ -51,7 +49,6 @@ ServiceMaps:
           type: general
           id: $.id
           isBulk: false
-          jsonPath: $.*
           timeStampField: $.ts
           customJsonMapping:
             indexMapping: { "Data": { } }
@@ -65,7 +62,6 @@ ServiceMaps:
           type: general
           id: $.id
           isBulk: false
-          jsonPath: $.*
           timeStampField: $.ts
           customJsonMapping:
             indexMapping: { "Data": { } }
@@ -79,7 +75,6 @@ ServiceMaps:
           type: general
           id: $.id
           isBulk: false
-          jsonPath: $.*
           timeStampField: $.ts
           customJsonMapping:
             indexMapping: { "Data": { } }
@@ -93,7 +88,6 @@ ServiceMaps:
           type: general
           id: $.id
           isBulk: false
-          jsonPath: $.*
           timeStampField: $.ts
           customJsonMapping:
             indexMapping: { "Data": { } }
@@ -107,7 +101,6 @@ ServiceMaps:
           type: general
           id: $.id
           isBulk: false
-          jsonPath: $.*
           timeStampField: $.ts
           customJsonMapping:
             indexMapping: { "Data": { } }
