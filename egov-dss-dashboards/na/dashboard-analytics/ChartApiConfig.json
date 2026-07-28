@@ -16605,7 +16605,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"stockEntryType\": \"Data.additionalDetails.stockEntryType.keyword\", \"facilityId\": \"Data.facilityId.keyword\", \"transactingFacilityId\": \"Data.transactingFacilityId.keyword\", \"status\": \"Data.additionalDetails.status.keyword\"}",
         "indexName": "na-stock-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "stockBalanceTransformer",
@@ -16639,6 +16639,18 @@
     "filterKeys": [
       {
         "key": "campaignId"
+      },
+      {
+        "key": "stockEntryType"
+      },
+      {
+        "key": "facilityId"
+      },
+      {
+        "key": "transactingFacilityId"
+      },
+      {
+        "key": "status"
       }
     ],
     "documentType": "_doc",
