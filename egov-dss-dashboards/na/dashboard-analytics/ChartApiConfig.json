@@ -16669,7 +16669,7 @@
         "indexName": "na-stock-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "facilityStockTransformer",
-        "aggrQuery": "{\"size\":10000,\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\"]}"
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must_not\":[{\"range\":{\"Data.createdTime\":{\"lte\":1785090600000}}}]}},\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\"]}"
       },
       {
         "module": "COMMON",
@@ -16678,7 +16678,7 @@
         "indexName": "na-stock-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "transactingStockTransformer",
-        "aggrQuery": "{\"size\":10000,\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\"]}"
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must_not\":[{\"range\":{\"Data.createdTime\":{\"lte\":1785090600000}}}]}},\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\"]}"
       }
     ],
     "chartType": "rawResponse",
