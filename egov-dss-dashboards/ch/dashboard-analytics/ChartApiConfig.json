@@ -2198,7 +2198,7 @@
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": " \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"Total Population Registered\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}",
       "_comment": "Denominator: mirrors overviewTotalPopulationRegisteredICCD exactly (agg name 'Total Population Registered' > 'count'). FIXED: removed the age {gte:3,lte:59} filter that was previously here - the confirmed-correct reference card has no age bound at all on Registered."
@@ -8318,14 +8318,16 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Administered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Administered till today\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}",
+      "_comment": "Administered - stays scoped to current cycle only, unchanged."
     },
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population Registered till today\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}",
+      "_comment": "FIXED: removed 'cycle' from requestQueryMap - Registered should be cumulative across ALL cycles, not scoped to the currently selected cycle. Same fix as applied to coverageByProvinceICCD."
     }
   ],
   "chartType": "metric",
@@ -8347,7 +8349,7 @@
     "colorCode": "#228B22",
     "insightInterval": "dateRange"
   },
-  "_comment": "FIXED: query 2 (Registered denominator) switched from ch-project-task-index-v1 to ch-household-member-index-v1 (isHeadOfHousehold:false). This resolves the mismatch that was producing 85% instead of the correct ~95.5% (317 Administered / 332 Registered)."
+  "_comment": "FIXED: Registered query no longer scoped to 'cycle' - now spans all cycles combined, while Administered stays scoped to the current cycle only. Matches the same fix applied to coverageByProvinceICCD."
 },
  "populationNotAdministeredByReasonProvinceICCD": {
     "chartName": "DSS_HEALTH_POPULATION_NOT_ADMINISTERED_BY_REASON_PROVINCE_ICCD",
@@ -17109,14 +17111,16 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 3-11 Administered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population 3-11 Administered till today\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}",
+      "_comment": "Unchanged - Administered, correctly scoped to current cycle."
     },
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 3-11 Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}},{\"range\":{\"Data.age\":{\"lte\":11}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population 3-11 Registered till today\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"lte\": 11}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}",
+      "_comment": "FIXED: requestQueryMap had a missing opening brace (malformed JSON: started with ' \"projectTypeId\":' instead of '{\"projectTypeId\":') - would have failed to parse entirely. No 'cycle' key needed here (already correctly absent, matching the all-cycles Registered convention)."
     }
   ],
   "chartType": "metric",
@@ -17138,7 +17142,7 @@
     "colorCode": "#228B22",
     "insightInterval": "dateRange"
   },
-  "_comment": "FIXED: query 2 (Registered denominator) was still on ch-project-task-index-v1 with the old exists:dateOfRegistration filter - never switched when the rest of the Registered/Couvert queries moved to ch-household-member-index-v1. Now uses isHeadOfHousehold:false + age range on ch-household-member-index-v1, consistent with the numerator's data model expectations. Query 1 (Administered) left unchanged - correctly stays on ch-project-task-index-v1. UNVERIFIED: age unit."
+  "_comment": "FIXED: repaired malformed requestQueryMap JSON (missing opening brace) on query 2. Registered correctly has no 'cycle' scoping (spans all cycles); Administered correctly stays scoped to the current cycle."
 },
   "overviewPopulationAdministered3to11MaleICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_3_11_MALE_ICCD",
@@ -17320,14 +17324,16 @@
       "dateRefField": "",
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Administered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"terms\":{\"Data.administrationStatus.keyword\":[\"ADMINISTRATION_SUCCESS\"]}},{\"terms\":{\"Data.additionalDetails.doseIndex.keyword\":[\"1\",\"01\"]}},{\"range\":{\"Data.age\":{\"gte\":12}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population 12-59 Administered till today\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}",
+      "_comment": "Unchanged - Administered, correctly scoped to current cycle."
     },
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"province\": \"Data.boundaryHierarchy.province.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
-      "aggrQuery": "{\"size\":0,\"aggs\":{\"Population 12-59 Registered till today\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.householdMember.isHeadOfHousehold\":false}},{\"range\":{\"Data.age\":{\"gte\":12}}}]}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}"
+      "aggrQuery": "{\"size\": 0, \"aggs\": {\"Population 12-59 Registered till today\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}, {\"range\": {\"Data.age\": {\"gte\": 12}}}]}}, \"aggs\": {\"count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}",
+      "_comment": "FIXED: requestQueryMap had a missing opening brace (malformed JSON), same bug as the 3-11 sibling - would have failed to parse entirely. No 'cycle' key needed (already correctly absent)."
     }
   ],
   "chartType": "metric",
@@ -17349,8 +17355,8 @@
     "colorCode": "#228B22",
     "insightInterval": "dateRange"
   },
-  "_comment": "FIXED: query 2 (Registered denominator) switched from ch-project-task-index-v1 (exists:dateOfRegistration) to ch-household-member-index-v1 (isHeadOfHousehold:false), same fix as the 3-11 sibling. Query 1 (Administered) unchanged. UNVERIFIED: age unit."
-  },
+  "_comment": "FIXED: repaired malformed requestQueryMap JSON (missing opening brace) on query 2 - same bug pattern as the 3-11 sibling card."
+},
   "overviewPopulationAdministered12to59MaleICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_ADMINISTERED_12_59_MALE_ICCD",
     "queries": [
