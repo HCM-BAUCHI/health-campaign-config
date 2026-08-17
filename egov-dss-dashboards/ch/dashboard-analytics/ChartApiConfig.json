@@ -14365,7 +14365,7 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"terms\": {\"Data.administrationStatus.keyword\": [\"ADMINISTRATION_SUCCESS\"]}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"1\", \"01\"]}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"Population Total\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500}, \"aggs\": {\"Total Count Population Administered Cumulative\": {\"value_count\": {\"field\": \"Data.projectBeneficiaryClientReferenceId.keyword\"}}}}}}}}",
-      "_comment": "Administered count per province (Row 1 + numerator for Row 3)"
+      "_comment": "Administered count per province (Row 1 + numerator for Row 3) - stays scoped to current cycle only, per requirement."
     },
     {
       "module": "COMMON",
@@ -14389,15 +14389,15 @@
       "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-project-task-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.deliveredTo.keyword\": \"INDIVIDUAL\"}}, {\"term\": {\"Data.additionalDetails.taskStatus.keyword\": \"BENEFICIARY_REFUSED\"}}, {\"range\": {\"Data.age\": {\"gte\": 3, \"lte\": 59}}}]}}, \"aggs\": {\"Refused Total\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500}, \"aggs\": {\"Refused count\": {\"value_count\": {\"field\": \"Data.id.keyword\"}}}}}}}}",
-      "_comment": "Refused count per province, needed for Visité (Administered + Refused)"
+      "_comment": "Refused count per province, needed for Visité (Administered + Refused) - stays cycle-scoped, matching Administered."
     },
     {
       "module": "COMMON",
       "dateRefField": "",
-      "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
+      "requestQueryMap": "{\"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
       "indexName": "ch-household-member-index-v1",
       "aggrQuery": "{\"size\": 0, \"aggs\": {\"FILTER\": {\"filter\": {\"bool\": {\"must\": [{\"term\": {\"Data.householdMember.isHeadOfHousehold\": false}}]}}, \"aggs\": {\"Registered Total\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.province.keyword\", \"size\": 500}, \"aggs\": {\"Registered count\": {\"value_count\": {\"field\": \"Data.householdMember.individualClientReferenceId.keyword\"}}}}}}}}",
-      "_comment": "FIXED: dateRefField changed to empty string '', matching the exact pattern used by the confirmed-working overviewPopulationCoverageAchievedProvinceICCD's Registered query. Previously used the long-typed 'Data.householdMember.auditDetails.createdTime' field, which very likely caused the ~10x undercount producing impossible >100% coverage percentages."
+      "_comment": "FIXED: removed 'cycle' from requestQueryMap - Registered should be cumulative across ALL cycles (cycle1+cycle2+cycle3+cycle4+cycle5 combined), not scoped to whichever cycle is currently selected. Administered (query 1) correctly stays scoped to the current cycle only, per requirement: Administered = current cycle, Registered = all cycles combined."
     }
   ],
   "chartType": "xtable",
@@ -14429,7 +14429,7 @@
         "Total Count Population Administered Cumulative"
       ],
       "newField": "Nombre total d'enfant administrés",
-      "_comments": "Row 1: Total number of administered children"
+      "_comments": "Row 1: current cycle only"
     },
     {
       "postAggregationTheory": "",
@@ -14439,7 +14439,7 @@
         "Refused count"
       ],
       "newField": "Visité",
-      "_comments": "Intermediate: Visité = Administered + Refused (unchanged)"
+      "_comments": "Intermediate: Visité = Administered + Refused (both current-cycle-scoped, unchanged)"
     },
     {
       "postAggregationTheory": "",
@@ -14459,7 +14459,7 @@
         "Registered count"
       ],
       "newField": "Couverture de l'administration",
-      "_comments": "Row 3: CHANGED - now Administered / Registered (was Administered / Visité)"
+      "_comments": "Row 3: Administered (current cycle) / Registered (all cycles combined)"
     },
     {
       "postAggregationTheory": "",
@@ -14479,7 +14479,7 @@
     }
   ],
   "insight": {},
-  "_comment": "MINIMAL CHANGE: only Row 3 (Couverture de l'administration) denominator changed from Visité to Registered. Added one new query (Registered count) to support this. Everything else - Row 1, Row 2, Visité computedField, Refused query - left exactly as before."
+  "_comment": "FIXED: removed 'cycle' filter from the Registered query only - Registered is meant to be cumulative across all cycles, while Administered correctly stays scoped to the current cycle. This means Row 3 (Administration Coverage) now correctly compares 'children administered this cycle' against 'total children ever registered across all cycles', rather than incorrectly comparing both against the same single cycle."
 },
   "overviewPopulationTargetedProvinceICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_TARGETED_PROVINCE_ICCD",

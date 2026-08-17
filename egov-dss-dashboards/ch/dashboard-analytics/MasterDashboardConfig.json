@@ -1482,7 +1482,32 @@
               ]
             }
           ]
+        },{
+  "row": 1,
+  "name": "DSS_COHORT_TAB",
+  "vizArray": [
+    {
+      "id": 761,
+      "name": "DSS_HEALTH_COHORT_KIBANA_SCREEN",
+      "label": "DSS_HEALTH_COHORT_KIBANA_SCREEN",
+      "vizType": "chart",
+      "noUnit": true,
+      "isCollapsible": false,
+      "charts": [
+        {
+          "id": "cohortKibanaChart",
+          "name": "DASHBOARD_COHORT_KIBANA_CHART",
+          "code": "",
+          "moduleName": "iccd-maps",
+          "pageName": "ch-cohort-tab",
+          "chartType": "kibanaComponent",
+          "filter": "",
+          "headers": []
         }
+      ]
+    }
+  ]
+}
       
       ]
     },
