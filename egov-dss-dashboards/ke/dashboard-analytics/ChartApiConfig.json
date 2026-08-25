@@ -16706,7 +16706,7 @@
         "indexName": "ke-stock-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "stockBalanceTransformer",
-        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must_not\":[{\"range\":{\"Data.createdTime\":{\"lte\":1785090600000}}}]}},\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\",\"Data.dateOfEntry\",\"Data.createdTime\",\"Data.nameOfUser\",\"Data.userName\", \"Data.boundaryHierarchyCode\"]}"
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must_not\":[{\"range\":{\"Data.createdTime\":{\"lte\":1787509800000}}}]}},\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\",\"Data.dateOfEntry\",\"Data.createdTime\",\"Data.nameOfUser\",\"Data.userName\", \"Data.boundaryHierarchyCode\"]}"
       }
     ],
     "chartType": "rawResponse",
@@ -16755,7 +16755,7 @@
         "indexName": "ke-stock-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "facilityStockTransformer",
-        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must_not\":[{\"range\":{\"Data.createdTime\":{\"lte\":1785090600000}}}]}},\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\"]}"
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must_not\":[{\"range\":{\"Data.createdTime\":{\"lte\":1787509800000}}}]}},\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\"]}"
       },
       {
         "module": "COMMON",
@@ -16764,7 +16764,7 @@
         "indexName": "ke-stock-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "transactingStockTransformer",
-        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must_not\":[{\"range\":{\"Data.createdTime\":{\"lte\":1785090600000}}}]}},\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\"]}"
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must_not\":[{\"range\":{\"Data.createdTime\":{\"lte\":1787509800000}}}]}},\"_source\":[\"Data.facilityId\",\"Data.transactingFacilityId\",\"Data.eventType\",\"Data.physicalCount\",\"Data.productVariant\",\"Data.productName\",\"Data.additionalDetails.stockEntryType\",\"Data.additionalDetails.status\",\"Data.campaignId\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.id\"]}"
       }
     ],
     "chartType": "rawResponse",
