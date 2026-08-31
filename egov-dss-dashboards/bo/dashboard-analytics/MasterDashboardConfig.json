@@ -8,90 +8,6 @@
       "style": "linear",
       "visualizations": [
         {
-          "row": 1,
-          "name": "DSS_NATIONAL_HEALTH",
-          "vizArray": [
-            {
-              "id": 701,
-              "name": "DSS_HEALTH_NATIONAL_HOUSEHOLDS_REGISTERED",
-              "label": "DSS_HEALTH_NATIONAL_HOUSEHOLDS_REGISTERED",
-              "vizType": "stacked-collection",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "todayHouseholdVisitedNationalICCD",
-                  "name": "DSS_HEALTH_NATIONAL_HOUSEHOLDS_VISITED_TODAY_ICCD",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "totalHouseholdVisitedNationalICCD",
-                  "name": "DSS_HEALTH_NATIONAL_TOTAL_HOUSEHOLD_VISITED_ICCD",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            },
-            {
-              "id": 702,
-              "name": "DSS_HEALTH_POPULATION_ADMINISTERED",
-              "label": "DSS_HEALTH_POPULATION_ADMINISTERED",
-              "vizType": "stacked-collection",
-              "noUnit": false,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "todayPopulationCoveredNationalICCD",
-                  "name": "DSS_HEALTH_NATIONAL_POPULATION_COVERED_TODAY_ICCD",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "totalPopulationCoveredNationalICCD",
-                  "name": "DSS_HEALTH_NATIONAL_POPULATION_COVERED_TOTAL_ICCD",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            },
-            {
-              "id": 703,
-              "name": "DSS_HEALTH_DRUGS_ADMINISTERED",
-              "label": "DSS_HEALTH_DRUGS_ADMINISTERED",
-              "vizType": "stacked-collection",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "todayInterventionAdministeredNationalICCD",
-                  "name": "DSS_HEALTH_NATIONAL_TODAY_INTERVENTION_ADMINISTERED_ICCD",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "totalInterventionAdministeredNationalICCD",
-                  "name": "DSS_HEALTH_NATIONAL_TOTAL_INTERVENTION_ADMINISTERED_ICCD",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
           "row": 3,
           "name": "DSS_NATIONAL_HEALTH_HEATMAPS",
           "vizArray": [
@@ -107,25 +23,7 @@
                   "id": "populationCoverageHeatMapNationalICCD",
                   "name": "DSS_HEALTH_POPULATION_COVERAGE_NATIONAL_HEATMAP_ICCD",
                   "code": "",
-                  "chartType": "heatmap",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            },
-            {
-              "id": 708,
-              "name": "DSS_HEALTH_INTERVENTION_COVERAGE_HEATMAP",
-              "label": "DSS_HEALTH_INTERVENTION_COVERAGE_HEATMAP",
-              "vizType": "heatmap",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "interventionCoverageHeatMapNationalICCD",
-                  "name": "DSS_HEALTH_INTERVENTION_COVERAGE_HEATMAP_NATIONAL_ICCD",
-                  "code": "",
-                  "chartType": "heatmap",
+                  "chartType": "leafletHeatmap",
                   "filter": "",
                   "headers": []
                 }
@@ -3107,154 +3005,6 @@
       "style": "linear",
       "visualizations": [
         {
-          "row": 1,
-          "name": "DSS_NATIONAL_HEALTH_HOUSEHOLD_REGISTRATION",
-          "vizArray": [
-            {
-              "id": 101,
-              "name": "DSS_HEALTH_NATIONAL_HOUSEHOLDS_REGISTERED",
-              "label": "DSS_HEALTH_NATIONAL_HOUSEHOLDS_REGISTERED",
-              "vizType": "stacked-collection",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "nationalHouseholdsRegisteredBednetsICCD",
-                  "name": "DSS_HEALTH_NATIONAL_NUMBER_OF_HOUSEHOLDS_REGISTERED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nationalHouseholdRegisteredCoverageBednetsICCD",
-                  "name": "DSS_HEALTH_NATIONAL_HOUSEHOLD_REGISTERED_COVERAGE_PERCENT",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nationalHouseholdTargetBednetsICCD",
-                  "name": "DSS_HEALTH_NATIONAL_HOUSEHOLD_TARGET",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            },
-            {
-              "id": 102,
-              "name": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED",
-              "label": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED",
-              "vizType": "stacked-collection",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "nationalPopulationRegisteredBednetsICCD",
-                  "name": "DSS_HEALTH_NATIONAL_TOTAL_POPULATION_REGISTERED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nationalPopulationRegisteredCoverageBednetsICCD",
-                  "name": "DSS_HEALTH_NATIONAL_POPULATION_REGISTERED_COVERAGE_PERCENT",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nationalPopulationTargetBednetsICCD",
-                  "name": "DSS_HEALTH_NATIONAL_POPULATION_TARGET",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 2,
-          "name": "DSS_NATIONAL_HEALTH_DISTRIBUTION",
-          "vizArray": [
-            {
-              "id": 104,
-              "name": "DSS_HEALTH_NATIONAL_POPULATION_COVERED_ITNS",
-              "label": "DSS_HEALTH_NATIONAL_POPULATION_COVERED_ITNS",
-              "vizType": "stacked-collection",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "nationalPopulationCoveredITNsBednetsICCD",
-                  "name": "DSS_HEALTH_NATIONAL_TOTAL_POPULATION_COVERED_ITNS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nationalPopulationCoverageDistributionBednetsICCD",
-                  "name": "DSS_HEALTH_NATIONAL_POPULATION_COVERAGE_DISTRIBUTION_PERCENT",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nationalITNTargetBednetsICCD",
-                  "name": "DSS_HEALTH_NATIONAL_ITN_TARGET",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            },
-            {
-              "id": 301,
-              "name": "DSS_HEALTH_NATIONAL_USERS_OVERVIEW",
-              "label": "DSS_HEALTH_NATIONAL_USERS_OVERVIEW",
-              "vizType": "stacked-collection",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "nationalUsersCreatedBednetsICCD",
-                  "name": "DSS_HEALTH_NATIONAL_TOTAL_USERS_CREATED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nationalUsersSyncedBednetsICCD",
-                  "name": "DSS_HEALTH_NATIONAL_TOTAL_USERS_SYNCED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nationalUsersSyncedPercentBednetsICCD",
-                  "name": "DSS_HEALTH_NATIONAL_TOTAL_USERS_SYNCED_PERCENT",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
           "row": 3,
           "name": "DSS_NATIONAL_HEALTH_HEATMAPS",
           "vizArray": [
@@ -3270,25 +3020,7 @@
                   "id": "populationCoverageHeatMapNationalBednetsICCD",
                   "name": "DSS_HEALTH_POPULATION_COVERAGE_NATIONAL_HEATMAP_BEDNETS_ICCD",
                   "code": "",
-                  "chartType": "heatmap",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            },
-            {
-              "id": 708,
-              "name": "DSS_HEALTH_HOUSEHOLD_COVERAGE_HEATMAP",
-              "label": "DSS_HEALTH_HOUSEHOLD_COVERAGE_HEATMAP",
-              "vizType": "heatmap",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "householdCoverageHeatMapNationalBednetsICCD",
-                  "name": "DSS_HEALTH_HOUSEHOLD_COVERAGE_HEATMAP_NATIONAL_BEDNETS_ICCD",
-                  "code": "",
-                  "chartType": "heatmap",
+                  "chartType": "leafletHeatmap",
                   "filter": "",
                   "headers": []
                 }
