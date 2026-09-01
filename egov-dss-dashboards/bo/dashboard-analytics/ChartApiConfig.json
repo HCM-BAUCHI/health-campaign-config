@@ -23831,7 +23831,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"term\":{\"Data.productVariant.keyword\":\"PVAR-2026-02-06-000662\"}}]}}}},\"aggs\":{\"Bednets Targeted\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"TPD\":{\"sum\":{\"script\":{\"source\":\"doc['Data.targetPerDay'].size()!=0 ? doc['Data.targetPerDay'].value * 365 : 0\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"term\":{\"Data.productVariant.keyword\":\"PVAR-2026-02-06-000662\"}}]}}}},\"aggs\":{\"Bednets Targeted\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"TPD\":{\"sum\":{\"script\":{\"source\":\"doc['Data.targetPerDay'].size()!=0 ? doc['Data.targetPerDay'].value * 365 : 0\"}}}}}}}}}"
       }
     ],
     "chartType": "line",
