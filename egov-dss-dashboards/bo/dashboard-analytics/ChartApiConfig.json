@@ -23831,7 +23831,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"term\":{\"Data.productVariant.keyword\":\"PVAR-2026-02-06-000662\"}}]}}}},\"aggs\":{\"Bednets Targeted\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"TPD\":{\"sum\":{\"script\":{\"source\":\"doc['Data.targetPerDay'].size()!=0 ? doc['Data.targetPerDay'].value * 365 : 0\"}}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"term\":{\"Data.productVariant.keyword\":\"PVAR-2026-02-06-000662\"}}]}}}},\"aggs\":{\"Bednets Targeted\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"TPD\":{\"sum\":{\"script\":{\"source\":\"doc['Data.targetPerDay'].size()!=0 ? doc['Data.targetPerDay'].value * 365 : 0\"}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -23841,8 +23841,8 @@
     "documentType": "_doc",
     "action": "percentage",
     "aggregationPaths": [
-      "Percentage of Bednets Distributed",
-      "Bednets Targeted"
+      "Percentage of ITNs Distributed",
+      "ITNs Targeted"
     ],
     "isCappedByCampaignPeriod": [
       "Overall Target"
@@ -23860,14 +23860,14 @@
         "fields": [
           "TPD"
         ],
-        "newField": "Percentage Bednets",
+        "newField": "Percentage ITNs",
         "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name"
       }
     ],
     "insight": {},
     "_comment": " ",
     "kind": "drillDown"
-  },
+  },  
   "rdHouseholdsCoveredChartApBednetsICCD": {
     "kind": "drillDown",
     "chartName": "DSS_HEALTH_R_D_HOUSEHOLDS_COVERED_AP",
