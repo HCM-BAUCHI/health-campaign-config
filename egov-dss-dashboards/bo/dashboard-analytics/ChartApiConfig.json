@@ -26147,6 +26147,67 @@
     "_comment": "Complaints grouped by application status",
     "kind": "drillDown"
   },
+  "populationNotAdministeredByReasonProvinceICCD": {
+  "chartName": "DSS_HEALTH_POPULATION_NOT_ADMINISTERED_BY_REASON_PROVINCE_ICCD",
+  "queries": [
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\":\"Data.additionalDetails.cycleIndex.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+      "indexName": "bednet-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_REFUSED\"}}]}},\"aggs\":{\"Beneficiary Refused\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\":\"Data.additionalDetails.cycleIndex.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+      "indexName": "bednet-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_DIED\"}}]}},\"aggs\":{\"Beneficiary Died\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\":\"Data.additionalDetails.cycleIndex.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+      "indexName": "bednet-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_MIGRATED\"}}]}},\"aggs\":{\"Beneficiary Migrated\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\":\"Data.additionalDetails.cycleIndex.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+      "indexName": "bednet-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"BENEFICIARY_ABSENT\"}}]}},\"aggs\":{\"Beneficiary Absent\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+    },
+    {
+      "module": "COMMON",
+      "dateRefField": "Data.createdTime",
+      "requestQueryMap": "{\"cycle\":\"Data.additionalDetails.cycleIndex.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+      "indexName": "bednet-project-task-index-v1",
+      "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"INELIGIBLE\"}}]}},\"aggs\":{\"Beneficiary Ineligible\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
+    }
+  ],
+  "chartType": "pie",
+  "valueType": "number",
+  "showLabel": true,
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "",
+  "aggregationPaths": [
+    "Beneficiary Refused",
+    "Beneficiary Died",
+    "Beneficiary Migrated",
+    "Beneficiary Absent",
+    "Beneficiary Ineligible"
+  ],
+  "insight": {},
+  "_comment": "Beneficiaries not administered by reason",
+  "kind": "drillDown",
+  "filterKeys": [
+    {
+      "key": "reason"
+    }
+  ]
+},
   "totalDistributionsBednetsICCD": {
     "chartName": "DSS_HEALTH_NATIONAL_BED_NETS_DISTRIBUTED_TOTAL",
     "queries": [
