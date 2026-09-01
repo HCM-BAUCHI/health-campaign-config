@@ -26328,7 +26328,7 @@
         "dateRefField": "Data.taskDates",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"selectedType\":\"Data.deliveryComments.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Total household not delivered\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.deliveryComments.keyword\"}}],\"must_not\":[{\"term\":{\"Data.deliveryComments.keyword\":\"Entrega com sucesso\"}},{\"term\":{\"Data.deliveryComments.keyword\":\"Mais de 6 agregados familiares\"}}]}}}},\"aggs\":{\"Not Delivered Drilldown\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Total household not delivered\":{\"bool\":{\"must\":[{\"wildcard\":{\"Data.productVariant.keyword\":\"PVAR*\"}},{\"exists\":{\"field\":\"Data.deliveryComments.keyword\"}}],\"must_not\":[{\"term\":{\"Data.deliveryComments.keyword\":\"Entrega com sucesso\"}},{\"term\":{\"Data.deliveryComments.keyword\":\"Mais de 6 agregados familiares\"}}]}}}},\"aggs\":{\"Not Delivered Drilldown\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}}}}}}"
       }
     ],
     "chartType": "pie",
@@ -26348,7 +26348,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "Data.taskDates",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Total household not delivered\":{\"bool\":{\"must\":[{\"wildcard\":{\"Data.productVariant.keyword\":\"PVAR*\"}},{\"exists\":{\"field\":\"Data.deliveryComments.keyword\"}}],\"must_not\":[{\"term\":{\"Data.deliveryComments.keyword\":\"Entrega com sucesso\"}},{\"term\":{\"Data.deliveryComments.keyword\":\"Mais de 6 agregados familiares\"}}]}}}},\"aggs\":{\"Not Delivered\":{\"terms\":{\"field\":\"Data.deliveryComments.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
