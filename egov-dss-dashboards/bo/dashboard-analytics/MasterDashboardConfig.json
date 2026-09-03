@@ -4638,24 +4638,6 @@
           "name": "DSS_HEALTH_OVERVIEW",
           "vizArray": [
             {
-              "id": 204,
-              "name": "DSS_HEALTH_HOUSEHOLDS_NOT_DELIVERED",
-              "label": "DSS_HEALTH_HOUSEHOLDS_NOT_DELIVERED",
-              "vizType": "chart",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "totalHouseholdsNotDeliveredDistrictBednetsICCD",
-                  "name": "DSS_HEALTH_OVERVIEW_TOTAL_HOUSEHOLDS_NOT_DELIVERED_DISTRICT",
-                  "code": "",
-                  "chartType": "donut",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            },
-            {
               "id": 205,
               "name": "DSS_HEALTH_OVERVIEW_TOTAL_COMPLAINTS",
               "label": "DSS_HEALTH_OVERVIEW_TOTAL_COMPLAINTS",
