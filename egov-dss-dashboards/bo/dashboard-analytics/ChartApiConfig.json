@@ -23861,9 +23861,9 @@
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Number of households visited\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.community.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}}}},\"aggs\":{\"Number of households visited\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.community.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -23890,16 +23890,16 @@
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Percentage of Households Visited\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.community.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}}}},\"aggs\":{\"Percentage of Households Visited\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.community.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}}}},\"aggs\":{\"Households Targeted\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.community.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.distributionHub.keyword\"}}]}}}},\"aggs\":{\"Households Targeted\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.community.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -23929,7 +23929,7 @@
           "Target for daterange"
         ],
         "newField": "Households over daterange",
-        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
+        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name"
       }
     ],
     "insight": {},
@@ -23940,54 +23940,80 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.taskDates",
-        "requestQueryMap": "{\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "bo-household-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"householdsVisited\":{\"cardinality\":{\"field\":\"Data.household.id.keyword\"}}}}"
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}}}},\"aggs\":{\"Number of households visited\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       }
     ],
     "chartType": "metric",
     "isCumulative": false,
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "rdHouseholdsCoveredChartApBednetsICCD",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "householdsVisited"
+      "Number of households visited"
+    ],
+    "filterKeys": [
+      {
+        "key": "ward"
+      }
     ],
     "insight": {},
-    "_comment": "Total households covered at lga level"
+    "_comment": "Total households covered at ward level",
+    "kind": "drillDown"
   },
   "rdHouseholdsCoveredChartDistrictPercentBednetsICCD": {
     "chartName": "DSS_HEALTH_R_D_HOUSEHOLDS_COVERED_DISTRICT_PERCENT",
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.household.auditDetails.createdTime",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "bo-household-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Households Registered\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.household.id.keyword\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}]}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}}}},\"aggs\":{\"Percentage of Households Visited\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Overall target\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"TargetValue\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Households Targeted\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}}}},\"aggs\":{\"Households Targeted\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
       }
     ],
     "chartType": "metric",
     "isCumulative": false,
     "valueType": "percentage",
-    "drillChart": "none",
+    "drillChart": "rdHouseholdsCoveredChartAPPercentBednetsICCD",
     "documentType": "_doc",
     "action": "percentage",
     "aggregationPaths": [
-      "Households Registered",
-      "Overall target"
+      "Percentage of Households Visited",
+      "Households Targeted"
+    ],
+    "isCappedByCampaignPeriod": [
+      "Overall Target"
+    ],
+    "filterKeys": [
+      {
+        "key": "ward"
+      }
+    ],
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "repsonseToDifferenceOfDates",
+        "actionName": "",
+        "fields": [
+          "Target for daterange"
+        ],
+        "newField": "Households for daterange"
+      }
     ],
     "insight": {},
-    "_comment": "Household Registered Coverage % = (Households Registered / Target Households) * 100"
+    "_comment": "Household Visited Coverage % = (Households Visited / Households Targeted) * 100",
+    "kind": "drillDown"
   },
   "rdHouseholdsCoveredChartLocalityBednetsICCD": {
     "kind": "drillDown",
@@ -24020,16 +24046,16 @@
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Percentage of Households Visited\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.community.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.distributionHub.keyword\"}}]}}}},\"aggs\":{\"Percentage of Households Visited\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}}}},\"aggs\":{\"Households Targeted\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.community.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Households Targeted\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.distributionHub.keyword\"}}],\"must_not\":[]}}}},\"aggs\":{\"Households Targeted\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -24054,7 +24080,7 @@
           "Target for daterange"
         ],
         "newField": "Households over daterange",
-        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
+        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name"
       }
     ],
     "insight": {},
@@ -24255,17 +24281,17 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.taskDates",
-        "requestQueryMap": "{\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "bo-household-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"populationVisited\":{\"sum\":{\"field\":\"Data.household.memberCount\"}}}}"
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Percentage of Population Covered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"script\":{\"source\":\"doc['Data.quantity'].value * 1.8\"}}}}}}}}}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.taskDates",
-        "requestQueryMap": "{\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"populationTargeted\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"Population Targeted\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"TPD\":{\"sum\":{\"script\":{\"source\":\"doc['Data.targetPerDay'].value * 365\"}}}}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -24275,8 +24301,8 @@
     "documentType": "_doc",
     "action": "percentage",
     "aggregationPaths": [
-      "populationVisited",
-      "populationTargeted"
+      "Percentage of Population Covered",
+      "Population Targeted"
     ],
     "insight": {},
     "_comment": "Overall population coverage percentage (lga level)"
@@ -24288,9 +24314,9 @@
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Total Population Covered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.community.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"script\":{\"source\":\"doc['Data.quantity'].value * 1.8\"}}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Total Population Covered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"script\":{\"source\":\"doc['Data.quantity'].value * 1.8\"}}}}}}}}}"
       }
     ],
     "chartType": "line",
