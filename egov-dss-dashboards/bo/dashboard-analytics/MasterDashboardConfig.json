@@ -4579,7 +4579,7 @@
               "id": 201,
               "name": "DSS_HEALTH_HOUSEHOLDS",
               "label": "DSS_HEALTH_HOUSEHOLDS",
-              "vizType": "metric-collection",
+              "vizType": "stacked-collection",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
@@ -4825,7 +4825,7 @@
               "id": 2111,
               "name": "DSS_HEALTH_HOUSEHOLDS_COVERED_RD",
               "label": "DSS_HEALTH_HOUSEHOLDS_COVERED_RD",
-              "vizType": "metric-collection",
+              "vizType": "chart",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
@@ -4833,7 +4833,7 @@
                   "id": "rdHouseholdsCoveredChartDistrictPercentBednetsICCD",
                   "name": "DSS_HEALTH_NATIONAL_HOUSEHOLD_REGISTERED_COVERAGE_PERCENT",
                   "code": "",
-                  "chartType": "metric",
+                  "chartType": "bar",
                   "filter": "",
                   "headers": [],
                   "tabName": "PERCENT"
@@ -4842,7 +4842,7 @@
                   "id": "rdHouseholdsCoveredChartDistrictBednetsICCD",
                   "name": "DSS_HEALTH_NATIONAL_NUMBER_OF_HOUSEHOLDS_REGISTERED",
                   "code": "",
-                  "chartType": "metric",
+                  "chartType": "bar",
                   "filter": "",
                   "headers": [],
                   "tabName": "NUMBER"
@@ -4853,7 +4853,7 @@
               "id": 2121,
               "name": "DSS_HEALTH_POPULATION_COVERED_RD",
               "label": "DSS_HEALTH_POPULATION_COVERED_RD",
-              "vizType": "metric-collection",
+              "vizType": "chart",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
@@ -4861,7 +4861,7 @@
                   "id": "rdPopulationChartDistrictPercentBednetsICCD",
                   "name": "DSS_HEALTH_R_D_POPULATION_COVERED_DISTRICT_PERCENT",
                   "code": "",
-                  "chartType": "metric",
+                  "chartType": "bar",
                   "filter": "",
                   "headers": [],
                   "tabName": "PERCENT"
@@ -4870,7 +4870,7 @@
                   "id": "rdPopulationChartDistrictBednetsICCD",
                   "name": "DSS_HEALTH_R_D_POPULATION_COVERED_DISTRICT",
                   "code": "",
-                  "chartType": "metric",
+                  "chartType": "bar",
                   "filter": "",
                   "headers": [],
                   "tabName": "NUMBER"
