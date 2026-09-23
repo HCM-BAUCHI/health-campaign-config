@@ -23946,7 +23946,7 @@
         "aggrQuery": "{\"size\":0,\"aggs\":{\"householdsVisited\":{\"cardinality\":{\"field\":\"Data.household.id.keyword\"}}}}"
       }
     ],
-    "chartType": "metric",
+    "chartType": "line",
     "isCumulative": false,
     "valueType": "number",
     "drillChart": "none",
@@ -23976,7 +23976,7 @@
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Overall target\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"TargetValue\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       }
     ],
-    "chartType": "metric",
+    "chartType": "line",
     "isCumulative": false,
     "valueType": "percentage",
     "drillChart": "none",
@@ -24268,7 +24268,7 @@
         "aggrQuery": "{\"size\":0,\"aggs\":{\"populationTargeted\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}"
       }
     ],
-    "chartType": "metric",
+    "chartType": "line",
     "isCumulative": false,
     "valueType": "percentage",
     "drillChart": "none",
