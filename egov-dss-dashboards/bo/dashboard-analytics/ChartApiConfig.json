@@ -23613,26 +23613,12 @@
       "Percentage of Bednets Distributed",
       "Bednets Targeted"
     ],
-    "isCappedByCampaignPeriod": [
-      "Overall Target"
-    ],
     "filterKeys": [
       {
-        "key": "community"
+        "key": "ward"
       }
     ],
     "sort": "sortKeyAsc",
-    "computedFields": [
-      {
-        "postAggregationTheory": "repsonseToDifferenceOfDates",
-        "actionName": "",
-        "fields": [
-          "TPD"
-        ],
-        "newField": "Percentage Bednets",
-        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name"
-      }
-    ],
     "insight": {},
     "_comment": " "
   },
@@ -23694,25 +23680,12 @@
       "Percentage of Bednets Distributed",
       "Bednets Targeted"
     ],
-    "isCappedByCampaignPeriod": [
-      "Overall Target"
-    ],
     "filterKeys": [
       {
         "key": "ward"
       }
     ],
     "sort": "sortKeyAsc",
-    "computedFields": [
-      {
-        "postAggregationTheory": "responseToDifferenceOfDates",
-        "actionName": "",
-        "fields": [
-          "TPD"
-        ],
-        "newField": "Percentage Bednets"
-      }
-    ],
     "insight": {},
     "_comment": " "
   },
