@@ -3651,7 +3651,7 @@
         },
         {
           "row": 1,
-          "name": "DSS_HEALTH_OVERVIEW",
+          "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
               "id": 200,
