@@ -2642,7 +2642,7 @@
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Complaints Id\":{\"terms\":{\"field\":\"Data.service.serviceRequestId.keyword\",\"size\":10000},\"aggs\":{\"Created Time\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"def createdTime = doc['Data.service.auditDetails.createdTime'].value;\\n def dateFormat = new SimpleDateFormat('dd MMM yyyy hh mm ss');\\n def formattedDate = dateFormat.format(new Date(createdTime));\\n def stringDate = formattedDate.toString();\\n def day = stringDate.substring(0, 2);\\n def month = stringDate.substring(3, 6);\\n def year = stringDate.substring(7, 11);\\n def hour = stringDate.substring(12, 14);\\n def minute = stringDate.substring(15, 17);\\n def seconds = stringDate.substring(18, 20);\\n  return day + ' ' + month + ' ' + year + ' ' + hour + 'h ' + minute + 'm ' + seconds + 's'\"},\"size\":1,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Complaint Status\":{\"terms\":{\"field\":\"Data.service.applicationStatus.keyword\",\"size\":1},\"aggs\":{\"Complaint Type\":{\"terms\":{\"field\":\"Data.service.serviceCode.keyword\",\"size\":1},\"aggs\":{\"Administrative Area\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"def community = params['_source']['Data']['boundaryHierarchy']['community']; \\n def healthFacility = params['_source']['Data']['boundaryHierarchy']['healthFacility']; \\n def ward = params['_source']['Data']['boundaryHierarchy']['ward']; \\n def lga = params['_source']['Data']['boundaryHierarchy']['lga']; \\n def state = params['_source']['Data']['boundaryHierarchy']['state']; \\n if(community != null ) {return community;\\n}\\n else if(healthFacility != null ) {return healthFacility;\\n}\\n else if(ward != null ) {return ward;\\n}\\n else if(lga != null ) {return lga;\\n}\\n else if(state != null ) {return state;\\n} \\n else {return 'N/A'; \\n}\\n\"},\"size\":1},\"aggs\":{\"Complainant Phone Number\":{\"terms\":{\"field\":\"Data.service.user.mobileNumber.keyword\",\"size\":1},\"aggs\":{\"Supervisor Contact Number\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"def additionalDetail = params['_source']['Data']['service']['additionalDetail'];\\nif (additionalDetail != null && additionalDetail.contains('\\\"supervisorContactNumber\\\":\\\"')) {\\n  int startIndex = additionalDetail.indexOf('\\\"supervisorContactNumber\\\":') + 27;\\n  int endIndex = additionalDetail.indexOf(',', startIndex);\\n  if (endIndex != -1) {\\n    String supervisorContactNumber = additionalDetail.substring(startIndex, endIndex-1);\\n    if (supervisorContactNumber!=':null ') return supervisorContactNumber;\\n  }\\n}\\nreturn 'N/A';\"},\"size\":1},\"aggs\":{\"Details\":{\"terms\":{\"field\":\"Data.service.description.keyword\",\"size\":1}}}}}}}}}}}}}}}}}}"
       }
     ],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
@@ -4040,7 +4040,7 @@
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Open Filter\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.service.applicationStatus.keyword\":{\"value\":\"PENDING_ASSIGNMENT\"}}}]}},\"aggs\":{\"Complaints Id\":{\"terms\":{\"field\":\"Data.service.serviceRequestId.keyword\",\"size\":1000000},\"aggs\":{\"Created Time\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"def createdTime = doc['Data.service.auditDetails.createdTime'].value;\\n def dateFormat = new SimpleDateFormat('dd MMM yyyy hh mm ss');\\n def formattedDate = dateFormat.format(new Date(createdTime));\\n def stringDate = formattedDate.toString();\\n def day = stringDate.substring(0, 2);\\n def month = stringDate.substring(3, 6);\\n def year = stringDate.substring(7, 11);\\n def hour = stringDate.substring(12, 14);\\n def minute = stringDate.substring(15, 17);\\n def seconds = stringDate.substring(18, 20);\\n  return day + ' ' + month + ' ' + year + ' ' + hour + 'h ' + minute + 'm ' + seconds + 's'\"},\"size\":1,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Complaint Type\":{\"terms\":{\"field\":\"Data.service.serviceCode.keyword\",\"size\":1},\"aggs\":{\"Administrative Area\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"def community = params['_source']['Data']['boundaryHierarchy']['community']; \\n def healthFacility = params['_source']['Data']['boundaryHierarchy']['healthFacility']; \\n def ward = params['_source']['Data']['boundaryHierarchy']['ward']; \\n def lga = params['_source']['Data']['boundaryHierarchy']['lga']; \\n def state = params['_source']['Data']['boundaryHierarchy']['state']; \\n if(community != null ) {return community;\\n}\\n else if(healthFacility != null ) {return healthFacility;\\n}\\n else if(ward != null ) {return ward;\\n}\\n else if(lga != null ) {return lga;\\n}\\n else if(state != null ) {return state;\\n} \\n else {return 'N/A'; \\n}\\n\"},\"size\":1},\"aggs\":{\"Complainant Phone Number\":{\"terms\":{\"field\":\"Data.service.user.mobileNumber.keyword\",\"size\":1},\"aggs\":{\"Supervisor Contact Number\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"def additionalDetail = params['_source']['Data']['service']['additionalDetail'];\\nif (additionalDetail != null && additionalDetail.contains('\\\"supervisorContactNumber\\\":\\\"')) {\\n  int startIndex = additionalDetail.indexOf('\\\"supervisorContactNumber\\\":') + 27;\\n  int endIndex = additionalDetail.indexOf(',', startIndex);\\n  if (endIndex != -1) {\\n    String supervisorContactNumber = additionalDetail.substring(startIndex, endIndex-1);\\n    if (supervisorContactNumber!=':null ') return supervisorContactNumber;\\n  }\\n}\\nreturn 'N/A';\"},\"size\":1},\"aggs\":{\"Details\":{\"terms\":{\"field\":\"Data.service.description.keyword\",\"size\":1}}}}}}}}}}}}}}}}}}"
       }
     ],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
@@ -18523,7 +18523,7 @@
       }
     ],
     "filterKeys": [],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
@@ -18578,7 +18578,7 @@
       }
     ],
     "filterKeys": [],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "bednetsCoverageHeatMapDistrictLLIN",
     "documentType": "_doc",
@@ -20277,7 +20277,7 @@
       }
     ],
     "filterKeys": [],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
@@ -20332,7 +20332,7 @@
       }
     ],
     "filterKeys": [],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "bednetsCoverageHeatMapDistrictBednetsICCD",
     "documentType": "_doc",
@@ -21004,7 +21004,7 @@
         "column": "Community"
       }
     ],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "complaintsByStatusSummaryLocalityBednetsICCD",
     "documentType": "_doc",
@@ -21073,7 +21073,7 @@
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Open\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.service.applicationStatus.keyword\":\"PENDING_ASSIGNMENT\"}}]}},\"aggs\":{\"Open Complaints\":{\"date_histogram\":{\"field\":\"Data.service.auditDetails.lastModifiedTime\",\"calendar_interval\":\"day\",\"min_doc_count\":1,\"format\":\"dd MMM yyyy\"},\"aggs\":{\"Open Complaints Count\":{\"value_count\":{\"field\":\"Data.service.auditDetails.lastModifiedTime\"}}}}}},\"Resolved\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.service.applicationStatus.keyword\":\"RESOLVED\"}}]}},\"aggs\":{\"Resolved Complaints\":{\"date_histogram\":{\"field\":\"Data.service.auditDetails.lastModifiedTime\",\"calendar_interval\":\"day\",\"min_doc_count\":1,\"format\":\"dd MMM yyyy\"},\"aggs\":{\"Resolved Complaints Count\":{\"value_count\":{\"field\":\"Data.service.auditDetails.lastModifiedTime\"}}}}}},\"Rejected\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.service.applicationStatus.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Rejected Complaints\":{\"date_histogram\":{\"field\":\"Data.service.auditDetails.lastModifiedTime\",\"calendar_interval\":\"day\",\"min_doc_count\":1,\"format\":\"dd MMM yyyy\"},\"aggs\":{\"Rejected Complaints Count\":{\"value_count\":{\"field\":\"Data.service.auditDetails.lastModifiedTime\"}}}}}}}}"
       }
     ],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
@@ -21225,7 +21225,7 @@
         "column": "Country"
       }
     ],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "complaintsListBednetsICCD",
     "documentType": "_doc",
@@ -21555,7 +21555,7 @@
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Complaints Id\":{\"terms\":{\"field\":\"Data.service.serviceRequestId.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Created Time\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"def createdTime = doc['Data.service.auditDetails.createdTime'].value; def dateFormat = new SimpleDateFormat('dd MMM yyyy hh mm ss'); return dateFormat.format(new Date(createdTime));\"},\"size\":1,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Complaint Status\":{\"terms\":{\"field\":\"Data.service.applicationStatus.keyword\",\"size\":1},\"aggs\":{\"Complaint Type\":{\"terms\":{\"field\":\"Data.service.serviceCode.keyword\",\"size\":1},\"aggs\":{\"Administrative Area\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"def bh = params['_source']['Data']['boundaryHierarchy']; if (bh != null && bh.containsKey('country')) { return bh['country']; } return 'N/A';\"},\"size\":1},\"aggs\":{\"Complainant Phone Number\":{\"terms\":{\"field\":\"Data.service.user.mobileNumber.keyword\",\"size\":1},\"aggs\":{\"Supervisor Contact Number\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"def additionalDetail = params['_source']['Data']['service']['additionalDetail']; if (additionalDetail != null && additionalDetail.contains('supervisorContactNumber')) { int start = additionalDetail.indexOf('supervisorContactNumber:'); if (start != -1) { String val = additionalDetail.substring(start + 25).trim(); int end = val.indexOf(','); if (end != -1) { val = val.substring(0,end).trim(); } return val; } } return 'N/A';\"},\"size\":1},\"aggs\":{\"Details\":{\"terms\":{\"field\":\"Data.service.description.keyword\",\"size\":1}}}}}}}}}}}}}}}}}}"
       }
     ],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
@@ -21796,7 +21796,7 @@
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Project Start and End Dates\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"Start Date\":{\"min\":{\"field\":\"Data.startDate\"}},\"End Date\":{\"max\":{\"field\":\"Data.endDate\"}}}}}}}}"
       }
     ],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
@@ -22374,7 +22374,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"locationKey\":\"Data.boundaryHierarchy.state.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}},\"aggs\":{\"Total Households\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":1000},\"aggs\":{\"Household Covered Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}},\"aggs\":{\"Total Households\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":1000},\"aggs\":{\"Household Covered Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       }
     ],
     "filterKeys": [],
@@ -23003,7 +23003,7 @@
         "aggrQuery": "{\"size\":0,\"aggs\":{\"Open Filter\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.service.applicationStatus.keyword\":\"PENDING_ASSIGNMENT\"}}]}},\"aggs\":{\"Complaints Id\":{\"terms\":{\"field\":\"Data.service.serviceRequestId.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Created Time\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"def createdTime = doc['Data.service.auditDetails.createdTime'].value; def dateFormat = new SimpleDateFormat('dd MMM yyyy hh mm ss'); return dateFormat.format(new Date(createdTime));\"},\"size\":1,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Complaint Type\":{\"terms\":{\"field\":\"Data.service.serviceCode.keyword\",\"size\":1},\"aggs\":{\"Administrative Area\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"def bh = params['_source']['Data']['boundaryHierarchy']; if (bh != null && bh.containsKey('country')) { return bh['country']; } return 'N/A';\"},\"size\":1},\"aggs\":{\"Complainant Phone Number\":{\"terms\":{\"field\":\"Data.service.user.mobileNumber.keyword\",\"size\":1},\"aggs\":{\"Supervisor Contact Number\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"def additionalDetail = params['_source']['Data']['service']['additionalDetail']; if (additionalDetail != null && additionalDetail.contains('supervisorContactNumber')) { int start = additionalDetail.indexOf('supervisorContactNumber:'); if (start != -1) { String val = additionalDetail.substring(start + 25).trim(); int end = val.indexOf(','); if (end != -1) { val = val.substring(0,end).trim(); } return val; } } return 'N/A';\"},\"size\":1},\"aggs\":{\"Details\":{\"terms\":{\"field\":\"Data.service.description.keyword\",\"size\":1}}}}}}}}}}}}}}}}}}"
       }
     ],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
@@ -25559,7 +25559,7 @@
         "column": "Community"
       }
     ],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "summaryByVillageBednetsICCD",
     "documentType": "_doc",
@@ -25805,7 +25805,7 @@
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.deliveryComments.keyword\":\"Orientação nacional\"}}]}},\"aggs\":{\"household count\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.community.keyword\"},\"aggs\":{\"Household Relocated delivery count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       }
     ],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
@@ -27078,7 +27078,7 @@
       }
     ],
     "filterKeys": [],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
@@ -27183,7 +27183,7 @@
       }
     ],
     "filterKeys": [],
-    "chartType": "table",
+    "chartType": "xtable",
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
