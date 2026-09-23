@@ -27718,9 +27718,9 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.household.clientAuditDetails.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\"}",
-        "indexName": "bo-household-index-v1",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\"}",
+        "indexName": "bo-project-task-index-v1",
         "key": "households",
         "transformData": "rawDocsTermsAggs",
         "bucketsPath": "grid.buckets",
@@ -27734,13 +27734,13 @@
           "bboxBotLat": -90,
           "bboxBotLon": 180
         },
-        "aggrQuery": "{\"size\": ${hitsCap}, \"track_total_hits\": ${trackTotalHitsUpTo}, \"_source\": [\"Data.geoPoint\", \"Data.household.id\", \"Data.nameOfUser\", \"Data.household.memberCount\"], \"query\": {\"bool\": {\"must\": [{\"exists\": {\"field\": \"Data.geoPoint\"}}, {\"geo_bounding_box\": {\"Data.geoPoint\": {\"top_left\": {\"lat\": ${bboxTopLat}, \"lon\": ${bboxTopLon}}, \"bottom_right\": {\"lat\": ${bboxBotLat}, \"lon\": ${bboxBotLon}}}}}]}}, \"aggs\": {\"grid\": {\"geotile_grid\": {\"field\": \"Data.geoPoint\", \"precision\": ${precision}, \"size\": ${bucketCap}}, \"aggs\": {\"centroid\": {\"geo_centroid\": {\"field\": \"Data.geoPoint\"}}, \"members\": {\"sum\": {\"field\": \"Data.household.memberCount\"}}}}}}",
+        "aggrQuery": "{\"size\": ${hitsCap}, \"track_total_hits\": ${trackTotalHitsUpTo}, \"_source\": [\"Data.geoPoint\", \"Data.taskId\", \"Data.nameOfUser\", \"Data.memberCount\"], \"query\": {\"bool\": {\"must\": [{\"exists\": {\"field\": \"Data.geoPoint\"}}, {\"geo_bounding_box\": {\"Data.geoPoint\": {\"top_left\": {\"lat\": ${bboxTopLat}, \"lon\": ${bboxTopLon}}, \"bottom_right\": {\"lat\": ${bboxBotLat}, \"lon\": ${bboxBotLon}}}}}]}}, \"aggs\": {\"grid\": {\"geotile_grid\": {\"field\": \"Data.geoPoint\", \"precision\": ${precision}, \"size\": ${bucketCap}}, \"aggs\": {\"centroid\": {\"geo_centroid\": {\"field\": \"Data.geoPoint\"}}, \"members\": {\"sum\": {\"field\": \"Data.memberCount\"}}}}}}",
         "select": {
-          "id": "Data.household.id",
+          "id": "Data.taskId",
           "lat": "Data.geoPoint[1]",
           "lon": "Data.geoPoint[0]",
           "name": "Data.nameOfUser",
-          "m": "Data.household.memberCount"
+          "m": "Data.memberCount"
         },
         "selectClusters": {
           "k": "key",

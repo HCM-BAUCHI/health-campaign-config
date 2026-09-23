@@ -3777,7 +3777,7 @@
               "id": 217,
               "name": "DSS_HEALTH_HOUSEHOLDS_COVERAGE_HEATMAP_PROVINCE",
               "label": "DSS_HEALTH_HOUSEHOLDS_COVERAGE_HEATMAP_PROVINCE",
-              "vizType": "chart",
+              "vizType": "leafletMap",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
@@ -3785,7 +3785,7 @@
                   "id": "householdsCoverageHeatMapProvinceBednetsICCD",
                   "name": "DSS_HEALTH_HOUSEHOLDS_COVERAGE_HEATMAP_PROVINCE",
                   "code": "",
-                  "chartType": "heatmap",
+                  "chartType": "leafletHeatMap",
                   "filter": "",
                   "headers": [],
                   "tabName": "HOUSEHOLD"
@@ -3794,7 +3794,7 @@
                   "id": "populationCoverageHeatMapProvinceBednetsICCD",
                   "name": "DSS_HEALTH_POPULATION_COVERAGE_HEATMAP_PROVINCE",
                   "code": "",
-                  "chartType": "heatmap",
+                  "chartType": "leafletHeatMap",
                   "filter": "",
                   "headers": [],
                   "tabName": "POPULATION"
@@ -3803,28 +3803,40 @@
                   "id": "bednetsCoverageHeatMapProvinceBednetsICCD",
                   "name": "DSS_HEALTH_BEDNETS_COVERAGE_HEATMAP_PROVINCE",
                   "code": "",
-                  "chartType": "heatmap",
+                  "chartType": "leafletHeatMap",
                   "filter": "",
                   "headers": [],
                   "tabName": "BEDNETS"
-                }
-              ]
-            },
-            {
-              "id": 218,
-              "name": "DSS_HEALTH_RD_HH_VISITED_LATLONG",
-              "label": "DSS_HEALTH_RD_HH_VISITED_LATLONG",
-              "vizType": "latlong",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
+                },
                 {
-                  "id": "householdsVisitedLatLongPointsBednetsICCD",
-                  "name": "DSS_HEALTH_RD_HH_VISITED_LATLONG",
+                  "id": "householdPointMap",
+                  "name": "DSS_HEALTH_HOUSEHOLD_POINT_MAP",
                   "code": "",
-                  "chartType": "points",
+                  "chartType": "leafletCoordinateMap",
                   "filter": "",
-                  "headers": []
+                  "headers": [],
+                  "tabName": "HOUSEHOLDS",
+                  "_styleComment": "Every key optional; each falls back independently. clusterColors takes a list (ramp, light -> dark) or a single colour string for a constant fill. Keep the steps on one hue: density is a magnitude, and unrelated hues would encode it as identity. The legend bar is generated from these same colours.",
+                  "style": {
+                    "clusterColors": ["#FFE9A8", "#FFD24D", "#FFA424", "#F76707", "#D9480F", "#A02C0A"],
+                    "pointColor": "#C84C0E",
+                    "clusterMinRadius": 5,
+                    "clusterMaxRadius": 22,
+                    "pointRadius": 4,
+                    "shape": "circle",
+                    "iconSize": 22
+                  },
+                  "_comment": "scaling is indexed by boundary drill depth; the last entry repeats for anything deeper, so adding hierarchy levels needs no code change. No level is named anywhere.",
+                  "_modeComment": "viewport = precision AND bbox follow the screen, so zooming re-clusters and panning brings in new data. This is the only mode where the document total is scoped to what is on screen, which is what lets individual coordinates appear once the user has zoomed into a sparse enough area. The alternatives keep a global bbox: boundary = fixed precision, one request for the whole boundary; zoom = precision follows zoom but pan is not an input. Both are cheaper, but in both the total is boundary-wide, so they can never flip to individual coordinates.",
+                  "_hitsCapComment": "hitsCap is the count below which individual coordinates are drawn instead of clusters; 0 or omitted means clusters only. Note the total is counted over the PADDED bbox, not the visible screen, so a larger bboxPadding delays the switch to individual coordinates.",
+                  "_precisionComment": "precision = round(leafletZoom) + zoomOffset, clamped to maxPrecision. In viewport mode precision and bbox scale together, so the bucket count per screen stays roughly constant at any zoom - maxPrecision is only an absolute floor on cell size.",
+                  "_paddingComment": "bboxPadding fetches a region larger than the screen, in each dimension. 2.0 = 4x the visible area, so the user can pan roughly half a screen in any direction before anything is refetched. Higher = fewer requests while panning, but a larger total and so a later switch to individual coordinates.",
+                  "scaling": [
+                    { "mode": "viewport", "zoomOffset": 3, "maxPrecision": 22, "hitsCap": 1000, "bboxPadding": 2.0 },
+                    { "mode": "viewport", "zoomOffset": 3, "maxPrecision": 22, "hitsCap": 1500, "bboxPadding": 2.0 },
+                    { "mode": "viewport", "zoomOffset": 3, "maxPrecision": 22, "hitsCap": 2000, "bboxPadding": 2.0 },
+                    { "mode": "viewport", "zoomOffset": 3, "maxPrecision": 22, "hitsCap": 2000, "bboxPadding": 1.5 }
+                  ]
                 }
               ]
             }
