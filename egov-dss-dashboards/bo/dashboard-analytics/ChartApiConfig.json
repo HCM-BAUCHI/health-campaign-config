@@ -20685,10 +20685,6 @@
       }
     ],
     "chartType": "metric",
-    "postAggregationTheory": "repsonseToDifferenceOfDates",
-    "isCappedByCampaignPeriod": [
-      "Overall Target"
-    ],
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
@@ -22465,10 +22461,6 @@
     "aggregationPaths": [
       "Overall Target"
     ],
-    "postAggregationTheory": "repsonseToDifferenceOfDates",
-    "isCappedByCampaignPeriod": [
-      "Overall Target"
-    ],
     "insight": {},
     "_comment": ""
   },
@@ -23344,10 +23336,6 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Overall Target"
-    ],
-    "postAggregationTheory": "repsonseToDifferenceOfDates",
-    "isCappedByCampaignPeriod": [
       "Overall Target"
     ],
     "insight": {},
