@@ -4571,8 +4571,8 @@
                   "id": "teamPerformanceSummary",
                   "name": "DASHBOARD_TEAM_PERFORMNACE",
                   "code": "",
-                  "moduleName": "iccd-maps",
-                  "pageName": "oy-team-performance-summary",
+                  "moduleName": "llin",
+                  "pageName": "itn-user-report",
                   "chartType": "kibanaComponent",
                   "filter": "",
                   "headers": []
