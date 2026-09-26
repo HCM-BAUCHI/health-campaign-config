@@ -4434,6 +4434,82 @@
             }
           ]
         },
+
+        {
+          "row": 1,
+          "name": "DSS_HEALTH_TEAM_PERFORMANCE",
+          "vizArray": [
+            {
+              "id": 780,
+              "name": "DSS_HEALTH_USER_SYNC_OVERVIEW",
+              "label": "DSS_HEALTH_USER_SYNC_OVERVIEW",
+              "vizType": "bannercard",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncSummaryProvinceICCD",
+                  "name": "DSS_HEALTH_USER_SYNC_SUMMARY_ICCD",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_HEALTH_TEAM_PERFORMANCE",
+          "vizArray": [
+            {
+              "id": 781,
+              "name": "AVERAGE_NO_OF_POPULATION_ADMINISTERED",
+              "label": "AVERAGE_NO_OF_POPULATION_ADMINISTERED",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "averageNumberOfPopulationAdministeredDistrictICCD",
+                  "name": "AVERAGE_NO_OF_POPULATION_ADMINISTERED_ICCD",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "DSS_HEALTH_TEAM_PERFORMANCE",
+          "vizArray": [
+            {
+              "id": 761,
+              "name": "DSS_HEALTH_KIBANA_SCREEN",
+              "label": "DSS_HEALTH_KIBANA_SCREEN",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "teamPerformanceSummary",
+                  "name": "DASHBOARD_TEAM_PERFORMNACE",
+                  "code": "",
+                  "moduleName": "iccd-maps",
+                  "pageName": "oy-team-performance-summary",
+                  "chartType": "kibanaComponent",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        
         {
           "row": 1,
           "name": "DSS_HEALTH_SUPERVISION",
