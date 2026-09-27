@@ -25103,6 +25103,20 @@
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.status.keyword\":\"CLOSED_HOUSEHOLD\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Bednets Total\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Household Closed Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Household Target\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Total Household Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Total Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -25124,97 +25138,92 @@
       "Population Covered",
       "Total ITN Target",
       "Total ITN Distributed",
-      "Household Closed Count"
+      "Household Closed Count",
+      "Total Household Target",
+      "Total Population Target"
     ],
     "hideInsights": true,
     "hideHeaderDenomination": true,
     "computedFields": [
       {
         "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Households Registered"
-        ],
+        "fields": ["Total Households Registered"],
         "newField": "Household Registered"
       },
       {
         "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["Total Household Target"],
+        "newField": "Household Targeted",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
-        "fields": [
-          "Households Covered",
-          "Total Households Registered"
-        ],
+        "fields": ["Total Households Registered", "Total Household Target"],
         "newField": "Household Coverage %",
-        "_comments": "Household Coverage % = (Households Covered / Total Households Registered) * 100"
+        "_comments": "Household Coverage % = (Households Registered / Target Households) * 100 — per client formula"
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Population Registered"
-        ],
+        "fields": ["Total Population Registered"],
         "newField": "Population Registered",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Population covered"
-        ],
+        "fields": ["Total Population Target"],
+        "newField": "Population Targeted",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["Total Population covered"],
         "newField": "Population Covered",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
-        "fields": [
-          "Population Covered",
-          "Total Population Registered"
-        ],
+        "fields": ["Total Population Registered", "Total Population Target"],
         "newField": "Population Coverage %",
-        "_comments": "Population Covered / Population Registered  * 100"
+        "_comments": "Population Coverage % = (Population Registered / Target Population) * 100 — per client formula"
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total ITN Distributed"
-        ],
+        "fields": ["Total ITN Distributed"],
         "newField": "ITN Distributed",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total ITN Target"
-        ],
+        "fields": ["Total ITN Target"],
         "newField": "ITN Target",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
-        "fields": [
-          "Total ITN Distributed",
-          "Total ITN Target"
-        ],
+        "fields": ["Total ITN Distributed", "Total ITN Target"],
         "newField": "ITN Coverage %",
         "_comments": "ITN Distributed / ITN Target"
       },
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
-        "fields": [
-          "Household Closed Count"
-        ],
+        "fields": ["Household Closed Count"],
         "newField": "Non-Delivery (HH Closed)",
         "_comments": ""
       }
     ],
     "insight": {},
     "sort": "sortKeyAsc",
-    "_comment": " ",
+    "_comment": "Household/Population Coverage % redefined to Registered/Target (client formula), replacing prior Delivered/Registered definition — added Household Targeted, Population Targeted columns",
     "kind": "drillDown"
   },
   "summaryByLocalityBednetsICCD": {
