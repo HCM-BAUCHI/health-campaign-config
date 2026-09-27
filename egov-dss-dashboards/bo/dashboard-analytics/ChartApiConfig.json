@@ -25138,15 +25138,6 @@
       },
       {
         "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Households Covered"
-        ],
-        "newField": "Household Coverage",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
         "fields": [
           "Households Covered",
