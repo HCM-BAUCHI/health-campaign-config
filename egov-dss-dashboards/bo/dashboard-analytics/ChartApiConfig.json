@@ -25316,7 +25316,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "mdtSummaryBednetsICCD",
+    "drillChart": "deliveryPerformanceByMdtBednetsICCD",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "distributionHub",
@@ -25478,56 +25478,118 @@
     "hideHeaderDenomination": true,
     "_comment": " "
   },
- "mdtSummaryBednetsICCD": {
-    "chartName": "DSS_HEALTH_MDT_SUMMARY",
+  "deliveryPerformanceByMdtBednetsICCD": {
+    "kind": "drillDown",
+    "chartName": "DSS_HEALTH_DELIVERY_PERFORMANCE_BY_MDT",
     "queries": [
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"username\":\"Data.userName.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "bo-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactionType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.status.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Issued\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"size\":10000,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.userName.keyword\"},\"aggs\":{\"Households distributed count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"username\":\"Data.userName.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "bo-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactionType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.status.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Returned\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"size\":10000,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.userName.keyword\"},\"aggs\":{\"Bednets distributed count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"size\":10000,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.userName.keyword\"},\"aggs\":{\"Population covered count\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.status.keyword\":\"CLOSED_HOUSEHOLD\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"size\":10000,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.userName.keyword\"},\"aggs\":{\"Household Closed delivery count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.deliveryComments.keyword\":\"Insufici\u00eancia de redes\"}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"size\":10000,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.userName.keyword\"},\"aggs\":{\"Household Rejected delivery count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.deliveryComments.keyword\":\"Orienta\u00e7\u00e3o nacional\"}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"size\":10000,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.userName.keyword\"},\"aggs\":{\"Household Relocated delivery count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       }
     ],
+    "action": "",
     "chartType": "xtable",
     "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
     "plotLabel": "MDT",
     "filterKeys": [
       {
-        "key": "username",
-        "column": "Username"
+        "key": "userName",
+        "column": "MDT"
       }
     ],
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "excludedColumns": [],
+    "showFooter": true,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "excludedColumns": [
+      "Households distributed count",
+      "Bednets distributed count",
+      "Population covered count",
+      "Household Closed delivery count",
+      "Household Rejected delivery count",
+      "Household Relocated delivery count"
+    ],
+    "excludedBucketKeys": [],
     "computedFields": [
       {
-        "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
-        "fields": [
-          "Issued"
-        ],
-        "newField": "Issued"
+        "fields": ["Households distributed count"],
+        "newField": "Households Delivered",
+        "_comments": ""
       },
       {
-        "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
-        "fields": [
-          "Returned"
-        ],
-        "newField": "Returned"
+        "fields": ["Bednets distributed count"],
+        "newField": "Bednets Distributed",
+        "_comments": ""
+      },
+      {
+        "actionName": "AdditiveComputedField",
+        "fields": ["Population covered count"],
+        "newField": "Population Covered",
+        "_comments": ""
+      },
+      {
+        "actionName": "AdditiveComputedField",
+        "fields": ["Household Closed delivery count"],
+        "newField": "Non Delivery HH Closed",
+        "_comments": ""
+      },
+      {
+        "actionName": "AdditiveComputedField",
+        "fields": ["Household Rejected delivery count"],
+        "newField": "Non Delivery HH Rejected",
+        "_comments": ""
+      },
+      {
+        "actionName": "AdditiveComputedField",
+        "fields": ["Household Relocated delivery count"],
+        "newField": "Non Delivery HH Relocated",
+        "_comments": ""
       }
     ],
-    "kind": "drillDown"
+    "insight": {},
+    "sort": "sortKeyAsc",
+    "_comment": "MDT level drilldown - delivery performance, replaces stock-index inventory chart"
   },
   "summaryByVillageBednetsICCD": {
     "kind": "drillDown",
