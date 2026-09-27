@@ -25149,8 +25149,8 @@
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
         "fields": [
-          "Total Households Registered",
-          "Households Covered"
+          "Households Covered",
+          "Total Households Registered"
         ],
         "newField": "Household Coverage %",
         "_comments": "Household Coverage % = (Households Covered / Total Households Registered) * 100"
@@ -25181,7 +25181,7 @@
           "Total Population Registered"
         ],
         "newField": "Population Coverage %",
-        "_comments": "Population Covered / Population Registered"
+        "_comments": "Population Covered / Population Registered  * 100"
       },
       {
         "postAggregationTheory": "",
