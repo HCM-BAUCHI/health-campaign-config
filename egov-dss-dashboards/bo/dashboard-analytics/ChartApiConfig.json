@@ -25316,7 +25316,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "mdtSummaryBednetsICCD",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "distributionHub",
@@ -25477,6 +25477,57 @@
     "hideInsights": true,
     "hideHeaderDenomination": true,
     "_comment": " "
+  },
+ "mdtSummaryBednetsICCD": {
+    "chartName": "DSS_HEALTH_MDT_SUMMARY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"username\":\"Data.userName.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactionType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.status.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Issued\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"username\":\"Data.userName.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactionType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.status.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Returned\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "plotLabel": "MDT",
+    "filterKeys": [
+      {
+        "key": "username",
+        "column": "Username"
+      }
+    ],
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "excludedColumns": [],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Issued"
+        ],
+        "newField": "Issued"
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Returned"
+        ],
+        "newField": "Returned"
+      }
+    ],
+    "kind": "drillDown"
   },
   "summaryByVillageBednetsICCD": {
     "kind": "drillDown",
