@@ -1,4 +1,3 @@
-
 serviceMaps:
   serviceName: dst-report-automation
   mappings:
@@ -11,7 +10,7 @@ serviceMaps:
             INSERT INTO dst_report_metadata
             (event_id, tenant_id, state_name, campaign_identifier, cycle_index,
              deployment_group, mode, day, slot_date, slot_time, dag_run_id,
-             status, step_failed, drive_folder_url, timestamp_ms)
+             status, step_failed, delivered_to, timestamp_ms)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT (event_id) DO NOTHING;
           basePath: $
@@ -29,5 +28,5 @@ serviceMaps:
             - jsonPath: $.dag_run_id
             - jsonPath: $.status
             - jsonPath: $.step_failed
-            - jsonPath: $.drive_folder_url
+            - jsonPath: $.delivered_to
             - jsonPath: $.timestamp_ms
