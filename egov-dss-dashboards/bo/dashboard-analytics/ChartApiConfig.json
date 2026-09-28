@@ -27426,12 +27426,12 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.auditDetails.createdTime",
-        "requestQueryMap": "{\"userId\": \"Data.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "bo-transformed-errors-index-v1",
+        "dateRefField": "@timestamp",
+        "requestQueryMap": "{}",
+        "indexName": "bo-transformer-error-index-v1",
         "transformData": "linearAggregation",
         "transformKey": "failedRecordCountTransformer",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Error Records\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Error Records\":{\"value_count\":{\"field\":\"id.keyword\"}}}}"
       },
       {
         "module": "COMMON",
@@ -27531,7 +27531,7 @@
         "indexName": "bo-project-task-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "taskTransformer",
-        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[],\"must_not\":[{\"term\":{\"Data.administrationStatus.keywor\":{\"value\":\"DELIVERED\"}}}]}},\"_source\":[\"Data.geoPoint\",\"Data.taskId\",\"Data.productName\",\"Data.administrationStatus\",\"Data.@timestamp\",\"Data.quantity\",\"Data.latitude\",\"Data.longitude\",\"Data.boundaryHierarchy.subHills\",\"Data.additionalDetails.cycleIndex.keyword\"]}"
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[],\"must_not\":[{\"term\":{\"Data.administrationStatus.keyword\":{\"value\":\"DELIVERED\"}}}]}},\"_source\":[\"Data.geoPoint\",\"Data.taskId\",\"Data.productName\",\"Data.administrationStatus\",\"Data.@timestamp\",\"Data.quantity\",\"Data.latitude\",\"Data.longitude\",\"Data.boundaryHierarchy.subHills\",\"Data.additionalDetails.cycleIndex\"]}"
       },
       {
         "module": "COMMON",
@@ -27540,7 +27540,7 @@
         "indexName": "bo-stock-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "stockTransformer",
-        "aggrQuery": "{\"size\":100,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.id\",\"Data.productName\",\"Data.eventType\",\"Data.reason\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.@timestamp\",\"Data.physicalCount\",\"Data.additionalDetails.lat\",\"Data.additionalDetails.lng\"]}"
+        "aggrQuery": "{\"size\":100,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.id\",\"Data.productName\",\"Data.eventType\",\"Data.reason\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.@timestamp\",\"Data.physicalCount\",\"Data.additionalDetails.lat\",\"Data.additionalDetails.lng\",\"Data.userName\"]}"
       },
       {
         "module": "COMMON",
@@ -27549,16 +27549,7 @@
         "indexName": "bo-transformer-pgr-services",
         "transformData": "rawDocuments",
         "transformKey": "complaintsTransformer",
-        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.service.serviceRequestId\",\"Data.service.serviceCode\",\"Data.service.description\",\"Data.service.applicationStatus\",\"Data.@timestamp\"]}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.auditDetails.createdTime",
-        "requestQueryMap": "{\"userId\": \"Data.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "bo-transformed-errors-index-v1",
-        "transformData": "rawDocuments",
-        "transformKey": "errorTransformer",
-        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.id\",\"Data.errorCategory\",\"Data.@timestamp\"]}"
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.service.serviceRequestId\",\"Data.service.serviceCode\",\"Data.service.description\",\"Data.service.applicationStatus\",\"Data.@timestamp\",\"Data.userName\"]}"
       }
     ],
     "chartType": "rawResponse",
@@ -27571,7 +27562,8 @@
             "actionType": "'Delivery'",
             "detail": "Data.administrationStatus === 'ADMINISTRATION_SUCCESS' ? `Delivered ${Data.quantity} of ${Data.productName}` : Data.administrationStatus",
             "gps": "Data.geoPoint[1] && Data.geoPoint[0]? `${Data.geoPoint[1]}, ${Data.geoPoint[0]}` : '-'",
-            "outcome": "Data.administrationStatus === 'ADMINISTRATION_SUCCESS' ? 'SUCCESS': Data.administrationStatus"
+            "outcome": "Data.administrationStatus === 'ADMINISTRATION_SUCCESS' ? 'SUCCESS': Data.administrationStatus",
+            "userId": "Data.userName"
           }
         ]
       },
@@ -27583,7 +27575,8 @@
             "actionType": "'Stock'",
             "detail": "Data.eventType === 'RECEIVED' && Data.reason === 'RETURNED' ? `${Data.facilityName} Got Return Stock of ${Data.physicalCount} ${Data.productName} from ${Data.transactingFacilityName}` : Data.eventType === 'RECEIVED' ? `${Data.facilityName} Received ${Data.physicalCount} ${Data.productName} from ${Data.transactingFacilityName}` : `${Data.facilityName} Dispatched ${Data.physicalCount} ${Data.productName} to ${Data.transactingFacilityName}`",
             "gps": "Data.additionalDetails.lat && Data.additionalDetails.lng ? `${Data.additionalDetails.lat}, ${Data.additionalDetails.lng}` : '-'",
-            "outcome": "'SUCCESS'"
+            "outcome": "'SUCCESS'",
+            "userId": "Data.userName"
           }
         ]
       },
@@ -27595,19 +27588,8 @@
             "actionType": "'Complaint'",
             "detail": "`Raised Complaint ${Data.service.serviceCode} which is in status ${Data.service.applicationStatus} with Description ${Data.service.description}`",
             "gps": "'-'",
-            "outcome": "'COMPLAINT'"
-          }
-        ]
-      },
-      "errorTransformer": {
-        "transformationMappings": [
-          {
-            "id": "Data.id",
-            "timestamp": "Data.@timestamp",
-            "actionType": "'Error Record'",
-            "detail": "Data.errorCategory",
-            "gps": "'-'",
-            "outcome": "'FAILED'"
+            "outcome": "'COMPLAINT'",
+            "userId": "Data.userName"
           }
         ]
       }
@@ -27636,18 +27618,6 @@
           "mergedUsersRecordTaskStockSummary",
           "complaintsTransformer"
         ]
-      },
-      {
-        "mergeKey": "mergedUsersRecordSummary",
-        "baseDataset": "mergedUsersRecordSummary1",
-        "dataset": "errorTransformer",
-        "baseKey": "userId",
-        "joinKey": "userId",
-        "joinType": "concat",
-        "clearDatasets": [
-          "mergedUsersRecordSummary1",
-          "errorTransformer"
-        ]
       }
     ],
     "isCumulative": false,
@@ -27665,6 +27635,6 @@
       "mergedUsersRecordSummary"
     ],
     "insight": {},
-    "_comment": " "
+    "_comment": "User activity is joined using the source Data.userName carried as userId. Transformer-error records are excluded because bo-transformer-error-index-v1 does not expose mapped user/campaign/boundary fields; those values are embedded in payload."
   }
 }
