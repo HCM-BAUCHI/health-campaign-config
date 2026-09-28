@@ -27300,17 +27300,18 @@
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
         "indexName": "bo-project-staff-index-v1",
         "key": "staffDocuments",
-        "transformData": "rawDocuments",
-        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.userId\",\"Data.userName\",\"Data.role\",\"Data.boundaryHierarchyCode.lga\" ,\"Data.boundaryHierarchyCode.state\" ,\"Data.boundaryHierarchy.lga\", \"Data.boundaryHierarchy.state\", \"Data.nameOfUser\"]}",
+        "transformData": "termsAggregation",
+        "bucketsPath": "Username.buckets",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[]}},\"aggs\":{\"Username\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":20000},\"aggs\":{\"LatestDoc\":{\"top_hits\":{\"size\":1,\"sort\":[{\"Data.createdTime\":{\"order\":\"desc\"}}],\"_source\":{\"includes\":[\"Data.userId\",\"Data.userName\",\"Data.nameOfUser\",\"Data.role\",\"Data.boundaryHierarchy.state\",\"Data.boundaryHierarchy.lga\",\"Data.boundaryHierarchyCode.state\",\"Data.boundaryHierarchyCode.lga\"]}}}}}}}",
         "select": {
-          "userId": "Data.userId",
-          "userName": "Data.userName",
-          "nameOfUser": "Data.nameOfUser",
-          "role": "Data.role",
-          "state": "Data.boundaryHierarchy.state",
-          "lga": "Data.boundaryHierarchy.lga",
-          "provinceCode": "Data.boundaryHierarchyCode.state",
-          "districtCode": "Data.boundaryHierarchyCode.lga"
+          "userId": "LatestDoc.hits.hits[0]._source.Data.userId",
+          "userName": "key",
+          "nameOfUser": "LatestDoc.hits.hits[0]._source.Data.nameOfUser",
+          "role": "LatestDoc.hits.hits[0]._source.Data.role",
+          "state": "LatestDoc.hits.hits[0]._source.Data.boundaryHierarchy.state",
+          "lga": "LatestDoc.hits.hits[0]._source.Data.boundaryHierarchy.lga",
+          "provinceCode": "LatestDoc.hits.hits[0]._source.Data.boundaryHierarchyCode.state",
+          "districtCode": "LatestDoc.hits.hits[0]._source.Data.boundaryHierarchyCode.lga"
         }
       },
       {
@@ -27321,10 +27322,10 @@
         "key": "userSyncDocuments",
         "transformData": "termsAggregation",
         "bucketsPath": "Username.buckets",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[]}},\"aggs\":{\"Username\":{\"terms\":{\"field\":\"Data.syncedUserId.keyword\",\"size\":10000},\"aggs\":{\"LatestSyncedTime\":{\"max\":{\"field\":\"Data.syncedTimeStamp\"}},\"RecordTotal\":{\"value_count\":{\"field\":\"Data.syncedUserName.keyword\"}},\"Last3Hours\":{\"filter\":{\"range\":{\"Data.syncedTimeStamp\":{\"gte\":\"now-3h\",\"lte\":\"now\"}}}},\"LatestDoc\":{\"top_hits\":{\"size\":1,\"sort\":[{\"Data.syncedTimeStamp\":{\"order\":\"desc\"}}],\"_source\":{\"includes\":[\"Data.syncedUserId\",\"Data.syncedUserName\",\"Data.@timestamp\",\"Data.boundaryHierarchy.lga\",\"Data.boundaryHierarchy.state\",\"Data.role\",\"Data.syncedTimeStamp\"]}}}}}}}",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[]}},\"aggs\":{\"Username\":{\"terms\":{\"field\":\"Data.syncedUserName.keyword\",\"size\":20000},\"aggs\":{\"LatestSyncedTime\":{\"max\":{\"field\":\"Data.syncedTimeStamp\"}},\"RecordTotal\":{\"value_count\":{\"field\":\"Data.syncedUserName.keyword\"}},\"Last3Hours\":{\"filter\":{\"range\":{\"Data.syncedTimeStamp\":{\"gte\":\"now-3h\",\"lte\":\"now\"}}}},\"LatestDoc\":{\"top_hits\":{\"size\":1,\"sort\":[{\"Data.syncedTimeStamp\":{\"order\":\"desc\"}}],\"_source\":{\"includes\":[\"Data.syncedUserId\",\"Data.syncedUserName\",\"Data.boundaryHierarchy.lga\",\"Data.boundaryHierarchy.state\",\"Data.role\",\"Data.syncedTimeStamp\"]}}}}}}}",
         "select": {
-          "userId": "key",
-          "userName": "LatestDoc.hits.hits[0]._source.Data.syncedUserName",
+          "userId": "LatestDoc.hits.hits[0]._source.Data.syncedUserId",
+          "userName": "key",
           "role": "LatestDoc.hits.hits[0]._source.Data.role",
           "state": "LatestDoc.hits.hits[0]._source.Data.boundaryHierarchy.state",
           "lga": "LatestDoc.hits.hits[0]._source.Data.boundaryHierarchy.lga",
@@ -27344,25 +27345,21 @@
         "baseKey": "userName",
         "joinKey": "userName",
         "joinType": "full",
-        "clearDatasets2": [],
-        "clearDatasets": [
-          "staffDocuments",
-          "userSyncDocuments"
-        ],
+        "clearDatasets": ["staffDocuments", "userSyncDocuments"],
         "outputMappings": [
           {
             "userId": "staffDocuments.userId ? staffDocuments.userId : userSyncDocuments.userId",
             "userName": "staffDocuments.userName ? staffDocuments.userName : userSyncDocuments.userName",
-            "nameOfUser": "staffDocuments.nameOfUser ? staffDocuments.nameOfUser : userSyncDocuments.nameOfUser",
-            "role": "staffDocuments.role ? staffDocuments.role: userSyncDocuments.role",
-            "state": "staffDocuments.state ? staffDocuments.state: userSyncDocuments.state",
+            "nameOfUser": "staffDocuments.nameOfUser ? staffDocuments.nameOfUser : userSyncDocuments.userName",
+            "role": "staffDocuments.role ? staffDocuments.role : userSyncDocuments.role",
+            "state": "staffDocuments.state ? staffDocuments.state : userSyncDocuments.state",
             "lga": "staffDocuments.lga ? staffDocuments.lga : userSyncDocuments.lga",
             "provinceCode": "staffDocuments.provinceCode",
             "districtCode": "staffDocuments.districtCode",
-            "totalRecords": "userSyncDocuments.totalRecords",
+            "totalRecords": "userSyncDocuments.totalRecords ? userSyncDocuments.totalRecords : 0",
             "latestSyncTime": "userSyncDocuments.latestSyncTime",
             "active": "userSyncDocuments.active ? userSyncDocuments.active : 'INACTIVE'",
-            "fullLocation": "concat(staffDocuments.state ? staffDocuments.state: userSyncDocuments.state, ' - ', staffDocuments.lga ? staffDocuments.lga : userSyncDocuments.lga)"
+            "fullLocation": "concat(staffDocuments.state ? staffDocuments.state : userSyncDocuments.state, ' - ', staffDocuments.lga ? staffDocuments.lga : userSyncDocuments.lga)"
           }
         ]
       }
@@ -27371,16 +27368,10 @@
     "valueType": "number",
     "showLabel": true,
     "drillChart": "none",
-    "filterKeys": [
-      {
-        "key": "mergedUsersSummary"
-      }
-    ],
+    "filterKeys": [{ "key": "mergedUsersSummary" }],
     "documentType": "_doc",
     "action": "",
-    "aggregationPaths": [
-      "mergedUsersSummary"
-    ],
+    "aggregationPaths": ["mergedUsersSummary"],
     "insight": {},
     "_comment": " "
   },
@@ -27444,48 +27435,12 @@
     ],
     "chartType": "rawResponse",
     "transform": {
-      "failedRecordCountTransformer": {
-        "transformationMappings": [
-          {
-            "failedRecordCount": "Error Records.value"
-          }
-        ]
-      },
-      "taskRecordCountTransformer": {
-        "transformationMappings": [
-          {
-            "taskRecordCount": "Task Records.value"
-          }
-        ]
-      },
-      "complaintsRecordCountTransformer": {
-        "transformationMappings": [
-          {
-            "complaintRecordCount": "Complaint Records.value"
-          }
-        ]
-      },
-      "stockRecordCountTransformer": {
-        "transformationMappings": [
-          {
-            "stockRecordCount": "Stock Records.value"
-          }
-        ]
-      },
-      "latestGpsTransformer": {
-        "transformationMappings": [
-          {
-            "latestGps": "LatestDoc.hits.hits[0]._source.Data.geoPoint"
-          }
-        ]
-      },
-      "lastSyncTimeTransformer": {
-        "transformationMappings": [
-          {
-            "lastSyncTime": "LastSyncTime.value_as_string"
-          }
-        ]
-      }
+      "failedRecordCountTransformer": { "transformationMappings": [{ "failedRecordCount": "Error Records.value" }] },
+      "taskRecordCountTransformer": { "transformationMappings": [{ "taskRecordCount": "Task Records.value" }] },
+      "complaintsRecordCountTransformer": { "transformationMappings": [{ "complaintRecordCount": "Complaint Records.value" }] },
+      "stockRecordCountTransformer": { "transformationMappings": [{ "stockRecordCount": "Stock Records.value" }] },
+      "latestGpsTransformer": { "transformationMappings": [{ "latestGps": "LatestDoc.hits.hits[0]._source.Data.geoPoint" }] },
+      "lastSyncTimeTransformer": { "transformationMappings": [{ "lastSyncTime": "LastSyncTime.value_as_string" }] }
     },
     "merges": [
       {
@@ -27495,7 +27450,7 @@
         "datasets": [],
         "outputMappings": [
           {
-            "totalRecordsCount": "add(add(complaintRecordCount, add(taskRecordCount, stockRecordCount)))"
+            "totalRecordsCount": "add(complaintRecordCount ? complaintRecordCount : 0, add(taskRecordCount ? taskRecordCount : 0, stockRecordCount ? stockRecordCount : 0))"
           }
         ]
       }
@@ -27504,19 +27459,10 @@
     "valueType": "number",
     "showLabel": true,
     "drillChart": "none",
-    "filterKeys": [
-      {
-        "key": "Users"
-      }
-    ],
+    "filterKeys": [{ "key": "Users" }],
     "documentType": "_doc",
     "action": "",
-    "aggregationPaths": [
-      "totalRecordsCount",
-      "latestGps",
-      "failedRecordCount",
-      "lastSyncTime"
-    ],
+    "aggregationPaths": ["totalRecordsCount", "latestGps", "failedRecordCount", "lastSyncTime"],
     "insight": {},
     "_comment": " "
   },
@@ -27530,7 +27476,7 @@
         "indexName": "bo-project-task-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "taskTransformer",
-        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[],\"must_not\":[{\"term\":{\"Data.administrationStatus.keyword\":{\"value\":\"DELIVERED\"}}}]}},\"_source\":[\"Data.geoPoint\",\"Data.taskId\",\"Data.productName\",\"Data.administrationStatus\",\"Data.@timestamp\",\"Data.quantity\",\"Data.latitude\",\"Data.longitude\",\"Data.boundaryHierarchy.subHills\",\"Data.additionalDetails.cycleIndex\"]}"
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[],\"must_not\":[{\"term\":{\"Data.administrationStatus.keyword\":{\"value\":\"DELIVERED\"}}}]}},\"sort\":[{\"Data.@timestamp\":{\"order\":\"desc\"}}],\"_source\":[\"Data.geoPoint\",\"Data.taskId\",\"Data.productName\",\"Data.administrationStatus\",\"Data.@timestamp\",\"Data.quantity\",\"Data.latitude\",\"Data.longitude\",\"Data.userName\",\"Data.additionalDetails.cycleIndex\"]}"
       },
       {
         "module": "COMMON",
@@ -27539,7 +27485,7 @@
         "indexName": "bo-stock-index-v1",
         "transformData": "rawDocuments",
         "transformKey": "stockTransformer",
-        "aggrQuery": "{\"size\":100,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.id\",\"Data.productName\",\"Data.eventType\",\"Data.reason\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.@timestamp\",\"Data.physicalCount\",\"Data.additionalDetails.lat\",\"Data.additionalDetails.lng\",\"Data.userName\"]}"
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"sort\":[{\"Data.@timestamp\":{\"order\":\"desc\"}}],\"_source\":[\"Data.id\",\"Data.productName\",\"Data.eventType\",\"Data.reason\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.@timestamp\",\"Data.physicalCount\",\"Data.userName\"]}"
       },
       {
         "module": "COMMON",
@@ -27548,7 +27494,7 @@
         "indexName": "bo-transformer-pgr-services",
         "transformData": "rawDocuments",
         "transformKey": "complaintsTransformer",
-        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.service.serviceRequestId\",\"Data.service.serviceCode\",\"Data.service.description\",\"Data.service.applicationStatus\",\"Data.@timestamp\",\"Data.userName\"]}"
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"sort\":[{\"Data.@timestamp\":{\"order\":\"desc\"}}],\"_source\":[\"Data.service.serviceRequestId\",\"Data.service.serviceCode\",\"Data.service.description\",\"Data.service.applicationStatus\",\"Data.@timestamp\",\"Data.userName\"]}"
       }
     ],
     "chartType": "rawResponse",
@@ -27573,7 +27519,7 @@
             "timestamp": "Data.@timestamp",
             "actionType": "'Stock'",
             "detail": "Data.eventType === 'RECEIVED' && Data.reason === 'RETURNED' ? `${Data.facilityName} Got Return Stock of ${Data.physicalCount} ${Data.productName} from ${Data.transactingFacilityName}` : Data.eventType === 'RECEIVED' ? `${Data.facilityName} Received ${Data.physicalCount} ${Data.productName} from ${Data.transactingFacilityName}` : `${Data.facilityName} Dispatched ${Data.physicalCount} ${Data.productName} to ${Data.transactingFacilityName}`",
-            "gps": "Data.additionalDetails.lat && Data.additionalDetails.lng ? `${Data.additionalDetails.lat}, ${Data.additionalDetails.lng}` : '-'",
+            "gps": "'-'",
             "outcome": "'SUCCESS'",
             "userId": "Data.userName"
           }
@@ -27601,38 +27547,26 @@
         "baseKey": "userId",
         "joinKey": "userId",
         "joinType": "concat",
-        "clearDatasets": [
-          "taskTransformer",
-          "stockTransformer"
-        ]
+        "clearDatasets": ["taskTransformer", "stockTransformer"]
       },
       {
-        "mergeKey": "mergedUsersRecordSummary1",
+        "mergeKey": "mergedUsersRecordSummary",
         "baseDataset": "mergedUsersRecordTaskStockSummary",
         "dataset": "complaintsTransformer",
         "baseKey": "userId",
         "joinKey": "userId",
         "joinType": "concat",
-        "clearDatasets": [
-          "mergedUsersRecordTaskStockSummary",
-          "complaintsTransformer"
-        ]
+        "clearDatasets": ["mergedUsersRecordTaskStockSummary", "complaintsTransformer"]
       }
     ],
     "isCumulative": false,
     "valueType": "number",
     "showLabel": true,
     "drillChart": "none",
-    "filterKeys": [
-      {
-        "key": "mergedUsersRecordSummary"
-      }
-    ],
+    "filterKeys": [{ "key": "mergedUsersRecordSummary" }],
     "documentType": "_doc",
     "action": "",
-    "aggregationPaths": [
-      "mergedUsersRecordSummary"
-    ],
+    "aggregationPaths": ["mergedUsersRecordSummary"],
     "insight": {},
     "_comment": "User activity is joined using the source Data.userName carried as userId. Transformer-error records are excluded because bo-transformer-error-index-v1 does not expose mapped user/campaign/boundary fields; those values are embedded in payload."
   }
