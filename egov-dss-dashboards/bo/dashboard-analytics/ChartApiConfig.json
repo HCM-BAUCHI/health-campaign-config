@@ -19524,7 +19524,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Bednets Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"Overall Bednets target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.distributionHub.keyword\"}}]}},\"aggs\":{\"Bednets Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"Overall Bednets target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -19541,27 +19541,19 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "excludedColumns": [
-      "S.N.",
-      "Target for daterange"
-    ],
+    "excludedColumns": ["S.N.", "Target for daterange"],
     "computedFields": [
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
-        "fields": [
-          "Overall Bednets target"
-        ],
+        "fields": ["Overall Bednets target"],
         "newField": "Bednets Target",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
-        "fields": [
-          "total_count",
-          "Bednets Target"
-        ],
+        "fields": ["total_count", "Bednets Target"],
         "newField": "percentage_value",
         "_comments": ""
       }
@@ -21519,7 +21511,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Household Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"Overall Household target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.distributionHub.keyword\"}}]}},\"aggs\":{\"Household Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"Overall Household target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -21536,18 +21528,12 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "LGA",
-    "excludedColumns": [
-      "S.N.",
-      "Overall Household target"
-    ],
+    "excludedColumns": ["S.N.", "Overall Household target"],
     "computedFields": [
       {
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
-        "fields": [
-          "total_count",
-          "Overall Household target"
-        ],
+        "fields": ["total_count", "Overall Household target"],
         "newField": "percentage_value",
         "_comments": ""
       }
@@ -22668,7 +22654,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"Overall Population target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.distributionHub.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"Overall Population target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target for daterange\":{\"bucket_script\":{\"buckets_path\":{\"SUM\":\"target\"},\"script\":\"(params.SUM) * 365\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -22685,27 +22671,19 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "excludedColumns": [
-      "S.N.",
-      "Target for daterange"
-    ],
+    "excludedColumns": ["S.N.", "Target for daterange"],
     "computedFields": [
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
-        "fields": [
-          "Overall Population target"
-        ],
+        "fields": ["Overall Population target"],
         "newField": "Population Target",
         "_comments": ""
       },
       {
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
-        "fields": [
-          "total_count",
-          "Population Target"
-        ],
+        "fields": ["total_count", "Population Target"],
         "newField": "percentage_value",
         "_comments": ""
       }
@@ -26877,7 +26855,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\"}",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"country\": \"Data.boundaryHierarchy.country.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\", \"distributionHub\": \"Data.boundaryHierarchy.distributionHub.keyword\"}",
         "indexName": "bo-project-task-index-v1",
         "key": "households",
         "transformData": "rawDocsTermsAggs",
