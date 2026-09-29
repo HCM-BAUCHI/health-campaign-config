@@ -26892,12 +26892,12 @@
           "bboxBotLat": -90,
           "bboxBotLon": 180
         },
-        "aggrQuery": "{\"size\": ${hitsCap}, \"track_total_hits\": ${trackTotalHitsUpTo}, \"_source\": [\"Data.geoPoint\", \"Data.taskId\", \"Data.nameOfUser\", \"Data.memberCount\"], \"query\": {\"bool\": {\"must\": [{\"exists\": {\"field\": \"Data.geoPoint\"}}, {\"geo_bounding_box\": {\"Data.geoPoint\": {\"top_left\": {\"lat\": ${bboxTopLat}, \"lon\": ${bboxTopLon}}, \"bottom_right\": {\"lat\": ${bboxBotLat}, \"lon\": ${bboxBotLon}}}}}]}}, \"aggs\": {\"grid\": {\"geotile_grid\": {\"field\": \"Data.geoPoint\", \"precision\": ${precision}, \"size\": ${bucketCap}}, \"aggs\": {\"centroid\": {\"geo_centroid\": {\"field\": \"Data.geoPoint\"}}, \"members\": {\"sum\": {\"field\": \"Data.memberCount\"}}}}}}",
+        "aggrQuery": "{\"size\": ${hitsCap}, \"track_total_hits\": ${trackTotalHitsUpTo}, \"_source\": [\"Data.geoPoint\", \"Data.taskId\", \"Data.userName\", \"Data.memberCount\"], \"query\": {\"bool\": {\"must\": [{\"exists\": {\"field\": \"Data.geoPoint\"}}, {\"geo_bounding_box\": {\"Data.geoPoint\": {\"top_left\": {\"lat\": ${bboxTopLat}, \"lon\": ${bboxTopLon}}, \"bottom_right\": {\"lat\": ${bboxBotLat}, \"lon\": ${bboxBotLon}}}}}]}}, \"aggs\": {\"grid\": {\"geotile_grid\": {\"field\": \"Data.geoPoint\", \"precision\": ${precision}, \"size\": ${bucketCap}}, \"aggs\": {\"centroid\": {\"geo_centroid\": {\"field\": \"Data.geoPoint\"}}, \"members\": {\"sum\": {\"field\": \"Data.memberCount\"}}}}}}",
         "select": {
           "id": "Data.taskId",
           "lat": "Data.geoPoint[1]",
           "lon": "Data.geoPoint[0]",
-          "name": "Data.nameOfUser",
+          "name": "Data.userName",
           "m": "Data.memberCount"
         },
         "selectClusters": {
