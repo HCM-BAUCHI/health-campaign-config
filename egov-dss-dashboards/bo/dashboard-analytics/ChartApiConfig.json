@@ -27556,7 +27556,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\"}",
         "indexName": "bo-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"LGA\":{\"terms\":{\"size\":1000,\"order\":{\"_key\":\"asc\"},\"script\":{\"source\":\"if (doc['Data.facilityType.keyword'].size() > 0 && doc['Data.facilityType.keyword'].value == 'Warehouse' && doc['Data.transactingFacilityType.keyword'].size() > 0 && doc['Data.transactingFacilityType.keyword'].value == 'LGA Facility' && doc['Data.additionalDetails.stockEntryType.keyword'].size() > 0 && doc['Data.additionalDetails.stockEntryType.keyword'].value == 'ISSUED') { if (doc['Data.transactingFacilityName.keyword'].size() > 0) { String name = doc['Data.transactingFacilityName.keyword'].value; if (name == 'LGA_WH') { return 'UNKNOWN'; } if (name.endsWith(' LGA Warehouse')) { return name.substring(0, name.length() - 14); } if (name.endsWith(' Warehouse')) { return name.substring(0, name.length() - 10); } return name; } return 'UNKNOWN'; } if (doc['Data.boundaryHierarchy.lga.keyword'].size() > 0) { return doc['Data.boundaryHierarchy.lga.keyword'].value; } return 'UNKNOWN';\",\"value_type\":\"string\"}},\"aggs\":{\"Received\":{\"sum\":{\"script\":{\"source\":\"if (doc['Data.facilityType.keyword'].size() > 0 && doc['Data.facilityType.keyword'].value == 'Warehouse' && doc['Data.transactingFacilityType.keyword'].size() > 0 && doc['Data.transactingFacilityType.keyword'].value == 'LGA Facility' && doc['Data.additionalDetails.stockEntryType.keyword'].size() > 0 && doc['Data.additionalDetails.stockEntryType.keyword'].value == 'ISSUED' && doc['Data.transactingFacilityName.keyword'].size() > 0 && doc['Data.transactingFacilityName.keyword'].value != 'LGA_WH') { return doc['Data.physicalCount'].value; } return 0;\"}}},\"Issued\":{\"sum\":{\"script\":{\"source\":\"if (doc['Data.facilityType.keyword'].size() > 0 && doc['Data.facilityType.keyword'].value == 'LGA Facility' && doc['Data.transactingFacilityType.keyword'].size() > 0 && doc['Data.transactingFacilityType.keyword'].value == 'Distribution Hub' && doc['Data.additionalDetails.stockEntryType.keyword'].size() > 0 && doc['Data.additionalDetails.stockEntryType.keyword'].value == 'ISSUED') { return doc['Data.physicalCount'].value; } return 0;\"}}},\"Returned\":{\"sum\":{\"script\":{\"source\":\"if (doc['Data.facilityType.keyword'].size() > 0 && doc['Data.facilityType.keyword'].value == 'Distribution Hub' && doc['Data.transactingFacilityType.keyword'].size() > 0 && doc['Data.transactingFacilityType.keyword'].value == 'LGA Facility' && doc['Data.additionalDetails.stockEntryType.keyword'].size() > 0 && doc['Data.additionalDetails.stockEntryType.keyword'].value == 'RETURNED') { return doc['Data.physicalCount'].value; } return 0;\"}}},\"Total Stock\":{\"sum\":{\"script\":{\"source\":\"if (doc['Data.facilityType.keyword'].size() == 0 || doc['Data.transactingFacilityType.keyword'].size() == 0 || doc['Data.additionalDetails.stockEntryType.keyword'].size() == 0) { return 0; } String facilityType = doc['Data.facilityType.keyword'].value; String transactingType = doc['Data.transactingFacilityType.keyword'].value; String stockEntryType = doc['Data.additionalDetails.stockEntryType.keyword'].value; if (facilityType == 'Warehouse' && transactingType == 'LGA Facility' && stockEntryType == 'ISSUED' && doc['Data.transactingFacilityName.keyword'].size() > 0 && doc['Data.transactingFacilityName.keyword'].value != 'LGA_WH') { return doc['Data.physicalCount'].value; } if (facilityType == 'LGA Facility' && transactingType == 'Distribution Hub' && stockEntryType == 'ISSUED') { return -doc['Data.physicalCount'].value; } if (facilityType == 'Distribution Hub' && transactingType == 'LGA Facility' && stockEntryType == 'RETURNED') { return doc['Data.physicalCount'].value; } return 0;\"}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},\"aggs\":{\"LGA\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Stock\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}"
       }
     ],
     "filterKeys": [
@@ -27567,52 +27567,20 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "InventorySummaryByWardBednetsICCD",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "LGA",
     "excludedColumns": [
-      "SUM",
-      "Received",
-      "Issued",
-      "Returned",
-      "Total Stock"
+      "Stock"
     ],
     "computedFields": [
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Received"
+          "Stock"
         ],
-        "newField": "Stock Received",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Issued"
-        ],
-        "newField": "Stock Issued",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Returned"
-        ],
-        "newField": "Stock Returned",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Stock"
-        ],
-        "newField": "Stock Balance",
+        "newField": "Stock",
         "_comments": ""
       }
     ],
