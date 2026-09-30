@@ -4391,15 +4391,15 @@
           "vizArray": [
             {
               "id": 243,
-              "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_LGA",
-              "label": "DSS_HEALTH_INVENTORY_SUMMARY_BY_LGA",
+              "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STATE",
+              "label": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STATE",
               "vizType": "chart",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "InventorySummaryByLgaBednetsICCD",
-                  "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_LGA",
+                  "id": "InventorySummaryByStateBednetsICCD",
+                  "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STATE",
                   "code": "",
                   "chartType": "table",
                   "filter": "",

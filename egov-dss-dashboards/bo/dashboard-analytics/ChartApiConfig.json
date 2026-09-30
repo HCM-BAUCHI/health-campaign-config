@@ -27548,6 +27548,83 @@
     "insight": {},
     "_comment": "User activity is joined using the source Data.userName carried as userId. Transformer-error records are excluded because bo-transformer-error-index-v1 does not expose mapped user/campaign/boundary fields; those values are embedded in payload."
   },
+  "InventorySummaryByStateBednetsICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STATE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "bo-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"terms\":{\"Data.additionalDetails.stockEntryType.keyword\":[\"ISSUED\",\"RECEIVED\"]}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"terms\":{\"Data.additionalDetails.stockEntryType.keyword\":[\"ISSUED\",\"RECEIVED\"]}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"ReceivedValue\",\"issued\":\"IssuedValue\",\"returned\":\"ReturnedValue\"},\"script\":\"params.received - params.issued + params.returned\"}},\"ReceivedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Received>SUM\"},\"script\":\"params.v\"}},\"IssuedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Issued>SUM\"},\"script\":\"params.v\"}},\"ReturnedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Returned>SUM\"},\"script\":\"params.v\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "state",
+        "column": "State"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "InventorySummaryByLgaBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "State",
+    "excludedColumns": [
+      "SUM",
+      "Received",
+      "Issued",
+      "Returned",
+      "Total Stock",
+      "ReceivedValue",
+      "IssuedValue",
+      "ReturnedValue"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ReceivedValue"
+        ],
+        "newField": "Stock Received",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "IssuedValue"
+        ],
+        "newField": "Stock Issued",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ReturnedValue"
+        ],
+        "newField": "Stock Returned",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Stock"
+        ],
+        "newField": "Stock Balance",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown"
+  },
+
   "InventorySummaryByLgaBednetsICCD": {
     "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_LGA",
     "queries": [
