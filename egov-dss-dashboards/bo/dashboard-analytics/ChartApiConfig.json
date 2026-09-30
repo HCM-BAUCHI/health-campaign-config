@@ -27583,7 +27583,7 @@
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Received"
+          "Received>SUM"
         ],
         "newField": "Stock Received",
         "_comments": ""
@@ -27592,7 +27592,7 @@
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Issued"
+          "Issued>SUM"
         ],
         "newField": "Stock Issued",
         "_comments": ""
@@ -27601,7 +27601,7 @@
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Returned"
+          "Returned>SUM"
         ],
         "newField": "Stock Returned",
         "_comments": ""
@@ -27719,7 +27719,7 @@
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Received"
+          "Received>SUM"
         ],
         "newField": "Stock Received",
         "_comments": ""
@@ -27728,7 +27728,7 @@
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Issued"
+          "Issued>SUM"
         ],
         "newField": "Stock Issued",
         "_comments": ""
@@ -27737,7 +27737,7 @@
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Returned"
+          "Returned>SUM"
         ],
         "newField": "Stock Returned",
         "_comments": ""
@@ -27791,7 +27791,7 @@
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Received"
+          "Received>SUM"
         ],
         "newField": "Stock Received",
         "_comments": ""
@@ -27800,7 +27800,7 @@
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Returned"
+          "Returned>SUM"
         ],
         "newField": "Stock Returned",
         "_comments": ""
