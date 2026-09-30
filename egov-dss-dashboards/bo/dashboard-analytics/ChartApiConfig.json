@@ -27554,9 +27554,9 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\"}",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.additionalDetails.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\"}",
         "indexName": "bo-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"LGA\":{\"terms\":{\"size\":1000,\"order\":{\"_key\":\"asc\"},\"script\":{\"source\":\"if (doc['Data.boundaryHierarchy.lga.keyword'].size() > 0) { return doc['Data.boundaryHierarchy.lga.keyword'].value; } if (doc['Data.transactingFacilityType.keyword'].size() > 0 && doc['Data.transactingFacilityType.keyword'].value == 'LGA Facility' && doc['Data.additionalDetails.stockEntryType.keyword'].size() > 0 && doc['Data.additionalDetails.stockEntryType.keyword'].value == 'ISSUED' && doc['Data.additionalDetails.administrativeArea.keyword'].size() > 0) { return doc['Data.additionalDetails.administrativeArea.keyword'].value; } return null;\"},\"value_type\":\"string\"},\"aggs\":{\"Received\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.transactingFacilityType.keyword'].size()>0 && doc['Data.transactingFacilityType.keyword'].value=='LGA Facility' && doc['Data.additionalDetails.stockEntryType.keyword'].size()>0 && doc['Data.additionalDetails.stockEntryType.keyword'].value=='ISSUED') ? doc['Data.physicalCount'].value : 0\"}}},\"Issued\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.facilityType.keyword'].size()>0 && doc['Data.facilityType.keyword'].value=='LGA Facility' && doc['Data.transactingFacilityType.keyword'].size()>0 && doc['Data.transactingFacilityType.keyword'].value=='Distribution Hub' && doc['Data.additionalDetails.stockEntryType.keyword'].size()>0 && doc['Data.additionalDetails.stockEntryType.keyword'].value=='ISSUED') ? doc['Data.physicalCount'].value : 0\"}}},\"Returned\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.transactingFacilityType.keyword'].size()>0 && doc['Data.transactingFacilityType.keyword'].value=='Warehouse' && doc['Data.additionalDetails.stockEntryType.keyword'].size()>0 && doc['Data.additionalDetails.stockEntryType.keyword'].value=='RETURNED') ? doc['Data.physicalCount'].value : 0\"}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"Received\",\"issued\":\"Issued\",\"returned\":\"Returned\"},\"script\":\"params.received - params.issued + params.returned\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"LGA\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Stock Balance\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"Received>SUM\",\"issued\":\"Issued>SUM\",\"returned\":\"Returned>SUM\"},\"script\":\"params.received - params.issued + params.returned\"}}}}}}"
       }
     ],
     "filterKeys": [
@@ -27572,10 +27572,10 @@
     "action": "",
     "plotLabel": "LGA",
     "excludedColumns": [
+      "SUM",
       "Received",
       "Issued",
-      "Returned",
-      "Total Stock"
+      "Returned"
     ],
     "computedFields": [
       {
@@ -27603,15 +27603,6 @@
           "Returned"
         ],
         "newField": "Stock Returned",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Stock"
-        ],
-        "newField": "Stock Balance",
         "_comments": ""
       }
     ],
