@@ -4385,6 +4385,30 @@
             }
           ]
         },
+        {
+          "row": 6,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 243,
+              "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_DH",
+              "label": "DSS_HEALTH_INVENTORY_SUMMARY_BY_DH",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "InventorySummaryByDhBednetsICCD",
+                  "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_DH",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
 
         {
           "row": 1,

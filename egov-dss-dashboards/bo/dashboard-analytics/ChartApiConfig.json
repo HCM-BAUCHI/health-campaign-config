@@ -27547,5 +27547,31 @@
     "aggregationPaths": ["mergedUsersRecordSummary"],
     "insight": {},
     "_comment": "User activity is joined using the source Data.userName carried as userId. Transformer-error records are excluded because bo-transformer-error-index-v1 does not expose mapped user/campaign/boundary fields; those values are embedded in payload."
+  },
+  "InventorySummaryByDhBednetsICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_DH",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"wildcard\":{\"Data.productVariant.keyword\":\"PVAR*\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"DH\":{\"terms\":{\"size\":1000,\"order\":{\"_key\":\"asc\"},\"script\":{\"source\":\"doc['Data.facilityType.keyword'].size()>0 && doc['Data.facilityType.keyword'].value=='Distribution Hub' ? doc['Data.facilityId.keyword'].value : doc['Data.transactingFacilityId.keyword'].value\"},\"value_type\":\"string\"},\"aggs\":{\"Inflow\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},\"aggs\":{\"Qty\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outflow\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},\"aggs\":{\"Qty\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ReturnsUp\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"Qty\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"DHNameDoc\":{\"filter\":{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},\"aggs\":{\"LatestDoc\":{\"top_hits\":{\"size\":1,\"sort\":[{\"Data.createdTime\":{\"order\":\"desc\"}}],\"_source\":{\"includes\":[\"Data.boundaryHierarchy.distributionHub\",\"Data.boundaryHierarchy.lga\",\"Data.boundaryHierarchy.state\",\"Data.facilityName\"]}}}}},\"Balance\":{\"bucket_script\":{\"buckets_path\":{\"in\":\"Inflow.Qty\",\"out\":\"Outflow.Qty\",\"ret\":\"ReturnsUp.Qty\"},\"script\":\"params.in - params.out - params.ret\"}}}}}}"
+      }
+    ],
+    "filterKeys": [],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Distribution Hub",
+    "excludedColumns": ["S.N.", "DHNameDoc"],
+    "computedFields": [],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Balance = Inflow(LGA->DH, ISSUED, ACCEPTED) - Outflow(DH->STAFF, ISSUED, ACCEPTED) - ReturnsUp(DH->LGA, RETURNED, ACCEPTED), bucketed by unified DH id (facilityId when self is DH, else transactingFacilityId). DH name resolved from the DH's own most recent record.",
+    "kind": "drillDown"
   }
 }
