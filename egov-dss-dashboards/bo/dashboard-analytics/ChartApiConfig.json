@@ -27554,9 +27554,9 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\"}",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.additionalDetails.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\"}",
         "indexName": "bo-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"LGA\":{\"terms\":{\"size\":1000,\"order\":{\"_key\":\"asc\"},\"script\":{\"source\":\"if (doc['Data.boundaryHierarchy.lga.keyword'].size() > 0) { return doc['Data.boundaryHierarchy.lga.keyword'].value; } if (doc['Data.transactingFacilityType.keyword'].size() > 0 && doc['Data.transactingFacilityType.keyword'].value == 'LGA Facility' && doc['Data.additionalDetails.stockEntryType.keyword'].size() > 0 && doc['Data.additionalDetails.stockEntryType.keyword'].value == 'ISSUED' && doc['Data.additionalDetails.administrativeArea.keyword'].size() > 0) { return doc['Data.additionalDetails.administrativeArea.keyword'].value; } return null;\"},\"value_type\":\"string\"},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.transactingFacilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"Received>SUM\",\"issued\":\"Issued>SUM\",\"returned\":\"Returned>SUM\"},\"script\":\"params.received - params.issued + params.returned\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"LGA\":{\"terms\":{\"size\":1000,\"order\":{\"_key\":\"asc\"},\"script\":{\"source\":\"if (doc['Data.boundaryHierarchy.lga.keyword'].size() > 0) { return doc['Data.boundaryHierarchy.lga.keyword'].value; } if (doc['Data.transactingFacilityType.keyword'].size() > 0 && doc['Data.transactingFacilityType.keyword'].value == 'LGA Facility' && doc['Data.additionalDetails.stockEntryType.keyword'].size() > 0 && doc['Data.additionalDetails.stockEntryType.keyword'].value == 'ISSUED' && doc['Data.additionalDetails.administrativeArea.keyword'].size() > 0) { return doc['Data.additionalDetails.administrativeArea.keyword'].value; } return null;\"},\"value_type\":\"string\"},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.transactingFacilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Stock Balance\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"Received>SUM\",\"issued\":\"Issued>SUM\",\"returned\":\"Returned>SUM\"},\"script\":\"params.received - params.issued + params.returned\"}}}}}}"
       }
     ],
     "filterKeys": [
@@ -27575,8 +27575,7 @@
       "SUM",
       "Received",
       "Issued",
-      "Returned",
-      "Total Stock"
+      "Returned"
     ],
     "computedFields": [
       {
@@ -27605,15 +27604,6 @@
         ],
         "newField": "Stock Returned",
         "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Stock"
-        ],
-        "newField": "Stock Balance",
-        "_comments": ""
       }
     ],
     "insight": {},
@@ -27627,7 +27617,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\"}",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.additionalDetails.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\"}",
         "indexName": "bo-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"issued\":\"Issued>SUM\",\"returned\":\"Returned>SUM\"},\"script\":\"params.issued - params.returned\"}}}}}}"
       }
@@ -27690,7 +27680,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\"}",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.additionalDetails.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\"}",
         "indexName": "bo-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"DH\":{\"terms\":{\"size\":1000,\"order\":{\"_key\":\"asc\"},\"script\":{\"source\":\"if (doc['Data.facilityType.keyword'].size()>0 && doc['Data.facilityType.keyword'].value=='Distribution Hub') { return doc['Data.facilityName.keyword'].value; } if (doc['Data.transactingFacilityType.keyword'].size()>0 && doc['Data.transactingFacilityType.keyword'].value=='Distribution Hub') { return doc['Data.transactingFacilityName.keyword'].value; } return null;\"},\"value_type\":\"string\"},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"Received>SUM\",\"issued\":\"Issued>SUM\",\"returned\":\"Returned>SUM\"},\"script\":\"params.received - params.issued + params.returned\"}}}}}}"
       }
@@ -27763,7 +27753,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"mdt\":\"Data.facilityName.keyword\"}",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.additionalDetails.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\",\"mdt\":\"Data.facilityName.keyword\"}",
         "indexName": "bo-stock-index-v1",
         "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"field\":\"Data.facilityName.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Received\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"Received>SUM\",\"returned\":\"Returned>SUM\"},\"script\":\"params.received - params.returned\"}}}}}}"
       }
