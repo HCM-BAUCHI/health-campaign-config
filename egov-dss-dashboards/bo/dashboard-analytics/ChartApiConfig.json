@@ -21661,7 +21661,7 @@
         "dateRefField": "Data.taskDates",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-household-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"DateRange visits\":{\"cardinality\":{\"field\":\"Data.household.id.keyword\"}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"DateRange visits\":{\"cardinality\":{\"field\":\"Data.household.id.keyword\",\"precision_threshold\":40000}}}}"
       }
     ],
     "chartType": "metric",
@@ -25549,7 +25549,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-household-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total visits\":{\"cardinality\":{\"field\":\"Data.household.id.keyword\"}}}}"
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.projectType.keyword\":\"Bednet\"}}]}},\"aggs\":{\"Total visits\":{\"cardinality\":{\"field\":\"Data.household.id.keyword\",\"precision_threshold\":40000}}}}"
       }
     ],
     "chartType": "metric",
