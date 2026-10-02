@@ -4752,6 +4752,32 @@
               ]
             }
           ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_HEALTH_CUSTOM_REPORT",
+          "vizArray": [
+            {
+              "id": 265,
+              "name": "DSS_HEALTH_CUSTOM_STOCK_REPORT",
+              "label": "DSS_HEALTH_CUSTOM_STOCK_REPORT",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockPositionByDistrictBednetsICCD",
+                  "name": "DSS_HEALTH_CUSTOM_STOCK_REPORT",
+                  "code": "",
+                  "moduleName": "llin",
+                  "pageName": "stock-position-report",
+                  "chartType": "kibanaComponent",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -5037,6 +5063,7 @@
             }
           ]
         },
+
         {
           "row": 1,
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
@@ -5295,6 +5322,7 @@
             }
           ]
         },
+
         {
           "row": 1,
           "name": "DSS_KIBANA_MAPS",
@@ -5347,6 +5375,7 @@
             }
           ]
         },
+
         {
           "row": 1,
           "name": "DSS_HEALTH_COMPLAINTS",
@@ -5531,6 +5560,7 @@
             }
           ]
         },
+
         {
           "row": 1,
           "name": "DSS_HEALTH_INVENTORY",
@@ -5739,6 +5769,7 @@
             }
           ]
         },
+
         {
           "row": 1,
           "name": "DSS_HEALTH_SUPERVISION",
