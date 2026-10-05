@@ -4390,7 +4390,7 @@
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
-              "id": 243,
+              "id": 245,
               "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STATE",
               "label": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STATE",
               "vizType": "chart",
