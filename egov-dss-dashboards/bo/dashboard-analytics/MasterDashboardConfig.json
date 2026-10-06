@@ -4364,32 +4364,6 @@
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
-              "id": 248,
-              "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STOCK_RECEIVED",
-              "label": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STOCK_RECEIVED",
-              "vizType": "chart",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "summaryByStockReceived",
-                  "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STOCK_RECEIVED",
-                  "code": "",
-                  "moduleName": "llin",
-                  "pageName": "itn-stock-received-summary-report",
-                  "chartType": "kibanaComponent",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 6,
-          "name": "DSS_HEALTH_INVENTORY",
-          "vizArray": [
-            {
               "id": 245,
               "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STATE",
               "label": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STATE",
