@@ -27784,63 +27784,21 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\"}",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"distributionHub\":\"Data.boundaryHierarchy.distributionHub.keyword\"}",
         "indexName": "bo-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"size\":1000,\"order\":{\"_key\":\"asc\"},\"script\":{\"source\":\"String ft = doc['Data.facilityType.keyword'].size()>0 ? doc['Data.facilityType.keyword'].value : ''; String tt = doc['Data.transactingFacilityType.keyword'].size()>0 ? doc['Data.transactingFacilityType.keyword'].value : ''; String se = doc['Data.additionalDetails.stockEntryType.keyword'].size()>0 ? doc['Data.additionalDetails.stockEntryType.keyword'].value : ''; if (ft=='Distribution Hub' && tt=='STAFF' && se=='ISSUED' && doc['Data.transactingFacilityName.keyword'].size()>0) return doc['Data.transactingFacilityName.keyword'].value; if (ft=='STAFF' && tt=='Distribution Hub' && se=='RETURNED' && doc['Data.facilityName.keyword'].size()>0) return doc['Data.facilityName.keyword'].value; return null;\",\"value_type\":\"string\"}},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ReceivedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Received>SUM\"},\"script\":\"params.v\"}},\"ReturnedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Returned>SUM\"},\"script\":\"params.v\"}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"ReceivedValue\",\"returned\":\"ReturnedValue\"},\"script\":\"params.received - params.returned\"}}}}}}"
-      }
-    ],
-    "filterKeys": [
-      {
-        "key": "mdt",
-        "column": "MDT"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "plotLabel": "MDT",
-    "excludedColumns": [
-      "SUM",
-      "Received",
-      "Returned",
-      "ReceivedValue",
-      "ReturnedValue",
-      "Total Stock"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "ReceivedValue"
+        "aggrQuery": "{\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.campaignNumber.keyword\":\"CMP-2026-09-21-000561\"}},{\"term\":{\"Data.boundaryHierarchy.state.keyword\":\"Borno\"}},{\"term\":{\"Data.boundaryHierarchy.distributionHub.keyword\":\"Bulama Abdulsalam\"}}],\"should\":[{\"bool\":{\"filter\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"filter\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}},\"aggs\":{\"MDT\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"String ft = doc['Data.facilityType.keyword'].size() > 0 ? doc['Data.facilityType.keyword'].value : ''; String tt = doc['Data.transactingFacilityType.keyword'].size() > 0 ? doc['Data.transactingFacilityType.keyword'].value : ''; String se = doc['Data.additionalDetails.stockEntryType.keyword'].size() > 0 ? doc['Data.additionalDetails.stockEntryType.keyword'].value : ''; if (ft == 'Distribution Hub' && tt == 'STAFF' && se == 'ISSUED' && doc['Data.transactingFacilityName.keyword'].size() > 0) { return doc['Data.transactingFacilityName.keyword'].value; } if (ft == 'STAFF' && tt == 'Distribution Hub' && se == 'RETURNED' && doc['Data.facilityName.keyword'].size() > 0) { return doc['Data.facilityName.keyword'].value; } return 'UNKNOWN';\"},\"size\":1000},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"filter\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"filter\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"Received>SUM\",\"returned\":\"Returned>SUM\"},\"script\":\"params.received - params.returned\"}}}}}}",
+        "filterKeys": [
+          {
+            "key": "mdt",
+            "column": "MDT"
+          }
         ],
-        "newField": "Stock Received",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "ReturnedValue"
-        ],
-        "newField": "Stock Returned",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Stock"
-        ],
-        "newField": "Stock Balance",
-        "_comments": ""
+        "chartType": "xtable",
+        "valueType": "number",
+        "drillChart": "none",
+        "plotLabel": "MDT",
+        "kind": "drillDown"
       }
-    ],
-    "insight": {},
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "kind": "drillDown"
+    ]
   }
 }
