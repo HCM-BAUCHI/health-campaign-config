@@ -27556,7 +27556,28 @@
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityName.keyword\":\"National_WH\"}},{\"term\":{\"Data.transactingFacilityName.keyword\":\"STATE_WH\"}},{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityName.keyword\":\"STATE_WH\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\",\"IN_TRANSIT\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"terms\":{\"Data.transactingFacilityType.keyword\":[\"Warehouse\",\"State\"]}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"State\":{\"terms\":{\"size\":100,\"order\":{\"_key\":\"asc\"},\"script\":{\"source\":\"if (doc['Data.facilityName.keyword'].size() > 0 && doc['Data.transactingFacilityName.keyword'].size() > 0 && doc['Data.facilityName.keyword'].value == 'National_WH' && doc['Data.transactingFacilityName.keyword'].value == 'STATE_WH') { return 'Borno'; } if (doc['Data.boundaryHierarchy.state.keyword'].size() > 0) { return doc['Data.boundaryHierarchy.state.keyword'].value; } return 'UNKNOWN';\",\"value_type\":\"string\"}},\"aggs\":{\"Received Filter\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityName.keyword\":\"National_WH\"}},{\"term\":{\"Data.transactingFacilityName.keyword\":\"STATE_WH\"}},{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Received\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued Filter\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityName.keyword\":\"STATE_WH\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\",\"IN_TRANSIT\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Issued\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned Filter\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"terms\":{\"Data.transactingFacilityType.keyword\":[\"Warehouse\",\"State\"]}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Returned\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"Received Filter>Received\",\"issued\":\"Issued Filter>Issued\",\"returned\":\"Returned Filter>Returned\"},\"script\":\"params.received - params.issued + params.returned\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityName.keyword\":\"National_WH\"}},{\"term\":{\"Data.transactingFacilityName.keyword\":\"STATE_WH\"}},{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"term\":{\"Data.boundaryHierarchy.state.keyword\":\"Borno\"}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"State\":{\"terms\":{\"size\":100,\"order\":{\"_key\":\"asc\"},\"script\":{\"source\":\"if (doc['Data.facilityName.keyword'].size() > 0 && doc['Data.transactingFacilityName.keyword'].size() > 0 && doc['Data.facilityName.keyword'].value == 'National_WH' && doc['Data.transactingFacilityName.keyword'].value == 'STATE_WH') { return 'Borno'; } if (doc['Data.boundaryHierarchy.state.keyword'].size() > 0) { return doc['Data.boundaryHierarchy.state.keyword'].value; } return 'UNKNOWN';\",\"value_type\":\"string\"}},\"aggs\":{\"Received\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "bo-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.facilityName.keyword\":\"STATE_WH\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\",\"IN_TRANSIT\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"size\":100,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"Issued\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\"}",
+        "indexName": "bo-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"terms\":{\"Data.transactingFacilityType.keyword\":[\"Warehouse\",\"State\"]}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"size\":100,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"Returned\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"bool\":{\"should\":[{\"term\":{\"Data.boundaryHierarchy.state.keyword\":\"Borno\"}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityName.keyword\":\"National_WH\"}},{\"term\":{\"Data.transactingFacilityName.keyword\":\"STATE_WH\"}},{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"State\":{\"terms\":{\"size\":100,\"order\":{\"_key\":\"asc\"},\"script\":{\"source\":\"if (doc['Data.facilityName.keyword'].size() > 0 && doc['Data.transactingFacilityName.keyword'].size() > 0 && doc['Data.facilityName.keyword'].value == 'National_WH' && doc['Data.transactingFacilityName.keyword'].value == 'STATE_WH') { return 'Borno'; } if (doc['Data.boundaryHierarchy.state.keyword'].size() > 0) { return doc['Data.boundaryHierarchy.state.keyword'].value; } return 'UNKNOWN';\",\"value_type\":\"string\"}},\"aggs\":{\"Balance\":{\"sum\":{\"script\":{\"source\":\"if (doc['Data.physicalCount'].size() == 0) { return 0; } if (doc['Data.facilityName.keyword'].size() > 0 && doc['Data.transactingFacilityName.keyword'].size() > 0 && doc['Data.facilityName.keyword'].value == 'National_WH' && doc['Data.transactingFacilityName.keyword'].value == 'STATE_WH') { return doc['Data.physicalCount'].value; } if (doc['Data.facilityName.keyword'].size() > 0 && doc['Data.facilityName.keyword'].value == 'STATE_WH' && doc['Data.transactingFacilityType.keyword'].size() > 0 && doc['Data.transactingFacilityType.keyword'].value == 'LGA Facility' && doc['Data.additionalDetails.stockEntryType.keyword'].size() > 0 && doc['Data.additionalDetails.stockEntryType.keyword'].value == 'ISSUED') { return -doc['Data.physicalCount'].value; } if (doc['Data.facilityType.keyword'].size() > 0 && doc['Data.facilityType.keyword'].value == 'LGA Facility' && doc['Data.additionalDetails.stockEntryType.keyword'].size() > 0 && doc['Data.additionalDetails.stockEntryType.keyword'].value == 'RETURNED') { return doc['Data.physicalCount'].value; } return 0;\"}}}}}}"
       }
     ],
     "filterKeys": [
@@ -27572,10 +27593,10 @@
     "action": "",
     "plotLabel": "State",
     "excludedColumns": [
-      "Received Filter",
-      "Issued Filter",
-      "Returned Filter",
-      "Total Stock"
+      "Received",
+      "Issued",
+      "Returned",
+      "Balance"
     ],
     "computedFields": [
       {
@@ -27609,13 +27630,16 @@
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Total Stock"
+          "Balance"
         ],
         "newField": "Stock Balance",
         "_comments": ""
       }
     ],
     "insight": {},
+    "sort": "sortKeyAsc",
+    "showFooter": false,
+    "divisorFields": [],
     "hideInsights": true,
     "hideHeaderDenomination": true,
     "kind": "drillDown"
