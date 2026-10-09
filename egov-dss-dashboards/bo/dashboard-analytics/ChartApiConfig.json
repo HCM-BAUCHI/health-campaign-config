@@ -27864,12 +27864,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "State",
+    "aggregationPaths": [
+      "State",
+      "ExcessStockValue",
+      "LossStockValue"
+    ],
     "excludedColumns": [
       "Quantity",
       "Excess Stock",
-      "Loss Stock",
-      "ExcessStockValue",
-      "LossStockValue"
+      "Loss Stock"
     ],
     "computedFields": [
       {
