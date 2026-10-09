@@ -27857,22 +27857,10 @@
     "documentType": "_doc",
     "action": "",
     "drillChart": "excessLossStockLgaBednetsICCD",
-    "plotLabel": "State",
     "aggregationPaths": [
       "State",
-      "Excess Stock",
-      "Loss Stock"
-    ],
-    "pathDataTypeMapping": [
-      {
-        "State": "string"
-      },
-      {
-        "Excess Stock": "number"
-      },
-      {
-        "Loss Stock": "number"
-      }
+      "Excess Stock/Quantity",
+      "Loss Stock/Quantity"
     ],
     "_comment": "State-wise Excess and Loss Stock"
   }
