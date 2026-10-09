@@ -27896,5 +27896,173 @@
     "hideHeaderDenomination": true,
     "kind": "drillDown",
     "_comment": "State-wise Excess and Loss Stock"
+  },
+  "excessLossStockLgaBednetsICCD": {
+    "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_LGA",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.boundaryHierarchy.state.keyword\":\"Borno\"}},{\"term\":{\"Data.campaignNumber.keyword\":\"CMP-2026-09-21-000561\"}}]}},\"aggs\":{\"LGA\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "state",
+        "column": "State"
+      },
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "documentType": "_doc",
+    "action": "",
+    "drillChart": "excessLossStockWardBednetsICCD",
+    "plotLabel": "LGA",
+    "excludedColumns": [
+      "Quantity",
+      "ExcessStockFilter",
+      "LossStockFilter"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ExcessStockValue"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "LossStockValue"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "LGA-wise Excess and Loss Stock"
+  },
+  "excessLossStockWardBednetsICCD": {
+    "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_WARD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "state",
+        "column": "State"
+      },
+      {
+        "key": "lga",
+        "column": "LGA"
+      },
+      {
+        "key": "ward",
+        "column": "Ward"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "documentType": "_doc",
+    "action": "",
+    "drillChart": "excessLossStockDhBednetsICCD",
+    "plotLabel": "Ward",
+    "excludedColumns": [
+      "Quantity",
+      "ExcessStockFilter",
+      "LossStockFilter"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ExcessStockValue"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "LossStockValue"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "Ward-wise Excess and Loss Stock"
+  },
+  "excessLossStockDhBednetsICCD": {
+    "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_DH",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "bo-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}}]}},\"aggs\":{\"DistributionHub\":{\"terms\":{\"field\":\"Data.facilityName.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "documentType": "_doc",
+    "action": "",
+    "drillChart": "none",
+    "plotLabel": "Distribution Hub",
+    "excludedColumns": [
+      "Quantity",
+      "ExcessStockFilter",
+      "LossStockFilter"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ExcessStockValue"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "LossStockValue"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "Distribution Hub-wise Excess and Loss Stock"
   }
 }
