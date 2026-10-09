@@ -4383,6 +4383,30 @@
             }
           ]
         },
+        {
+          "row": 6,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 246,
+              "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STOCK_EXCESS_AND_LOSS",
+              "label": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STOCK_EXCESS_AND_LOSS",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "excessLossStockStateBednetsICCD",
+                  "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STOCK_EXCESS_AND_LOSS",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
 
         {
           "row": 1,
