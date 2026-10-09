@@ -27860,14 +27860,16 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
+    "drillChart": "excessLossStockLgaBednetsICCD",
     "documentType": "_doc",
     "action": "",
-    "drillChart": "excessLossStockLgaBednetsICCD",
     "plotLabel": "State",
     "excludedColumns": [
       "Quantity",
       "ExcessStockFilter",
-      "LossStockFilter"
+      "LossStockFilter",
+      "ExcessStockValue",
+      "LossStockValue"
     ],
     "computedFields": [
       {
