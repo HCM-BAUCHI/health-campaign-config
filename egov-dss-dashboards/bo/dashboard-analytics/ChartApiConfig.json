@@ -27858,7 +27858,7 @@
     "action": "",
     "drillChart": "excessLossStockLgaBednetsICCD",
     "aggregationPaths": [
-      "AGGS"
+      "State"
     ],
     "_comment": "State-wise Excess and Loss Stock"
   }
