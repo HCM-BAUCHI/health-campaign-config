@@ -27995,7 +27995,9 @@
       "ExcessStockFilter",
       "LossStockFilter",
       "ExcessStockValue",
-      "LossStockValue"
+      "LossStockValue",
+      "DSS_HEADER_EXCESSSTOCKVALUE",
+      "DSS_HEADER_LOSSSTOCKVALUE"
     ],
     "computedFields": [
       {
@@ -28045,7 +28047,9 @@
       "ExcessStockFilter",
       "LossStockFilter",
       "ExcessStockValue",
-      "LossStockValue"
+      "LossStockValue",
+      "DSS_HEADER_EXCESSSTOCKVALUE",
+      "DSS_HEADER_LOSSSTOCKVALUE"
     ],
     "computedFields": [
       {
