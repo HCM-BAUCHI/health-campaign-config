@@ -27849,7 +27849,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "bo-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"State\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Excess Stock\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Loss Stock\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Excess Stock>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Loss Stock>Quantity\"},\"script\":\"params.v\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"State\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
       }
     ],
     "filterKeys": [
@@ -27866,10 +27866,8 @@
     "plotLabel": "State",
     "excludedColumns": [
       "Quantity",
-      "Excess Stock",
-      "Loss Stock",
-      "ExcessStockValue",
-      "LossStockValue"
+      "ExcessStockFilter",
+      "LossStockFilter"
     ],
     "computedFields": [
       {
