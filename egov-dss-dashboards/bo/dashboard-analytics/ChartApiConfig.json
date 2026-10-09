@@ -27927,7 +27927,9 @@
     "excludedColumns": [
       "Quantity",
       "ExcessStockFilter",
-      "LossStockFilter"
+      "LossStockFilter",
+      "ExcessStockValue",
+      "LossStockValue"
     ],
     "computedFields": [
       {
@@ -27989,7 +27991,9 @@
     "excludedColumns": [
       "Quantity",
       "ExcessStockFilter",
-      "LossStockFilter"
+      "LossStockFilter",
+      "ExcessStockValue",
+      "LossStockValue"
     ],
     "computedFields": [
       {
@@ -28037,7 +28041,9 @@
     "excludedColumns": [
       "Quantity",
       "ExcessStockFilter",
-      "LossStockFilter"
+      "LossStockFilter",
+      "ExcessStockValue",
+      "LossStockValue"
     ],
     "computedFields": [
       {
