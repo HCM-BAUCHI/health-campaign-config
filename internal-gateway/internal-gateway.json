@@ -14,7 +14,8 @@
     "od": "http://health-expense-calculator.ondo:8080",
     "oy": "http://health-expense-calculator.oyo:8080",
     "pl": "http://health-expense-calculator.plateau:8080",
-    "so": "http://health-expense-calculator.sokoto:8080"
+    "so": "http://health-expense-calculator.sokoto:8080",
+    "abia": "http://health-expense-calculator.abia:8080"
   },
   "/egov-enc-service/.*": {
     "ba": "http://egov-enc-service.egov:8080",
@@ -31,6 +32,7 @@
     "od": "http://egov-enc-service.egov:8080",
     "oy": "http://egov-enc-service.egov:8080",
     "pl": "http://egov-enc-service.egov:8080",
-    "so": "http://egov-enc-service.egov:8080"
+    "so": "http://egov-enc-service.egov:8080",
+    "abia": "http://egov-enc-service.egov:8080"
   }
 }
