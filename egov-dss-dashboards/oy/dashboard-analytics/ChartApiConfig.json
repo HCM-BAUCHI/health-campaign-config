@@ -18433,5 +18433,2192 @@
         "aggrQuery": "{\"size\":0,\"aggs\":{\"FILTER\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"INDIVIDUAL\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"INELIGIBLE\"}}]}},\"aggs\":{\"Ineligible\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Ineligible Daily count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       }
     ]
+  },
+  "stockV2HeadlineCards": {
+    "chartName": "DSS_STOCK_V2_HEADLINE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "key": "stock",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"product\": \"Data.productName.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "select": {
+          "cs_acc": "all.buckets.all.cs_acc.u.value",
+          "cs_gross": "all.buckets.all.cs_gross.u.value",
+          "administered": "all.buckets.all.administered.value",
+          "adm_pct": "all.buckets.all.adm_pct.value",
+          "total_sih": "all.buckets.all.total_sih.value",
+          "in_transit": "all.buckets.all.in_transit.value",
+          "gross_all": "all.buckets.all.gross_all.value",
+          "negative": "all.buckets.all.negative.value"
+        },
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"cs_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Central Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cs_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Central Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"adm\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"red\": {\"filter\": {\"term\": {\"Data.administrationStatus.keyword\": \"VISITED\"}}}, \"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_tr\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_tr\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_tr\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_tr\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"administered\": {\"bucket_script\": {\"buckets_path\": {\"adm\": \"adm>u\", \"red\": \"red._count\"}, \"script\": \"params.adm + params.red\", \"gap_policy\": \"insert_zeros\"}}, \"adm_pct\": {\"bucket_script\": {\"buckets_path\": {\"cs_acc\": \"cs_acc>u\", \"adm\": \"adm>u\", \"red\": \"red._count\"}, \"script\": \"params.cs_acc > 0 ? Math.round((params.adm + params.red) / params.cs_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"total_sih\": {\"bucket_script\": {\"buckets_path\": {\"cs_acc\": \"cs_acc>u\", \"sh_gross\": \"sh_gross>u\", \"sh_acc\": \"sh_acc>u\", \"sh_rej\": \"sh_rej>u\", \"hc_gross\": \"hc_gross>u\", \"hc_acc\": \"hc_acc>u\", \"hc_rej\": \"hc_rej>u\", \"cr_gross\": \"cr_gross>u\", \"cr_acc\": \"cr_acc>u\", \"cr_rej\": \"cr_rej>u\", \"hr_gross\": \"hr_gross>u\", \"hr_acc\": \"hr_acc>u\", \"hr_rej\": \"hr_rej>u\", \"adm\": \"adm>u\", \"red\": \"red._count\"}, \"script\": \"(params.cs_acc + params.hr_acc + params.sh_rej - params.sh_gross) + (params.sh_acc + params.cr_acc + params.hc_rej + params.hr_rej - params.hc_gross - params.hr_gross) + (params.hc_acc + params.cr_rej - params.adm - params.red - params.cr_gross)\", \"gap_policy\": \"insert_zeros\"}}, \"in_transit\": {\"bucket_script\": {\"buckets_path\": {\"sh_tr\": \"sh_tr>u\", \"hc_tr\": \"hc_tr>u\", \"cr_tr\": \"cr_tr>u\", \"hr_tr\": \"hr_tr>u\"}, \"script\": \"params.sh_tr + params.hc_tr + params.cr_tr + params.hr_tr\", \"gap_policy\": \"insert_zeros\"}}, \"gross_all\": {\"bucket_script\": {\"buckets_path\": {\"sh_gross\": \"sh_gross>u\", \"hc_gross\": \"hc_gross>u\", \"cr_gross\": \"cr_gross>u\", \"hr_gross\": \"hr_gross>u\"}, \"script\": \"params.sh_gross + params.hc_gross + params.cr_gross + params.hr_gross\", \"gap_policy\": \"insert_zeros\"}}, \"negative\": {\"bucket_script\": {\"buckets_path\": {\"cs_acc\": \"cs_acc>u\", \"sh_gross\": \"sh_gross>u\", \"sh_acc\": \"sh_acc>u\", \"sh_rej\": \"sh_rej>u\", \"hc_gross\": \"hc_gross>u\", \"hc_acc\": \"hc_acc>u\", \"hc_rej\": \"hc_rej>u\", \"cr_gross\": \"cr_gross>u\", \"cr_acc\": \"cr_acc>u\", \"cr_rej\": \"cr_rej>u\", \"hr_gross\": \"hr_gross>u\", \"hr_acc\": \"hr_acc>u\", \"hr_rej\": \"hr_rej>u\", \"adm\": \"adm>u\", \"red\": \"red._count\"}, \"script\": \"Math.min(params.cs_acc + params.hr_acc + params.sh_rej - params.sh_gross, 0) + Math.min(params.sh_acc + params.cr_acc + params.hc_rej + params.hr_rej - params.hc_gross - params.hr_gross, 0) + Math.min(params.hc_acc + params.cr_rej - params.adm - params.red - params.cr_gross, 0)\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "stockV2HeadlineCards",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "cs_acc",
+      "cs_gross",
+      "administered",
+      "adm_pct",
+      "total_sih",
+      "in_transit",
+      "gross_all",
+      "negative"
+    ],
+    "cardsList": [
+      {
+        "id": "dss_stock_v2_received_from_central",
+        "labelKey": "DSS_STOCK_V2_RECEIVED_FROM_CENTRAL",
+        "valuePath": "cs_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "cs_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v2_administered",
+        "labelKey": "DSS_STOCK_V2_ADMINISTERED",
+        "valuePath": "administered",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "pct": "adm_pct"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v2_stock_in_hand",
+        "labelKey": "DSS_STOCK_V2_STOCK_IN_HAND",
+        "valuePath": "total_sih",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "cs_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v2_in_transit",
+        "labelKey": "DSS_STOCK_V2_IN_TRANSIT",
+        "valuePath": "in_transit",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "gross_all"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v2_negative_stock",
+        "labelKey": "DSS_STOCK_V2_NEGATIVE_STOCK",
+        "valuePath": "negative",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "range",
+          "valuePath": "negative",
+          "ranges": [
+            {
+              "lt": 0,
+              "color": "#D4351C"
+            },
+            {
+              "gte": 0,
+              "color": "#00703C"
+            }
+          ]
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Kibana a1733da0 Stock-2026-V2 (Cumulative): headline tiles"
+  },
+  "stockV2ReceivedCards": {
+    "chartName": "DSS_STOCK_V2_RECEIVED",
+    "queries": [
+      {
+        "module": "COMMON",
+        "key": "stock",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"product\": \"Data.productName.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "select": {
+          "cs_acc": "all.buckets.all.cs_acc.u.value",
+          "cs_gross": "all.buckets.all.cs_gross.u.value",
+          "sh_acc": "all.buckets.all.sh_acc.u.value",
+          "sh_gross": "all.buckets.all.sh_gross.u.value",
+          "hc_acc": "all.buckets.all.hc_acc.u.value",
+          "hc_gross": "all.buckets.all.hc_gross.u.value"
+        },
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"cs_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Central Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cs_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Central Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "stockV2ReceivedCards",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "cs_acc",
+      "cs_gross",
+      "sh_acc",
+      "sh_gross",
+      "hc_acc",
+      "hc_gross"
+    ],
+    "cardsList": [
+      {
+        "id": "dss_stock_v2_state_received",
+        "labelKey": "DSS_STOCK_V2_STATE_RECEIVED",
+        "valuePath": "cs_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "cs_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v2_hf_received",
+        "labelKey": "DSS_STOCK_V2_HF_RECEIVED",
+        "valuePath": "sh_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "sh_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v2_cdd_received",
+        "labelKey": "DSS_STOCK_V2_CDD_RECEIVED",
+        "valuePath": "hc_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "hc_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Kibana a1733da0 Stock-2026-V2 (Cumulative): received tiles"
+  },
+  "stockV2IssuedCards": {
+    "chartName": "DSS_STOCK_V2_ISSUED",
+    "queries": [
+      {
+        "module": "COMMON",
+        "key": "stock",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"product\": \"Data.productName.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "select": {
+          "state_issued_net": "all.buckets.all.state_issued_net.value",
+          "sh_gross": "all.buckets.all.sh_gross.u.value",
+          "hf_issued_net": "all.buckets.all.hf_issued_net.value",
+          "hc_gross": "all.buckets.all.hc_gross.u.value",
+          "administered": "all.buckets.all.administered.value",
+          "red": "all.buckets.all.red.doc_count"
+        },
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"red\": {\"filter\": {\"term\": {\"Data.administrationStatus.keyword\": \"VISITED\"}}}, \"sh_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"adm\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"state_issued_net\": {\"bucket_script\": {\"buckets_path\": {\"sh_gross\": \"sh_gross>u\", \"sh_rej\": \"sh_rej>u\", \"hr_acc\": \"hr_acc>u\"}, \"script\": \"params.sh_gross - params.sh_rej - params.hr_acc\", \"gap_policy\": \"insert_zeros\"}}, \"hf_issued_net\": {\"bucket_script\": {\"buckets_path\": {\"hc_gross\": \"hc_gross>u\", \"hc_rej\": \"hc_rej>u\", \"cr_acc\": \"cr_acc>u\"}, \"script\": \"params.hc_gross - params.hc_rej - params.cr_acc\", \"gap_policy\": \"insert_zeros\"}}, \"administered\": {\"bucket_script\": {\"buckets_path\": {\"adm\": \"adm>u\", \"red\": \"red._count\"}, \"script\": \"params.adm + params.red\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "stockV2IssuedCards",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "state_issued_net",
+      "sh_gross",
+      "hf_issued_net",
+      "hc_gross",
+      "administered",
+      "red"
+    ],
+    "cardsList": [
+      {
+        "id": "dss_stock_v2_state_issued_net",
+        "labelKey": "DSS_STOCK_V2_STATE_ISSUED_NET",
+        "valuePath": "state_issued_net",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "sh_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v2_hf_issued_net",
+        "labelKey": "DSS_STOCK_V2_HF_ISSUED_NET",
+        "valuePath": "hf_issued_net",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "hc_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v2_cdd_administered",
+        "labelKey": "DSS_STOCK_V2_CDD_ADMINISTERED",
+        "valuePath": "administered",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "redose": "red"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Kibana a1733da0 Stock-2026-V2 (Cumulative): issued tiles"
+  },
+  "stockV2ReturnsCards": {
+    "chartName": "DSS_STOCK_V2_RETURNS",
+    "queries": [
+      {
+        "module": "COMMON",
+        "key": "stock",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"product\": \"Data.productName.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "select": {
+          "hr_acc": "all.buckets.all.hr_acc.u.value",
+          "hr_rej": "all.buckets.all.hr_rej.u.value",
+          "hr_gross": "all.buckets.all.hr_gross.u.value",
+          "cr_acc": "all.buckets.all.cr_acc.u.value",
+          "cr_gross": "all.buckets.all.cr_gross.u.value"
+        },
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "stockV2ReturnsCards",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "hr_acc",
+      "hr_rej",
+      "hr_gross",
+      "cr_acc",
+      "cr_gross"
+    ],
+    "cardsList": [
+      {
+        "id": "dss_stock_v2_state_returns_received",
+        "labelKey": "DSS_STOCK_V2_STATE_RETURNS_RECEIVED",
+        "valuePath": "hr_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "rejected": "hr_rej"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v2_hf_returned_net",
+        "labelKey": "DSS_STOCK_V2_HF_RETURNED_NET",
+        "valuePath": "hr_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "hr_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v2_cdd_returned_net",
+        "labelKey": "DSS_STOCK_V2_CDD_RETURNED_NET",
+        "valuePath": "cr_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "cr_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Kibana a1733da0 Stock-2026-V2 (Cumulative): returns tiles"
+  },
+  "stockV2StockInHandCards": {
+    "chartName": "DSS_STOCK_V2_STOCK_IN_HAND",
+    "queries": [
+      {
+        "module": "COMMON",
+        "key": "stock",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"product\": \"Data.productName.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "select": {
+          "state_sih": "all.buckets.all.state_sih.value",
+          "hf_sih": "all.buckets.all.hf_sih.value",
+          "cdd_sih": "all.buckets.all.cdd_sih.value"
+        },
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"cs_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Central Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"adm\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"red\": {\"filter\": {\"term\": {\"Data.administrationStatus.keyword\": \"VISITED\"}}}, \"state_sih\": {\"bucket_script\": {\"buckets_path\": {\"cs_acc\": \"cs_acc>u\", \"sh_gross\": \"sh_gross>u\", \"sh_rej\": \"sh_rej>u\", \"hr_acc\": \"hr_acc>u\"}, \"script\": \"params.cs_acc + params.hr_acc + params.sh_rej - params.sh_gross\", \"gap_policy\": \"insert_zeros\"}}, \"hf_sih\": {\"bucket_script\": {\"buckets_path\": {\"sh_acc\": \"sh_acc>u\", \"hc_gross\": \"hc_gross>u\", \"hc_rej\": \"hc_rej>u\", \"cr_acc\": \"cr_acc>u\", \"hr_gross\": \"hr_gross>u\", \"hr_rej\": \"hr_rej>u\"}, \"script\": \"params.sh_acc + params.cr_acc + params.hc_rej + params.hr_rej - params.hc_gross - params.hr_gross\", \"gap_policy\": \"insert_zeros\"}}, \"cdd_sih\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"hc_acc>u\", \"cr_gross\": \"cr_gross>u\", \"cr_rej\": \"cr_rej>u\", \"adm\": \"adm>u\", \"red\": \"red._count\"}, \"script\": \"params.hc_acc + params.cr_rej - params.adm - params.red - params.cr_gross\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "stockV2StockInHandCards",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "state_sih",
+      "hf_sih",
+      "cdd_sih"
+    ],
+    "cardsList": [
+      {
+        "id": "dss_stock_v2_state_stock_in_hand",
+        "labelKey": "DSS_STOCK_V2_STATE_STOCK_IN_HAND",
+        "valuePath": "state_sih",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v2_hf_stock_in_hand",
+        "labelKey": "DSS_STOCK_V2_HF_STOCK_IN_HAND",
+        "valuePath": "hf_sih",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v2_cdd_stock_in_hand",
+        "labelKey": "DSS_STOCK_V2_CDD_STOCK_IN_HAND",
+        "valuePath": "cdd_sih",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Kibana a1733da0 Stock-2026-V2 (Cumulative): stock_in_hand tiles"
+  },
+  "stockV2ByLgaTable": {
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "stockV2ByWardTable",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "LGA",
+    "excludedColumns": [],
+    "computedFields": [],
+    "isCumulative": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "sort": "sortKeyAsc",
+    "insight": {},
+    "filterKeys": [
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "chartName": "DSS_STOCK_V2_BY_BOUNDARY",
+    "_comment": "Stock by lga: HF → CDD → children (Kibana 'Stock by LGA' table)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"product\": \"Data.productName.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "aggrQuery": "{\"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.lga.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Stock issued to CDD gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock accepted by CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock in transit to CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock rejected by CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD returns gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD returns net\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock returned to State net\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock administered\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"Stock redose\": {\"filter\": {\"term\": {\"Data.administrationStatus.keyword\": \"VISITED\"}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD stock in hand\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"cr_gross\": \"Stock CDD returns gross>u\", \"cr_rej\": \"cr_rej>u\", \"adm\": \"Stock administered>u\", \"red\": \"Stock redose._count\"}, \"script\": \"params.hc_acc + params.cr_rej - params.adm - params.red - params.cr_gross\", \"gap_policy\": \"insert_zeros\"}}, \"Stock usage percent\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"adm\": \"Stock administered>u\"}, \"script\": \"params.hc_acc > 0 ? Math.round(params.adm / params.hc_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"Stock return percent\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"cr_acc\": \"Stock CDD returns net>u\"}, \"script\": \"params.hc_acc > 0 ? Math.round(params.cr_acc / params.hc_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ],
+    "aggregationPaths": [
+      "Stock issued to CDD gross",
+      "Stock accepted by CDD",
+      "Stock in transit to CDD",
+      "Stock rejected by CDD",
+      "Stock CDD returns gross",
+      "Stock CDD returns net",
+      "Stock returned to State net",
+      "Stock administered",
+      "Stock redose",
+      "Stock CDD stock in hand",
+      "Stock usage percent",
+      "Stock return percent"
+    ],
+    "pathDataTypeMapping": [
+      {
+        "Stock issued to CDD gross": "number"
+      },
+      {
+        "Stock accepted by CDD": "number"
+      },
+      {
+        "Stock in transit to CDD": "number"
+      },
+      {
+        "Stock rejected by CDD": "number"
+      },
+      {
+        "Stock CDD returns gross": "number"
+      },
+      {
+        "Stock CDD returns net": "number"
+      },
+      {
+        "Stock returned to State net": "number"
+      },
+      {
+        "Stock administered": "number"
+      },
+      {
+        "Stock redose": "number"
+      },
+      {
+        "Stock CDD stock in hand": "number"
+      },
+      {
+        "Stock usage percent": "percentage"
+      },
+      {
+        "Stock return percent": "percentage"
+      }
+    ]
+  },
+  "stockV2ByWardTable": {
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "stockV2ByHfTable",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Ward",
+    "excludedColumns": [],
+    "computedFields": [],
+    "isCumulative": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "sort": "sortKeyAsc",
+    "insight": {},
+    "filterKeys": [
+      {
+        "key": "ward",
+        "column": "Ward"
+      }
+    ],
+    "chartName": "DSS_STOCK_V2_BY_BOUNDARY",
+    "_comment": "Stock by ward: HF → CDD → children (Kibana 'Stock by LGA' table)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"product\": \"Data.productName.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "aggrQuery": "{\"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.ward.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Stock issued to CDD gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock accepted by CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock in transit to CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock rejected by CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD returns gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD returns net\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock returned to State net\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock administered\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"Stock redose\": {\"filter\": {\"term\": {\"Data.administrationStatus.keyword\": \"VISITED\"}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD stock in hand\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"cr_gross\": \"Stock CDD returns gross>u\", \"cr_rej\": \"cr_rej>u\", \"adm\": \"Stock administered>u\", \"red\": \"Stock redose._count\"}, \"script\": \"params.hc_acc + params.cr_rej - params.adm - params.red - params.cr_gross\", \"gap_policy\": \"insert_zeros\"}}, \"Stock usage percent\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"adm\": \"Stock administered>u\"}, \"script\": \"params.hc_acc > 0 ? Math.round(params.adm / params.hc_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"Stock return percent\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"cr_acc\": \"Stock CDD returns net>u\"}, \"script\": \"params.hc_acc > 0 ? Math.round(params.cr_acc / params.hc_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ],
+    "aggregationPaths": [
+      "Stock issued to CDD gross",
+      "Stock accepted by CDD",
+      "Stock in transit to CDD",
+      "Stock rejected by CDD",
+      "Stock CDD returns gross",
+      "Stock CDD returns net",
+      "Stock returned to State net",
+      "Stock administered",
+      "Stock redose",
+      "Stock CDD stock in hand",
+      "Stock usage percent",
+      "Stock return percent"
+    ],
+    "pathDataTypeMapping": [
+      {
+        "Stock issued to CDD gross": "number"
+      },
+      {
+        "Stock accepted by CDD": "number"
+      },
+      {
+        "Stock in transit to CDD": "number"
+      },
+      {
+        "Stock rejected by CDD": "number"
+      },
+      {
+        "Stock CDD returns gross": "number"
+      },
+      {
+        "Stock CDD returns net": "number"
+      },
+      {
+        "Stock returned to State net": "number"
+      },
+      {
+        "Stock administered": "number"
+      },
+      {
+        "Stock redose": "number"
+      },
+      {
+        "Stock CDD stock in hand": "number"
+      },
+      {
+        "Stock usage percent": "percentage"
+      },
+      {
+        "Stock return percent": "percentage"
+      }
+    ]
+  },
+  "stockV2ByHfTable": {
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Health Facility",
+    "excludedColumns": [],
+    "computedFields": [],
+    "isCumulative": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "sort": "sortKeyAsc",
+    "insight": {},
+    "filterKeys": [
+      {
+        "key": "healthFacility",
+        "column": "Health Facility"
+      }
+    ],
+    "chartName": "DSS_STOCK_V2_BY_BOUNDARY",
+    "_comment": "Stock by healthFacility: HF → CDD → children (Kibana 'Stock by LGA' table)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"product\": \"Data.productName.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "aggrQuery": "{\"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Stock issued to CDD gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock accepted by CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock in transit to CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock rejected by CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD returns gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD returns net\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock returned to State net\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock administered\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"Stock redose\": {\"filter\": {\"term\": {\"Data.administrationStatus.keyword\": \"VISITED\"}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD stock in hand\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"cr_gross\": \"Stock CDD returns gross>u\", \"cr_rej\": \"cr_rej>u\", \"adm\": \"Stock administered>u\", \"red\": \"Stock redose._count\"}, \"script\": \"params.hc_acc + params.cr_rej - params.adm - params.red - params.cr_gross\", \"gap_policy\": \"insert_zeros\"}}, \"Stock usage percent\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"adm\": \"Stock administered>u\"}, \"script\": \"params.hc_acc > 0 ? Math.round(params.adm / params.hc_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"Stock return percent\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"cr_acc\": \"Stock CDD returns net>u\"}, \"script\": \"params.hc_acc > 0 ? Math.round(params.cr_acc / params.hc_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ],
+    "aggregationPaths": [
+      "Stock issued to CDD gross",
+      "Stock accepted by CDD",
+      "Stock in transit to CDD",
+      "Stock rejected by CDD",
+      "Stock CDD returns gross",
+      "Stock CDD returns net",
+      "Stock returned to State net",
+      "Stock administered",
+      "Stock redose",
+      "Stock CDD stock in hand",
+      "Stock usage percent",
+      "Stock return percent"
+    ],
+    "pathDataTypeMapping": [
+      {
+        "Stock issued to CDD gross": "number"
+      },
+      {
+        "Stock accepted by CDD": "number"
+      },
+      {
+        "Stock in transit to CDD": "number"
+      },
+      {
+        "Stock rejected by CDD": "number"
+      },
+      {
+        "Stock CDD returns gross": "number"
+      },
+      {
+        "Stock CDD returns net": "number"
+      },
+      {
+        "Stock returned to State net": "number"
+      },
+      {
+        "Stock administered": "number"
+      },
+      {
+        "Stock redose": "number"
+      },
+      {
+        "Stock CDD stock in hand": "number"
+      },
+      {
+        "Stock usage percent": "percentage"
+      },
+      {
+        "Stock return percent": "percentage"
+      }
+    ]
+  },
+  "stockV2PendingIssuesTable": {
+    "chartType": "xtableNested",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "LGA",
+    "excludedColumns": [],
+    "computedFields": [],
+    "isCumulative": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "sort": "sortKeyAsc",
+    "insight": {},
+    "filterKeys": [],
+    "chartName": "DSS_STOCK_V2_PENDING",
+    "_comment": "Pending issues: still IN_TRANSIT (Kibana 'Pending' table)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"product\": \"Data.productName.keyword\"}",
+        "indexName": "oy-stock-index-v1",
+        "aggrQuery": "{\"aggs\": {\"PENDING\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"LGA\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.lga.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Health facility\": {\"terms\": {\"field\": \"Data.facilityName.keyword\", \"size\": 2000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"units\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}}}"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "LGA",
+        "plotName": "LGA"
+      },
+      {
+        "aggName": "Health facility",
+        "plotName": "Health Facility"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Stock units in transit",
+        "path": "units.value",
+        "valueType": "number"
+      },
+      {
+        "name": "Stock records",
+        "path": "doc_count",
+        "valueType": "number"
+      }
+    ]
+  },
+  "stockV2PendingReturnsTable": {
+    "chartType": "xtableNested",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "LGA",
+    "excludedColumns": [],
+    "computedFields": [],
+    "isCumulative": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "sort": "sortKeyAsc",
+    "insight": {},
+    "filterKeys": [],
+    "chartName": "DSS_STOCK_V2_PENDING",
+    "_comment": "Pending returns: still IN_TRANSIT (Kibana 'Pending' table)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"product\": \"Data.productName.keyword\"}",
+        "indexName": "oy-stock-index-v1",
+        "aggrQuery": "{\"aggs\": {\"PENDING\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"LGA\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.lga.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Health facility\": {\"terms\": {\"field\": \"Data.transactingFacilityName.keyword\", \"size\": 2000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"units\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}}}"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "LGA",
+        "plotName": "LGA"
+      },
+      {
+        "aggName": "Health facility",
+        "plotName": "Health Facility"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Stock units in transit",
+        "path": "units.value",
+        "valueType": "number"
+      },
+      {
+        "name": "Stock records",
+        "path": "doc_count",
+        "valueType": "number"
+      }
+    ]
+  },
+  "stockV2TransferStatusBar": {
+    "chartName": "DSS_STOCK_V2_TRANSFER_STATUS",
+    "chartType": "line",
+    "valueType": "percentage",
+    "isCumulative": false,
+    "interval": "day",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Stock accepted",
+      "Stock in transit",
+      "Stock rejected"
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "showLabel": true,
+    "filterKeys": [],
+    "_comment": "Transfer status: share of units per leg (Kibana 100% stacked bar)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"product\": \"Data.productName.keyword\"}",
+        "indexName": "oy-stock-index-v1",
+        "aggrQuery": "{\"aggs\": {\"Stock accepted\": {\"filters\": {\"keyed\": false, \"filters\": {\"1.DSS_STOCK_LEG_STATE_TO_HF.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"2.DSS_STOCK_LEG_HF_TO_CDD.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"3.DSS_STOCK_LEG_CDD_TO_HF.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"4.DSS_STOCK_LEG_HF_TO_STATE.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}}}, \"aggs\": {\"gross\": {\"sum\": {\"field\": \"Data.physicalCount\"}}, \"part\": {\"filter\": {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"share\": {\"bucket_script\": {\"buckets_path\": {\"p\": \"part>u\", \"g\": \"gross\"}, \"script\": \"params.g > 0 ? Math.round(params.p / params.g * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}, \"Stock in transit\": {\"filters\": {\"keyed\": false, \"filters\": {\"1.DSS_STOCK_LEG_STATE_TO_HF.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"2.DSS_STOCK_LEG_HF_TO_CDD.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"3.DSS_STOCK_LEG_CDD_TO_HF.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"4.DSS_STOCK_LEG_HF_TO_STATE.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}}}, \"aggs\": {\"gross\": {\"sum\": {\"field\": \"Data.physicalCount\"}}, \"part\": {\"filter\": {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"share\": {\"bucket_script\": {\"buckets_path\": {\"p\": \"part>u\", \"g\": \"gross\"}, \"script\": \"params.g > 0 ? Math.round(params.p / params.g * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}, \"Stock rejected\": {\"filters\": {\"keyed\": false, \"filters\": {\"1.DSS_STOCK_LEG_STATE_TO_HF.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"2.DSS_STOCK_LEG_HF_TO_CDD.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"3.DSS_STOCK_LEG_CDD_TO_HF.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"4.DSS_STOCK_LEG_HF_TO_STATE.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}}}, \"aggs\": {\"gross\": {\"sum\": {\"field\": \"Data.physicalCount\"}}, \"part\": {\"filter\": {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"share\": {\"bucket_script\": {\"buckets_path\": {\"p\": \"part>u\", \"g\": \"gross\"}, \"script\": \"params.g > 0 ? Math.round(params.p / params.g * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ]
+  },
+  "stockV2UsageByLgaBar": {
+    "chartName": "DSS_STOCK_V2_USAGE_BY_LGA",
+    "chartType": "line",
+    "valueType": "percentage",
+    "isCumulative": false,
+    "interval": "day",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Stock usage percent",
+      "Stock return percent"
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "showLabel": true,
+    "filterKeys": [],
+    "_comment": "Usage = administered (day 1) ÷ accepted by CDDs; Return = CDD returns accepted ÷ accepted by CDDs",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"product\": \"Data.productName.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "aggrQuery": "{\"aggs\": {\"Stock usage percent\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.lga.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"adm\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"hc_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"pct\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"hc_acc>u\", \"adm\": \"adm>u\"}, \"script\": \"params.hc_acc > 0 ? Math.round(params.adm / params.hc_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}, \"Stock return percent\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.lga.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"pct\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"hc_acc>u\", \"cr_acc\": \"cr_acc>u\"}, \"script\": \"params.hc_acc > 0 ? Math.round(params.cr_acc / params.hc_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ]
+  },
+  "stockV2PendingRejectedByLgaBar": {
+    "chartName": "DSS_STOCK_V2_PENDING_REJECTED_BY_LGA",
+    "chartType": "line",
+    "valueType": "number",
+    "isCumulative": false,
+    "interval": "day",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Stock issues in transit",
+      "Stock issues rejected",
+      "Stock returns in transit",
+      "Stock returns rejected"
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "showLabel": true,
+    "filterKeys": [],
+    "_comment": "Per LGA: stock still in transit or refused (issues HF → CDD, returns CDD → HF)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"product\": \"Data.productName.keyword\"}",
+        "indexName": "oy-stock-index-v1",
+        "aggrQuery": "{\"aggs\": {\"Stock issues in transit\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"LGA\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.lga.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"Stock issues rejected\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"LGA\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.lga.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"Stock returns in transit\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"LGA\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.lga.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}, \"Stock returns rejected\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"LGA\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.lga.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}"
+      }
+    ]
+  },
+  "stockV3HeadlineCards": {
+    "chartName": "DSS_STOCK_V3_HEADLINE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "key": "stock",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "select": {
+          "cs_acc": "all.buckets.all.cs_acc.u.value",
+          "administered": "all.buckets.all.administered.value",
+          "adm_pct": "all.buckets.all.adm_pct.value",
+          "total_sih": "all.buckets.all.total_sih.value",
+          "in_transit": "all.buckets.all.in_transit.value",
+          "negative": "all.buckets.all.negative.value"
+        },
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"cs_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Central Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"adm\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"red\": {\"filter\": {\"term\": {\"Data.administrationStatus.keyword\": \"VISITED\"}}}, \"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_tr\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_tr\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_tr\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_tr\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"administered\": {\"bucket_script\": {\"buckets_path\": {\"adm\": \"adm>u\", \"red\": \"red._count\"}, \"script\": \"params.adm + params.red\", \"gap_policy\": \"insert_zeros\"}}, \"adm_pct\": {\"bucket_script\": {\"buckets_path\": {\"cs_acc\": \"cs_acc>u\", \"adm\": \"adm>u\", \"red\": \"red._count\"}, \"script\": \"params.cs_acc > 0 ? Math.round((params.adm + params.red) / params.cs_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"total_sih\": {\"bucket_script\": {\"buckets_path\": {\"cs_acc\": \"cs_acc>u\", \"sh_gross\": \"sh_gross>u\", \"sh_acc\": \"sh_acc>u\", \"sh_rej\": \"sh_rej>u\", \"hc_gross\": \"hc_gross>u\", \"hc_acc\": \"hc_acc>u\", \"hc_rej\": \"hc_rej>u\", \"cr_gross\": \"cr_gross>u\", \"cr_acc\": \"cr_acc>u\", \"cr_rej\": \"cr_rej>u\", \"hr_gross\": \"hr_gross>u\", \"hr_acc\": \"hr_acc>u\", \"hr_rej\": \"hr_rej>u\", \"adm\": \"adm>u\", \"red\": \"red._count\"}, \"script\": \"(params.cs_acc + params.hr_acc + params.sh_rej - params.sh_gross) + (params.sh_acc + params.cr_acc + params.hc_rej + params.hr_rej - params.hc_gross - params.hr_gross) + (params.hc_acc + params.cr_rej - params.adm - params.red - params.cr_gross)\", \"gap_policy\": \"insert_zeros\"}}, \"in_transit\": {\"bucket_script\": {\"buckets_path\": {\"sh_tr\": \"sh_tr>u\", \"hc_tr\": \"hc_tr>u\", \"cr_tr\": \"cr_tr>u\", \"hr_tr\": \"hr_tr>u\"}, \"script\": \"params.sh_tr + params.hc_tr + params.cr_tr + params.hr_tr\", \"gap_policy\": \"insert_zeros\"}}, \"negative\": {\"bucket_script\": {\"buckets_path\": {\"cs_acc\": \"cs_acc>u\", \"sh_gross\": \"sh_gross>u\", \"sh_acc\": \"sh_acc>u\", \"sh_rej\": \"sh_rej>u\", \"hc_gross\": \"hc_gross>u\", \"hc_acc\": \"hc_acc>u\", \"hc_rej\": \"hc_rej>u\", \"cr_gross\": \"cr_gross>u\", \"cr_acc\": \"cr_acc>u\", \"cr_rej\": \"cr_rej>u\", \"hr_gross\": \"hr_gross>u\", \"hr_acc\": \"hr_acc>u\", \"hr_rej\": \"hr_rej>u\", \"adm\": \"adm>u\", \"red\": \"red._count\"}, \"script\": \"Math.min(params.cs_acc + params.hr_acc + params.sh_rej - params.sh_gross, 0) + Math.min(params.sh_acc + params.cr_acc + params.hc_rej + params.hr_rej - params.hc_gross - params.hr_gross, 0) + Math.min(params.hc_acc + params.cr_rej - params.adm - params.red - params.cr_gross, 0)\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "stockV3HeadlineCards",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "cs_acc",
+      "administered",
+      "adm_pct",
+      "total_sih",
+      "in_transit",
+      "negative"
+    ],
+    "cardsList": [
+      {
+        "id": "dss_stock_v3_received_from_central",
+        "labelKey": "DSS_STOCK_V3_RECEIVED_FROM_CENTRAL",
+        "valuePath": "cs_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_administered",
+        "labelKey": "DSS_STOCK_V3_ADMINISTERED",
+        "valuePath": "administered",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "pct": "adm_pct"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_stock_in_hand",
+        "labelKey": "DSS_STOCK_V3_STOCK_IN_HAND",
+        "valuePath": "total_sih",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_in_transit",
+        "labelKey": "DSS_STOCK_V3_IN_TRANSIT",
+        "valuePath": "in_transit",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_negative_stock",
+        "labelKey": "DSS_STOCK_V3_NEGATIVE_STOCK",
+        "valuePath": "negative",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "range",
+          "valuePath": "negative",
+          "ranges": [
+            {
+              "lt": 0,
+              "color": "#D4351C"
+            },
+            {
+              "gte": 0,
+              "color": "#00703C"
+            }
+          ]
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Kibana 855ea670 Stock-2026-V2: headline tiles"
+  },
+  "stockV3ReceivedSPAQ1Cards": {
+    "chartName": "DSS_STOCK_V3_RECEIVED_SPAQ_1",
+    "queries": [
+      {
+        "module": "COMMON",
+        "key": "stock",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "select": {
+          "cs_acc": "all.buckets.all.cs_acc.u.value",
+          "cs_gross": "all.buckets.all.cs_gross.u.value",
+          "sh_acc": "all.buckets.all.sh_acc.u.value",
+          "sh_gross": "all.buckets.all.sh_gross.u.value",
+          "hc_acc": "all.buckets.all.hc_acc.u.value",
+          "hc_gross": "all.buckets.all.hc_gross.u.value"
+        },
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 1\"}}}}, \"aggs\": {\"cs_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Central Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cs_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Central Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "stockV3ReceivedSPAQ1Cards",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "cs_acc",
+      "cs_gross",
+      "sh_acc",
+      "sh_gross",
+      "hc_acc",
+      "hc_gross"
+    ],
+    "cardsList": [
+      {
+        "id": "dss_stock_v3_state_received_spaq1",
+        "labelKey": "DSS_STOCK_V3_STATE_RECEIVED_SPAQ1",
+        "valuePath": "cs_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "cs_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_hf_received_spaq1",
+        "labelKey": "DSS_STOCK_V3_HF_RECEIVED_SPAQ1",
+        "valuePath": "sh_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "sh_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_cdd_received_spaq1",
+        "labelKey": "DSS_STOCK_V3_CDD_RECEIVED_SPAQ1",
+        "valuePath": "hc_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "hc_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Kibana 855ea670 Stock-2026-V2: received tiles for SPAQ 1"
+  },
+  "stockV3ReceivedSPAQ2Cards": {
+    "chartName": "DSS_STOCK_V3_RECEIVED_SPAQ_2",
+    "queries": [
+      {
+        "module": "COMMON",
+        "key": "stock",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "select": {
+          "cs_acc": "all.buckets.all.cs_acc.u.value",
+          "cs_gross": "all.buckets.all.cs_gross.u.value",
+          "sh_acc": "all.buckets.all.sh_acc.u.value",
+          "sh_gross": "all.buckets.all.sh_gross.u.value",
+          "hc_acc": "all.buckets.all.hc_acc.u.value",
+          "hc_gross": "all.buckets.all.hc_gross.u.value"
+        },
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 2\"}}}}, \"aggs\": {\"cs_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Central Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cs_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Central Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "stockV3ReceivedSPAQ2Cards",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "cs_acc",
+      "cs_gross",
+      "sh_acc",
+      "sh_gross",
+      "hc_acc",
+      "hc_gross"
+    ],
+    "cardsList": [
+      {
+        "id": "dss_stock_v3_state_received_spaq2",
+        "labelKey": "DSS_STOCK_V3_STATE_RECEIVED_SPAQ2",
+        "valuePath": "cs_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "cs_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_hf_received_spaq2",
+        "labelKey": "DSS_STOCK_V3_HF_RECEIVED_SPAQ2",
+        "valuePath": "sh_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "sh_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_cdd_received_spaq2",
+        "labelKey": "DSS_STOCK_V3_CDD_RECEIVED_SPAQ2",
+        "valuePath": "hc_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "hc_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Kibana 855ea670 Stock-2026-V2: received tiles for SPAQ 2"
+  },
+  "stockV3IssuedSPAQ1Cards": {
+    "chartName": "DSS_STOCK_V3_ISSUED_SPAQ_1",
+    "queries": [
+      {
+        "module": "COMMON",
+        "key": "stock",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "select": {
+          "state_issued_net": "all.buckets.all.state_issued_net.value",
+          "sh_gross": "all.buckets.all.sh_gross.u.value",
+          "hf_issued_net": "all.buckets.all.hf_issued_net.value",
+          "hc_gross": "all.buckets.all.hc_gross.u.value",
+          "administered": "all.buckets.all.administered.value",
+          "red": "all.buckets.all.red.doc_count"
+        },
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 1\"}}}}, \"aggs\": {\"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"red\": {\"filter\": {\"term\": {\"Data.administrationStatus.keyword\": \"VISITED\"}}}, \"sh_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"adm\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"state_issued_net\": {\"bucket_script\": {\"buckets_path\": {\"sh_gross\": \"sh_gross>u\", \"sh_rej\": \"sh_rej>u\", \"hr_acc\": \"hr_acc>u\"}, \"script\": \"params.sh_gross - params.sh_rej - params.hr_acc\", \"gap_policy\": \"insert_zeros\"}}, \"hf_issued_net\": {\"bucket_script\": {\"buckets_path\": {\"hc_gross\": \"hc_gross>u\", \"hc_rej\": \"hc_rej>u\", \"cr_acc\": \"cr_acc>u\"}, \"script\": \"params.hc_gross - params.hc_rej - params.cr_acc\", \"gap_policy\": \"insert_zeros\"}}, \"administered\": {\"bucket_script\": {\"buckets_path\": {\"adm\": \"adm>u\", \"red\": \"red._count\"}, \"script\": \"params.adm + params.red\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "stockV3IssuedSPAQ1Cards",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "state_issued_net",
+      "sh_gross",
+      "hf_issued_net",
+      "hc_gross",
+      "administered",
+      "red"
+    ],
+    "cardsList": [
+      {
+        "id": "dss_stock_v3_state_issued_net_spaq1",
+        "labelKey": "DSS_STOCK_V3_STATE_ISSUED_NET_SPAQ1",
+        "valuePath": "state_issued_net",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "sh_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_hf_issued_net_spaq1",
+        "labelKey": "DSS_STOCK_V3_HF_ISSUED_NET_SPAQ1",
+        "valuePath": "hf_issued_net",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "hc_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_cdd_administered_spaq1",
+        "labelKey": "DSS_STOCK_V3_CDD_ADMINISTERED_SPAQ1",
+        "valuePath": "administered",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "redose": "red"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Kibana 855ea670 Stock-2026-V2: issued tiles for SPAQ 1"
+  },
+  "stockV3IssuedSPAQ2Cards": {
+    "chartName": "DSS_STOCK_V3_ISSUED_SPAQ_2",
+    "queries": [
+      {
+        "module": "COMMON",
+        "key": "stock",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "select": {
+          "state_issued_net": "all.buckets.all.state_issued_net.value",
+          "sh_gross": "all.buckets.all.sh_gross.u.value",
+          "hf_issued_net": "all.buckets.all.hf_issued_net.value",
+          "hc_gross": "all.buckets.all.hc_gross.u.value",
+          "administered": "all.buckets.all.administered.value",
+          "red": "all.buckets.all.red.doc_count"
+        },
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 2\"}}}}, \"aggs\": {\"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"red\": {\"filter\": {\"term\": {\"Data.administrationStatus.keyword\": \"VISITED\"}}}, \"sh_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"adm\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"state_issued_net\": {\"bucket_script\": {\"buckets_path\": {\"sh_gross\": \"sh_gross>u\", \"sh_rej\": \"sh_rej>u\", \"hr_acc\": \"hr_acc>u\"}, \"script\": \"params.sh_gross - params.sh_rej - params.hr_acc\", \"gap_policy\": \"insert_zeros\"}}, \"hf_issued_net\": {\"bucket_script\": {\"buckets_path\": {\"hc_gross\": \"hc_gross>u\", \"hc_rej\": \"hc_rej>u\", \"cr_acc\": \"cr_acc>u\"}, \"script\": \"params.hc_gross - params.hc_rej - params.cr_acc\", \"gap_policy\": \"insert_zeros\"}}, \"administered\": {\"bucket_script\": {\"buckets_path\": {\"adm\": \"adm>u\", \"red\": \"red._count\"}, \"script\": \"params.adm + params.red\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "stockV3IssuedSPAQ2Cards",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "state_issued_net",
+      "sh_gross",
+      "hf_issued_net",
+      "hc_gross",
+      "administered",
+      "red"
+    ],
+    "cardsList": [
+      {
+        "id": "dss_stock_v3_state_issued_net_spaq2",
+        "labelKey": "DSS_STOCK_V3_STATE_ISSUED_NET_SPAQ2",
+        "valuePath": "state_issued_net",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "sh_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_hf_issued_net_spaq2",
+        "labelKey": "DSS_STOCK_V3_HF_ISSUED_NET_SPAQ2",
+        "valuePath": "hf_issued_net",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "hc_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_cdd_administered_spaq2",
+        "labelKey": "DSS_STOCK_V3_CDD_ADMINISTERED_SPAQ2",
+        "valuePath": "administered",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "redose": "red"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Kibana 855ea670 Stock-2026-V2: issued tiles for SPAQ 2"
+  },
+  "stockV3ReturnsSPAQ1Cards": {
+    "chartName": "DSS_STOCK_V3_RETURNS_SPAQ_1",
+    "queries": [
+      {
+        "module": "COMMON",
+        "key": "stock",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "select": {
+          "hr_acc": "all.buckets.all.hr_acc.u.value",
+          "hr_rej": "all.buckets.all.hr_rej.u.value",
+          "hr_gross": "all.buckets.all.hr_gross.u.value",
+          "cr_acc": "all.buckets.all.cr_acc.u.value",
+          "cr_gross": "all.buckets.all.cr_gross.u.value"
+        },
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 1\"}}}}, \"aggs\": {\"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "stockV3ReturnsSPAQ1Cards",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "hr_acc",
+      "hr_rej",
+      "hr_gross",
+      "cr_acc",
+      "cr_gross"
+    ],
+    "cardsList": [
+      {
+        "id": "dss_stock_v3_state_returns_received_spaq1",
+        "labelKey": "DSS_STOCK_V3_STATE_RETURNS_RECEIVED_SPAQ1",
+        "valuePath": "hr_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "rejected": "hr_rej"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_hf_returned_net_spaq1",
+        "labelKey": "DSS_STOCK_V3_HF_RETURNED_NET_SPAQ1",
+        "valuePath": "hr_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "hr_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_cdd_returned_net_spaq1",
+        "labelKey": "DSS_STOCK_V3_CDD_RETURNED_NET_SPAQ1",
+        "valuePath": "cr_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "cr_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Kibana 855ea670 Stock-2026-V2: returns tiles for SPAQ 1"
+  },
+  "stockV3ReturnsSPAQ2Cards": {
+    "chartName": "DSS_STOCK_V3_RETURNS_SPAQ_2",
+    "queries": [
+      {
+        "module": "COMMON",
+        "key": "stock",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "select": {
+          "hr_acc": "all.buckets.all.hr_acc.u.value",
+          "hr_rej": "all.buckets.all.hr_rej.u.value",
+          "hr_gross": "all.buckets.all.hr_gross.u.value",
+          "cr_acc": "all.buckets.all.cr_acc.u.value",
+          "cr_gross": "all.buckets.all.cr_gross.u.value"
+        },
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 2\"}}}}, \"aggs\": {\"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "stockV3ReturnsSPAQ2Cards",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "hr_acc",
+      "hr_rej",
+      "hr_gross",
+      "cr_acc",
+      "cr_gross"
+    ],
+    "cardsList": [
+      {
+        "id": "dss_stock_v3_state_returns_received_spaq2",
+        "labelKey": "DSS_STOCK_V3_STATE_RETURNS_RECEIVED_SPAQ2",
+        "valuePath": "hr_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "rejected": "hr_rej"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_hf_returned_net_spaq2",
+        "labelKey": "DSS_STOCK_V3_HF_RETURNED_NET_SPAQ2",
+        "valuePath": "hr_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "hr_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_cdd_returned_net_spaq2",
+        "labelKey": "DSS_STOCK_V3_CDD_RETURNED_NET_SPAQ2",
+        "valuePath": "cr_acc",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "gross": "cr_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Kibana 855ea670 Stock-2026-V2: returns tiles for SPAQ 2"
+  },
+  "stockV3StockInHandSPAQ1Cards": {
+    "chartName": "DSS_STOCK_V3_STOCK_IN_HAND_SPAQ_1",
+    "queries": [
+      {
+        "module": "COMMON",
+        "key": "stock",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "select": {
+          "state_sih": "all.buckets.all.state_sih.value",
+          "hf_sih": "all.buckets.all.hf_sih.value",
+          "cdd_sih": "all.buckets.all.cdd_sih.value"
+        },
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 1\"}}}}, \"aggs\": {\"cs_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Central Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"adm\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"red\": {\"filter\": {\"term\": {\"Data.administrationStatus.keyword\": \"VISITED\"}}}, \"state_sih\": {\"bucket_script\": {\"buckets_path\": {\"cs_acc\": \"cs_acc>u\", \"sh_gross\": \"sh_gross>u\", \"sh_rej\": \"sh_rej>u\", \"hr_acc\": \"hr_acc>u\"}, \"script\": \"params.cs_acc + params.hr_acc + params.sh_rej - params.sh_gross\", \"gap_policy\": \"insert_zeros\"}}, \"hf_sih\": {\"bucket_script\": {\"buckets_path\": {\"sh_acc\": \"sh_acc>u\", \"hc_gross\": \"hc_gross>u\", \"hc_rej\": \"hc_rej>u\", \"cr_acc\": \"cr_acc>u\", \"hr_gross\": \"hr_gross>u\", \"hr_rej\": \"hr_rej>u\"}, \"script\": \"params.sh_acc + params.cr_acc + params.hc_rej + params.hr_rej - params.hc_gross - params.hr_gross\", \"gap_policy\": \"insert_zeros\"}}, \"cdd_sih\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"hc_acc>u\", \"cr_gross\": \"cr_gross>u\", \"cr_rej\": \"cr_rej>u\", \"adm\": \"adm>u\", \"red\": \"red._count\"}, \"script\": \"params.hc_acc + params.cr_rej - params.adm - params.red - params.cr_gross\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "stockV3StockInHandSPAQ1Cards",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "state_sih",
+      "hf_sih",
+      "cdd_sih"
+    ],
+    "cardsList": [
+      {
+        "id": "dss_stock_v3_state_stock_in_hand_spaq1",
+        "labelKey": "DSS_STOCK_V3_STATE_STOCK_IN_HAND_SPAQ1",
+        "valuePath": "state_sih",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_hf_stock_in_hand_spaq1",
+        "labelKey": "DSS_STOCK_V3_HF_STOCK_IN_HAND_SPAQ1",
+        "valuePath": "hf_sih",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_cdd_stock_in_hand_spaq1",
+        "labelKey": "DSS_STOCK_V3_CDD_STOCK_IN_HAND_SPAQ1",
+        "valuePath": "cdd_sih",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Kibana 855ea670 Stock-2026-V2: stock_in_hand tiles for SPAQ 1"
+  },
+  "stockV3StockInHandSPAQ2Cards": {
+    "chartName": "DSS_STOCK_V3_STOCK_IN_HAND_SPAQ_2",
+    "queries": [
+      {
+        "module": "COMMON",
+        "key": "stock",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "select": {
+          "state_sih": "all.buckets.all.state_sih.value",
+          "hf_sih": "all.buckets.all.hf_sih.value",
+          "cdd_sih": "all.buckets.all.cdd_sih.value"
+        },
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 2\"}}}}, \"aggs\": {\"cs_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Central Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"adm\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"red\": {\"filter\": {\"term\": {\"Data.administrationStatus.keyword\": \"VISITED\"}}}, \"state_sih\": {\"bucket_script\": {\"buckets_path\": {\"cs_acc\": \"cs_acc>u\", \"sh_gross\": \"sh_gross>u\", \"sh_rej\": \"sh_rej>u\", \"hr_acc\": \"hr_acc>u\"}, \"script\": \"params.cs_acc + params.hr_acc + params.sh_rej - params.sh_gross\", \"gap_policy\": \"insert_zeros\"}}, \"hf_sih\": {\"bucket_script\": {\"buckets_path\": {\"sh_acc\": \"sh_acc>u\", \"hc_gross\": \"hc_gross>u\", \"hc_rej\": \"hc_rej>u\", \"cr_acc\": \"cr_acc>u\", \"hr_gross\": \"hr_gross>u\", \"hr_rej\": \"hr_rej>u\"}, \"script\": \"params.sh_acc + params.cr_acc + params.hc_rej + params.hr_rej - params.hc_gross - params.hr_gross\", \"gap_policy\": \"insert_zeros\"}}, \"cdd_sih\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"hc_acc>u\", \"cr_gross\": \"cr_gross>u\", \"cr_rej\": \"cr_rej>u\", \"adm\": \"adm>u\", \"red\": \"red._count\"}, \"script\": \"params.hc_acc + params.cr_rej - params.adm - params.red - params.cr_gross\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "stockV3StockInHandSPAQ2Cards",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": []
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "state_sih",
+      "hf_sih",
+      "cdd_sih"
+    ],
+    "cardsList": [
+      {
+        "id": "dss_stock_v3_state_stock_in_hand_spaq2",
+        "labelKey": "DSS_STOCK_V3_STATE_STOCK_IN_HAND_SPAQ2",
+        "valuePath": "state_sih",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_hf_stock_in_hand_spaq2",
+        "labelKey": "DSS_STOCK_V3_HF_STOCK_IN_HAND_SPAQ2",
+        "valuePath": "hf_sih",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "dss_stock_v3_cdd_stock_in_hand_spaq2",
+        "labelKey": "DSS_STOCK_V3_CDD_STOCK_IN_HAND_SPAQ2",
+        "valuePath": "cdd_sih",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Kibana 855ea670 Stock-2026-V2: stock_in_hand tiles for SPAQ 2"
+  },
+  "stockV3TransferStatusBar": {
+    "chartName": "DSS_STOCK_V3_TRANSFER_STATUS",
+    "chartType": "line",
+    "valueType": "percentage",
+    "isCumulative": false,
+    "interval": "day",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Stock accepted",
+      "Stock in transit",
+      "Stock rejected"
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "showLabel": true,
+    "filterKeys": [],
+    "_comment": "Transfer status: share of units per leg (Kibana 100% stacked bar)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+        "indexName": "oy-stock-index-v1",
+        "aggrQuery": "{\"aggs\": {\"Stock accepted\": {\"filters\": {\"keyed\": false, \"filters\": {\"1.DSS_STOCK_LEG_STATE_TO_HF.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"2.DSS_STOCK_LEG_HF_TO_CDD.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"3.DSS_STOCK_LEG_CDD_TO_HF.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"4.DSS_STOCK_LEG_HF_TO_STATE.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}}}, \"aggs\": {\"gross\": {\"sum\": {\"field\": \"Data.physicalCount\"}}, \"part\": {\"filter\": {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"share\": {\"bucket_script\": {\"buckets_path\": {\"p\": \"part>u\", \"g\": \"gross\"}, \"script\": \"params.g > 0 ? Math.round(params.p / params.g * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}, \"Stock in transit\": {\"filters\": {\"keyed\": false, \"filters\": {\"1.DSS_STOCK_LEG_STATE_TO_HF.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"2.DSS_STOCK_LEG_HF_TO_CDD.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"3.DSS_STOCK_LEG_CDD_TO_HF.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"4.DSS_STOCK_LEG_HF_TO_STATE.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}}}, \"aggs\": {\"gross\": {\"sum\": {\"field\": \"Data.physicalCount\"}}, \"part\": {\"filter\": {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"share\": {\"bucket_script\": {\"buckets_path\": {\"p\": \"part>u\", \"g\": \"gross\"}, \"script\": \"params.g > 0 ? Math.round(params.p / params.g * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}, \"Stock rejected\": {\"filters\": {\"keyed\": false, \"filters\": {\"1.DSS_STOCK_LEG_STATE_TO_HF.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"2.DSS_STOCK_LEG_HF_TO_CDD.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"3.DSS_STOCK_LEG_CDD_TO_HF.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"4.DSS_STOCK_LEG_HF_TO_STATE.L\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}}}, \"aggs\": {\"gross\": {\"sum\": {\"field\": \"Data.physicalCount\"}}, \"part\": {\"filter\": {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"share\": {\"bucket_script\": {\"buckets_path\": {\"p\": \"part>u\", \"g\": \"gross\"}, \"script\": \"params.g > 0 ? Math.round(params.p / params.g * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ]
+  },
+  "stockV3TransferLedgerTable": {
+    "chartType": "xtableNested",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Stock transfer",
+    "excludedColumns": [],
+    "computedFields": [],
+    "isCumulative": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "sort": "sortKeyAsc",
+    "insight": {},
+    "filterKeys": [],
+    "chartName": "DSS_STOCK_V3_TRANSFER_LEDGER",
+    "_comment": "Transfer ledger: rows = leg × product, gross = accepted + in transit + rejected",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+        "indexName": "oy-stock-index-v1",
+        "aggrQuery": "{\"aggs\": {\"Transfer\": {\"filters\": {\"keyed\": false, \"filters\": {\"1. State → HF\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"2. HF → CDD\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"3. CDD → HF (return)\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"4. HF → State (return)\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}}}, \"aggs\": {\"Product\": {\"terms\": {\"field\": \"Data.productName.keyword\", \"size\": 10, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"gross\": {\"sum\": {\"field\": \"Data.physicalCount\"}}, \"acc\": {\"filter\": {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"tr\": {\"filter\": {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"rej\": {\"filter\": {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}}}"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "Transfer",
+        "plotName": "Stock transfer"
+      },
+      {
+        "aggName": "Product",
+        "plotName": "Stock product"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Stock gross sent",
+        "path": "gross.value",
+        "valueType": "number"
+      },
+      {
+        "name": "Stock accepted",
+        "path": "acc.u.value",
+        "valueType": "number"
+      },
+      {
+        "name": "Stock in transit",
+        "path": "tr.u.value",
+        "valueType": "number"
+      },
+      {
+        "name": "Stock rejected",
+        "path": "rej.u.value",
+        "valueType": "number"
+      }
+    ]
+  },
+  "stockV3ByLgaTable": {
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "stockV3ByWardTable",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "LGA",
+    "excludedColumns": [],
+    "computedFields": [],
+    "isCumulative": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "sort": "sortKeyAsc",
+    "insight": {},
+    "filterKeys": [
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "chartName": "DSS_STOCK_V3_BY_BOUNDARY",
+    "_comment": "Stock by lga: HF → CDD → children (Kibana 'Stock by LGA' table)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "aggrQuery": "{\"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.lga.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Stock issued to CDD gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock accepted by CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock in transit to CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock rejected by CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD returns gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD returns net\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock returned to State net\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock administered day 1\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"Stock redose\": {\"filter\": {\"term\": {\"Data.administrationStatus.keyword\": \"VISITED\"}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD stock in hand\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"cr_gross\": \"Stock CDD returns gross>u\", \"cr_rej\": \"cr_rej>u\", \"adm\": \"Stock administered day 1>u\", \"red\": \"Stock redose._count\"}, \"script\": \"params.hc_acc + params.cr_rej - params.adm - params.red - params.cr_gross\", \"gap_policy\": \"insert_zeros\"}}, \"Stock usage percent\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"adm\": \"Stock administered day 1>u\"}, \"script\": \"params.hc_acc > 0 ? Math.round(params.adm / params.hc_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"Stock return percent\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"cr_acc\": \"Stock CDD returns net>u\"}, \"script\": \"params.hc_acc > 0 ? Math.round(params.cr_acc / params.hc_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ],
+    "aggregationPaths": [
+      "Stock issued to CDD gross",
+      "Stock accepted by CDD",
+      "Stock in transit to CDD",
+      "Stock rejected by CDD",
+      "Stock CDD returns gross",
+      "Stock CDD returns net",
+      "Stock returned to State net",
+      "Stock administered day 1",
+      "Stock redose",
+      "Stock CDD stock in hand",
+      "Stock usage percent",
+      "Stock return percent"
+    ],
+    "pathDataTypeMapping": [
+      {
+        "Stock issued to CDD gross": "number"
+      },
+      {
+        "Stock accepted by CDD": "number"
+      },
+      {
+        "Stock in transit to CDD": "number"
+      },
+      {
+        "Stock rejected by CDD": "number"
+      },
+      {
+        "Stock CDD returns gross": "number"
+      },
+      {
+        "Stock CDD returns net": "number"
+      },
+      {
+        "Stock returned to State net": "number"
+      },
+      {
+        "Stock administered day 1": "number"
+      },
+      {
+        "Stock redose": "number"
+      },
+      {
+        "Stock CDD stock in hand": "number"
+      },
+      {
+        "Stock usage percent": "percentage"
+      },
+      {
+        "Stock return percent": "percentage"
+      }
+    ]
+  },
+  "stockV3ByWardTable": {
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "stockV3ByHfTable",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Ward",
+    "excludedColumns": [],
+    "computedFields": [],
+    "isCumulative": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "sort": "sortKeyAsc",
+    "insight": {},
+    "filterKeys": [
+      {
+        "key": "ward",
+        "column": "Ward"
+      }
+    ],
+    "chartName": "DSS_STOCK_V3_BY_BOUNDARY",
+    "_comment": "Stock by ward: HF → CDD → children (Kibana 'Stock by LGA' table)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "aggrQuery": "{\"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.ward.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Stock issued to CDD gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock accepted by CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock in transit to CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock rejected by CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD returns gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD returns net\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock returned to State net\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock administered day 1\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"Stock redose\": {\"filter\": {\"term\": {\"Data.administrationStatus.keyword\": \"VISITED\"}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD stock in hand\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"cr_gross\": \"Stock CDD returns gross>u\", \"cr_rej\": \"cr_rej>u\", \"adm\": \"Stock administered day 1>u\", \"red\": \"Stock redose._count\"}, \"script\": \"params.hc_acc + params.cr_rej - params.adm - params.red - params.cr_gross\", \"gap_policy\": \"insert_zeros\"}}, \"Stock usage percent\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"adm\": \"Stock administered day 1>u\"}, \"script\": \"params.hc_acc > 0 ? Math.round(params.adm / params.hc_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"Stock return percent\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"cr_acc\": \"Stock CDD returns net>u\"}, \"script\": \"params.hc_acc > 0 ? Math.round(params.cr_acc / params.hc_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ],
+    "aggregationPaths": [
+      "Stock issued to CDD gross",
+      "Stock accepted by CDD",
+      "Stock in transit to CDD",
+      "Stock rejected by CDD",
+      "Stock CDD returns gross",
+      "Stock CDD returns net",
+      "Stock returned to State net",
+      "Stock administered day 1",
+      "Stock redose",
+      "Stock CDD stock in hand",
+      "Stock usage percent",
+      "Stock return percent"
+    ],
+    "pathDataTypeMapping": [
+      {
+        "Stock issued to CDD gross": "number"
+      },
+      {
+        "Stock accepted by CDD": "number"
+      },
+      {
+        "Stock in transit to CDD": "number"
+      },
+      {
+        "Stock rejected by CDD": "number"
+      },
+      {
+        "Stock CDD returns gross": "number"
+      },
+      {
+        "Stock CDD returns net": "number"
+      },
+      {
+        "Stock returned to State net": "number"
+      },
+      {
+        "Stock administered day 1": "number"
+      },
+      {
+        "Stock redose": "number"
+      },
+      {
+        "Stock CDD stock in hand": "number"
+      },
+      {
+        "Stock usage percent": "percentage"
+      },
+      {
+        "Stock return percent": "percentage"
+      }
+    ]
+  },
+  "stockV3ByHfTable": {
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Health Facility",
+    "excludedColumns": [],
+    "computedFields": [],
+    "isCumulative": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "sort": "sortKeyAsc",
+    "insight": {},
+    "filterKeys": [
+      {
+        "key": "healthFacility",
+        "column": "Health Facility"
+      }
+    ],
+    "chartName": "DSS_STOCK_V3_BY_BOUNDARY",
+    "_comment": "Stock by healthFacility: HF → CDD → children (Kibana 'Stock by LGA' table)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\", \"ward\": \"Data.boundaryHierarchy.ward.keyword\"}",
+        "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
+        "aggrQuery": "{\"aggs\": {\"Boundary\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.healthFacility.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Stock issued to CDD gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock accepted by CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock in transit to CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock rejected by CDD\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD returns gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD returns net\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock returned to State net\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock administered day 1\": {\"filter\": {\"bool\": {\"filter\": [{\"term\": {\"Data.administrationStatus.keyword\": \"ADMINISTRATION_SUCCESS\"}}, {\"terms\": {\"Data.additionalDetails.doseIndex.keyword\": [\"01\", \"1\"]}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.quantity\"}}}}, \"Stock redose\": {\"filter\": {\"term\": {\"Data.administrationStatus.keyword\": \"VISITED\"}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"Stock CDD stock in hand\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"cr_gross\": \"Stock CDD returns gross>u\", \"cr_rej\": \"cr_rej>u\", \"adm\": \"Stock administered day 1>u\", \"red\": \"Stock redose._count\"}, \"script\": \"params.hc_acc + params.cr_rej - params.adm - params.red - params.cr_gross\", \"gap_policy\": \"insert_zeros\"}}, \"Stock usage percent\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"adm\": \"Stock administered day 1>u\"}, \"script\": \"params.hc_acc > 0 ? Math.round(params.adm / params.hc_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"Stock return percent\": {\"bucket_script\": {\"buckets_path\": {\"hc_acc\": \"Stock accepted by CDD>u\", \"cr_acc\": \"Stock CDD returns net>u\"}, \"script\": \"params.hc_acc > 0 ? Math.round(params.cr_acc / params.hc_acc * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+      }
+    ],
+    "aggregationPaths": [
+      "Stock issued to CDD gross",
+      "Stock accepted by CDD",
+      "Stock in transit to CDD",
+      "Stock rejected by CDD",
+      "Stock CDD returns gross",
+      "Stock CDD returns net",
+      "Stock returned to State net",
+      "Stock administered day 1",
+      "Stock redose",
+      "Stock CDD stock in hand",
+      "Stock usage percent",
+      "Stock return percent"
+    ],
+    "pathDataTypeMapping": [
+      {
+        "Stock issued to CDD gross": "number"
+      },
+      {
+        "Stock accepted by CDD": "number"
+      },
+      {
+        "Stock in transit to CDD": "number"
+      },
+      {
+        "Stock rejected by CDD": "number"
+      },
+      {
+        "Stock CDD returns gross": "number"
+      },
+      {
+        "Stock CDD returns net": "number"
+      },
+      {
+        "Stock returned to State net": "number"
+      },
+      {
+        "Stock administered day 1": "number"
+      },
+      {
+        "Stock redose": "number"
+      },
+      {
+        "Stock CDD stock in hand": "number"
+      },
+      {
+        "Stock usage percent": "percentage"
+      },
+      {
+        "Stock return percent": "percentage"
+      }
+    ]
+  },
+  "stockV3PendingIssuesTable": {
+    "chartType": "xtableNested",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "LGA",
+    "excludedColumns": [],
+    "computedFields": [],
+    "isCumulative": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "sort": "sortKeyAsc",
+    "insight": {},
+    "filterKeys": [],
+    "chartName": "DSS_STOCK_V3_PENDING",
+    "_comment": "Pending issues: still IN_TRANSIT (Kibana 'Pending' table)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+        "indexName": "oy-stock-index-v1",
+        "aggrQuery": "{\"aggs\": {\"PENDING\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"LGA\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.lga.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Health facility\": {\"terms\": {\"field\": \"Data.facilityName.keyword\", \"size\": 2000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"units\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}}}"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "LGA",
+        "plotName": "LGA"
+      },
+      {
+        "aggName": "Health facility",
+        "plotName": "Health Facility"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Stock units in transit",
+        "path": "units.value",
+        "valueType": "number"
+      },
+      {
+        "name": "Stock records",
+        "path": "doc_count",
+        "valueType": "number"
+      }
+    ]
+  },
+  "stockV3PendingReturnsTable": {
+    "chartType": "xtableNested",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "LGA",
+    "excludedColumns": [],
+    "computedFields": [],
+    "isCumulative": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "sort": "sortKeyAsc",
+    "insight": {},
+    "filterKeys": [],
+    "chartName": "DSS_STOCK_V3_PENDING",
+    "_comment": "Pending returns: still IN_TRANSIT (Kibana 'Pending' table)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\": \"Data.campaignNumber.keyword\", \"cycle\": \"Data.additionalDetails.cycleIndex.keyword\"}",
+        "indexName": "oy-stock-index-v1",
+        "aggrQuery": "{\"aggs\": {\"PENDING\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"IN_TRANSIT\"}}]}}, \"aggs\": {\"LGA\": {\"terms\": {\"field\": \"Data.boundaryHierarchy.lga.keyword\", \"size\": 1000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"Health facility\": {\"terms\": {\"field\": \"Data.transactingFacilityName.keyword\", \"size\": 2000, \"order\": {\"_key\": \"asc\"}}, \"aggs\": {\"units\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}}}"
+      }
+    ],
+    "bucketHierarchy": [
+      {
+        "aggName": "LGA",
+        "plotName": "LGA"
+      },
+      {
+        "aggName": "Health facility",
+        "plotName": "Health Facility"
+      }
+    ],
+    "metricPaths": [
+      {
+        "name": "Stock units in transit",
+        "path": "units.value",
+        "valueType": "number"
+      },
+      {
+        "name": "Stock records",
+        "path": "doc_count",
+        "valueType": "number"
+      }
+    ]
   }
 }

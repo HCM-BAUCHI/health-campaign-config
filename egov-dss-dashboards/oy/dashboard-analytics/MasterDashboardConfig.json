@@ -1069,6 +1069,626 @@
         },
         {
           "row": 1,
+          "name": "DSS_HEALTH_STOCK_V2",
+          "filterOptions": {
+            "product": [
+              "SPAQ 1",
+              "SPAQ 2"
+            ]
+          },
+          "vizArray": [
+            {
+              "id": 13001,
+              "name": "DSS_STOCK_V2_HEADLINE",
+              "label": "DSS_STOCK_V2_HEADLINE",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV2HeadlineCards",
+                  "name": "DSS_STOCK_V2_HEADLINE",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_HEALTH_STOCK_V2",
+          "filterOptions": {
+            "product": [
+              "SPAQ 1",
+              "SPAQ 2"
+            ]
+          },
+          "vizArray": [
+            {
+              "id": 13002,
+              "name": "DSS_STOCK_V2_RECEIVED",
+              "label": "DSS_STOCK_V2_RECEIVED",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV2ReceivedCards",
+                  "name": "DSS_STOCK_V2_RECEIVED",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "DSS_HEALTH_STOCK_V2",
+          "filterOptions": {
+            "product": [
+              "SPAQ 1",
+              "SPAQ 2"
+            ]
+          },
+          "vizArray": [
+            {
+              "id": 13003,
+              "name": "DSS_STOCK_V2_ISSUED",
+              "label": "DSS_STOCK_V2_ISSUED",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV2IssuedCards",
+                  "name": "DSS_STOCK_V2_ISSUED",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "name": "DSS_HEALTH_STOCK_V2",
+          "filterOptions": {
+            "product": [
+              "SPAQ 1",
+              "SPAQ 2"
+            ]
+          },
+          "vizArray": [
+            {
+              "id": 13004,
+              "name": "DSS_STOCK_V2_RETURNS",
+              "label": "DSS_STOCK_V2_RETURNS",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV2ReturnsCards",
+                  "name": "DSS_STOCK_V2_RETURNS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "name": "DSS_HEALTH_STOCK_V2",
+          "filterOptions": {
+            "product": [
+              "SPAQ 1",
+              "SPAQ 2"
+            ]
+          },
+          "vizArray": [
+            {
+              "id": 13005,
+              "name": "DSS_STOCK_V2_STOCK_IN_HAND",
+              "label": "DSS_STOCK_V2_STOCK_IN_HAND",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV2StockInHandCards",
+                  "name": "DSS_STOCK_V2_STOCK_IN_HAND",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "name": "DSS_HEALTH_STOCK_V2",
+          "filterOptions": {
+            "product": [
+              "SPAQ 1",
+              "SPAQ 2"
+            ]
+          },
+          "vizArray": [
+            {
+              "id": 13006,
+              "name": "DSS_STOCK_V2_BY_BOUNDARY",
+              "label": "DSS_STOCK_V2_BY_BOUNDARY",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV2ByLgaTable",
+                  "name": "DSS_STOCK_V2_BY_BOUNDARY",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 7,
+          "name": "DSS_HEALTH_STOCK_V2",
+          "filterOptions": {
+            "product": [
+              "SPAQ 1",
+              "SPAQ 2"
+            ]
+          },
+          "vizArray": [
+            {
+              "id": 13007,
+              "name": "DSS_STOCK_V2_PENDING",
+              "label": "DSS_STOCK_V2_PENDING",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV2PendingIssuesTable",
+                  "name": "DSS_STOCK_V2_PENDING",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "STOCK_PENDING_ISSUES"
+                },
+                {
+                  "id": "stockV2PendingReturnsTable",
+                  "name": "DSS_STOCK_V2_PENDING",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "STOCK_PENDING_RETURNS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 8,
+          "name": "DSS_HEALTH_STOCK_V2",
+          "filterOptions": {
+            "product": [
+              "SPAQ 1",
+              "SPAQ 2"
+            ]
+          },
+          "vizArray": [
+            {
+              "id": 13008,
+              "name": "DSS_STOCK_V2_TRANSFER_STATUS",
+              "label": "DSS_STOCK_V2_TRANSFER_STATUS",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV2TransferStatusBar",
+                  "name": "DSS_STOCK_V2_TRANSFER_STATUS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 9,
+          "name": "DSS_HEALTH_STOCK_V2",
+          "filterOptions": {
+            "product": [
+              "SPAQ 1",
+              "SPAQ 2"
+            ]
+          },
+          "vizArray": [
+            {
+              "id": 13009,
+              "name": "DSS_STOCK_V2_USAGE_BY_LGA",
+              "label": "DSS_STOCK_V2_USAGE_BY_LGA",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV2UsageByLgaBar",
+                  "name": "DSS_STOCK_V2_USAGE_BY_LGA",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 13010,
+              "name": "DSS_STOCK_V2_PENDING_REJECTED_BY_LGA",
+              "label": "DSS_STOCK_V2_PENDING_REJECTED_BY_LGA",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV2PendingRejectedByLgaBar",
+                  "name": "DSS_STOCK_V2_PENDING_REJECTED_BY_LGA",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 1,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
+              "id": 13011,
+              "name": "DSS_STOCK_V3_HEADLINE",
+              "label": "DSS_STOCK_V3_HEADLINE",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3HeadlineCards",
+                  "name": "DSS_STOCK_V3_HEADLINE",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
+              "id": 13012,
+              "name": "DSS_STOCK_V3_RECEIVED_SPAQ_1",
+              "label": "DSS_STOCK_V3_RECEIVED_SPAQ_1",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3ReceivedSPAQ1Cards",
+                  "name": "DSS_STOCK_V3_RECEIVED_SPAQ_1",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
+              "id": 13013,
+              "name": "DSS_STOCK_V3_RECEIVED_SPAQ_2",
+              "label": "DSS_STOCK_V3_RECEIVED_SPAQ_2",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3ReceivedSPAQ2Cards",
+                  "name": "DSS_STOCK_V3_RECEIVED_SPAQ_2",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
+              "id": 13014,
+              "name": "DSS_STOCK_V3_ISSUED_SPAQ_1",
+              "label": "DSS_STOCK_V3_ISSUED_SPAQ_1",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3IssuedSPAQ1Cards",
+                  "name": "DSS_STOCK_V3_ISSUED_SPAQ_1",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
+              "id": 13015,
+              "name": "DSS_STOCK_V3_ISSUED_SPAQ_2",
+              "label": "DSS_STOCK_V3_ISSUED_SPAQ_2",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3IssuedSPAQ2Cards",
+                  "name": "DSS_STOCK_V3_ISSUED_SPAQ_2",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
+              "id": 13016,
+              "name": "DSS_STOCK_V3_RETURNS_SPAQ_1",
+              "label": "DSS_STOCK_V3_RETURNS_SPAQ_1",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3ReturnsSPAQ1Cards",
+                  "name": "DSS_STOCK_V3_RETURNS_SPAQ_1",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 7,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
+              "id": 13017,
+              "name": "DSS_STOCK_V3_RETURNS_SPAQ_2",
+              "label": "DSS_STOCK_V3_RETURNS_SPAQ_2",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3ReturnsSPAQ2Cards",
+                  "name": "DSS_STOCK_V3_RETURNS_SPAQ_2",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 8,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
+              "id": 13018,
+              "name": "DSS_STOCK_V3_STOCK_IN_HAND_SPAQ_1",
+              "label": "DSS_STOCK_V3_STOCK_IN_HAND_SPAQ_1",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3StockInHandSPAQ1Cards",
+                  "name": "DSS_STOCK_V3_STOCK_IN_HAND_SPAQ_1",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 9,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
+              "id": 13019,
+              "name": "DSS_STOCK_V3_STOCK_IN_HAND_SPAQ_2",
+              "label": "DSS_STOCK_V3_STOCK_IN_HAND_SPAQ_2",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3StockInHandSPAQ2Cards",
+                  "name": "DSS_STOCK_V3_STOCK_IN_HAND_SPAQ_2",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 10,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
+              "id": 13020,
+              "name": "DSS_STOCK_V3_TRANSFER_STATUS",
+              "label": "DSS_STOCK_V3_TRANSFER_STATUS",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3TransferStatusBar",
+                  "name": "DSS_STOCK_V3_TRANSFER_STATUS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 11,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
+              "id": 13021,
+              "name": "DSS_STOCK_V3_TRANSFER_LEDGER",
+              "label": "DSS_STOCK_V3_TRANSFER_LEDGER",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3TransferLedgerTable",
+                  "name": "DSS_STOCK_V3_TRANSFER_LEDGER",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 12,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
+              "id": 13022,
+              "name": "DSS_STOCK_V3_BY_BOUNDARY",
+              "label": "DSS_STOCK_V3_BY_BOUNDARY",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3ByLgaTable",
+                  "name": "DSS_STOCK_V3_BY_BOUNDARY",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 13,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
+              "id": 13023,
+              "name": "DSS_STOCK_V3_PENDING",
+              "label": "DSS_STOCK_V3_PENDING",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3PendingIssuesTable",
+                  "name": "DSS_STOCK_V3_PENDING",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "STOCK_PENDING_ISSUES"
+                },
+                {
+                  "id": "stockV3PendingReturnsTable",
+                  "name": "DSS_STOCK_V3_PENDING",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "STOCK_PENDING_RETURNS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 1,
           "name": "DSS_HEALTH_TEAM_PERFORMANCE",
           "vizArray": [
             {
