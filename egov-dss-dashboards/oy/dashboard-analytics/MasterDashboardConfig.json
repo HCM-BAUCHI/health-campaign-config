@@ -1198,6 +1198,36 @@
           },
           "vizArray": [
             {
+              "id": 13024,
+              "name": "DSS_STOCK_V2_REJECTED",
+              "label": "DSS_STOCK_V2_REJECTED",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV2RejectedCards",
+                  "name": "DSS_STOCK_V2_REJECTED",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "name": "DSS_HEALTH_STOCK_V2",
+          "filterOptions": {
+            "product": [
+              "SPAQ 1",
+              "SPAQ 2"
+            ]
+          },
+          "vizArray": [
+            {
               "id": 13005,
               "name": "DSS_STOCK_V2_STOCK_IN_HAND",
               "label": "DSS_STOCK_V2_STOCK_IN_HAND",
@@ -1218,7 +1248,7 @@
           ]
         },
         {
-          "row": 6,
+          "row": 7,
           "name": "DSS_HEALTH_STOCK_V2",
           "filterOptions": {
             "product": [
@@ -1248,7 +1278,7 @@
           ]
         },
         {
-          "row": 7,
+          "row": 8,
           "name": "DSS_HEALTH_STOCK_V2",
           "filterOptions": {
             "product": [
@@ -1288,7 +1318,7 @@
           ]
         },
         {
-          "row": 8,
+          "row": 9,
           "name": "DSS_HEALTH_STOCK_V2",
           "filterOptions": {
             "product": [
@@ -1318,7 +1348,7 @@
           ]
         },
         {
-          "row": 9,
+          "row": 10,
           "name": "DSS_HEALTH_STOCK_V2",
           "filterOptions": {
             "product": [
@@ -1538,6 +1568,54 @@
           "name": "DSS_HEALTH_STOCK_V3",
           "vizArray": [
             {
+              "id": 13025,
+              "name": "DSS_STOCK_V3_REJECTED_SPAQ_1",
+              "label": "DSS_STOCK_V3_REJECTED_SPAQ_1",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3RejectedSPAQ1Cards",
+                  "name": "DSS_STOCK_V3_REJECTED_SPAQ_1",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 9,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
+              "id": 13026,
+              "name": "DSS_STOCK_V3_REJECTED_SPAQ_2",
+              "label": "DSS_STOCK_V3_REJECTED_SPAQ_2",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "stockV3RejectedSPAQ2Cards",
+                  "name": "DSS_STOCK_V3_REJECTED_SPAQ_2",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 10,
+          "name": "DSS_HEALTH_STOCK_V3",
+          "vizArray": [
+            {
               "id": 13018,
               "name": "DSS_STOCK_V3_STOCK_IN_HAND_SPAQ_1",
               "label": "DSS_STOCK_V3_STOCK_IN_HAND_SPAQ_1",
@@ -1558,7 +1636,7 @@
           ]
         },
         {
-          "row": 9,
+          "row": 11,
           "name": "DSS_HEALTH_STOCK_V3",
           "vizArray": [
             {
@@ -1582,7 +1660,7 @@
           ]
         },
         {
-          "row": 10,
+          "row": 12,
           "name": "DSS_HEALTH_STOCK_V3",
           "vizArray": [
             {
@@ -1606,7 +1684,7 @@
           ]
         },
         {
-          "row": 11,
+          "row": 13,
           "name": "DSS_HEALTH_STOCK_V3",
           "vizArray": [
             {
@@ -1630,7 +1708,7 @@
           ]
         },
         {
-          "row": 12,
+          "row": 14,
           "name": "DSS_HEALTH_STOCK_V3",
           "vizArray": [
             {
@@ -1654,7 +1732,7 @@
           ]
         },
         {
-          "row": 13,
+          "row": 15,
           "name": "DSS_HEALTH_STOCK_V3",
           "vizArray": [
             {
