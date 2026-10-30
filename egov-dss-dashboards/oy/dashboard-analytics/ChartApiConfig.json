@@ -18760,12 +18760,11 @@
         "transformData": "linearAggregation",
         "select": {
           "hr_acc": "all.buckets.all.hr_acc.u.value",
-          "hr_rej": "all.buckets.all.hr_rej.u.value",
           "hr_gross": "all.buckets.all.hr_gross.u.value",
           "cr_acc": "all.buckets.all.cr_acc.u.value",
           "cr_gross": "all.buckets.all.cr_gross.u.value"
         },
-        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}"
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}"
       }
     ],
     "chartType": "rawResponse",
@@ -18787,7 +18786,6 @@
     "action": "",
     "aggregationPaths": [
       "hr_acc",
-      "hr_rej",
       "hr_gross",
       "cr_acc",
       "cr_gross"
@@ -18799,7 +18797,7 @@
         "valuePath": "hr_acc",
         "valueType": "NUMBER",
         "descriptionParams": {
-          "rejected": "hr_rej"
+          "gross": "hr_gross"
         },
         "colorRules": {
           "type": "constant",
@@ -18849,6 +18847,9 @@
         "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
         "transformData": "linearAggregation",
         "select": {
+          "hr_rej": "all.buckets.all.hr_rej.u.value",
+          "hr_rej_pct": "all.buckets.all.hr_rej_pct.value",
+          "hr_gross": "all.buckets.all.hr_gross.u.value",
           "sh_rej": "all.buckets.all.sh_rej.u.value",
           "sh_rej_pct": "all.buckets.all.sh_rej_pct.value",
           "sh_gross": "all.buckets.all.sh_gross.u.value",
@@ -18857,12 +18858,9 @@
           "hc_gross": "all.buckets.all.hc_gross.u.value",
           "cr_rej": "all.buckets.all.cr_rej.u.value",
           "cr_rej_pct": "all.buckets.all.cr_rej_pct.value",
-          "cr_gross": "all.buckets.all.cr_gross.u.value",
-          "hr_rej": "all.buckets.all.hr_rej.u.value",
-          "hr_rej_pct": "all.buckets.all.hr_rej_pct.value",
-          "hr_gross": "all.buckets.all.hr_gross.u.value"
+          "cr_gross": "all.buckets.all.cr_gross.u.value"
         },
-        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"sh_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"sh_gross\": \"sh_gross>u\", \"sh_rej\": \"sh_rej>u\"}, \"script\": \"params.sh_gross > 0 ? Math.round(params.sh_rej / params.sh_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"hc_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"hc_gross\": \"hc_gross>u\", \"hc_rej\": \"hc_rej>u\"}, \"script\": \"params.hc_gross > 0 ? Math.round(params.hc_rej / params.hc_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"cr_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"cr_gross\": \"cr_gross>u\", \"cr_rej\": \"cr_rej>u\"}, \"script\": \"params.cr_gross > 0 ? Math.round(params.cr_rej / params.cr_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"hr_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"hr_gross\": \"hr_gross>u\", \"hr_rej\": \"hr_rej>u\"}, \"script\": \"params.hr_gross > 0 ? Math.round(params.hr_rej / params.hr_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}}, \"aggs\": {\"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"hr_gross\": \"hr_gross>u\", \"hr_rej\": \"hr_rej>u\"}, \"script\": \"params.hr_gross > 0 ? Math.round(params.hr_rej / params.hr_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"sh_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"sh_gross\": \"sh_gross>u\", \"sh_rej\": \"sh_rej>u\"}, \"script\": \"params.sh_gross > 0 ? Math.round(params.sh_rej / params.sh_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"hc_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"hc_gross\": \"hc_gross>u\", \"hc_rej\": \"hc_rej>u\"}, \"script\": \"params.hc_gross > 0 ? Math.round(params.hc_rej / params.hc_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"cr_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"cr_gross\": \"cr_gross>u\", \"cr_rej\": \"cr_rej>u\"}, \"script\": \"params.cr_gross > 0 ? Math.round(params.cr_rej / params.cr_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
       }
     ],
     "chartType": "rawResponse",
@@ -18883,6 +18881,9 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
+      "hr_rej",
+      "hr_rej_pct",
+      "hr_gross",
       "sh_rej",
       "sh_rej_pct",
       "sh_gross",
@@ -18891,12 +18892,23 @@
       "hc_gross",
       "cr_rej",
       "cr_rej_pct",
-      "cr_gross",
-      "hr_rej",
-      "hr_rej_pct",
-      "hr_gross"
+      "cr_gross"
     ],
     "cardsList": [
+      {
+        "id": "dss_stock_v2_state_rejected_hf_returns",
+        "labelKey": "DSS_STOCK_V2_STATE_REJECTED_HF_RETURNS",
+        "valuePath": "hr_rej",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "pct": "hr_rej_pct",
+          "gross": "hr_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
       {
         "id": "dss_stock_v2_hf_rejected_from_state",
         "labelKey": "DSS_STOCK_V2_HF_REJECTED_FROM_STATE",
@@ -18933,20 +18945,6 @@
         "descriptionParams": {
           "pct": "cr_rej_pct",
           "gross": "cr_gross"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      },
-      {
-        "id": "dss_stock_v2_state_rejected_hf_returns",
-        "labelKey": "DSS_STOCK_V2_STATE_REJECTED_HF_RETURNS",
-        "valuePath": "hr_rej",
-        "valueType": "NUMBER",
-        "descriptionParams": {
-          "pct": "hr_rej_pct",
-          "gross": "hr_gross"
         },
         "colorRules": {
           "type": "constant",
@@ -19976,12 +19974,11 @@
         "transformData": "linearAggregation",
         "select": {
           "hr_acc": "all.buckets.all.hr_acc.u.value",
-          "hr_rej": "all.buckets.all.hr_rej.u.value",
           "hr_gross": "all.buckets.all.hr_gross.u.value",
           "cr_acc": "all.buckets.all.cr_acc.u.value",
           "cr_gross": "all.buckets.all.cr_gross.u.value"
         },
-        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 1\"}}}}, \"aggs\": {\"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}"
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 1\"}}}}, \"aggs\": {\"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}"
       }
     ],
     "chartType": "rawResponse",
@@ -20003,7 +20000,6 @@
     "action": "",
     "aggregationPaths": [
       "hr_acc",
-      "hr_rej",
       "hr_gross",
       "cr_acc",
       "cr_gross"
@@ -20015,7 +20011,7 @@
         "valuePath": "hr_acc",
         "valueType": "NUMBER",
         "descriptionParams": {
-          "rejected": "hr_rej"
+          "gross": "hr_gross"
         },
         "colorRules": {
           "type": "constant",
@@ -20066,12 +20062,11 @@
         "transformData": "linearAggregation",
         "select": {
           "hr_acc": "all.buckets.all.hr_acc.u.value",
-          "hr_rej": "all.buckets.all.hr_rej.u.value",
           "hr_gross": "all.buckets.all.hr_gross.u.value",
           "cr_acc": "all.buckets.all.cr_acc.u.value",
           "cr_gross": "all.buckets.all.cr_gross.u.value"
         },
-        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 2\"}}}}, \"aggs\": {\"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}"
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 2\"}}}}, \"aggs\": {\"hr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_acc\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"ACCEPTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}}}}}"
       }
     ],
     "chartType": "rawResponse",
@@ -20093,7 +20088,6 @@
     "action": "",
     "aggregationPaths": [
       "hr_acc",
-      "hr_rej",
       "hr_gross",
       "cr_acc",
       "cr_gross"
@@ -20105,7 +20099,7 @@
         "valuePath": "hr_acc",
         "valueType": "NUMBER",
         "descriptionParams": {
-          "rejected": "hr_rej"
+          "gross": "hr_gross"
         },
         "colorRules": {
           "type": "constant",
@@ -20155,6 +20149,9 @@
         "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
         "transformData": "linearAggregation",
         "select": {
+          "hr_rej": "all.buckets.all.hr_rej.u.value",
+          "hr_rej_pct": "all.buckets.all.hr_rej_pct.value",
+          "hr_gross": "all.buckets.all.hr_gross.u.value",
           "sh_rej": "all.buckets.all.sh_rej.u.value",
           "sh_rej_pct": "all.buckets.all.sh_rej_pct.value",
           "sh_gross": "all.buckets.all.sh_gross.u.value",
@@ -20163,12 +20160,9 @@
           "hc_gross": "all.buckets.all.hc_gross.u.value",
           "cr_rej": "all.buckets.all.cr_rej.u.value",
           "cr_rej_pct": "all.buckets.all.cr_rej_pct.value",
-          "cr_gross": "all.buckets.all.cr_gross.u.value",
-          "hr_rej": "all.buckets.all.hr_rej.u.value",
-          "hr_rej_pct": "all.buckets.all.hr_rej_pct.value",
-          "hr_gross": "all.buckets.all.hr_gross.u.value"
+          "cr_gross": "all.buckets.all.cr_gross.u.value"
         },
-        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 1\"}}}}, \"aggs\": {\"sh_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"sh_gross\": \"sh_gross>u\", \"sh_rej\": \"sh_rej>u\"}, \"script\": \"params.sh_gross > 0 ? Math.round(params.sh_rej / params.sh_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"hc_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"hc_gross\": \"hc_gross>u\", \"hc_rej\": \"hc_rej>u\"}, \"script\": \"params.hc_gross > 0 ? Math.round(params.hc_rej / params.hc_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"cr_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"cr_gross\": \"cr_gross>u\", \"cr_rej\": \"cr_rej>u\"}, \"script\": \"params.cr_gross > 0 ? Math.round(params.cr_rej / params.cr_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"hr_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"hr_gross\": \"hr_gross>u\", \"hr_rej\": \"hr_rej>u\"}, \"script\": \"params.hr_gross > 0 ? Math.round(params.hr_rej / params.hr_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 1\"}}}}, \"aggs\": {\"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"hr_gross\": \"hr_gross>u\", \"hr_rej\": \"hr_rej>u\"}, \"script\": \"params.hr_gross > 0 ? Math.round(params.hr_rej / params.hr_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"sh_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"sh_gross\": \"sh_gross>u\", \"sh_rej\": \"sh_rej>u\"}, \"script\": \"params.sh_gross > 0 ? Math.round(params.sh_rej / params.sh_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"hc_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"hc_gross\": \"hc_gross>u\", \"hc_rej\": \"hc_rej>u\"}, \"script\": \"params.hc_gross > 0 ? Math.round(params.hc_rej / params.hc_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"cr_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"cr_gross\": \"cr_gross>u\", \"cr_rej\": \"cr_rej>u\"}, \"script\": \"params.cr_gross > 0 ? Math.round(params.cr_rej / params.cr_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
       }
     ],
     "chartType": "rawResponse",
@@ -20189,6 +20183,9 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
+      "hr_rej",
+      "hr_rej_pct",
+      "hr_gross",
       "sh_rej",
       "sh_rej_pct",
       "sh_gross",
@@ -20197,12 +20194,23 @@
       "hc_gross",
       "cr_rej",
       "cr_rej_pct",
-      "cr_gross",
-      "hr_rej",
-      "hr_rej_pct",
-      "hr_gross"
+      "cr_gross"
     ],
     "cardsList": [
+      {
+        "id": "dss_stock_v3_state_rejected_hf_returns_spaq1",
+        "labelKey": "DSS_STOCK_V3_STATE_REJECTED_HF_RETURNS_SPAQ1",
+        "valuePath": "hr_rej",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "pct": "hr_rej_pct",
+          "gross": "hr_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
       {
         "id": "dss_stock_v3_hf_rejected_from_state_spaq1",
         "labelKey": "DSS_STOCK_V3_HF_REJECTED_FROM_STATE_SPAQ1",
@@ -20244,20 +20252,6 @@
           "type": "constant",
           "color": "#0B4B66"
         }
-      },
-      {
-        "id": "dss_stock_v3_state_rejected_hf_returns_spaq1",
-        "labelKey": "DSS_STOCK_V3_STATE_REJECTED_HF_RETURNS_SPAQ1",
-        "valuePath": "hr_rej",
-        "valueType": "NUMBER",
-        "descriptionParams": {
-          "pct": "hr_rej_pct",
-          "gross": "hr_gross"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
       }
     ],
     "insight": {},
@@ -20276,6 +20270,9 @@
         "indexName": "oy-stock-index-v1,oy-project-task-index-v1",
         "transformData": "linearAggregation",
         "select": {
+          "hr_rej": "all.buckets.all.hr_rej.u.value",
+          "hr_rej_pct": "all.buckets.all.hr_rej_pct.value",
+          "hr_gross": "all.buckets.all.hr_gross.u.value",
           "sh_rej": "all.buckets.all.sh_rej.u.value",
           "sh_rej_pct": "all.buckets.all.sh_rej_pct.value",
           "sh_gross": "all.buckets.all.sh_gross.u.value",
@@ -20284,12 +20281,9 @@
           "hc_gross": "all.buckets.all.hc_gross.u.value",
           "cr_rej": "all.buckets.all.cr_rej.u.value",
           "cr_rej_pct": "all.buckets.all.cr_rej_pct.value",
-          "cr_gross": "all.buckets.all.cr_gross.u.value",
-          "hr_rej": "all.buckets.all.hr_rej.u.value",
-          "hr_rej_pct": "all.buckets.all.hr_rej_pct.value",
-          "hr_gross": "all.buckets.all.hr_gross.u.value"
+          "cr_gross": "all.buckets.all.cr_gross.u.value"
         },
-        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 2\"}}}}, \"aggs\": {\"sh_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"sh_gross\": \"sh_gross>u\", \"sh_rej\": \"sh_rej>u\"}, \"script\": \"params.sh_gross > 0 ? Math.round(params.sh_rej / params.sh_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"hc_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"hc_gross\": \"hc_gross>u\", \"hc_rej\": \"hc_rej>u\"}, \"script\": \"params.hc_gross > 0 ? Math.round(params.hc_rej / params.hc_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"cr_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"cr_gross\": \"cr_gross>u\", \"cr_rej\": \"cr_rej>u\"}, \"script\": \"params.cr_gross > 0 ? Math.round(params.cr_rej / params.cr_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"hr_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"hr_gross\": \"hr_gross>u\", \"hr_rej\": \"hr_rej>u\"}, \"script\": \"params.hr_gross > 0 ? Math.round(params.hr_rej / params.hr_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
+        "aggrQuery": "{\"size\": 0, \"query\": {\"bool\": {\"filter\": []}}, \"aggs\": {\"all\": {\"filters\": {\"filters\": {\"all\": {\"term\": {\"Data.productName.keyword\": \"SPAQ 2\"}}}}, \"aggs\": {\"hr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\", \"WAREHOUSE\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"State Facility\", \"Warehouse\", \"WAREHOUSE\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"sh_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"State Facility\", \"Warehouse\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"Health Facility\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hc_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"Health Facility\"]}}, {\"terms\": {\"Data.transactingFacilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"ISSUED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_rej\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}, {\"term\": {\"Data.additionalDetails.status.keyword\": \"REJECTED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"cr_gross\": {\"filter\": {\"bool\": {\"filter\": [{\"terms\": {\"Data.facilityType.keyword\": [\"STAFF\"]}}, {\"term\": {\"Data.additionalDetails.stockEntryType.keyword\": \"RETURNED\"}}]}}, \"aggs\": {\"u\": {\"sum\": {\"field\": \"Data.physicalCount\"}}}}, \"hr_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"hr_gross\": \"hr_gross>u\", \"hr_rej\": \"hr_rej>u\"}, \"script\": \"params.hr_gross > 0 ? Math.round(params.hr_rej / params.hr_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"sh_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"sh_gross\": \"sh_gross>u\", \"sh_rej\": \"sh_rej>u\"}, \"script\": \"params.sh_gross > 0 ? Math.round(params.sh_rej / params.sh_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"hc_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"hc_gross\": \"hc_gross>u\", \"hc_rej\": \"hc_rej>u\"}, \"script\": \"params.hc_gross > 0 ? Math.round(params.hc_rej / params.hc_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}, \"cr_rej_pct\": {\"bucket_script\": {\"buckets_path\": {\"cr_gross\": \"cr_gross>u\", \"cr_rej\": \"cr_rej>u\"}, \"script\": \"params.cr_gross > 0 ? Math.round(params.cr_rej / params.cr_gross * 10000) / 100.0 : 0\", \"gap_policy\": \"insert_zeros\"}}}}}}"
       }
     ],
     "chartType": "rawResponse",
@@ -20310,6 +20304,9 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
+      "hr_rej",
+      "hr_rej_pct",
+      "hr_gross",
       "sh_rej",
       "sh_rej_pct",
       "sh_gross",
@@ -20318,12 +20315,23 @@
       "hc_gross",
       "cr_rej",
       "cr_rej_pct",
-      "cr_gross",
-      "hr_rej",
-      "hr_rej_pct",
-      "hr_gross"
+      "cr_gross"
     ],
     "cardsList": [
+      {
+        "id": "dss_stock_v3_state_rejected_hf_returns_spaq2",
+        "labelKey": "DSS_STOCK_V3_STATE_REJECTED_HF_RETURNS_SPAQ2",
+        "valuePath": "hr_rej",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "pct": "hr_rej_pct",
+          "gross": "hr_gross"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
       {
         "id": "dss_stock_v3_hf_rejected_from_state_spaq2",
         "labelKey": "DSS_STOCK_V3_HF_REJECTED_FROM_STATE_SPAQ2",
@@ -20360,20 +20368,6 @@
         "descriptionParams": {
           "pct": "cr_rej_pct",
           "gross": "cr_gross"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      },
-      {
-        "id": "dss_stock_v3_state_rejected_hf_returns_spaq2",
-        "labelKey": "DSS_STOCK_V3_STATE_REJECTED_HF_RETURNS_SPAQ2",
-        "valuePath": "hr_rej",
-        "valueType": "NUMBER",
-        "descriptionParams": {
-          "pct": "hr_rej_pct",
-          "gross": "hr_gross"
         },
         "colorRules": {
           "type": "constant",
