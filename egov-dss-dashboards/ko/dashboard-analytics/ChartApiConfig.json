@@ -23326,7 +23326,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "ko-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"ITN Target\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.localityCode.keyword\":\"ITN_NI_01_KOGI\"}},{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}}]}},\"aggs\":{\"household_target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}"
       }
     ],
     "chartType": "metric",
