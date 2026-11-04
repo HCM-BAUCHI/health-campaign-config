@@ -23244,7 +23244,6 @@
           "Percentage of Households Visited",
           "Households Targeted"
         ],
-        "newField": "Households Visited",
         "_comments": ""
       }
     ],
@@ -23394,7 +23393,6 @@
           "Percentage of Households Visited",
           "Households Targeted"
         ],
-        "newField": "Households Visited",
         "_comments": ""
       }
     ],
@@ -23545,10 +23543,21 @@
     "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "percentage",
+    "action": "",
     "aggregationPaths": [
       "Percentage of Population Covered",
       "Population Targeted"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Percentage of Population Covered",
+          "Population Targeted"
+        ],
+        "_comments": ""
+      }
     ],
     "insight": {},
     "_comment": "Overall population coverage percentage (lga level)"
@@ -23676,21 +23685,28 @@
     "valueType": "percentage",
     "drillChart": "rdPopulationChartDistrictPercentBednetsICCD",
     "documentType": "_doc",
-    "action": "percentage",
+    "action": "",
     "aggregationPaths": [
       "Percentage of Population Covered",
       "Population Targeted"
     ],
-    "isCappedByCampaignPeriod": [
-      "Overall Population Target"
-    ],
     "filterKeys": [
       {
-        "key": "lga"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
-    "sort": "sortKeyAsc",
-    "computedFields": [],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Percentage of Population Covered",
+          "Population Targeted"
+        ],
+        "_comments": ""
+      }
+    ],
     "insight": {},
     "_comment": " ",
     "kind": "drillDown"
