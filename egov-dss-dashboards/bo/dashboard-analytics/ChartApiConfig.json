@@ -23235,32 +23235,31 @@
     "valueType": "percentage",
     "drillChart": "rdHouseholdsCoveredChartApPercentBednetsICCD",
     "documentType": "_doc",
-    "action": "percentage",
+    "action": "",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Percentage of Households Visited",
+          "Households Targeted"
+        ],
+        "newField": "Households Visited",
+        "_comments": ""
+      }
+    ],
     "aggregationPaths": [
       "Percentage of Households Visited",
       "Households Targeted"
     ],
-    "isCappedByCampaignPeriod": [
-      "Overall Target"
-    ],
     "filterKeys": [
       {
-        "key": "ward"
-      }
-    ],
-    "sort": "sortKeyAsc",
-    "computedFields": [
-      {
-        "postAggregationTheory": "repsonseToDifferenceOfDates",
-        "actionName": "",
-        "fields": [
-          "Target for daterange"
-        ],
-        "newField": "Households for daterange"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
-    "_comment": "Household Visited Coverage % = (Households Visited / Households Targeted) * 100",
+    "_comment": " ",
     "kind": "drillDown"
   },
   "rdHouseholdsCoveredChartLocalityBednetsICCD": {
@@ -23386,28 +23385,27 @@
     "valueType": "percentage",
     "drillChart": "rdHouseholdsCoveredChartDistrictPercentBednetsICCD",
     "documentType": "_doc",
-    "action": "percentage",
+    "action": "",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Percentage of Households Visited",
+          "Households Targeted"
+        ],
+        "newField": "Households Visited",
+        "_comments": ""
+      }
+    ],
     "aggregationPaths": [
       "Percentage of Households Visited",
       "Households Targeted"
     ],
-    "isCappedByCampaignPeriod": [
-      "Overall Target"
-    ],
     "filterKeys": [
       {
-        "key": "lga"
-      }
-    ],
-    "sort": "sortKeyAsc",
-    "computedFields": [
-      {
-        "postAggregationTheory": "repsonseToDifferenceOfDates",
-        "actionName": "",
-        "fields": [
-          "Target for daterange"
-        ],
-        "newField": "Households for daterange"
+        "key": "lga",
+        "column": "LGA"
       }
     ],
     "insight": {},
