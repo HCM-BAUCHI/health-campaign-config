@@ -9,7 +9,13 @@ ServiceMaps:
       type: facility
       id: $.clientReferenceId
       isBulk: true
-      jsonPath: $.*
+      jsonPath: "$[?(@.usage nin ['OUTSIDE_HOUSEHOLD_PLACES','TRANSIT_POST'])]"
+      timeStampField: $.auditDetails.createdTime
+    - name: namibia-outside-household-index-v1
+      type: outside-household
+      id: $.id
+      isBulk: true
+      jsonPath: "$[?(@.usage in ['OUTSIDE_HOUSEHOLD_PLACES','TRANSIT_POST'])]"
       timeStampField: $.auditDetails.createdTime
   - topic: namibia-update-facility-topic
     configKey: INDEX
@@ -18,5 +24,11 @@ ServiceMaps:
       type: facility
       id: $.clientReferenceId
       isBulk: true
-      jsonPath: $.*
+      jsonPath: "$[?(@.usage nin ['OUTSIDE_HOUSEHOLD_PLACES','TRANSIT_POST'])]"
+      timeStampField: $.auditDetails.lastModifiedTime
+    - name: namibia-outside-household-index-v1
+      type: outside-household
+      id: $.id
+      isBulk: true
+      jsonPath: "$[?(@.usage in ['OUTSIDE_HOUSEHOLD_PLACES','TRANSIT_POST'])]"
       timeStampField: $.auditDetails.lastModifiedTime
