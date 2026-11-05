@@ -2,10 +2,10 @@ ServiceMaps:
   serviceName: Public Grievance Redressal - rainmaker
   version: 1.0.0
   mappings:
-    - topic: ad-save-pgr-request
+    - topic: kb-save-pgr-request
       configKey: INDEX
       indexes:
-        - name: ad-pgr-services
+        - name: kb-pgr-services
           type: general
           id: $.service.serviceRequestId
           jsonPath: $
@@ -104,10 +104,10 @@ ServiceMaps:
                 uriResponseMapping:
                   - inJsonPath: $.MdmsRes.tenant.tenants
                     outJsonPath: $.Data.tenantData
-    - topic: ad-update-pgr-request
+    - topic: kb-update-pgr-request
       configKey: INDEX
       indexes:
-        - name: ad-pgr-services
+        - name: kb-pgr-services
           type: general
           id: $.service.serviceRequestId
           jsonPath: $
@@ -191,10 +191,10 @@ ServiceMaps:
                 uriResponseMapping:
                   - inJsonPath: $.MdmsRes.RAINMAKER-PGR.ServiceDefs.*.slaHours
                     outJsonPath: $.Data.slaHours
-    - topic: ad-pgr-services-legacyIndex
+    - topic: kb-pgr-services-legacyIndex
       configKey: LEGACYINDEX
       indexes:
-        - name: ad-pgr-services
+        - name: kb-pgr-services
           type: general
           isBulk: true
           id: $.service.serviceRequestId
@@ -261,10 +261,10 @@ ServiceMaps:
                 uriResponseMapping:
                   - inJsonPath: $.MdmsRes.tenant.tenants
                     outJsonPath: $.Data.tenantData
-    - topic: ad-pgr-service-reindex
+    - topic: kb-pgr-service-reindex
       configKey: REINDEX
       indexes:
-        - name: ad-pgrreindex-v2
+        - name: kb-pgrreindex-v2
           type: general
           id: $.Data.service.serviceRequestId
           isBulk: true

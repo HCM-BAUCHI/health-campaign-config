@@ -2,10 +2,10 @@ ServiceMaps:
   serviceName: Public Grievance Redressal - rainmaker
   version: 1.0.0
   mappings:
-  - topic: ad-transformer-save-pgr-request
+  - topic: kb-transformer-save-pgr-request
     configKey: INDEX
     indexes:
-    - name: ad-transformer-pgr-services
+    - name: kb-transformer-pgr-services
       type: general
       id: $.service.serviceRequestId
       jsonPath: $
@@ -17,7 +17,7 @@ ServiceMaps:
         - inJsonPath: $
           outJsonPath: $.Data
       timeStampField: $.service.auditDetails.lastModifiedTime
-    - name: ad-user-sync-index-v1
+    - name: kb-user-sync-index-v1
       type: users
       id: $.service.serviceRequestId
       isBulk: true

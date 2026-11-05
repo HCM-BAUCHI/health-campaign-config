@@ -2,28 +2,28 @@ ServiceMaps:
   serviceName: individual
   version: 1.0.0
   mappings:
-  - topic: ad-save-individual-topic
+  - topic: kb-save-individual-topic
     configKey: INDEX
     indexes:
-    - name: ad-individual-index-v1
+    - name: kb-individual-index-v1
       type: individual
       id: $.clientReferenceId
       isBulk: true
       jsonPath: $.*
       timeStampField: $.auditDetails.createdTime
-  - topic: ad-update-individual-topic
+  - topic: kb-update-individual-topic
     configKey: INDEX
     indexes:
-    - name: ad-individual-index-v1
+    - name: kb-individual-index-v1
       type: individual
       id: $.clientReferenceId
       isBulk: true
       jsonPath: $.*
       timeStampField: $.auditDetails.lastModifiedTime
-  - topic: ad-delete-individual-topic
+  - topic: kb-delete-individual-topic
     configKey: INDEX
     indexes:
-    - name: ad-individual-index-v1
+    - name: kb-individual-index-v1
       type: individual
       id: $.clientReferenceId
       isBulk: true

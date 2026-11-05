@@ -2,10 +2,10 @@ ServiceMaps:
   serviceName: referralmanagement
   version: 1.0.0
   mappings:
-  - topic: ad-transformer-producer-referral-index-v1-topic
+  - topic: kb-transformer-producer-referral-index-v1-topic
     configKey: INDEX
     indexes:
-    - name: ad-referral-index-v1
+    - name: kb-referral-index-v1
       type: referral
       id: $.referral.id
       isBulk: true
@@ -17,7 +17,7 @@ ServiceMaps:
         - inJsonPath: $
           outJsonPath: $.Data
       timeStampField: $.referral.auditDetails.createdTime
-    - name: ad-user-sync-index-v1
+    - name: kb-user-sync-index-v1
       type: users
       id: $.referral.id
       isBulk: true
@@ -53,19 +53,19 @@ ServiceMaps:
         - inJsonPath: $.additionalDetails.cycleIndex
           outJsonPath: $.Data.additionalDetails.cycleIndex
       timeStampField: $.referral.auditDetails.lastModifiedTime
-  - topic: ad-delete-referral-topic
+  - topic: kb-delete-referral-topic
     configKey: INDEX
     indexes:
-    - name: ad-referral-index-v1
+    - name: kb-referral-index-v1
       type: referral
       id: $.id
       isBulk: true
       jsonPath: $.*
       timeStampField: $.auditDetails.lastModifiedTime
-  - topic: ad-transformer-producer-hfreferral-index-v1-topic
+  - topic: kb-transformer-producer-hfreferral-index-v1-topic
     configKey: INDEX
     indexes:
-    - name: ad-hf-referral-index-v1
+    - name: kb-hf-referral-index-v1
       type: hfreferral
       id: $.hfReferral.id
       isBulk: true
@@ -77,7 +77,7 @@ ServiceMaps:
         - inJsonPath: $
           outJsonPath: $.Data
       timeStampField: $.hfReferral.clientAuditDetails.lastModifiedTime
-    - name: ad-user-sync-index-v1
+    - name: kb-user-sync-index-v1
       type: users
       id: $.hfReferral.id
       isBulk: true
@@ -113,10 +113,10 @@ ServiceMaps:
           - inJsonPath: $.additionalDetails.cycleIndex
             outJsonPath: $.Data.additionalDetails.cycleIndex
       timeStampField: $.hfReferral.clientAuditDetails.lastModifiedTime
-  - topic: ad-delete-hfreferral-topic
+  - topic: kb-delete-hfreferral-topic
     configKey: INDEX
     indexes:
-    - name: ad-hf-referral-index-v1
+    - name: kb-hf-referral-index-v1
       type: hfreferral
       id: $.id
       isBulk: true
