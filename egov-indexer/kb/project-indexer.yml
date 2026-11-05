@@ -2,10 +2,10 @@ ServiceMaps:
   serviceName: Project Service
   version: 1.0.0
   mappings:
-  - topic: kb-transformer-producer-bulk-project-index-v1-topic
+  - topic: ad-transformer-producer-bulk-project-index-v1-topic
     configKey: INDEX
     indexes:
-    - name: kb-project-index-v1
+    - name: ad-project-index-v1
       type: projects
       id: $.id
       isBulk: true
@@ -17,82 +17,82 @@ ServiceMaps:
         - inJsonPath: $
           outJsonPath: $.Data
       timeStampField: $.lastModifiedTime
-  - topic: kb-save-project-beneficiary-topic
+  - topic: ad-save-project-beneficiary-topic
     configKey: INDEX
     indexes:
-    - name: kb-project-beneficiary-index-v1
+    - name: ad-project-beneficiary-index-v1
       type: project-beneficiary
       id: $.clientReferenceId,$.beneficiaryClientReferenceId,$.tenantId
       isBulk: true
       jsonPath: $.*
       timeStampField: $.auditDetails.createdTime
-  - topic: kb-update-project-beneficiary-topic
+  - topic: ad-update-project-beneficiary-topic
     configKey: INDEX
     indexes:
-    - name: kb-project-beneficiary-index-v1
+    - name: ad-project-beneficiary-index-v1
       type: project-beneficiary
       id: $.clientReferenceId,$.beneficiaryClientReferenceId,$.tenantId
       isBulk: true
       jsonPath: $.*
       timeStampField: $.auditDetails.lastModifiedTime
-  - topic: kb-delete-project-beneficiary-topic
+  - topic: ad-delete-project-beneficiary-topic
     configKey: INDEX
     indexes:
-    - name: kb-project-beneficiary-index-v1
+    - name: ad-project-beneficiary-index-v1
       type: project-beneficiary
       id: $.clientReferenceId,$.beneficiaryClientReferenceId,$.tenantId
       isBulk: true
       jsonPath: $.*
       timeStampField: $.auditDetails.lastModifiedTime
-  - topic: kb-save-project-resource-topic
+  - topic: ad-save-project-resource-topic
     configKey: INDEX
     indexes:
-    - name: kb-project-resource-index-v1
+    - name: ad-project-resource-index-v1
       type: project-resource
       id: $.id
       isBulk: true
       jsonPath: $.*
       timeStampField: $.auditDetails.createdTime
-  - topic: kb-update-project-resource-topic
+  - topic: ad-update-project-resource-topic
     configKey: INDEX
     indexes:
-    - name: kb-project-resource-index-v1
+    - name: ad-project-resource-index-v1
       type: project-resource
       id: $.id
       isBulk: true
       jsonPath: $.*
       timeStampField: $.auditDetails.lastModifiedTime
-  - topic: kb-delete-project-resource-topic
+  - topic: ad-delete-project-resource-topic
     configKey: INDEX
     indexes:
-    - name: kb-project-resource-index-v1
+    - name: ad-project-resource-index-v1
       type: project-resource
       id: $.id
       isBulk: true
       jsonPath: $.*
       timeStampField: $.auditDetails.lastModifiedTime
-  - topic: kb-save-project-facility-topic
+  - topic: ad-save-project-facility-topic
     configKey: INDEX
     indexes:
-    - name: kb-project-facility-index-v1
+    - name: ad-project-facility-index-v1
       type: project-facility
       id: $.id
       isBulk: true
       jsonPath: $.*
       timeStampField: $.auditDetails.createdTime
-  - topic: kb-update-project-facility-topic
+  - topic: ad-update-project-facility-topic
     configKey: INDEX
     indexes:
-    - name: kb-project-facility-index-v1
+    - name: ad-project-facility-index-v1
       type: project-facility
       id: $.id
       isBulk: true
       jsonPath: $.*
       timeStampField: $.auditDetails.lastModifiedTime
-  - topic: kb-delete-project-facility-topic
+  - topic: ad-delete-project-facility-topic
     configKey: INDEX
     indexes:
-    - name: kb-project-facility-index-v1
+    - name: ad-project-facility-index-v1
       type: project-facility
       id: $.id
       isBulk: true

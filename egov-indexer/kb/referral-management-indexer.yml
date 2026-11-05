@@ -2,10 +2,10 @@ ServiceMaps:
   serviceName: referralmanagement
   version: 1.0.0
   mappings:
-  - topic: kb-transformer-producer-referral-index-v1-topic
+  - topic: ad-transformer-producer-referral-index-v1-topic
     configKey: INDEX
     indexes:
-    - name: kb-referral-index-v1
+    - name: ad-referral-index-v1
       type: referral
       id: $.referral.id
       isBulk: true
@@ -17,15 +17,17 @@ ServiceMaps:
         - inJsonPath: $
           outJsonPath: $.Data
       timeStampField: $.referral.auditDetails.createdTime
-    - name: kb-user-sync-index-v1
+    - name: ad-user-sync-index-v1
       type: users
-      id: $.referral.id,$.referral.tenantId
+      id: $.referral.id
       isBulk: true
       jsonPath: $
       customJsonMapping:
         indexMapping:
-          Data: {}
+          Data: { additionalDetails: {} }
         fieldMapping:
+        - inJsonPath: $.referral.id
+          outJsonPath: $.Data.referralId
         - inJsonPath: $.referral.clientAuditDetails.createdBy
           outJsonPath: $.Data.syncedUserId
         - inJsonPath: $.userName
@@ -40,28 +42,30 @@ ServiceMaps:
           outJsonPath: $.Data.createdTime
         - inJsonPath: $.@timestamp
           outJsonPath: $.Data.syncedTimeStamp
-        - inJsonPath: $.@timestamp
-          outJsonPath: $.Data.@timestamp
         - inJsonPath: $.taskDates
           outJsonPath: $.Data.taskDates
         - inJsonPath: $.syncedDate
           outJsonPath: $.Data.syncedDate
-        - inJsonPath: $.userAddress
-          outJsonPath: $.Data.userAddress
+        - inJsonPath: $.campaignNumber
+          outJsonPath: $.Data.campaignNumber
+        - inJsonPath: $.campaignId
+          outJsonPath: $.Data.campaignId
+        - inJsonPath: $.additionalDetails.cycleIndex
+          outJsonPath: $.Data.additionalDetails.cycleIndex
       timeStampField: $.referral.auditDetails.lastModifiedTime
-  - topic: kb-delete-referral-topic
+  - topic: ad-delete-referral-topic
     configKey: INDEX
     indexes:
-    - name: kb-referral-index-v1
+    - name: ad-referral-index-v1
       type: referral
       id: $.id
       isBulk: true
       jsonPath: $.*
       timeStampField: $.auditDetails.lastModifiedTime
-  - topic: kb-transformer-producer-hfreferral-index-v1-topic
+  - topic: ad-transformer-producer-hfreferral-index-v1-topic
     configKey: INDEX
     indexes:
-    - name: kb-hf-referral-index-v1
+    - name: ad-hf-referral-index-v1
       type: hfreferral
       id: $.hfReferral.id
       isBulk: true
@@ -73,10 +77,46 @@ ServiceMaps:
         - inJsonPath: $
           outJsonPath: $.Data
       timeStampField: $.hfReferral.clientAuditDetails.lastModifiedTime
-  - topic: kb-delete-hfreferral-topic
+    - name: ad-user-sync-index-v1
+      type: users
+      id: $.hfReferral.id
+      isBulk: true
+      jsonPath: $
+      customJsonMapping:
+        indexMapping:
+          Data: { additionalDetails: {} }
+        fieldMapping:
+          - inJsonPath: $.hfReferral.id
+            outJsonPath: $.Data.hfReferralId
+          - inJsonPath: $.hfReferral.clientAuditDetails.createdBy
+            outJsonPath: $.Data.syncedUserId
+          - inJsonPath: $.userName
+            outJsonPath: $.Data.syncedUserName
+          - inJsonPath: $.role
+            outJsonPath: $.Data.role
+          - inJsonPath: $.boundaryHierarchy
+            outJsonPath: $.Data.boundaryHierarchy
+          - inJsonPath: $.hfReferral.clientAuditDetails.createdTime
+            outJsonPath: $.Data.clientCreatedTime
+          - inJsonPath: $.hfReferral.auditDetails.lastModifiedTime
+            outJsonPath: $.Data.createdTime
+          - inJsonPath: $.taskDates
+            outJsonPath: $.Data.taskDates
+          - inJsonPath: $.@timestamp
+            outJsonPath: $.Data.syncedTimeStamp
+          - inJsonPath: $.syncedDate
+            outJsonPath: $.Data.syncedDate
+          - inJsonPath: $.campaignNumber
+            outJsonPath: $.Data.campaignNumber
+          - inJsonPath: $.campaignId
+            outJsonPath: $.Data.campaignId
+          - inJsonPath: $.additionalDetails.cycleIndex
+            outJsonPath: $.Data.additionalDetails.cycleIndex
+      timeStampField: $.hfReferral.clientAuditDetails.lastModifiedTime
+  - topic: ad-delete-hfreferral-topic
     configKey: INDEX
     indexes:
-    - name: kb-hf-referral-index-v1
+    - name: ad-hf-referral-index-v1
       type: hfreferral
       id: $.id
       isBulk: true

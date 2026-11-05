@@ -2,19 +2,19 @@ ServiceMaps:
   serviceName: facility
   version: 1.0.0
   mappings:
-  - topic: kb-save-facility-topic
+  - topic: ad-save-facility-topic
     configKey: INDEX
     indexes:
-    - name: kb-facility-index-v1
+    - name: ad-facility-index-v1
       type: facility
       id: $.clientReferenceId
       isBulk: true
       jsonPath: $.*
       timeStampField: $.auditDetails.createdTime
-  - topic: kb-update-facility-topic
+  - topic: ad-update-facility-topic
     configKey: INDEX
     indexes:
-    - name: kb-facility-index-v1
+    - name: ad-facility-index-v1
       type: facility
       id: $.clientReferenceId
       isBulk: true

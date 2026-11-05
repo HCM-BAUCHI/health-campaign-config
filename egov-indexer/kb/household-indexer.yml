@@ -2,10 +2,10 @@ ServiceMaps:
   serviceName: household
   version: 1.0.0
   mappings:
-  - topic: kb-transformer-producer-household-index-v1-topic
+  - topic: ad-transformer-producer-household-index-v1-topic
     configKey: INDEX
     indexes:
-    - name: kb-household-index-v1
+    - name: ad-household-index-v1
       type: household
       id: $.household.clientReferenceId
       isBulk: true
@@ -17,19 +17,19 @@ ServiceMaps:
         - inJsonPath: $
           outJsonPath: $.Data
       timeStampField: $.household.clientAuditDetails.lastModifiedTime
-  - topic: kb-delete-household-topic
+  - topic: ad-delete-household-topic
     configKey: INDEX
     indexes:
-    - name: kb-household-index-v1
+    - name: ad-household-index-v1
       type: household
       id: $.clientReferenceId
       isBulk: true
       jsonPath: $.*
       timeStampField: $.auditDetails.lastModifiedTime
-  - topic: kb-transformer-producer-household-member-index-v1-topic
+  - topic: ad-transformer-producer-household-member-index-v1-topic
     configKey: INDEX
     indexes:
-    - name: kb-household-member-index-v1
+    - name: ad-household-member-index-v1
       type: member
       id: $.householdMember.clientReferenceId
       isBulk: true
@@ -41,10 +41,10 @@ ServiceMaps:
         - inJsonPath: $
           outJsonPath: $.Data
       timeStampField: $.householdMember.clientAuditDetails.lastModifiedTime
-  - topic: kb-delete-household-member-topic
+  - topic: ad-delete-household-member-topic
     configKey: INDEX
     indexes:
-    - name: kb-household-member-index-v1
+    - name: ad-household-member-index-v1
       type: member
       id: $.id
       isBulk: true
