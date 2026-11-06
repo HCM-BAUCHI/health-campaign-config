@@ -27718,11 +27718,7 @@
       "SUM",
       "Received",
       "Issued",
-      "Returned",
-      "StockReceived",
-      "StockIssued",
-      "StockReturned",
-      "StockBalance"
+      "Returned"
     ],
     "computedFields": [
       {
