@@ -27718,12 +27718,16 @@
       "SUM",
       "Received",
       "Issued",
-      "Returned"
+      "Returned",
+      "StockReceived",
+      "StockIssued",
+      "StockReturned",
+      "StockBalance"
     ],
     "computedFields": [
       {
         "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
+        "actionName": "",
         "fields": [
           "StockReceived"
         ],
@@ -27732,7 +27736,7 @@
       },
       {
         "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
+        "actionName": "",
         "fields": [
           "StockIssued"
         ],
@@ -27741,7 +27745,7 @@
       },
       {
         "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
+        "actionName": "",
         "fields": [
           "StockReturned"
         ],
