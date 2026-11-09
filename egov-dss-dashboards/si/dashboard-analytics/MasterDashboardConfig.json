@@ -3597,17 +3597,17 @@
           "vizArray": [
             {
               "id": 4020,
-              "name": "DSS_SI_ITN_V_INV_P_1",
-              "label": "DSS_SI_ITN_V_INV_P_1",
-              "vizType": "bannercard",
+              "name": "DSS_SI_ITN_V_INV_HEADLINE",
+              "label": "DSS_SI_ITN_V_INV_HEADLINE",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnInvWarehouseManagerUserSyncIRSICCD",
-                  "name": "DSS_SI_ITN_INV_WAREHOUSE_MANAGER_USER_SYNC_RATE",
+                  "id": "siItnStkHeadline",
+                  "name": "DSS_SI_ITN_STK_HEADLINE",
                   "code": "",
-                  "chartType": "table",
+                  "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }
@@ -3621,17 +3621,17 @@
           "vizArray": [
             {
               "id": 4021,
-              "name": "DSS_SI_ITN_V_INV_P_2",
-              "label": "DSS_SI_ITN_V_INV_P_2",
-              "vizType": "chart",
+              "name": "DSS_SI_ITN_V_INV_RECEIVED",
+              "label": "DSS_SI_ITN_V_INV_RECEIVED",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnInvInventoryStockUsedProvinceBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_INVENTORY_STOCK_USED_PROVINCE",
+                  "id": "siItnStkReceived",
+                  "name": "DSS_SI_ITN_STK_RECEIVED",
                   "code": "",
-                  "chartType": "bar",
+                  "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }
@@ -3645,17 +3645,17 @@
           "vizArray": [
             {
               "id": 4022,
-              "name": "DSS_SI_ITN_V_INV_P_3",
-              "label": "DSS_SI_ITN_V_INV_P_3",
-              "vizType": "chart",
+              "name": "DSS_SI_ITN_V_INV_ISSUED",
+              "label": "DSS_SI_ITN_V_INV_ISSUED",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnInvInventoryStockInHandProvinceBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_INVENTORY_STOCK_IN_HAND_PROVINCE",
+                  "id": "siItnStkIssued",
+                  "name": "DSS_SI_ITN_STK_ISSUED",
                   "code": "",
-                  "chartType": "bar",
+                  "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }
@@ -3669,113 +3669,19 @@
           "vizArray": [
             {
               "id": 4023,
-              "name": "DSS_SI_ITN_V_INV_P_4",
-              "label": "DSS_SI_ITN_V_INV_P_4",
-              "vizType": "leafletMap",
+              "name": "DSS_SI_ITN_V_INV_RETURNS",
+              "label": "DSS_SI_ITN_V_INV_RETURNS",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnInvWarehouseDistributionLatLongPointsBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
+                  "id": "siItnStkReturns",
+                  "name": "DSS_SI_ITN_STK_RETURNS",
                   "code": "",
-                  "chartType": "leafletHeatMap",
+                  "chartType": "metric",
                   "filter": "",
                   "headers": []
-                },
-                {
-                  "id": "siItnInvWarehouseDistributionLatLongTableAvlRcvdDispDistrictWiseProvincialBoardBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
-                  "code": "",
-                  "chartType": "leafletHeatMap",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "SI_ITN_INV_HOUSEHOLDS"
-                },
-                {
-                  "id": "siItnInvWarehouseDistributionLatLongTableDaysStockLastsDistrictWiseProvincialBoardBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
-                  "code": "",
-                  "chartType": "leafletHeatMap",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnInvWarehouseDistributionLatLongTableAvlRcvdDispFacilitiesBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
-                  "code": "",
-                  "chartType": "leafletHeatMap",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnInvWarehouseDistributionLatLongTableStockStatusDistrictWiseProvincialBoardBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
-                  "code": "",
-                  "chartType": "leafletHeatMap",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnInvWarehouseDistributionLatLongTableWarNumDistrictWiseProvincialBoardBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
-                  "code": "",
-                  "chartType": "leafletCoordinateMap",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "SI_ITN_INV_HOUSEHOLDS",
-                  "_styleComment": "Every key optional; each falls back independently. clusterColors takes a list (ramp, light -> dark) or a single colour string for a constant fill. Keep the steps on one hue: density is a magnitude, and unrelated hues would encode it as identity. The legend bar is generated from these same colours.",
-                  "style": {
-                    "clusterColors": [
-                      "#FFE9A8",
-                      "#FFD24D",
-                      "#FFA424",
-                      "#F76707",
-                      "#D9480F",
-                      "#A02C0A"
-                    ],
-                    "pointColor": "#C84C0E",
-                    "clusterMinRadius": 5,
-                    "clusterMaxRadius": 22,
-                    "pointRadius": 4,
-                    "shape": "circle",
-                    "iconSize": 22
-                  },
-                  "_comment": "scaling is indexed by boundary drill depth; the last entry repeats for anything deeper, so adding hierarchy levels needs no code change. No level is named anywhere.",
-                  "_modeComment": "viewport = precision AND bbox follow the screen, so zooming re-clusters and panning brings in new data. This is the only mode where the document total is scoped to what is on screen, which is what lets individual coordinates appear once the user has zoomed into a sparse enough area. The alternatives keep a global bbox: boundary = fixed precision, one request for the whole boundary; zoom = precision follows zoom but pan is not an input. Both are cheaper, but in both the total is boundary-wide, so they can never flip to individual coordinates.",
-                  "_hitsCapComment": "hitsCap is the count below which individual coordinates are drawn instead of clusters; 0 or omitted means clusters only. Note the total is counted over the PADDED bbox, not the visible screen, so a larger bboxPadding delays the switch to individual coordinates.",
-                  "_precisionComment": "precision = round(leafletZoom) + zoomOffset, clamped to maxPrecision. In viewport mode precision and bbox scale together, so the bucket count per screen stays roughly constant at any zoom - maxPrecision is only an absolute floor on cell size.",
-                  "_paddingComment": "bboxPadding fetches a region larger than the screen, in each dimension. 2.0 = 4x the visible area, so the user can pan roughly half a screen in any direction before anything is refetched. Higher = fewer requests while panning, but a larger total and so a later switch to individual coordinates.",
-                  "scaling": [
-                    {
-                      "mode": "viewport",
-                      "zoomOffset": 3,
-                      "maxPrecision": 22,
-                      "hitsCap": 1000,
-                      "bboxPadding": 2.0
-                    },
-                    {
-                      "mode": "viewport",
-                      "zoomOffset": 3,
-                      "maxPrecision": 22,
-                      "hitsCap": 1500,
-                      "bboxPadding": 2.0
-                    },
-                    {
-                      "mode": "viewport",
-                      "zoomOffset": 3,
-                      "maxPrecision": 22,
-                      "hitsCap": 2000,
-                      "bboxPadding": 2.0
-                    },
-                    {
-                      "mode": "viewport",
-                      "zoomOffset": 3,
-                      "maxPrecision": 22,
-                      "hitsCap": 2000,
-                      "bboxPadding": 1.5
-                    }
-                  ]
                 }
               ]
             }
@@ -3787,17 +3693,17 @@
           "vizArray": [
             {
               "id": 4024,
-              "name": "DSS_SI_ITN_V_INV_P_5",
-              "label": "DSS_SI_ITN_V_INV_P_5",
-              "vizType": "chart",
+              "name": "DSS_SI_ITN_V_INV_LOSS",
+              "label": "DSS_SI_ITN_V_INV_LOSS",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnInvInventorySummaryByDistrictBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_INVENTORY_SUMMARY_BY_DISTRICT",
+                  "id": "siItnStkLoss",
+                  "name": "DSS_SI_ITN_STK_LOSS",
                   "code": "",
-                  "chartType": "table",
+                  "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }
@@ -3811,17 +3717,17 @@
           "vizArray": [
             {
               "id": 4025,
-              "name": "DSS_SI_ITN_V_INV_P_6",
-              "label": "DSS_SI_ITN_V_INV_P_6",
-              "vizType": "chart",
+              "name": "DSS_SI_ITN_V_INV_IN_HAND",
+              "label": "DSS_SI_ITN_V_INV_IN_HAND",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnInvInventorySummaryByStateBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_INVENTORY_SUMMARY_BY_STATE",
+                  "id": "siItnStkInHand",
+                  "name": "DSS_SI_ITN_STK_IN_HAND",
                   "code": "",
-                  "chartType": "table",
+                  "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }
@@ -3835,15 +3741,115 @@
           "vizArray": [
             {
               "id": 4026,
-              "name": "DSS_SI_ITN_V_INV_P_7",
-              "label": "DSS_SI_ITN_V_INV_P_7",
+              "name": "DSS_SI_ITN_V_INV_BY_AREA",
+              "label": "DSS_SI_ITN_V_INV_BY_AREA",
               "vizType": "chart",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnInvExcessLossStockStateBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_EXCESS_LOSS_STOCK_STATE",
+                  "id": "siItnStkByAreaP",
+                  "name": "DSS_SI_ITN_STK_BY_AREA_P",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 8,
+          "name": "DSS_SI_ITN_TAB_INVENTORY",
+          "vizArray": [
+            {
+              "id": 4027,
+              "name": "DSS_SI_ITN_V_INV_STATUS",
+              "label": "DSS_SI_ITN_V_INV_STATUS",
+              "vizType": "chart",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnStkStatusByLevel",
+                  "name": "DSS_SI_ITN_STK_STATUS_BY_LEVEL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 4028,
+              "name": "DSS_SI_ITN_V_INV_USAGE",
+              "label": "DSS_SI_ITN_V_INV_USAGE",
+              "vizType": "chart",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnStkUsageByAreaP",
+                  "name": "DSS_SI_ITN_STK_USAGE_BY_AREA_P",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_USAGE"
+                },
+                {
+                  "id": "siItnStkReturnRateByAreaP",
+                  "name": "DSS_SI_ITN_STK_RETURN_RATE_BY_AREA_P",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_RETURN_RATE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 9,
+          "name": "DSS_SI_ITN_TAB_INVENTORY",
+          "vizArray": [
+            {
+              "id": 4029,
+              "name": "DSS_SI_ITN_V_INV_LOSS_BY_AREA",
+              "label": "DSS_SI_ITN_V_INV_LOSS_BY_AREA",
+              "vizType": "chart",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnStkLossByAreaP",
+                  "name": "DSS_SI_ITN_STK_LOSS_BY_AREA_P",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 10,
+          "name": "DSS_SI_ITN_TAB_INVENTORY",
+          "vizArray": [
+            {
+              "id": 4030,
+              "name": "DSS_SI_ITN_V_INV_PENDING",
+              "label": "DSS_SI_ITN_V_INV_PENDING",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnStkPending",
+                  "name": "DSS_SI_ITN_STK_PENDING",
                   "code": "",
                   "chartType": "table",
                   "filter": "",
@@ -3858,7 +3864,7 @@
           "name": "DSS_SI_ITN_TAB_MAPS",
           "vizArray": [
             {
-              "id": 4027,
+              "id": 4031,
               "name": "DSS_SI_ITN_V_LEAFLET",
               "label": "DSS_SI_ITN_V_LEAFLET",
               "vizType": "leafletMap",
@@ -3910,7 +3916,7 @@
           "name": "DSS_SI_ITN_TAB_MAPS",
           "vizArray": [
             {
-              "id": 4028,
+              "id": 4032,
               "name": "DSS_SI_ITN_V_MAP_1",
               "label": "DSS_SI_ITN_V_MAP_1",
               "vizType": "chart",
@@ -3936,7 +3942,7 @@
           "name": "DSS_SI_ITN_TAB_MAPS",
           "vizArray": [
             {
-              "id": 4029,
+              "id": 4033,
               "name": "DSS_SI_ITN_V_MAP_2",
               "label": "DSS_SI_ITN_V_MAP_2",
               "vizType": "chart",
@@ -3962,7 +3968,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 4030,
+              "id": 4034,
               "name": "DSS_SI_ITN_V_CMP_RECEIVED",
               "label": "DSS_SI_ITN_V_CMP_RECEIVED",
               "vizType": "cards-list",
@@ -3986,7 +3992,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 4031,
+              "id": 4035,
               "name": "DSS_SI_ITN_V_COMPLAINTS_BY_STATUS",
               "label": "DSS_SI_ITN_V_COMPLAINTS_BY_STATUS",
               "vizType": "chart",
@@ -4004,7 +4010,7 @@
               ]
             },
             {
-              "id": 4032,
+              "id": 4036,
               "name": "DSS_SI_ITN_V_CMP_BY_TYPE",
               "label": "DSS_SI_ITN_V_CMP_BY_TYPE",
               "vizType": "chart",
@@ -4028,7 +4034,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 4033,
+              "id": 4037,
               "name": "DSS_SI_ITN_V_CMP_BY_AREA",
               "label": "DSS_SI_ITN_V_CMP_BY_AREA",
               "vizType": "chart",
@@ -4046,7 +4052,7 @@
               ]
             },
             {
-              "id": 4034,
+              "id": 4038,
               "name": "DSS_SI_ITN_V_CMP_SHARE",
               "label": "DSS_SI_ITN_V_CMP_SHARE",
               "vizType": "chart",
@@ -4070,7 +4076,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 4035,
+              "id": 4039,
               "name": "DSS_SI_ITN_V_CMP_RESOLUTION",
               "label": "DSS_SI_ITN_V_CMP_RESOLUTION",
               "vizType": "chart",
@@ -4088,7 +4094,7 @@
               ]
             },
             {
-              "id": 4036,
+              "id": 4040,
               "name": "DSS_SI_ITN_V_CMP_TYPE_BY_AREA",
               "label": "DSS_SI_ITN_V_CMP_TYPE_BY_AREA",
               "vizType": "chart",
@@ -4112,7 +4118,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 4037,
+              "id": 4041,
               "name": "DSS_SI_ITN_V_CMP_SUMMARY",
               "label": "DSS_SI_ITN_V_CMP_SUMMARY",
               "vizType": "chart",
@@ -4130,7 +4136,7 @@
               ]
             },
             {
-              "id": 4038,
+              "id": 4042,
               "name": "DSS_SI_ITN_V_CMP_OPEN_AGE",
               "label": "DSS_SI_ITN_V_CMP_OPEN_AGE",
               "vizType": "chart",
@@ -4154,7 +4160,7 @@
           "name": "DSS_SI_ITN_TAB_TEAM_PERFORMANCE",
           "vizArray": [
             {
-              "id": 4039,
+              "id": 4043,
               "name": "DSS_SI_ITN_V_TEAMS",
               "label": "DSS_SI_ITN_V_TEAMS",
               "vizType": "cards-list",
@@ -4178,7 +4184,7 @@
           "name": "DSS_SI_ITN_TAB_TEAM_PERFORMANCE",
           "vizArray": [
             {
-              "id": 4040,
+              "id": 4044,
               "name": "DSS_SI_ITN_V_REG_TEAMS",
               "label": "DSS_SI_ITN_V_REG_TEAMS",
               "vizType": "chart",
@@ -4202,7 +4208,7 @@
           "name": "DSS_SI_ITN_TAB_TEAM_PERFORMANCE",
           "vizArray": [
             {
-              "id": 4041,
+              "id": 4045,
               "name": "DSS_SI_ITN_V_DST_TEAMS",
               "label": "DSS_SI_ITN_V_DST_TEAMS",
               "vizType": "chart",
@@ -4226,7 +4232,7 @@
           "name": "DSS_SI_ITN_TAB_DATA_QUALITY",
           "vizArray": [
             {
-              "id": 4042,
+              "id": 4046,
               "name": "DSS_SI_ITN_V_DQ_CARDS",
               "label": "DSS_SI_ITN_V_DQ_CARDS",
               "vizType": "cards-list",
@@ -4250,7 +4256,7 @@
           "name": "DSS_SI_ITN_TAB_DATA_QUALITY",
           "vizArray": [
             {
-              "id": 4043,
+              "id": 4047,
               "name": "DSS_SI_ITN_V_DQ_BY_AREA",
               "label": "DSS_SI_ITN_V_DQ_BY_AREA",
               "vizType": "chart",
@@ -4274,7 +4280,7 @@
           "name": "DSS_SI_ITN_TAB_DATA_QUALITY",
           "vizArray": [
             {
-              "id": 4044,
+              "id": 4048,
               "name": "DSS_SI_ITN_V_DQ_SUMMARY",
               "label": "DSS_SI_ITN_V_DQ_SUMMARY",
               "vizType": "chart",
@@ -4298,7 +4304,7 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 4045,
+              "id": 4049,
               "name": "DSS_SI_ITN_V_SYS_USERS",
               "label": "DSS_SI_ITN_V_SYS_USERS",
               "vizType": "cards-list",
@@ -4322,7 +4328,7 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 4046,
+              "id": 4050,
               "name": "DSS_SI_ITN_V_SYS_TREND",
               "label": "DSS_SI_ITN_V_SYS_TREND",
               "vizType": "chart",
@@ -4346,7 +4352,7 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 4047,
+              "id": 4051,
               "name": "DSS_SI_ITN_V_SYS_USER_TABLE",
               "label": "DSS_SI_ITN_V_SYS_USER_TABLE",
               "vizType": "chart",
@@ -4370,7 +4376,7 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 4048,
+              "id": 4052,
               "name": "DSS_SI_ITN_V_REG_SYNC_TABLE",
               "label": "DSS_SI_ITN_V_REG_SYNC_TABLE",
               "vizType": "chart",
@@ -4388,7 +4394,7 @@
               ]
             },
             {
-              "id": 4049,
+              "id": 4053,
               "name": "DSS_SI_ITN_V_DST_SYNC_TABLE",
               "label": "DSS_SI_ITN_V_DST_SYNC_TABLE",
               "vizType": "chart",
@@ -5127,17 +5133,17 @@
           "vizArray": [
             {
               "id": 5021,
-              "name": "DSS_SI_ITN_V_INV_D_1",
-              "label": "DSS_SI_ITN_V_INV_D_1",
-              "vizType": "chart",
+              "name": "DSS_SI_ITN_V_INV_HEADLINE",
+              "label": "DSS_SI_ITN_V_INV_HEADLINE",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnInvDaysInventoryStockLastsDistrictBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_OVERVIEW_DAYS_INVENTORY_CAN_LAST_DISTRICT",
+                  "id": "siItnStkHeadline",
+                  "name": "DSS_SI_ITN_STK_HEADLINE",
                   "code": "",
-                  "chartType": "bar",
+                  "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }
@@ -5151,17 +5157,17 @@
           "vizArray": [
             {
               "id": 5022,
-              "name": "DSS_SI_ITN_V_INV_D_2",
-              "label": "DSS_SI_ITN_V_INV_D_2",
-              "vizType": "chart",
+              "name": "DSS_SI_ITN_V_INV_RECEIVED",
+              "label": "DSS_SI_ITN_V_INV_RECEIVED",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnInvInventoryStockInHandDistrictBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_INVENTORY_STOCK_IN_HAND_DISTRICT",
+                  "id": "siItnStkReceived",
+                  "name": "DSS_SI_ITN_STK_RECEIVED",
                   "code": "",
-                  "chartType": "bar",
+                  "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }
@@ -5175,57 +5181,17 @@
           "vizArray": [
             {
               "id": 5023,
-              "name": "DSS_SI_ITN_V_INV_D_3",
-              "label": "DSS_SI_ITN_V_INV_D_3",
-              "vizType": "latlong",
+              "name": "DSS_SI_ITN_V_INV_ISSUED",
+              "label": "DSS_SI_ITN_V_INV_ISSUED",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnInvWarehouseDistributionLatLongPointsBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
+                  "id": "siItnStkIssued",
+                  "name": "DSS_SI_ITN_STK_ISSUED",
                   "code": "",
-                  "chartType": "points",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnInvWarehouseDistributionLatLongTableAvlRcvdDispDistrictWiseProvincialBoardBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnInvWarehouseDistributionLatLongTableDaysStockLastsDistrictWiseProvincialBoardBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnInvWarehouseDistributionLatLongTableAvlRcvdDispFacilitiesBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnInvWarehouseDistributionLatLongTableStockStatusDistrictWiseProvincialBoardBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnInvWarehouseDistributionLatLongTableWarNumDistrictWiseProvincialBoardBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
-                  "code": "",
-                  "chartType": "table",
+                  "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }
@@ -5239,17 +5205,17 @@
           "vizArray": [
             {
               "id": 5024,
-              "name": "DSS_SI_ITN_V_INV_D_4",
-              "label": "DSS_SI_ITN_V_INV_D_4",
-              "vizType": "chart",
+              "name": "DSS_SI_ITN_V_INV_RETURNS",
+              "label": "DSS_SI_ITN_V_INV_RETURNS",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnInvInventorySummaryByApBednetsICCD",
-                  "name": "DSS_SI_ITN_INV_INVENTORY_SUMMARY_BY_AP",
+                  "id": "siItnStkReturns",
+                  "name": "DSS_SI_ITN_STK_RETURNS",
                   "code": "",
-                  "chartType": "table",
+                  "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }
@@ -5263,19 +5229,17 @@
           "vizArray": [
             {
               "id": 5025,
-              "name": "DSS_SI_ITN_V_INV_D_5",
-              "label": "DSS_SI_ITN_V_INV_D_5",
-              "vizType": "chart",
+              "name": "DSS_SI_ITN_V_INV_LOSS",
+              "label": "DSS_SI_ITN_V_INV_LOSS",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "summaryByStockReceived",
-                  "name": "DSS_SI_ITN_V_INV_D_5",
+                  "id": "siItnStkLoss",
+                  "name": "DSS_SI_ITN_STK_LOSS",
                   "code": "",
-                  "moduleName": "llin",
-                  "pageName": "itn-stock-received-summary-report",
-                  "chartType": "kibanaComponent",
+                  "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }
@@ -5289,19 +5253,17 @@
           "vizArray": [
             {
               "id": 5026,
-              "name": "DSS_SI_ITN_V_INV_D_6",
-              "label": "DSS_SI_ITN_V_INV_D_6",
-              "vizType": "chart",
+              "name": "DSS_SI_ITN_V_INV_IN_HAND",
+              "label": "DSS_SI_ITN_V_INV_IN_HAND",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "summaryByStockIssued",
-                  "name": "DSS_SI_ITN_V_INV_D_6",
+                  "id": "siItnStkInHand",
+                  "name": "DSS_SI_ITN_STK_IN_HAND",
                   "code": "",
-                  "moduleName": "llin",
-                  "pageName": "itn-stock-issued-summary-report",
-                  "chartType": "kibanaComponent",
+                  "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }
@@ -5315,19 +5277,117 @@
           "vizArray": [
             {
               "id": 5027,
-              "name": "DSS_SI_ITN_V_INV_D_7",
-              "label": "DSS_SI_ITN_V_INV_D_7",
+              "name": "DSS_SI_ITN_V_INV_BY_AREA",
+              "label": "DSS_SI_ITN_V_INV_BY_AREA",
               "vizType": "chart",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "summaryByStockReturned",
-                  "name": "DSS_SI_ITN_V_INV_D_7",
+                  "id": "siItnStkByAreaD",
+                  "name": "DSS_SI_ITN_STK_BY_AREA_D",
                   "code": "",
-                  "moduleName": "llin",
-                  "pageName": "itn-stock-returned-summary-report",
-                  "chartType": "kibanaComponent",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 8,
+          "name": "DSS_SI_ITN_TAB_INVENTORY",
+          "vizArray": [
+            {
+              "id": 5028,
+              "name": "DSS_SI_ITN_V_INV_STATUS",
+              "label": "DSS_SI_ITN_V_INV_STATUS",
+              "vizType": "chart",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnStkStatusByLevel",
+                  "name": "DSS_SI_ITN_STK_STATUS_BY_LEVEL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 5029,
+              "name": "DSS_SI_ITN_V_INV_USAGE",
+              "label": "DSS_SI_ITN_V_INV_USAGE",
+              "vizType": "chart",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnStkUsageByAreaD",
+                  "name": "DSS_SI_ITN_STK_USAGE_BY_AREA_D",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_USAGE"
+                },
+                {
+                  "id": "siItnStkReturnRateByAreaD",
+                  "name": "DSS_SI_ITN_STK_RETURN_RATE_BY_AREA_D",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_RETURN_RATE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 9,
+          "name": "DSS_SI_ITN_TAB_INVENTORY",
+          "vizArray": [
+            {
+              "id": 5030,
+              "name": "DSS_SI_ITN_V_INV_LOSS_BY_AREA",
+              "label": "DSS_SI_ITN_V_INV_LOSS_BY_AREA",
+              "vizType": "chart",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnStkLossByAreaD",
+                  "name": "DSS_SI_ITN_STK_LOSS_BY_AREA_D",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 10,
+          "name": "DSS_SI_ITN_TAB_INVENTORY",
+          "vizArray": [
+            {
+              "id": 5031,
+              "name": "DSS_SI_ITN_V_INV_PENDING",
+              "label": "DSS_SI_ITN_V_INV_PENDING",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnStkPending",
+                  "name": "DSS_SI_ITN_STK_PENDING",
+                  "code": "",
+                  "chartType": "table",
                   "filter": "",
                   "headers": []
                 }
@@ -5340,7 +5400,7 @@
           "name": "DSS_SI_ITN_TAB_MAPS",
           "vizArray": [
             {
-              "id": 5028,
+              "id": 5032,
               "name": "DSS_SI_ITN_V_LEAFLET",
               "label": "DSS_SI_ITN_V_LEAFLET",
               "vizType": "leafletMap",
@@ -5392,7 +5452,7 @@
           "name": "DSS_SI_ITN_TAB_MAPS",
           "vizArray": [
             {
-              "id": 5029,
+              "id": 5033,
               "name": "DSS_SI_ITN_V_MAP_1",
               "label": "DSS_SI_ITN_V_MAP_1",
               "vizType": "chart",
@@ -5418,7 +5478,7 @@
           "name": "DSS_SI_ITN_TAB_MAPS",
           "vizArray": [
             {
-              "id": 5030,
+              "id": 5034,
               "name": "DSS_SI_ITN_V_MAP_2",
               "label": "DSS_SI_ITN_V_MAP_2",
               "vizType": "chart",
@@ -5444,7 +5504,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 5031,
+              "id": 5035,
               "name": "DSS_SI_ITN_V_CMP_RECEIVED",
               "label": "DSS_SI_ITN_V_CMP_RECEIVED",
               "vizType": "cards-list",
@@ -5468,7 +5528,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 5032,
+              "id": 5036,
               "name": "DSS_SI_ITN_V_COMPLAINTS_BY_STATUS",
               "label": "DSS_SI_ITN_V_COMPLAINTS_BY_STATUS",
               "vizType": "chart",
@@ -5486,7 +5546,7 @@
               ]
             },
             {
-              "id": 5033,
+              "id": 5037,
               "name": "DSS_SI_ITN_V_CMP_BY_TYPE",
               "label": "DSS_SI_ITN_V_CMP_BY_TYPE",
               "vizType": "chart",
@@ -5510,7 +5570,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 5034,
+              "id": 5038,
               "name": "DSS_SI_ITN_V_CMP_BY_AREA",
               "label": "DSS_SI_ITN_V_CMP_BY_AREA",
               "vizType": "chart",
@@ -5528,7 +5588,7 @@
               ]
             },
             {
-              "id": 5035,
+              "id": 5039,
               "name": "DSS_SI_ITN_V_CMP_SHARE",
               "label": "DSS_SI_ITN_V_CMP_SHARE",
               "vizType": "chart",
@@ -5552,7 +5612,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 5036,
+              "id": 5040,
               "name": "DSS_SI_ITN_V_CMP_RESOLUTION",
               "label": "DSS_SI_ITN_V_CMP_RESOLUTION",
               "vizType": "chart",
@@ -5570,7 +5630,7 @@
               ]
             },
             {
-              "id": 5037,
+              "id": 5041,
               "name": "DSS_SI_ITN_V_CMP_TYPE_BY_AREA",
               "label": "DSS_SI_ITN_V_CMP_TYPE_BY_AREA",
               "vizType": "chart",
@@ -5594,7 +5654,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 5038,
+              "id": 5042,
               "name": "DSS_SI_ITN_V_CMP_SUMMARY",
               "label": "DSS_SI_ITN_V_CMP_SUMMARY",
               "vizType": "chart",
@@ -5612,7 +5672,7 @@
               ]
             },
             {
-              "id": 5039,
+              "id": 5043,
               "name": "DSS_SI_ITN_V_CMP_OPEN_AGE",
               "label": "DSS_SI_ITN_V_CMP_OPEN_AGE",
               "vizType": "chart",
@@ -5636,7 +5696,7 @@
           "name": "DSS_SI_ITN_TAB_TEAM_PERFORMANCE",
           "vizArray": [
             {
-              "id": 5040,
+              "id": 5044,
               "name": "DSS_SI_ITN_V_TEAMS",
               "label": "DSS_SI_ITN_V_TEAMS",
               "vizType": "cards-list",
@@ -5660,7 +5720,7 @@
           "name": "DSS_SI_ITN_TAB_TEAM_PERFORMANCE",
           "vizArray": [
             {
-              "id": 5041,
+              "id": 5045,
               "name": "DSS_SI_ITN_V_REG_TEAMS",
               "label": "DSS_SI_ITN_V_REG_TEAMS",
               "vizType": "chart",
@@ -5684,7 +5744,7 @@
           "name": "DSS_SI_ITN_TAB_TEAM_PERFORMANCE",
           "vizArray": [
             {
-              "id": 5042,
+              "id": 5046,
               "name": "DSS_SI_ITN_V_DST_TEAMS",
               "label": "DSS_SI_ITN_V_DST_TEAMS",
               "vizType": "chart",
@@ -5708,7 +5768,7 @@
           "name": "DSS_SI_ITN_TAB_DATA_QUALITY",
           "vizArray": [
             {
-              "id": 5043,
+              "id": 5047,
               "name": "DSS_SI_ITN_V_DQ_CARDS",
               "label": "DSS_SI_ITN_V_DQ_CARDS",
               "vizType": "cards-list",
@@ -5732,7 +5792,7 @@
           "name": "DSS_SI_ITN_TAB_DATA_QUALITY",
           "vizArray": [
             {
-              "id": 5044,
+              "id": 5048,
               "name": "DSS_SI_ITN_V_DQ_BY_AREA",
               "label": "DSS_SI_ITN_V_DQ_BY_AREA",
               "vizType": "chart",
@@ -5756,7 +5816,7 @@
           "name": "DSS_SI_ITN_TAB_DATA_QUALITY",
           "vizArray": [
             {
-              "id": 5045,
+              "id": 5049,
               "name": "DSS_SI_ITN_V_DQ_SUMMARY",
               "label": "DSS_SI_ITN_V_DQ_SUMMARY",
               "vizType": "chart",
@@ -5780,7 +5840,7 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 5046,
+              "id": 5050,
               "name": "DSS_SI_ITN_V_SYS_USERS",
               "label": "DSS_SI_ITN_V_SYS_USERS",
               "vizType": "cards-list",
@@ -5804,7 +5864,7 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 5047,
+              "id": 5051,
               "name": "DSS_SI_ITN_V_SYS_TREND",
               "label": "DSS_SI_ITN_V_SYS_TREND",
               "vizType": "chart",
@@ -5828,7 +5888,7 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 5048,
+              "id": 5052,
               "name": "DSS_SI_ITN_V_SYS_USER_TABLE",
               "label": "DSS_SI_ITN_V_SYS_USER_TABLE",
               "vizType": "chart",
@@ -5852,7 +5912,7 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 5049,
+              "id": 5053,
               "name": "DSS_SI_ITN_V_REG_SYNC_TABLE",
               "label": "DSS_SI_ITN_V_REG_SYNC_TABLE",
               "vizType": "chart",
@@ -5870,7 +5930,7 @@
               ]
             },
             {
-              "id": 5050,
+              "id": 5054,
               "name": "DSS_SI_ITN_V_DST_SYNC_TABLE",
               "label": "DSS_SI_ITN_V_DST_SYNC_TABLE",
               "vizType": "chart",
