@@ -31044,6 +31044,88 @@
     ],
     "kind": "drillDown"
   },
+  "siItnCoverageSummaryN": {
+    "chartName": "DSS_SI_ITN_COVERAGE_SUMMARY_N",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "siItnDstSummaryP",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households registered",
+      "Households administered",
+      "Nets distributed",
+      "Start Date",
+      "End Date"
+    ],
+    "insight": {},
+    "_comment": "KPI coverage summary by province: registered, administered, nets, distribution coverage %",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households registered\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households administered\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_dates\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Start Date\":{\"min\":{\"field\":\"Data.startDate\"}},\"End Date\":{\"max\":{\"field\":\"Data.endDate\"}}}}}}}}"
+      }
+    ],
+    "plotLabel": "Province",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Households administered",
+          "Households registered"
+        ],
+        "newField": "Distribution coverage %"
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Start Date"
+        ],
+        "newField": "startDate"
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "End Date"
+        ],
+        "newField": "endDate"
+      }
+    ],
+    "excludedColumns": [
+      "Start Date",
+      "End Date"
+    ],
+    "filterKeys": [
+      {
+        "key": "province",
+        "column": "Province"
+      }
+    ],
+    "kind": "drillDown"
+  },
   "siItnDstDistributorSyncN": {
     "chartName": "DSS_SI_ITN_DST_DISTRIBUTOR_SYNC_N",
     "chartType": "xtable",
@@ -32187,6 +32269,63 @@
       }
     ]
   },
+  "siItnWfRegistrarsN": {
+    "chartName": "DSS_SI_ITN_WF_REGISTRARS_N",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households registered",
+      "Active days",
+      "Households per day"
+    ],
+    "insight": {},
+    "_comment": "KPI REG-13/14: per registrar (no team target in the data)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":2000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households registered\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}},\"Active days\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.taskDates\"}},\"Households per day\":{\"bucket_script\":{\"buckets_path\":{\"n\":\"Households registered\",\"d\":\"Active days\"},\"script\":\"params.d > 0 ? params.n / params.d : 0\"}}}}}}"
+      }
+    ],
+    "plotLabel": "Registrar",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc"
+  },
+  "siItnWfDistributorsN": {
+    "chartName": "DSS_SI_ITN_WF_DISTRIBUTORS_N",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households served",
+      "Nets distributed",
+      "Active days",
+      "Households per day"
+    ],
+    "insight": {},
+    "_comment": "KPI DST-12/13: per distributor (no team target in the data)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":2000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}},\"Active days\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.taskDates\"}},\"Households per day\":{\"bucket_script\":{\"buckets_path\":{\"n\":\"Households served\",\"d\":\"Active days\"},\"script\":\"params.d > 0 ? params.n / params.d : 0\"}}}}}}}}"
+      }
+    ],
+    "plotLabel": "Distributor",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc"
+  },
   "siItnCmpByStatusN": {
     "chartName": "DSS_SI_ITN_CMP_BY_STATUS_N",
     "chartType": "pie",
@@ -33256,5 +33395,927 @@
         "newField": "percentage_value"
       }
     ]
+  },
+  "siItnInvInventorySummaryByStateBednetsICCD": {
+    "chartName": "DSS_SI_ITN_INV_INVENTORY_SUMMARY_BY_STATE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\",\"IN_TRANSIT\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"terms\":{\"Data.transactingFacilityType.keyword\":[\"State\",\"Warehouse\"]}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"State\":{\"terms\":{\"size\":1000,\"order\":{\"_key\":\"asc\"},\"script\":{\"source\":\"String state = doc['Data.boundaryHierarchy.province.keyword'].size() > 0 ? doc['Data.boundaryHierarchy.province.keyword'].value : ''; String ft = doc['Data.facilityType.keyword'].size() > 0 ? doc['Data.facilityType.keyword'].value : ''; String tt = doc['Data.transactingFacilityType.keyword'].size() > 0 ? doc['Data.transactingFacilityType.keyword'].value : ''; String fn = doc['Data.facilityName.keyword'].size() > 0 ? doc['Data.facilityName.keyword'].value : ''; String tfn = doc['Data.transactingFacilityName.keyword'].size() > 0 ? doc['Data.transactingFacilityName.keyword'].value : ''; String se = doc['Data.additionalDetails.stockEntryType.keyword'].size() > 0 ? doc['Data.additionalDetails.stockEntryType.keyword'].value : ''; if (state != '') { return state; } if (ft == 'Central Facility' && tt == 'Warehouse' && fn == 'National_WH' && tfn == 'STATE_WH' && se == 'ISSUED') { return 'Borno'; } return null;\"},\"value_type\":\"string\"},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\",\"IN_TRANSIT\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"terms\":{\"Data.transactingFacilityType.keyword\":[\"State\",\"Warehouse\"]}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ReceivedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Received>SUM\"},\"script\":\"params.v\"}},\"IssuedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Issued>SUM\"},\"script\":\"params.v\"}},\"ReturnedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Returned>SUM\"},\"script\":\"params.v\"}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"ReceivedValue\",\"issued\":\"IssuedValue\",\"returned\":\"ReturnedValue\"},\"script\":\"params.received - params.issued + params.returned\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "province",
+        "column": "State"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Province",
+    "excludedColumns": [
+      "SUM",
+      "Received",
+      "Issued",
+      "Returned",
+      "Total Stock",
+      "ReceivedValue",
+      "IssuedValue",
+      "ReturnedValue"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ReceivedValue"
+        ],
+        "newField": "Stock Received",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "IssuedValue"
+        ],
+        "newField": "Stock Issued",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ReturnedValue"
+        ],
+        "newField": "Stock Returned",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Stock"
+        ],
+        "newField": "Stock Balance",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_copyOf": "InventorySummaryByStateBednetsICCD",
+    "_comment": "KPI inventory: copy of Borno ITN chart InventorySummaryByStateBednetsICCD (boundary keys renamed to Sierra Leone levels)"
+  },
+  "siItnInvExcessLossStockStateBednetsICCD": {
+    "chartName": "DSS_SI_ITN_INV_EXCESS_LOSS_STOCK_STATE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"State\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "province",
+        "column": "State"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Province",
+    "excludedColumns": [
+      "Quantity",
+      "ExcessStockFilter",
+      "LossStockFilter",
+      "ExcessStockValue",
+      "LossStockValue"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ExcessStockValue"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "LossStockValue"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "KPI inventory: copy of Borno ITN chart excessLossStockStateBednetsICCD (boundary keys renamed to Sierra Leone levels)",
+    "_copyOf": "excessLossStockStateBednetsICCD"
+  },
+  "siItnInvWarehouseManagerUserSyncIRSICCD": {
+    "chartName": "DSS_SI_ITN_INV_WAREHOUSE_MANAGER_USER_SYNC_RATE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-project-staff-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"NAME\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"WAREHOUSE_MANAGER\"}}]}},\"aggs\":{\"AGGS\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":500},\"aggs\":{\"Total Users Created\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-user-sync-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"NAME\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.role.keyword\":[\"WAREHOUSE_MANAGER\"]}},{\"exists\":{\"field\":\"Data.syncedUserId.keyword\"}}]}},\"aggs\":{\"AGGS\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":500},\"aggs\":{\"Unique Users Synced\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.syncedUserId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"}}}}}}}}"
+      }
+    ],
+    "filterKeys": [],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "DATA SYNC",
+    "filterForCurrentDay": true,
+    "excludedColumns": [
+      "S.N.",
+      "DATA SYNC",
+      "Total Users Created",
+      "Unique Users Synced"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Users Created"
+        ],
+        "newField": "Total_WMs",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Unique Users Synced"
+        ],
+        "newField": "Total_WMs_Synced_At_Least_Once",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Total_WMs_Synced_At_Least_Once",
+          "Total_WMs"
+        ],
+        "newField": "User_Sync_Rate",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "KPI inventory: copy of Borno ITN chart warehouseManagerUserSyncIRSICCD (boundary keys renamed to Sierra Leone levels)",
+    "_copyOf": "warehouseManagerUserSyncIRSICCD"
+  },
+  "siItnInvInventoryStockUsedProvinceBednetsICCD": {
+    "chartName": "DSS_SI_ITN_INV_INVENTORY_STOCK_USED_PROVINCE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Stock Used\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.isDelivered\":true}},{\"term\":{\"Data.projectType.keyword\":\"Bednet\"}},{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"wildcard\":{\"Data.productVariant.keyword\":\"PVAR*\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}},\"aggs\":{\"Used Stock\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "plotLabel": "none",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Used Stock"
+    ],
+    "insight": {},
+    "_comment": "KPI inventory: copy of Borno ITN chart inventoryStockUsedProvinceBednetsICCD (boundary keys renamed to Sierra Leone levels)",
+    "_copyOf": "inventoryStockUsedProvinceBednetsICCD"
+  },
+  "siItnInvInventoryStockInHandProvinceBednetsICCD": {
+    "chartName": "DSS_SI_ITN_INV_INVENTORY_STOCK_IN_HAND_PROVINCE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\"},\"script\":\"params.IS-params.OS\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}}]}},\"aggs\":{\"Overall Target\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Distributions\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.isDelivered\":true}},{\"term\":{\"Data.projectType.keyword\":\"Bednet\"}},{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"wildcard\":{\"Data.productVariant.keyword\":\"PVAR*\"}}]}},\"aggs\":{\"Distributions by lga\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Distributions\":{\"sum\":{\"script\":{\"source\":\"doc['Data.quantity'].value*(-1)\"}}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "SumComputedField",
+        "fields": [
+          "Overall Target",
+          "Distributions by lga"
+        ],
+        "newField": "Required Stock",
+        "_comments": ""
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "plotLabel": "none",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "computeMultiPaths": true,
+    "aggregationPaths": [
+      "Available Stock",
+      "Overall Target",
+      "Distributions by lga"
+    ],
+    "insight": {},
+    "_comment": "KPI inventory: copy of Borno ITN chart inventoryStockInHandProvinceBednetsICCD (boundary keys renamed to Sierra Leone levels)",
+    "_copyOf": "inventoryStockInHandProvinceBednetsICCD"
+  },
+  "siItnInvWarehouseDistributionLatLongPointsBednetsICCD": {
+    "chartName": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"locationKey\":\"Data.boundaryHierarchy.province.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"exists\":{\"field\":\"Data.latitude\"}},{\"exists\":{\"field\":\"Data.longitude\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}},\"aggs\":{\"POINTS\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":100},\"aggs\":{\"LATITUDE\":{\"avg\":{\"field\":\"Data.latitude\"}},\"LONGITUDE\":{\"avg\":{\"field\":\"Data.longitude\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"locationKey\":\"Data.boundaryHierarchy.province.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.latitude\"}},{\"exists\":{\"field\":\"Data.longitude\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}},\"aggs\":{\"POINTS\":{\"terms\":{\"field\":\"Data.facilityName.keyword\",\"size\":1000000},\"aggs\":{\"LATITUDE\":{\"avg\":{\"field\":\"Data.latitude\"}},\"LONGITUDE\":{\"avg\":{\"field\":\"Data.longitude\"}},\"total_count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "filterKeys": [],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Warehouse Name",
+    "excludedColumns": [
+      "S.N.",
+      "LONGITUDE",
+      "LATITUDE",
+      "total_count"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "newField": "longitude",
+        "fields": [
+          "LONGITUDE"
+        ],
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "newField": "latitude",
+        "fields": [
+          "LATITUDE"
+        ],
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "newField": "percentage_value",
+        "fields": [
+          "total_count"
+        ],
+        "_comments": "Leaflet heat intensity value"
+      }
+    ],
+    "insight": {},
+    "hideInsights": false,
+    "hideHeaderDenomination": true,
+    "_comment": "KPI inventory: copy of Borno ITN chart warehouseDistributionLatLongPointsBednetsICCD (boundary keys renamed to Sierra Leone levels)",
+    "_copyOf": "warehouseDistributionLatLongPointsBednetsICCD"
+  },
+  "siItnInvWarehouseDistributionLatLongTableAvlRcvdDispDistrictWiseProvincialBoardBednetsICCD": {
+    "chartName": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Stock Received Filter\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},\"aggs\":{\"Stock Received\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"Stock Dispatched Filter\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},\"aggs\":{\"Stock Dispatched\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Stock in Hand\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\"},\"script\":\"params.IS-params.OS\"}}}}}}}}"
+      }
+    ],
+    "filterKeys": [],
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "lga",
+    "isCumulative": false,
+    "aggregationPaths": [
+      "Stock in Hand",
+      "Stock Received",
+      "Stock Dispatched"
+    ],
+    "insight": {},
+    "hideInsights": false,
+    "hideHeaderDenomination": true,
+    "_comment": "KPI inventory: copy of Borno ITN chart warehouseDistributionLatLongTableAvlRcvdDispDistrictWiseProvincialBoardBednetsICCD (boundary keys renamed to Sierra Leone levels)",
+    "_copyOf": "warehouseDistributionLatLongTableAvlRcvdDispDistrictWiseProvincialBoardBednetsICCD"
+  },
+  "siItnInvWarehouseDistributionLatLongTableDaysStockLastsDistrictWiseProvincialBoardBednetsICCD": {
+    "chartName": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Will last for\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\"},\"script\":\"params.IS-params.OS\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}}]}}}},\"aggs\":{\"Target Per Day\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.targetPerDay\"}}}}}}}}"
+      }
+    ],
+    "filterKeys": [],
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "division",
+    "plotLabel": "lga",
+    "isCumulative": false,
+    "aggregationPaths": [
+      "Will last for",
+      "Target Per Day"
+    ],
+    "insight": {},
+    "hideInsights": false,
+    "hideHeaderDenomination": true,
+    "_comment": "KPI inventory: copy of Borno ITN chart warehouseDistributionLatLongTableDaysStockLastsDistrictWiseProvincialBoardBednetsICCD (boundary keys renamed to Sierra Leone levels)",
+    "_copyOf": "warehouseDistributionLatLongTableDaysStockLastsDistrictWiseProvincialBoardBednetsICCD"
+  },
+  "siItnInvWarehouseDistributionLatLongTableAvlRcvdDispFacilitiesBednetsICCD": {
+    "chartName": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Stock in Hand\":{\"terms\":{\"size\":500,\"field\":\"Data.facilityName.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\"},\"script\":\"params.IS-params.OS\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Stock Received Filter\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},\"aggs\":{\"Stock Received\":{\"terms\":{\"field\":\"Data.facilityName.keyword\",\"size\":1000},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}},\"Stock Dispatched Filter\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},\"aggs\":{\"Stock Dispatched\":{\"terms\":{\"field\":\"Data.facilityName.keyword\",\"size\":1000},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}}}"
+      }
+    ],
+    "filterKeys": [],
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Warehouse Name",
+    "isCumulative": false,
+    "aggregationPaths": [
+      "Stock in Hand",
+      "Stock Received",
+      "Stock Dispatched"
+    ],
+    "insight": {},
+    "hideInsights": false,
+    "hideHeaderDenomination": true,
+    "_comment": "KPI inventory: copy of Borno ITN chart warehouseDistributionLatLongTableAvlRcvdDispFacilitiesBednetsICCD (boundary keys renamed to Sierra Leone levels)",
+    "_copyOf": "warehouseDistributionLatLongTableAvlRcvdDispFacilitiesBednetsICCD"
+  },
+  "siItnInvWarehouseDistributionLatLongTableStockStatusDistrictWiseProvincialBoardBednetsICCD": {
+    "chartName": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Stock in Hand\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\"},\"script\":\"params.IS-params.OS\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}}]}},\"aggs\":{\"Overall Target\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Overall Target\":{\"bucket_script\":{\"buckets_path\":{\"ot\":\"SUM\"},\"script\":\"params.ot * (-1)\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Distributions\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}},\"aggs\":{\"Distributions by lga\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Distributions\":{\"sum\":{\"script\":{\"source\":\"doc['Data.quantity']\"}}}}}}}}}"
+      }
+    ],
+    "filterKeys": [],
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "lga",
+    "isCumulative": false,
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "SumComputedField",
+        "fields": [
+          "Stock in Hand",
+          "Overall Target",
+          "Distributions by lga"
+        ],
+        "newField": "Status",
+        "_comments": ""
+      }
+    ],
+    "computeMultiPaths": true,
+    "aggregationPaths": [
+      "Stock in Hand",
+      "Overall Target",
+      "Distributions by lga"
+    ],
+    "insight": {},
+    "hideInsights": false,
+    "hideHeaderDenomination": true,
+    "_comment": "KPI inventory: copy of Borno ITN chart warehouseDistributionLatLongTableStockStatusDistrictWiseProvincialBoardBednetsICCD (boundary keys renamed to Sierra Leone levels)",
+    "_copyOf": "warehouseDistributionLatLongTableStockStatusDistrictWiseProvincialBoardBednetsICCD"
+  },
+  "siItnInvWarehouseDistributionLatLongTableWarNumDistrictWiseProvincialBoardBednetsICCD": {
+    "chartName": "DSS_SI_ITN_INV_WH_DISTRIBUTION_LATLONG",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}],\"must_not\":[{\"match_phrase\":{\"Data.facilityType.keyword\":\"Monitor Local\"}}]}}}},\"aggs\":{\"No. of Warehouses\":{\"terms\":{\"size\":50000,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"CARDINALITY\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.facilityId.keyword\"},\"init_script\":\"state.list=[]\",\"map_script\":\"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"}}}}}}}}"
+      }
+    ],
+    "filterKeys": [],
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "lga",
+    "isCumulative": false,
+    "aggregationPaths": [
+      "No. of Warehouses"
+    ],
+    "insight": {},
+    "hideInsights": false,
+    "hideHeaderDenomination": true,
+    "_comment": "KPI inventory: copy of Borno ITN chart warehouseDistributionLatLongTableWarNumDistrictWiseProvincialBoardBednetsICCD (boundary keys renamed to Sierra Leone levels)",
+    "_copyOf": "warehouseDistributionLatLongTableWarNumDistrictWiseProvincialBoardBednetsICCD"
+  },
+  "siItnInvInventorySummaryByDistrictBednetsICCD": {
+    "chartName": "DSS_SI_ITN_INV_INVENTORY_SUMMARY_BY_DISTRICT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}}]}},\"aggs\":{\"Product Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.district.keyword\"},\"aggs\":{\"Target per day\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Overall Target to Receive\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target for range\":{\"bucket_script\":{\"buckets_path\":{\"target\":\"Target per day\"},\"script\":\"(params.target)*365\"}},\"Target for days to last\":{\"bucket_script\":{\"buckets_path\":{\"target\":\"Target per day\"},\"script\":\"(params.target)*100\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Outgoing\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\"},\"script\":\"params.IS-params.OS\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Excess\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.district.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Loss\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "siItnInvInventorySummaryByApBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Inventory summary By District",
+    "filterKeys": [
+      {
+        "key": "district",
+        "column": "Inventory summary By District"
+      }
+    ],
+    "divisorFields": [],
+    "showFooter": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "excludedColumns": [
+      "SUM",
+      "Target for range",
+      "Target per day",
+      "Target for days to last",
+      "Incoming",
+      "Outgoing",
+      "Total Stock",
+      "Overall Target to Receive",
+      "Excess",
+      "Loss"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Overall Target to Receive"
+        ],
+        "newField": "Bednets Target",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Incoming"
+        ],
+        "newField": "Bednets Incoming Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Outgoing"
+        ],
+        "newField": "Bednets Outgoing Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Stock"
+        ],
+        "newField": "Bednets Stock Left",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Total Stock",
+          "Target for days to last"
+        ],
+        "newField": "Days To Last",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Excess"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Loss"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "sort": "sortKeyAsc",
+    "_comment": "KPI inventory: copy of Borno ITN chart InventorySummaryByDistrictBednetsICCD (boundary keys renamed to Sierra Leone levels)",
+    "kind": "drillDown",
+    "_copyOf": "InventorySummaryByDistrictBednetsICCD"
+  },
+  "siItnInvDaysInventoryStockLastsDistrictBednetsICCD": {
+    "chartName": "DSS_SI_ITN_INV_OVERVIEW_DAYS_INVENTORY_CAN_LAST_DISTRICT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}}]}}}},\"aggs\":{\"No. of Days Stock Can Last\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\"},\"script\":\"params.IS-params.OS\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}}}},\"aggs\":{\"Target Per Day\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.targetPerDay\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "division",
+    "aggregationPaths": [
+      "No. of Days Stock Can Last",
+      "Target Per Day"
+    ],
+    "insight": {},
+    "_comment": "KPI inventory: copy of Borno ITN chart daysInventoryStockLastsDistrictBednetsICCD (boundary keys renamed to Sierra Leone levels)",
+    "_copyOf": "daysInventoryStockLastsDistrictBednetsICCD"
+  },
+  "siItnInvInventoryStockInHandDistrictBednetsICCD": {
+    "chartName": "DSS_SI_ITN_INV_INVENTORY_STOCK_IN_HAND_DISTRICT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\"},\"script\":\"params.IS-params.OS\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}},\"aggs\":{\"Overall Target\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Distributions\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}},\"aggs\":{\"Distributions by AP\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Distributions\":{\"sum\":{\"script\":{\"source\":\"doc['Data.quantity'].value*(-1)\"}}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "SumComputedField",
+        "fields": [
+          "Overall Target",
+          "Distributions by AP"
+        ],
+        "newField": "Required Stock",
+        "_comments": ""
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "plotLabel": "none",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "computeMultiPaths": true,
+    "aggregationPaths": [
+      "Available Stock",
+      "Overall Target",
+      "Distributions by AP"
+    ],
+    "insight": {},
+    "_comment": "KPI inventory: copy of Borno ITN chart inventoryStockInHandDistrictBednetsICCD (boundary keys renamed to Sierra Leone levels)",
+    "_copyOf": "inventoryStockInHandDistrictBednetsICCD"
+  },
+  "siItnInvInventorySummaryByApBednetsICCD": {
+    "chartName": "DSS_SI_ITN_INV_INVENTORY_SUMMARY_BY_AP",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}},\"aggs\":{\"Product Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"},\"aggs\":{\"Target per day\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Overall Target to Receive\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target for range\":{\"bucket_script\":{\"buckets_path\":{\"target\":\"Target per day\"},\"script\":\"(params.target)*365\"}},\"Target for days to last\":{\"bucket_script\":{\"buckets_path\":{\"target\":\"Target per day\"},\"script\":\"(params.target)*100\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Outgoing\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"RECEIVED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\"},\"script\":\"params.IS-params.OS\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Excess\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Loss\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Inventory summary By Administrative State",
+    "filterKeys": [
+      {
+        "key": "chiefdom",
+        "column": "Inventory summary By Administrative State"
+      }
+    ],
+    "divisorFields": [],
+    "showFooter": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "excludedColumns": [
+      "SUM",
+      "Target for range",
+      "Target per day",
+      "Target for days to last",
+      "Incoming",
+      "Outgoing",
+      "Total Stock",
+      "Overall Target to Receive",
+      "Excess",
+      "Loss"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Overall Target to Receive"
+        ],
+        "newField": "Bednets Target",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Incoming"
+        ],
+        "newField": "Bednets Incoming Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Outgoing"
+        ],
+        "newField": "Bednets Outgoing Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Stock"
+        ],
+        "newField": "Bednets Stock Left",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Total Stock",
+          "Target for days to last"
+        ],
+        "newField": "Days To Last",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Excess"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Loss"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "sort": "sortKeyAsc",
+    "_comment": "KPI inventory: copy of Borno ITN chart InventorySummaryByApBednetsICCD (boundary keys renamed to Sierra Leone levels)",
+    "kind": "drillDown",
+    "_copyOf": "InventorySummaryByApBednetsICCD"
   }
 }
