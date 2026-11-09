@@ -34320,5 +34320,747 @@
     "_comment": "KPI inventory: copy of Borno ITN chart InventorySummaryByApBednetsICCD (boundary keys renamed to Sierra Leone levels)",
     "kind": "drillDown",
     "_copyOf": "InventorySummaryByApBednetsICCD"
+  },
+  "siItnRegTilesP": {
+    "chartName": "DSS_SI_ITN_REG_TILES_P",
+    "chartType": "rawResponse",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"all\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"hh\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}},\"people\":{\"sum\":{\"field\":\"Data.household.memberCount\"}},\"tok\":{\"filter\":{\"wildcard\":{\"Data.additionalDetails.identifiers.keyword\":\"UNIQUE_BENEFICIARY_ID*\"}},\"aggs\":{\"v\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}},\"req\":{\"filter\":{\"wildcard\":{\"Data.additionalDetails.identifiers.keyword\":\"UNIQUE_BENEFICIARY_ID*\"}},\"aggs\":{\"v\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}},\"avg\":{\"bucket_script\":{\"buckets_path\":{\"a\":\"people\",\"b\":\"hh\"},\"script\":\"params.b > 0 ? Math.round(params.a * 10.0 / params.b) / 10.0 : 0\"}},\"tok_pct\":{\"bucket_script\":{\"buckets_path\":{\"a\":\"tok>v\",\"b\":\"hh\"},\"script\":\"params.b > 0 ? Math.round(params.a * 1000.0 / params.b) / 10.0 : 0\"}}}}}}",
+        "key": "hh",
+        "transformData": "linearAggregation",
+        "select": {
+          "reg_hh": "all.buckets.all.hh.value",
+          "reg_people": "all.buckets.all.people.value",
+          "reg_tokens": "all.buckets.all.tok.v.value",
+          "reg_itn": "all.buckets.all.req.v.value",
+          "reg_avg": "all.buckets.all.avg.value",
+          "reg_tok_pct": "all.buckets.all.tok_pct.value"
+        }
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"closed\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"REGISTRAR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"CLOSED_HOUSEHOLD\"}}]}},\"aggs\":{\"v\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}",
+        "key": "closed",
+        "transformData": "linearAggregation",
+        "select": {
+          "reg_closed": "closed.v.value"
+        }
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"hh\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}},\"aggs\":{\"v\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}},\"pop\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}},\"aggs\":{\"v\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}",
+        "key": "target",
+        "transformData": "linearAggregation",
+        "select": {
+          "reg_hh_target": "hh.v.value",
+          "reg_pop_target": "pop.v.value"
+        }
+      }
+    ],
+    "aggregationPaths": [
+      "reg_outstanding",
+      "reg_hh_target",
+      "reg_closed",
+      "reg_pop_pct",
+      "reg_people",
+      "reg_pop_target",
+      "reg_avg",
+      "reg_hh",
+      "reg_tokens",
+      "reg_tok_pct",
+      "reg_itn"
+    ],
+    "cardsList": [
+      {
+        "id": "reg_outstanding",
+        "labelKey": "DSS_SI_ITN_TILE_REG_OUTSTANDING",
+        "valuePath": "reg_outstanding",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "target": "reg_hh_target",
+          "closed": "reg_closed"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "reg_pop_coverage",
+        "labelKey": "DSS_SI_ITN_TILE_REG_POP_COVERAGE",
+        "valuePath": "reg_pop_pct",
+        "valueType": "PERCENTAGE",
+        "descriptionParams": {
+          "people": "reg_people",
+          "target": "reg_pop_target"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "reg_avg_hh_size",
+        "labelKey": "DSS_SI_ITN_TILE_REG_AVG_HH_SIZE",
+        "valuePath": "reg_avg",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "people": "reg_people",
+          "households": "reg_hh"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "reg_tokens",
+        "labelKey": "DSS_SI_ITN_TILE_REG_TOKENS",
+        "valuePath": "reg_tokens",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "pct": "reg_tok_pct"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "reg_itns",
+        "labelKey": "DSS_SI_ITN_TILE_REG_ITNS",
+        "valuePath": "reg_itn",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "KPI tiles (cards-list): REG-04/07/08/17, closed and e-Token counts (totals)",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "siItnRegTilesP",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": [
+          {
+            "reg_outstanding": "subtract(reg_hh_target, reg_hh)"
+          },
+          {
+            "reg_pop_pct": "multiply(divide(reg_people, reg_pop_target), 100)"
+          }
+        ]
+      }
+    ]
+  },
+  "siItnRegTilesD": {
+    "chartName": "DSS_SI_ITN_REG_TILES_D",
+    "chartType": "rawResponse",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"all\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"hh\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}},\"people\":{\"sum\":{\"field\":\"Data.household.memberCount\"}},\"tok\":{\"filter\":{\"wildcard\":{\"Data.additionalDetails.identifiers.keyword\":\"UNIQUE_BENEFICIARY_ID*\"}},\"aggs\":{\"v\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}},\"req\":{\"filter\":{\"wildcard\":{\"Data.additionalDetails.identifiers.keyword\":\"UNIQUE_BENEFICIARY_ID*\"}},\"aggs\":{\"v\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}},\"avg\":{\"bucket_script\":{\"buckets_path\":{\"a\":\"people\",\"b\":\"hh\"},\"script\":\"params.b > 0 ? Math.round(params.a * 10.0 / params.b) / 10.0 : 0\"}},\"tok_pct\":{\"bucket_script\":{\"buckets_path\":{\"a\":\"tok>v\",\"b\":\"hh\"},\"script\":\"params.b > 0 ? Math.round(params.a * 1000.0 / params.b) / 10.0 : 0\"}}}}}}",
+        "key": "hh",
+        "transformData": "linearAggregation",
+        "select": {
+          "reg_hh": "all.buckets.all.hh.value",
+          "reg_people": "all.buckets.all.people.value",
+          "reg_tokens": "all.buckets.all.tok.v.value",
+          "reg_itn": "all.buckets.all.req.v.value",
+          "reg_avg": "all.buckets.all.avg.value",
+          "reg_tok_pct": "all.buckets.all.tok_pct.value"
+        }
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"closed\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"REGISTRAR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"CLOSED_HOUSEHOLD\"}}]}},\"aggs\":{\"v\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}",
+        "key": "closed",
+        "transformData": "linearAggregation",
+        "select": {
+          "reg_closed": "closed.v.value"
+        }
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"hh\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}}]}},\"aggs\":{\"v\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}},\"pop\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}}]}},\"aggs\":{\"v\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}",
+        "key": "target",
+        "transformData": "linearAggregation",
+        "select": {
+          "reg_hh_target": "hh.v.value",
+          "reg_pop_target": "pop.v.value"
+        }
+      }
+    ],
+    "aggregationPaths": [
+      "reg_outstanding",
+      "reg_hh_target",
+      "reg_closed",
+      "reg_pop_pct",
+      "reg_people",
+      "reg_pop_target",
+      "reg_avg",
+      "reg_hh",
+      "reg_tokens",
+      "reg_tok_pct",
+      "reg_itn"
+    ],
+    "cardsList": [
+      {
+        "id": "reg_outstanding",
+        "labelKey": "DSS_SI_ITN_TILE_REG_OUTSTANDING",
+        "valuePath": "reg_outstanding",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "target": "reg_hh_target",
+          "closed": "reg_closed"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "reg_pop_coverage",
+        "labelKey": "DSS_SI_ITN_TILE_REG_POP_COVERAGE",
+        "valuePath": "reg_pop_pct",
+        "valueType": "PERCENTAGE",
+        "descriptionParams": {
+          "people": "reg_people",
+          "target": "reg_pop_target"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "reg_avg_hh_size",
+        "labelKey": "DSS_SI_ITN_TILE_REG_AVG_HH_SIZE",
+        "valuePath": "reg_avg",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "people": "reg_people",
+          "households": "reg_hh"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "reg_tokens",
+        "labelKey": "DSS_SI_ITN_TILE_REG_TOKENS",
+        "valuePath": "reg_tokens",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "pct": "reg_tok_pct"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "reg_itns",
+        "labelKey": "DSS_SI_ITN_TILE_REG_ITNS",
+        "valuePath": "reg_itn",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "KPI tiles (cards-list): REG-04/07/08/17, closed and e-Token counts (totals)",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "siItnRegTilesD",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": [
+          {
+            "reg_outstanding": "subtract(reg_hh_target, reg_hh)"
+          },
+          {
+            "reg_pop_pct": "multiply(divide(reg_people, reg_pop_target), 100)"
+          }
+        ]
+      }
+    ]
+  },
+  "siItnWfTiles": {
+    "chartName": "DSS_SI_ITN_WF_TILES",
+    "chartType": "rawResponse",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.household.clientAuditDetails.createdTime",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"all\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"hh\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}},\"users\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.household.clientAuditDetails.createdBy.keyword\"}},\"per\":{\"bucket_script\":{\"buckets_path\":{\"a\":\"hh\",\"b\":\"users\"},\"script\":\"params.b > 0 ? Math.round(params.a * 10.0 / params.b) / 10.0 : 0\"}}}}}}",
+        "key": "reg",
+        "transformData": "linearAggregation",
+        "select": {
+          "wf_reg_hh": "all.buckets.all.hh.value",
+          "wf_reg_users": "all.buckets.all.users.value",
+          "wf_reg_per": "all.buckets.all.per.value"
+        }
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"all\":{\"filters\":{\"filters\":{\"all\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}}}},\"aggs\":{\"hh\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"users\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.createdBy.keyword\"}},\"per\":{\"bucket_script\":{\"buckets_path\":{\"a\":\"hh\",\"b\":\"users\"},\"script\":\"params.b > 0 ? Math.round(params.a * 10.0 / params.b) / 10.0 : 0\"}}}}}}",
+        "key": "dst",
+        "transformData": "linearAggregation",
+        "select": {
+          "wf_dst_hh": "all.buckets.all.hh.value",
+          "wf_dst_users": "all.buckets.all.users.value",
+          "wf_dst_per": "all.buckets.all.per.value"
+        }
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-user-sync-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"today\":{\"filter\":{\"range\":{\"Data.syncedTimeStamp\":{\"gte\":\"now/d\"}}},\"aggs\":{\"v\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.syncedUserId.keyword\"}}}}}}",
+        "key": "today",
+        "transformData": "linearAggregation",
+        "select": {
+          "wf_active_today": "today.v.value"
+        }
+      }
+    ],
+    "aggregationPaths": [
+      "wf_active_today",
+      "wf_reg_per",
+      "wf_reg_hh",
+      "wf_reg_users",
+      "wf_dst_per",
+      "wf_dst_hh",
+      "wf_dst_users"
+    ],
+    "cardsList": [
+      {
+        "id": "wf_active_today",
+        "labelKey": "DSS_SI_ITN_TILE_WF_ACTIVE_TODAY",
+        "valuePath": "wf_active_today",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "wf_reg_per_user",
+        "labelKey": "DSS_SI_ITN_TILE_WF_REG_PER_USER",
+        "valuePath": "wf_reg_per",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "households": "wf_reg_hh",
+          "users": "wf_reg_users"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "wf_dst_per_user",
+        "labelKey": "DSS_SI_ITN_TILE_WF_DST_PER_USER",
+        "valuePath": "wf_dst_per",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "households": "wf_dst_hh",
+          "users": "wf_dst_users"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "KPI tiles (cards-list): active today, REG-14, DST-13 (selected dates)"
+  },
+  "siItnDqTiles": {
+    "chartName": "DSS_SI_ITN_DQ_TILES",
+    "chartType": "rawResponse",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"all\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"hh\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}},\"gps\":{\"filter\":{\"bool\":{\"should\":[{\"bool\":{\"must_not\":[{\"exists\":{\"field\":\"Data.geoPoint\"}}]}},{\"range\":{\"Data.household.address.locationAccuracy\":{\"gt\":50}}},{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.household.address.latitude\"}}],\"must_not\":[{\"bool\":{\"must\":[{\"range\":{\"Data.household.address.latitude\":{\"gte\":6.9,\"lte\":10.0}}},{\"range\":{\"Data.household.address.longitude\":{\"gte\":-13.4,\"lte\":-10.2}}}]}}]}}],\"minimum_should_match\":1}},\"aggs\":{\"v\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}},\"big\":{\"filter\":{\"range\":{\"Data.household.memberCount\":{\"gt\":20}}},\"aggs\":{\"v\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}},\"gps_pct\":{\"bucket_script\":{\"buckets_path\":{\"a\":\"gps>v\",\"b\":\"hh\"},\"script\":\"params.b > 0 ? Math.round(params.a * 1000.0 / params.b) / 10.0 : 0\"}},\"big_pct\":{\"bucket_script\":{\"buckets_path\":{\"a\":\"big>v\",\"b\":\"hh\"},\"script\":\"params.b > 0 ? Math.round(params.a * 1000.0 / params.b) / 10.0 : 0\"}}}}}}",
+        "key": "dq",
+        "transformData": "linearAggregation",
+        "select": {
+          "dq_gps": "all.buckets.all.gps.v.value",
+          "dq_big": "all.buckets.all.big.v.value",
+          "dq_gps_pct": "all.buckets.all.gps_pct.value",
+          "dq_big_pct": "all.buckets.all.big_pct.value"
+        }
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.household.clientAuditDetails.createdTime",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"by_day\":{\"date_histogram\":{\"field\":\"Data.household.clientAuditDetails.createdTime\",\"calendar_interval\":\"day\"},\"aggs\":{\"users\":{\"terms\":{\"field\":\"Data.household.clientAuditDetails.createdBy.keyword\",\"size\":1000},\"aggs\":{\"hh\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}},\"busy\":{\"bucket_selector\":{\"buckets_path\":{\"n\":\"hh\"},\"script\":\"params.n > 15\"}}}},\"busy_users\":{\"bucket_script\":{\"buckets_path\":{\"c\":\"users._bucket_count\"},\"script\":\"params.c\"}}}},\"busy\":{\"sum_bucket\":{\"buckets_path\":\"by_day>busy_users\"}}}}",
+        "key": "busy",
+        "transformData": "linearAggregation",
+        "select": {
+          "dq_busy": "busy.value"
+        }
+      }
+    ],
+    "aggregationPaths": [
+      "dq_gps",
+      "dq_gps_pct",
+      "dq_big",
+      "dq_big_pct",
+      "dq_busy"
+    ],
+    "cardsList": [
+      {
+        "id": "dq_invalid_gps",
+        "labelKey": "DSS_SI_ITN_TILE_DQ_INVALID_GPS",
+        "valuePath": "dq_gps",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "pct": "dq_gps_pct"
+        },
+        "colorRules": {
+          "type": "range",
+          "valuePath": "dq_gps",
+          "ranges": [
+            {
+              "gt": 0,
+              "color": "#C84C0E"
+            },
+            {
+              "lte": 0,
+              "color": "#00703C"
+            }
+          ]
+        }
+      },
+      {
+        "id": "dq_large_hh",
+        "labelKey": "DSS_SI_ITN_TILE_DQ_LARGE_HH",
+        "valuePath": "dq_big",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "pct": "dq_big_pct"
+        },
+        "colorRules": {
+          "type": "range",
+          "valuePath": "dq_big",
+          "ranges": [
+            {
+              "gt": 0,
+              "color": "#C84C0E"
+            },
+            {
+              "lte": 0,
+              "color": "#00703C"
+            }
+          ]
+        }
+      },
+      {
+        "id": "dq_busy_registrars",
+        "labelKey": "DSS_SI_ITN_TILE_DQ_BUSY_REGISTRARS",
+        "valuePath": "dq_busy",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "range",
+          "valuePath": "dq_busy",
+          "ranges": [
+            {
+              "gt": 0,
+              "color": "#C84C0E"
+            },
+            {
+              "lte": 0,
+              "color": "#00703C"
+            }
+          ]
+        }
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "KPI tiles (cards-list): REG-15, households > 20 members, registrar-days > 15 households"
+  },
+  "siItnSysTiles": {
+    "chartName": "DSS_SI_ITN_SYS_TILES",
+    "chartType": "rawResponse",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-staff-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"v\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.userId.keyword\"}}}}",
+        "key": "staff",
+        "transformData": "linearAggregation",
+        "select": {
+          "sys_assigned": "v.value"
+        }
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.syncedTimeStamp",
+        "requestQueryMap": "{\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-user-sync-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"v\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.syncedUserId.keyword\"}}}}",
+        "key": "sync",
+        "transformData": "linearAggregation",
+        "select": {
+          "sys_synced": "v.value"
+        }
+      }
+    ],
+    "aggregationPaths": [
+      "sys_assigned",
+      "sys_synced",
+      "sys_rate"
+    ],
+    "cardsList": [
+      {
+        "id": "sys_assigned",
+        "labelKey": "DSS_SI_ITN_TILE_SYS_ASSIGNED",
+        "valuePath": "sys_assigned",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "sys_synced",
+        "labelKey": "DSS_SI_ITN_TILE_SYS_SYNCED",
+        "valuePath": "sys_synced",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "sys_sync_rate",
+        "labelKey": "DSS_SI_ITN_TILE_SYS_SYNC_RATE",
+        "valuePath": "sys_rate",
+        "valueType": "PERCENTAGE",
+        "descriptionParams": {
+          "synced": "sys_synced",
+          "assigned": "sys_assigned"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "KPI tiles (cards-list): SYS-01/02/03",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "siItnSysTiles",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": [
+          {
+            "sys_rate": "multiply(divide(sys_synced, sys_assigned), 100)"
+          }
+        ]
+      }
+    ]
+  },
+  "siItnCmpTiles": {
+    "chartName": "DSS_SI_ITN_CMP_TILES",
+    "chartType": "rawResponse",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.service.auditDetails.createdTime",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-transformer-pgr-services",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"all\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"total\":{\"value_count\":{\"field\":\"Data.service.id.keyword\"}},\"open\":{\"filter\":{\"bool\":{\"must_not\":[{\"terms\":{\"Data.service.applicationStatus.keyword\":[\"RESOLVED\",\"REJECTED\"]}}]}}},\"res\":{\"filter\":{\"term\":{\"Data.service.applicationStatus.keyword\":\"RESOLVED\"}}},\"rej\":{\"filter\":{\"term\":{\"Data.service.applicationStatus.keyword\":\"REJECTED\"}}},\"open_pct\":{\"bucket_script\":{\"buckets_path\":{\"a\":\"open>_count\",\"b\":\"total\"},\"script\":\"params.b > 0 ? Math.round(params.a * 1000.0 / params.b) / 10.0 : 0\"}},\"res_pct\":{\"bucket_script\":{\"buckets_path\":{\"a\":\"res>_count\",\"b\":\"total\"},\"script\":\"params.b > 0 ? Math.round(params.a * 1000.0 / params.b) / 10.0 : 0\"}},\"rej_pct\":{\"bucket_script\":{\"buckets_path\":{\"a\":\"rej>_count\",\"b\":\"total\"},\"script\":\"params.b > 0 ? Math.round(params.a * 1000.0 / params.b) / 10.0 : 0\"}}}}}}",
+        "key": "cmp",
+        "transformData": "linearAggregation",
+        "select": {
+          "cmp_total": "all.buckets.all.total.value",
+          "cmp_open": "all.buckets.all.open.doc_count",
+          "cmp_res": "all.buckets.all.res.doc_count",
+          "cmp_rej": "all.buckets.all.rej.doc_count",
+          "cmp_open_pct": "all.buckets.all.open_pct.value",
+          "cmp_res_pct": "all.buckets.all.res_pct.value",
+          "cmp_rej_pct": "all.buckets.all.rej_pct.value"
+        }
+      }
+    ],
+    "aggregationPaths": [
+      "cmp_total",
+      "cmp_open",
+      "cmp_open_pct",
+      "cmp_res",
+      "cmp_res_pct",
+      "cmp_rej",
+      "cmp_rej_pct"
+    ],
+    "cardsList": [
+      {
+        "id": "cmp_received",
+        "labelKey": "DSS_SI_ITN_TILE_CMP_RECEIVED",
+        "valuePath": "cmp_total",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "cmp_open",
+        "labelKey": "DSS_SI_ITN_TILE_CMP_OPEN",
+        "valuePath": "cmp_open",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "pct": "cmp_open_pct"
+        },
+        "colorRules": {
+          "type": "range",
+          "valuePath": "cmp_open",
+          "ranges": [
+            {
+              "gt": 0,
+              "color": "#C84C0E"
+            },
+            {
+              "lte": 0,
+              "color": "#00703C"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cmp_resolved",
+        "labelKey": "DSS_SI_ITN_TILE_CMP_RESOLVED",
+        "valuePath": "cmp_res",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "pct": "cmp_res_pct"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "cmp_rejected",
+        "labelKey": "DSS_SI_ITN_TILE_CMP_REJECTED",
+        "valuePath": "cmp_rej",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "pct": "cmp_rej_pct"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "KPI tiles (cards-list): CMP-01/04: received, open, resolved, rejected (selected dates)"
   }
 }

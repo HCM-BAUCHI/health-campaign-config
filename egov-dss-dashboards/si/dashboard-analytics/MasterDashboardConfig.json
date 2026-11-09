@@ -3160,53 +3160,13 @@
               "id": 4007,
               "name": "DSS_SI_ITN_V_REG_PROGRESS",
               "label": "DSS_SI_ITN_V_REG_PROGRESS",
-              "vizType": "metric-collection",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnRegOutstandingP",
-                  "name": "DSS_SI_ITN_REG_OUTSTANDING_P",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnRegAvgHhSize",
-                  "name": "DSS_SI_ITN_REG_AVG_HH_SIZE",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnRegClosed",
-                  "name": "DSS_SI_ITN_REG_CLOSED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnRegTokens",
-                  "name": "DSS_SI_ITN_REG_TOKENS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnRegItnRequired",
-                  "name": "DSS_SI_ITN_REG_ITN_REQUIRED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnRegPopCoverageP",
-                  "name": "DSS_SI_ITN_REG_POP_COVERAGE_P",
+                  "id": "siItnRegTilesP",
+                  "name": "DSS_SI_ITN_REG_TILES_P",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -3517,30 +3477,6 @@
           "vizArray": [
             {
               "id": 4017,
-              "name": "DSS_SI_ITN_V_DST_ONE_IN_TWO",
-              "label": "DSS_SI_ITN_V_DST_ONE_IN_TWO",
-              "vizType": "metric-collection",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "siItnDst12Coverage",
-                  "name": "DSS_SI_ITN_DST12_COVERAGE",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 4,
-          "name": "DSS_SI_ITN_TAB_DISTRIBUTION",
-          "vizArray": [
-            {
-              "id": 4018,
               "name": "DSS_SI_ITN_V_DST_COVERAGE",
               "label": "DSS_SI_ITN_V_DST_COVERAGE",
               "vizType": "chart",
@@ -3588,11 +3524,11 @@
           ]
         },
         {
-          "row": 5,
+          "row": 4,
           "name": "DSS_SI_ITN_TAB_DISTRIBUTION",
           "vizArray": [
             {
-              "id": 4019,
+              "id": 4018,
               "name": "DSS_SI_ITN_V_DST_DAILY",
               "label": "DSS_SI_ITN_V_DST_DAILY",
               "vizType": "chart",
@@ -3622,11 +3558,11 @@
           ]
         },
         {
-          "row": 6,
+          "row": 5,
           "name": "DSS_SI_ITN_TAB_DISTRIBUTION",
           "vizArray": [
             {
-              "id": 4020,
+              "id": 4019,
               "name": "DSS_SI_ITN_V_DST_SUMMARY",
               "label": "DSS_SI_ITN_V_DST_SUMMARY",
               "vizType": "chart",
@@ -3660,7 +3596,7 @@
           "name": "DSS_SI_ITN_TAB_INVENTORY",
           "vizArray": [
             {
-              "id": 4021,
+              "id": 4020,
               "name": "DSS_SI_ITN_V_INV_P_1",
               "label": "DSS_SI_ITN_V_INV_P_1",
               "vizType": "bannercard",
@@ -3684,7 +3620,7 @@
           "name": "DSS_SI_ITN_TAB_INVENTORY",
           "vizArray": [
             {
-              "id": 4022,
+              "id": 4021,
               "name": "DSS_SI_ITN_V_INV_P_2",
               "label": "DSS_SI_ITN_V_INV_P_2",
               "vizType": "chart",
@@ -3708,7 +3644,7 @@
           "name": "DSS_SI_ITN_TAB_INVENTORY",
           "vizArray": [
             {
-              "id": 4023,
+              "id": 4022,
               "name": "DSS_SI_ITN_V_INV_P_3",
               "label": "DSS_SI_ITN_V_INV_P_3",
               "vizType": "chart",
@@ -3732,7 +3668,7 @@
           "name": "DSS_SI_ITN_TAB_INVENTORY",
           "vizArray": [
             {
-              "id": 4024,
+              "id": 4023,
               "name": "DSS_SI_ITN_V_INV_P_4",
               "label": "DSS_SI_ITN_V_INV_P_4",
               "vizType": "leafletMap",
@@ -3850,7 +3786,7 @@
           "name": "DSS_SI_ITN_TAB_INVENTORY",
           "vizArray": [
             {
-              "id": 4025,
+              "id": 4024,
               "name": "DSS_SI_ITN_V_INV_P_5",
               "label": "DSS_SI_ITN_V_INV_P_5",
               "vizType": "chart",
@@ -3874,7 +3810,7 @@
           "name": "DSS_SI_ITN_TAB_INVENTORY",
           "vizArray": [
             {
-              "id": 4026,
+              "id": 4025,
               "name": "DSS_SI_ITN_V_INV_P_6",
               "label": "DSS_SI_ITN_V_INV_P_6",
               "vizType": "chart",
@@ -3898,7 +3834,7 @@
           "name": "DSS_SI_ITN_TAB_INVENTORY",
           "vizArray": [
             {
-              "id": 4027,
+              "id": 4026,
               "name": "DSS_SI_ITN_V_INV_P_7",
               "label": "DSS_SI_ITN_V_INV_P_7",
               "vizType": "chart",
@@ -3922,7 +3858,7 @@
           "name": "DSS_SI_ITN_TAB_MAPS",
           "vizArray": [
             {
-              "id": 4028,
+              "id": 4027,
               "name": "DSS_SI_ITN_V_LEAFLET",
               "label": "DSS_SI_ITN_V_LEAFLET",
               "vizType": "leafletMap",
@@ -3974,7 +3910,7 @@
           "name": "DSS_SI_ITN_TAB_MAPS",
           "vizArray": [
             {
-              "id": 4029,
+              "id": 4028,
               "name": "DSS_SI_ITN_V_MAP_1",
               "label": "DSS_SI_ITN_V_MAP_1",
               "vizType": "chart",
@@ -4000,7 +3936,7 @@
           "name": "DSS_SI_ITN_TAB_MAPS",
           "vizArray": [
             {
-              "id": 4030,
+              "id": 4029,
               "name": "DSS_SI_ITN_V_MAP_2",
               "label": "DSS_SI_ITN_V_MAP_2",
               "vizType": "chart",
@@ -4026,16 +3962,16 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 4031,
+              "id": 4030,
               "name": "DSS_SI_ITN_V_CMP_RECEIVED",
               "label": "DSS_SI_ITN_V_CMP_RECEIVED",
-              "vizType": "metric-collection",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnCmpReceived",
-                  "name": "DSS_SI_ITN_CMP_RECEIVED",
+                  "id": "siItnCmpTiles",
+                  "name": "DSS_SI_ITN_CMP_TILES",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -4050,7 +3986,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 4032,
+              "id": 4031,
               "name": "DSS_SI_ITN_V_COMPLAINTS_BY_STATUS",
               "label": "DSS_SI_ITN_V_COMPLAINTS_BY_STATUS",
               "vizType": "chart",
@@ -4068,7 +4004,7 @@
               ]
             },
             {
-              "id": 4033,
+              "id": 4032,
               "name": "DSS_SI_ITN_V_CMP_BY_TYPE",
               "label": "DSS_SI_ITN_V_CMP_BY_TYPE",
               "vizType": "chart",
@@ -4092,7 +4028,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 4034,
+              "id": 4033,
               "name": "DSS_SI_ITN_V_CMP_BY_AREA",
               "label": "DSS_SI_ITN_V_CMP_BY_AREA",
               "vizType": "chart",
@@ -4110,7 +4046,7 @@
               ]
             },
             {
-              "id": 4035,
+              "id": 4034,
               "name": "DSS_SI_ITN_V_CMP_SHARE",
               "label": "DSS_SI_ITN_V_CMP_SHARE",
               "vizType": "chart",
@@ -4134,7 +4070,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 4036,
+              "id": 4035,
               "name": "DSS_SI_ITN_V_CMP_RESOLUTION",
               "label": "DSS_SI_ITN_V_CMP_RESOLUTION",
               "vizType": "chart",
@@ -4152,7 +4088,7 @@
               ]
             },
             {
-              "id": 4037,
+              "id": 4036,
               "name": "DSS_SI_ITN_V_CMP_TYPE_BY_AREA",
               "label": "DSS_SI_ITN_V_CMP_TYPE_BY_AREA",
               "vizType": "chart",
@@ -4176,7 +4112,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 4038,
+              "id": 4037,
               "name": "DSS_SI_ITN_V_CMP_SUMMARY",
               "label": "DSS_SI_ITN_V_CMP_SUMMARY",
               "vizType": "chart",
@@ -4194,7 +4130,7 @@
               ]
             },
             {
-              "id": 4039,
+              "id": 4038,
               "name": "DSS_SI_ITN_V_CMP_OPEN_AGE",
               "label": "DSS_SI_ITN_V_CMP_OPEN_AGE",
               "vizType": "chart",
@@ -4218,32 +4154,16 @@
           "name": "DSS_SI_ITN_TAB_TEAM_PERFORMANCE",
           "vizArray": [
             {
-              "id": 4040,
+              "id": 4039,
               "name": "DSS_SI_ITN_V_TEAMS",
               "label": "DSS_SI_ITN_V_TEAMS",
-              "vizType": "metric-collection",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnWfActiveToday",
-                  "name": "DSS_SI_ITN_WF_ACTIVE_TODAY",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnWfRegProductivity",
-                  "name": "DSS_SI_ITN_WF_REG_PRODUCTIVITY",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnWfDstProductivity",
-                  "name": "DSS_SI_ITN_WF_DST_PRODUCTIVITY",
+                  "id": "siItnWfTiles",
+                  "name": "DSS_SI_ITN_WF_TILES",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -4258,7 +4178,7 @@
           "name": "DSS_SI_ITN_TAB_TEAM_PERFORMANCE",
           "vizArray": [
             {
-              "id": 4041,
+              "id": 4040,
               "name": "DSS_SI_ITN_V_REG_TEAMS",
               "label": "DSS_SI_ITN_V_REG_TEAMS",
               "vizType": "chart",
@@ -4282,7 +4202,7 @@
           "name": "DSS_SI_ITN_TAB_TEAM_PERFORMANCE",
           "vizArray": [
             {
-              "id": 4042,
+              "id": 4041,
               "name": "DSS_SI_ITN_V_DST_TEAMS",
               "label": "DSS_SI_ITN_V_DST_TEAMS",
               "vizType": "chart",
@@ -4306,32 +4226,16 @@
           "name": "DSS_SI_ITN_TAB_DATA_QUALITY",
           "vizArray": [
             {
-              "id": 4043,
+              "id": 4042,
               "name": "DSS_SI_ITN_V_DQ_CARDS",
               "label": "DSS_SI_ITN_V_DQ_CARDS",
-              "vizType": "metric-collection",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnDqInvalidGps",
-                  "name": "DSS_SI_ITN_DQ_INVALID_GPS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnDqLargeHh",
-                  "name": "DSS_SI_ITN_DQ_LARGE_HH",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnDqBusyRegistrars",
-                  "name": "DSS_SI_ITN_DQ_BUSY_REGISTRARS",
+                  "id": "siItnDqTiles",
+                  "name": "DSS_SI_ITN_DQ_TILES",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -4346,7 +4250,7 @@
           "name": "DSS_SI_ITN_TAB_DATA_QUALITY",
           "vizArray": [
             {
-              "id": 4044,
+              "id": 4043,
               "name": "DSS_SI_ITN_V_DQ_BY_AREA",
               "label": "DSS_SI_ITN_V_DQ_BY_AREA",
               "vizType": "chart",
@@ -4370,7 +4274,7 @@
           "name": "DSS_SI_ITN_TAB_DATA_QUALITY",
           "vizArray": [
             {
-              "id": 4045,
+              "id": 4044,
               "name": "DSS_SI_ITN_V_DQ_SUMMARY",
               "label": "DSS_SI_ITN_V_DQ_SUMMARY",
               "vizType": "chart",
@@ -4394,32 +4298,16 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 4046,
+              "id": 4045,
               "name": "DSS_SI_ITN_V_SYS_USERS",
               "label": "DSS_SI_ITN_V_SYS_USERS",
-              "vizType": "metric-collection",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnSysUsers",
-                  "name": "DSS_SI_ITN_SYS_USERS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnSysSynced",
-                  "name": "DSS_SI_ITN_SYS_SYNCED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnSysSyncRate",
-                  "name": "DSS_SI_ITN_SYS_SYNC_RATE",
+                  "id": "siItnSysTiles",
+                  "name": "DSS_SI_ITN_SYS_TILES",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -4434,7 +4322,7 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 4047,
+              "id": 4046,
               "name": "DSS_SI_ITN_V_SYS_TREND",
               "label": "DSS_SI_ITN_V_SYS_TREND",
               "vizType": "chart",
@@ -4458,7 +4346,7 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 4048,
+              "id": 4047,
               "name": "DSS_SI_ITN_V_SYS_USER_TABLE",
               "label": "DSS_SI_ITN_V_SYS_USER_TABLE",
               "vizType": "chart",
@@ -4482,7 +4370,7 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 4049,
+              "id": 4048,
               "name": "DSS_SI_ITN_V_REG_SYNC_TABLE",
               "label": "DSS_SI_ITN_V_REG_SYNC_TABLE",
               "vizType": "chart",
@@ -4500,7 +4388,7 @@
               ]
             },
             {
-              "id": 4050,
+              "id": 4049,
               "name": "DSS_SI_ITN_V_DST_SYNC_TABLE",
               "label": "DSS_SI_ITN_V_DST_SYNC_TABLE",
               "vizType": "chart",
@@ -4778,53 +4666,13 @@
               "id": 5007,
               "name": "DSS_SI_ITN_V_REG_PROGRESS",
               "label": "DSS_SI_ITN_V_REG_PROGRESS",
-              "vizType": "metric-collection",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnRegOutstandingD",
-                  "name": "DSS_SI_ITN_REG_OUTSTANDING_D",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnRegAvgHhSize",
-                  "name": "DSS_SI_ITN_REG_AVG_HH_SIZE",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnRegClosed",
-                  "name": "DSS_SI_ITN_REG_CLOSED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnRegTokens",
-                  "name": "DSS_SI_ITN_REG_TOKENS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnRegItnRequired",
-                  "name": "DSS_SI_ITN_REG_ITN_REQUIRED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnRegPopCoverageD",
-                  "name": "DSS_SI_ITN_REG_POP_COVERAGE_D",
+                  "id": "siItnRegTilesD",
+                  "name": "DSS_SI_ITN_REG_TILES_D",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -5135,30 +4983,6 @@
           "vizArray": [
             {
               "id": 5017,
-              "name": "DSS_SI_ITN_V_DST_ONE_IN_TWO",
-              "label": "DSS_SI_ITN_V_DST_ONE_IN_TWO",
-              "vizType": "metric-collection",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "siItnDst12Coverage",
-                  "name": "DSS_SI_ITN_DST12_COVERAGE",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 4,
-          "name": "DSS_SI_ITN_TAB_DISTRIBUTION",
-          "vizArray": [
-            {
-              "id": 5018,
               "name": "DSS_SI_ITN_V_DST_COVERAGE",
               "label": "DSS_SI_ITN_V_DST_COVERAGE",
               "vizType": "chart",
@@ -5206,11 +5030,11 @@
           ]
         },
         {
-          "row": 5,
+          "row": 4,
           "name": "DSS_SI_ITN_TAB_DISTRIBUTION",
           "vizArray": [
             {
-              "id": 5019,
+              "id": 5018,
               "name": "DSS_SI_ITN_V_DST_BY_DP",
               "label": "DSS_SI_ITN_V_DST_BY_DP",
               "vizType": "chart",
@@ -5230,11 +5054,11 @@
           ]
         },
         {
-          "row": 6,
+          "row": 5,
           "name": "DSS_SI_ITN_TAB_DISTRIBUTION",
           "vizArray": [
             {
-              "id": 5020,
+              "id": 5019,
               "name": "DSS_SI_ITN_V_DST_DAILY",
               "label": "DSS_SI_ITN_V_DST_DAILY",
               "vizType": "chart",
@@ -5264,11 +5088,11 @@
           ]
         },
         {
-          "row": 7,
+          "row": 6,
           "name": "DSS_SI_ITN_TAB_DISTRIBUTION",
           "vizArray": [
             {
-              "id": 5021,
+              "id": 5020,
               "name": "DSS_SI_ITN_V_DST_SUMMARY",
               "label": "DSS_SI_ITN_V_DST_SUMMARY",
               "vizType": "chart",
@@ -5302,7 +5126,7 @@
           "name": "DSS_SI_ITN_TAB_INVENTORY",
           "vizArray": [
             {
-              "id": 5022,
+              "id": 5021,
               "name": "DSS_SI_ITN_V_INV_D_1",
               "label": "DSS_SI_ITN_V_INV_D_1",
               "vizType": "chart",
@@ -5326,7 +5150,7 @@
           "name": "DSS_SI_ITN_TAB_INVENTORY",
           "vizArray": [
             {
-              "id": 5023,
+              "id": 5022,
               "name": "DSS_SI_ITN_V_INV_D_2",
               "label": "DSS_SI_ITN_V_INV_D_2",
               "vizType": "chart",
@@ -5350,7 +5174,7 @@
           "name": "DSS_SI_ITN_TAB_INVENTORY",
           "vizArray": [
             {
-              "id": 5024,
+              "id": 5023,
               "name": "DSS_SI_ITN_V_INV_D_3",
               "label": "DSS_SI_ITN_V_INV_D_3",
               "vizType": "latlong",
@@ -5414,7 +5238,7 @@
           "name": "DSS_SI_ITN_TAB_INVENTORY",
           "vizArray": [
             {
-              "id": 5025,
+              "id": 5024,
               "name": "DSS_SI_ITN_V_INV_D_4",
               "label": "DSS_SI_ITN_V_INV_D_4",
               "vizType": "chart",
@@ -5438,7 +5262,7 @@
           "name": "DSS_SI_ITN_TAB_INVENTORY",
           "vizArray": [
             {
-              "id": 5026,
+              "id": 5025,
               "name": "DSS_SI_ITN_V_INV_D_5",
               "label": "DSS_SI_ITN_V_INV_D_5",
               "vizType": "chart",
@@ -5464,7 +5288,7 @@
           "name": "DSS_SI_ITN_TAB_INVENTORY",
           "vizArray": [
             {
-              "id": 5027,
+              "id": 5026,
               "name": "DSS_SI_ITN_V_INV_D_6",
               "label": "DSS_SI_ITN_V_INV_D_6",
               "vizType": "chart",
@@ -5490,7 +5314,7 @@
           "name": "DSS_SI_ITN_TAB_INVENTORY",
           "vizArray": [
             {
-              "id": 5028,
+              "id": 5027,
               "name": "DSS_SI_ITN_V_INV_D_7",
               "label": "DSS_SI_ITN_V_INV_D_7",
               "vizType": "chart",
@@ -5516,7 +5340,7 @@
           "name": "DSS_SI_ITN_TAB_MAPS",
           "vizArray": [
             {
-              "id": 5029,
+              "id": 5028,
               "name": "DSS_SI_ITN_V_LEAFLET",
               "label": "DSS_SI_ITN_V_LEAFLET",
               "vizType": "leafletMap",
@@ -5568,7 +5392,7 @@
           "name": "DSS_SI_ITN_TAB_MAPS",
           "vizArray": [
             {
-              "id": 5030,
+              "id": 5029,
               "name": "DSS_SI_ITN_V_MAP_1",
               "label": "DSS_SI_ITN_V_MAP_1",
               "vizType": "chart",
@@ -5594,7 +5418,7 @@
           "name": "DSS_SI_ITN_TAB_MAPS",
           "vizArray": [
             {
-              "id": 5031,
+              "id": 5030,
               "name": "DSS_SI_ITN_V_MAP_2",
               "label": "DSS_SI_ITN_V_MAP_2",
               "vizType": "chart",
@@ -5620,16 +5444,16 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 5032,
+              "id": 5031,
               "name": "DSS_SI_ITN_V_CMP_RECEIVED",
               "label": "DSS_SI_ITN_V_CMP_RECEIVED",
-              "vizType": "metric-collection",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnCmpReceived",
-                  "name": "DSS_SI_ITN_CMP_RECEIVED",
+                  "id": "siItnCmpTiles",
+                  "name": "DSS_SI_ITN_CMP_TILES",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -5644,7 +5468,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 5033,
+              "id": 5032,
               "name": "DSS_SI_ITN_V_COMPLAINTS_BY_STATUS",
               "label": "DSS_SI_ITN_V_COMPLAINTS_BY_STATUS",
               "vizType": "chart",
@@ -5662,7 +5486,7 @@
               ]
             },
             {
-              "id": 5034,
+              "id": 5033,
               "name": "DSS_SI_ITN_V_CMP_BY_TYPE",
               "label": "DSS_SI_ITN_V_CMP_BY_TYPE",
               "vizType": "chart",
@@ -5686,7 +5510,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 5035,
+              "id": 5034,
               "name": "DSS_SI_ITN_V_CMP_BY_AREA",
               "label": "DSS_SI_ITN_V_CMP_BY_AREA",
               "vizType": "chart",
@@ -5704,7 +5528,7 @@
               ]
             },
             {
-              "id": 5036,
+              "id": 5035,
               "name": "DSS_SI_ITN_V_CMP_SHARE",
               "label": "DSS_SI_ITN_V_CMP_SHARE",
               "vizType": "chart",
@@ -5728,7 +5552,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 5037,
+              "id": 5036,
               "name": "DSS_SI_ITN_V_CMP_RESOLUTION",
               "label": "DSS_SI_ITN_V_CMP_RESOLUTION",
               "vizType": "chart",
@@ -5746,7 +5570,7 @@
               ]
             },
             {
-              "id": 5038,
+              "id": 5037,
               "name": "DSS_SI_ITN_V_CMP_TYPE_BY_AREA",
               "label": "DSS_SI_ITN_V_CMP_TYPE_BY_AREA",
               "vizType": "chart",
@@ -5770,7 +5594,7 @@
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
-              "id": 5039,
+              "id": 5038,
               "name": "DSS_SI_ITN_V_CMP_SUMMARY",
               "label": "DSS_SI_ITN_V_CMP_SUMMARY",
               "vizType": "chart",
@@ -5788,7 +5612,7 @@
               ]
             },
             {
-              "id": 5040,
+              "id": 5039,
               "name": "DSS_SI_ITN_V_CMP_OPEN_AGE",
               "label": "DSS_SI_ITN_V_CMP_OPEN_AGE",
               "vizType": "chart",
@@ -5812,32 +5636,16 @@
           "name": "DSS_SI_ITN_TAB_TEAM_PERFORMANCE",
           "vizArray": [
             {
-              "id": 5041,
+              "id": 5040,
               "name": "DSS_SI_ITN_V_TEAMS",
               "label": "DSS_SI_ITN_V_TEAMS",
-              "vizType": "metric-collection",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnWfActiveToday",
-                  "name": "DSS_SI_ITN_WF_ACTIVE_TODAY",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnWfRegProductivity",
-                  "name": "DSS_SI_ITN_WF_REG_PRODUCTIVITY",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnWfDstProductivity",
-                  "name": "DSS_SI_ITN_WF_DST_PRODUCTIVITY",
+                  "id": "siItnWfTiles",
+                  "name": "DSS_SI_ITN_WF_TILES",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -5852,7 +5660,7 @@
           "name": "DSS_SI_ITN_TAB_TEAM_PERFORMANCE",
           "vizArray": [
             {
-              "id": 5042,
+              "id": 5041,
               "name": "DSS_SI_ITN_V_REG_TEAMS",
               "label": "DSS_SI_ITN_V_REG_TEAMS",
               "vizType": "chart",
@@ -5876,7 +5684,7 @@
           "name": "DSS_SI_ITN_TAB_TEAM_PERFORMANCE",
           "vizArray": [
             {
-              "id": 5043,
+              "id": 5042,
               "name": "DSS_SI_ITN_V_DST_TEAMS",
               "label": "DSS_SI_ITN_V_DST_TEAMS",
               "vizType": "chart",
@@ -5900,32 +5708,16 @@
           "name": "DSS_SI_ITN_TAB_DATA_QUALITY",
           "vizArray": [
             {
-              "id": 5044,
+              "id": 5043,
               "name": "DSS_SI_ITN_V_DQ_CARDS",
               "label": "DSS_SI_ITN_V_DQ_CARDS",
-              "vizType": "metric-collection",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnDqInvalidGps",
-                  "name": "DSS_SI_ITN_DQ_INVALID_GPS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnDqLargeHh",
-                  "name": "DSS_SI_ITN_DQ_LARGE_HH",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnDqBusyRegistrars",
-                  "name": "DSS_SI_ITN_DQ_BUSY_REGISTRARS",
+                  "id": "siItnDqTiles",
+                  "name": "DSS_SI_ITN_DQ_TILES",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -5940,7 +5732,7 @@
           "name": "DSS_SI_ITN_TAB_DATA_QUALITY",
           "vizArray": [
             {
-              "id": 5045,
+              "id": 5044,
               "name": "DSS_SI_ITN_V_DQ_BY_AREA",
               "label": "DSS_SI_ITN_V_DQ_BY_AREA",
               "vizType": "chart",
@@ -5964,7 +5756,7 @@
           "name": "DSS_SI_ITN_TAB_DATA_QUALITY",
           "vizArray": [
             {
-              "id": 5046,
+              "id": 5045,
               "name": "DSS_SI_ITN_V_DQ_SUMMARY",
               "label": "DSS_SI_ITN_V_DQ_SUMMARY",
               "vizType": "chart",
@@ -5988,32 +5780,16 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 5047,
+              "id": 5046,
               "name": "DSS_SI_ITN_V_SYS_USERS",
               "label": "DSS_SI_ITN_V_SYS_USERS",
-              "vizType": "metric-collection",
+              "vizType": "cards-list",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnSysUsers",
-                  "name": "DSS_SI_ITN_SYS_USERS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnSysSynced",
-                  "name": "DSS_SI_ITN_SYS_SYNCED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnSysSyncRate",
-                  "name": "DSS_SI_ITN_SYS_SYNC_RATE",
+                  "id": "siItnSysTiles",
+                  "name": "DSS_SI_ITN_SYS_TILES",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -6028,7 +5804,7 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 5048,
+              "id": 5047,
               "name": "DSS_SI_ITN_V_SYS_TREND",
               "label": "DSS_SI_ITN_V_SYS_TREND",
               "vizType": "chart",
@@ -6052,7 +5828,7 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 5049,
+              "id": 5048,
               "name": "DSS_SI_ITN_V_SYS_USER_TABLE",
               "label": "DSS_SI_ITN_V_SYS_USER_TABLE",
               "vizType": "chart",
@@ -6076,7 +5852,7 @@
           "name": "DSS_SI_ITN_TAB_SYNC",
           "vizArray": [
             {
-              "id": 5050,
+              "id": 5049,
               "name": "DSS_SI_ITN_V_REG_SYNC_TABLE",
               "label": "DSS_SI_ITN_V_REG_SYNC_TABLE",
               "vizType": "chart",
@@ -6094,7 +5870,7 @@
               ]
             },
             {
-              "id": 5051,
+              "id": 5050,
               "name": "DSS_SI_ITN_V_DST_SYNC_TABLE",
               "label": "DSS_SI_ITN_V_DST_SYNC_TABLE",
               "vizType": "chart",
