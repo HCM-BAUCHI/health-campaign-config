@@ -32716,5 +32716,545 @@
     "hideHeaderDenomination": true,
     "hideInsights": true,
     "sort": "sortKeyAsc"
+  },
+  "siItnMapRegCoverageN": {
+    "chartName": "DSS_SI_ITN_MAP_REG_COVERAGE_N",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households registered",
+      "Household target"
+    ],
+    "insight": {},
+    "_comment": "KPI map: Households registered ÷ Household target by area (leafletHeatMap)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households registered\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Household target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+      }
+    ],
+    "plotLabel": "Province",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Households registered",
+          "Household target"
+        ],
+        "newField": "percentage_value"
+      }
+    ]
+  },
+  "siItnMapDstCoverageN": {
+    "chartName": "DSS_SI_ITN_MAP_DST_COVERAGE_N",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households served",
+      "Households registered"
+    ],
+    "insight": {},
+    "_comment": "KPI map: Households served ÷ Households registered by area (leafletHeatMap)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households registered\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
+      }
+    ],
+    "plotLabel": "Province",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Households served",
+          "Households registered"
+        ],
+        "newField": "percentage_value"
+      }
+    ]
+  },
+  "siItnMapPopCoverageN": {
+    "chartName": "DSS_SI_ITN_MAP_POP_COVERAGE_N",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population reached",
+      "Population target"
+    ],
+    "insight": {},
+    "_comment": "KPI map: Population reached ÷ Population target by area (leafletHeatMap)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Population target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+      }
+    ],
+    "plotLabel": "Province",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Population reached",
+          "Population target"
+        ],
+        "newField": "percentage_value"
+      }
+    ]
+  },
+  "siItnMapNetsCoverageN": {
+    "chartName": "DSS_SI_ITN_MAP_NETS_COVERAGE_N",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Nets distributed",
+      "ITNs required"
+    ],
+    "insight": {},
+    "_comment": "KPI map: Nets distributed ÷ ITNs required by area (leafletHeatMap)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"wildcard\":{\"Data.additionalDetails.identifiers.keyword\":\"UNIQUE_BENEFICIARY_ID*\"}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ITNs required\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+      }
+    ],
+    "plotLabel": "Province",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Nets distributed",
+          "ITNs required"
+        ],
+        "newField": "percentage_value"
+      }
+    ]
+  },
+  "siItnMapRegCoverageP": {
+    "chartName": "DSS_SI_ITN_MAP_REG_COVERAGE_P",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households registered",
+      "Household target"
+    ],
+    "insight": {},
+    "_comment": "KPI map: Households registered ÷ Household target by area (leafletHeatMap)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households registered\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Household target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+      }
+    ],
+    "plotLabel": "District",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Households registered",
+          "Household target"
+        ],
+        "newField": "percentage_value"
+      }
+    ]
+  },
+  "siItnMapDstCoverageP": {
+    "chartName": "DSS_SI_ITN_MAP_DST_COVERAGE_P",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households served",
+      "Households registered"
+    ],
+    "insight": {},
+    "_comment": "KPI map: Households served ÷ Households registered by area (leafletHeatMap)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households registered\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
+      }
+    ],
+    "plotLabel": "District",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Households served",
+          "Households registered"
+        ],
+        "newField": "percentage_value"
+      }
+    ]
+  },
+  "siItnMapPopCoverageP": {
+    "chartName": "DSS_SI_ITN_MAP_POP_COVERAGE_P",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population reached",
+      "Population target"
+    ],
+    "insight": {},
+    "_comment": "KPI map: Population reached ÷ Population target by area (leafletHeatMap)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Population target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+      }
+    ],
+    "plotLabel": "District",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Population reached",
+          "Population target"
+        ],
+        "newField": "percentage_value"
+      }
+    ]
+  },
+  "siItnMapNetsCoverageP": {
+    "chartName": "DSS_SI_ITN_MAP_NETS_COVERAGE_P",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Nets distributed",
+      "ITNs required"
+    ],
+    "insight": {},
+    "_comment": "KPI map: Nets distributed ÷ ITNs required by area (leafletHeatMap)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"wildcard\":{\"Data.additionalDetails.identifiers.keyword\":\"UNIQUE_BENEFICIARY_ID*\"}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ITNs required\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+      }
+    ],
+    "plotLabel": "District",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Nets distributed",
+          "ITNs required"
+        ],
+        "newField": "percentage_value"
+      }
+    ]
+  },
+  "siItnMapRegCoverageD": {
+    "chartName": "DSS_SI_ITN_MAP_REG_COVERAGE_D",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households registered",
+      "Household target"
+    ],
+    "insight": {},
+    "_comment": "KPI map: Households registered ÷ Household target by area (leafletHeatMap)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households registered\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.phu.keyword\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Household target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+      }
+    ],
+    "plotLabel": "Chiefdom",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Households registered",
+          "Household target"
+        ],
+        "newField": "percentage_value"
+      }
+    ]
+  },
+  "siItnMapDstCoverageD": {
+    "chartName": "DSS_SI_ITN_MAP_DST_COVERAGE_D",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households served",
+      "Households registered"
+    ],
+    "insight": {},
+    "_comment": "KPI map: Households served ÷ Households registered by area (leafletHeatMap)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households registered\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
+      }
+    ],
+    "plotLabel": "Chiefdom",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Households served",
+          "Households registered"
+        ],
+        "newField": "percentage_value"
+      }
+    ]
+  },
+  "siItnMapPopCoverageD": {
+    "chartName": "DSS_SI_ITN_MAP_POP_COVERAGE_D",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population reached",
+      "Population target"
+    ],
+    "insight": {},
+    "_comment": "KPI map: Population reached ÷ Population target by area (leafletHeatMap)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.phu.keyword\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Population target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+      }
+    ],
+    "plotLabel": "Chiefdom",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Population reached",
+          "Population target"
+        ],
+        "newField": "percentage_value"
+      }
+    ]
+  },
+  "siItnMapNetsCoverageD": {
+    "chartName": "DSS_SI_ITN_MAP_NETS_COVERAGE_D",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Nets distributed",
+      "ITNs required"
+    ],
+    "insight": {},
+    "_comment": "KPI map: Nets distributed ÷ ITNs required by area (leafletHeatMap)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"wildcard\":{\"Data.additionalDetails.identifiers.keyword\":\"UNIQUE_BENEFICIARY_ID*\"}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ITNs required\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+      }
+    ],
+    "plotLabel": "Chiefdom",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Nets distributed",
+          "ITNs required"
+        ],
+        "newField": "percentage_value"
+      }
+    ]
   }
 }

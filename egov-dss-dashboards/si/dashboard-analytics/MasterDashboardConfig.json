@@ -3078,6 +3078,58 @@
               ]
             }
           ]
+        },
+        {
+          "row": 1,
+          "name": "DSS_SI_ITN_TAB_MAPS",
+          "vizArray": [
+            {
+              "id": 3014,
+              "name": "DSS_SI_ITN_V_LEAFLET",
+              "label": "DSS_SI_ITN_V_LEAFLET",
+              "vizType": "leafletMap",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnMapRegCoverageN",
+                  "name": "DSS_SI_ITN_MAP_REG_COVERAGE_N",
+                  "code": "",
+                  "chartType": "leafletHeatMap",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_MAP_REG"
+                },
+                {
+                  "id": "siItnMapDstCoverageN",
+                  "name": "DSS_SI_ITN_MAP_DST_COVERAGE_N",
+                  "code": "",
+                  "chartType": "leafletHeatMap",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_MAP_DST"
+                },
+                {
+                  "id": "siItnMapPopCoverageN",
+                  "name": "DSS_SI_ITN_MAP_POP_COVERAGE_N",
+                  "code": "",
+                  "chartType": "leafletHeatMap",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_MAP_POP"
+                },
+                {
+                  "id": "siItnMapNetsCoverageN",
+                  "name": "DSS_SI_ITN_MAP_NETS_COVERAGE_N",
+                  "code": "",
+                  "chartType": "leafletHeatMap",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_MAP_NETS"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -4326,6 +4378,58 @@
           "vizArray": [
             {
               "id": 4041,
+              "name": "DSS_SI_ITN_V_LEAFLET",
+              "label": "DSS_SI_ITN_V_LEAFLET",
+              "vizType": "leafletMap",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnMapRegCoverageP",
+                  "name": "DSS_SI_ITN_MAP_REG_COVERAGE_P",
+                  "code": "",
+                  "chartType": "leafletHeatMap",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_MAP_REG"
+                },
+                {
+                  "id": "siItnMapDstCoverageP",
+                  "name": "DSS_SI_ITN_MAP_DST_COVERAGE_P",
+                  "code": "",
+                  "chartType": "leafletHeatMap",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_MAP_DST"
+                },
+                {
+                  "id": "siItnMapPopCoverageP",
+                  "name": "DSS_SI_ITN_MAP_POP_COVERAGE_P",
+                  "code": "",
+                  "chartType": "leafletHeatMap",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_MAP_POP"
+                },
+                {
+                  "id": "siItnMapNetsCoverageP",
+                  "name": "DSS_SI_ITN_MAP_NETS_COVERAGE_P",
+                  "code": "",
+                  "chartType": "leafletHeatMap",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_MAP_NETS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_SI_ITN_TAB_MAPS",
+          "vizArray": [
+            {
+              "id": 4042,
               "name": "DSS_SI_ITN_V_MAP_1",
               "label": "DSS_SI_ITN_V_MAP_1",
               "vizType": "chart",
@@ -4347,11 +4451,11 @@
           ]
         },
         {
-          "row": 2,
+          "row": 3,
           "name": "DSS_SI_ITN_TAB_MAPS",
           "vizArray": [
             {
-              "id": 4042,
+              "id": 4043,
               "name": "DSS_SI_ITN_V_MAP_2",
               "label": "DSS_SI_ITN_V_MAP_2",
               "vizType": "chart",
@@ -5643,6 +5747,58 @@
           "vizArray": [
             {
               "id": 5042,
+              "name": "DSS_SI_ITN_V_LEAFLET",
+              "label": "DSS_SI_ITN_V_LEAFLET",
+              "vizType": "leafletMap",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnMapRegCoverageD",
+                  "name": "DSS_SI_ITN_MAP_REG_COVERAGE_D",
+                  "code": "",
+                  "chartType": "leafletHeatMap",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_MAP_REG"
+                },
+                {
+                  "id": "siItnMapDstCoverageD",
+                  "name": "DSS_SI_ITN_MAP_DST_COVERAGE_D",
+                  "code": "",
+                  "chartType": "leafletHeatMap",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_MAP_DST"
+                },
+                {
+                  "id": "siItnMapPopCoverageD",
+                  "name": "DSS_SI_ITN_MAP_POP_COVERAGE_D",
+                  "code": "",
+                  "chartType": "leafletHeatMap",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_MAP_POP"
+                },
+                {
+                  "id": "siItnMapNetsCoverageD",
+                  "name": "DSS_SI_ITN_MAP_NETS_COVERAGE_D",
+                  "code": "",
+                  "chartType": "leafletHeatMap",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SI_ITN_MAP_NETS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_SI_ITN_TAB_MAPS",
+          "vizArray": [
+            {
+              "id": 5043,
               "name": "DSS_SI_ITN_V_MAP_1",
               "label": "DSS_SI_ITN_V_MAP_1",
               "vizType": "chart",
@@ -5664,11 +5820,11 @@
           ]
         },
         {
-          "row": 2,
+          "row": 3,
           "name": "DSS_SI_ITN_TAB_MAPS",
           "vizArray": [
             {
-              "id": 5043,
+              "id": 5044,
               "name": "DSS_SI_ITN_V_MAP_2",
               "label": "DSS_SI_ITN_V_MAP_2",
               "vizType": "chart",
