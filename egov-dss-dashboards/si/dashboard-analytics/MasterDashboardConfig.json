@@ -3486,31 +3486,39 @@
           "vizArray": [
             {
               "id": 4013,
-              "name": "DSS_SI_ITN_V_DST_HOUSEHOLDS",
-              "label": "DSS_SI_ITN_V_DST_HOUSEHOLDS",
+              "name": "DSS_ITN_V_DST_HOUSEHOLDS",
+              "label": "DSS_ITN_V_DST_HOUSEHOLDS",
               "vizType": "stacked-collection",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnDstServed",
-                  "name": "DSS_SI_ITN_DST_SERVED",
+                  "id": "siItnDstHhEligible",
+                  "name": "DSS_ITN_DST_HH_ELIGIBLE",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
                 {
-                  "id": "siItnDstEligible",
-                  "name": "DSS_SI_ITN_DST_ELIGIBLE",
+                  "id": "siItnDstHhServed",
+                  "name": "DSS_ITN_DST_HH_SERVED",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
                 {
-                  "id": "siItnDstCoverage",
-                  "name": "DSS_SI_ITN_DST_COVERAGE",
+                  "id": "siItnDstHhUnserved",
+                  "name": "DSS_ITN_DST_HH_UNSERVED",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "siItnDstHhCoverageP",
+                  "name": "DSS_ITN_DST_HH_COVERAGE_P",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -3520,39 +3528,39 @@
             },
             {
               "id": 4014,
-              "name": "DSS_SI_ITN_V_DST_NETS",
-              "label": "DSS_SI_ITN_V_DST_NETS",
+              "name": "DSS_ITN_V_DST_ITNS",
+              "label": "DSS_ITN_V_DST_ITNS",
               "vizType": "stacked-collection",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnDstNetsTotal",
-                  "name": "DSS_SI_ITN_DST_NETS_TOTAL",
+                  "id": "siItnDstItnRequired",
+                  "name": "DSS_ITN_DST_ITN_REQUIRED",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
                 {
-                  "id": "siItnRegItnRequired",
-                  "name": "DSS_SI_ITN_REG_ITN_REQUIRED",
+                  "id": "siItnDstItnDistributed",
+                  "name": "DSS_ITN_DST_ITN_DISTRIBUTED",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
                 {
-                  "id": "siItnDstNetsCoverage",
-                  "name": "DSS_SI_ITN_DST_NETS_COVERAGE",
+                  "id": "siItnDstItnRemaining",
+                  "name": "DSS_ITN_DST_ITN_REMAINING",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
                 {
-                  "id": "siItnDstNetGap",
-                  "name": "DSS_SI_ITN_DST_NET_GAP",
+                  "id": "siItnDstItnCoverageP",
+                  "name": "DSS_ITN_DST_ITN_COVERAGE_P",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -3562,23 +3570,39 @@
             },
             {
               "id": 4015,
-              "name": "DSS_SI_ITN_V_DST_POPULATION",
-              "label": "DSS_SI_ITN_V_DST_POPULATION",
+              "name": "DSS_ITN_V_DST_POPULATION",
+              "label": "DSS_ITN_V_DST_POPULATION",
               "vizType": "stacked-collection",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnDstPopTotal",
-                  "name": "DSS_SI_ITN_DST_POP_TOTAL",
+                  "id": "siItnDstPopRegistered",
+                  "name": "DSS_ITN_DST_POP_REGISTERED",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
                 {
-                  "id": "siItnDstPopCoverageP",
-                  "name": "DSS_SI_ITN_DST_POP_COVERAGE_P",
+                  "id": "siItnDstPopCovered",
+                  "name": "DSS_ITN_DST_POP_COVERED",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "siItnDstPopRemaining",
+                  "name": "DSS_ITN_DST_POP_REMAINING",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "siItnDstPopCoveredP",
+                  "name": "DSS_ITN_DST_POP_COVERED_P",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -3594,47 +3618,57 @@
           "vizArray": [
             {
               "id": 4017,
-              "name": "DSS_SI_ITN_V_DST_COVERAGE",
-              "label": "DSS_SI_ITN_V_DST_COVERAGE",
+              "name": "DSS_ITN_V_DST_HH_COVERAGE_BY_AREA",
+              "label": "DSS_ITN_V_DST_HH_COVERAGE_BY_AREA",
               "vizType": "chart",
-              "noUnit": false,
+              "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnDstCoverageByAreaPctP",
-                  "name": "DSS_SI_ITN_DST_COVERAGE_BY_AREA_PCT_P",
+                  "id": "siItnDstHhPctByDistrict",
+                  "name": "DSS_ITN_DST_HH_PCT_BY_DISTRICT",
                   "code": "",
                   "chartType": "bar",
                   "filter": "",
                   "headers": [],
-                  "tabName": "SI_ITN_HH_PCT"
+                  "tabName": "PERCENT"
                 },
                 {
-                  "id": "siItnDstCoverageByAreaPopPctP",
-                  "name": "DSS_SI_ITN_DST_COVERAGE_BY_AREA_POP_PCT_P",
+                  "id": "siItnDstHhCountByDistrict",
+                  "name": "DSS_ITN_DST_HH_COUNT_BY_DISTRICT",
                   "code": "",
                   "chartType": "bar",
                   "filter": "",
                   "headers": [],
-                  "tabName": "SI_ITN_POP_PCT"
+                  "tabName": "NUMBER"
+                }
+              ]
+            },
+            {
+              "id": 4058,
+              "name": "DSS_ITN_V_DST_ITN_COVERAGE_BY_AREA",
+              "label": "DSS_ITN_V_DST_ITN_COVERAGE_BY_AREA",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnDstItnPctByDistrict",
+                  "name": "DSS_ITN_DST_ITN_PCT_BY_DISTRICT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "PERCENT"
                 },
                 {
-                  "id": "siItnDstCoverageByAreaNetsPctP",
-                  "name": "DSS_SI_ITN_DST_COVERAGE_BY_AREA_NETS_PCT_P",
+                  "id": "siItnDstItnCountByDistrict",
+                  "name": "DSS_ITN_DST_ITN_COUNT_BY_DISTRICT",
                   "code": "",
                   "chartType": "bar",
                   "filter": "",
                   "headers": [],
-                  "tabName": "SI_ITN_NETS_PCT"
-                },
-                {
-                  "id": "siItnDstCoverageByAreaP",
-                  "name": "DSS_SI_ITN_DST_COVERAGE_BY_AREA_P",
-                  "code": "",
-                  "chartType": "bar",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "SI_ITN_COUNT"
+                  "tabName": "NUMBER"
                 }
               ]
             }
@@ -3646,29 +3680,57 @@
           "vizArray": [
             {
               "id": 4018,
-              "name": "DSS_SI_ITN_V_DST_DAILY",
-              "label": "DSS_SI_ITN_V_DST_DAILY",
+              "name": "DSS_ITN_V_DST_HH_DAILY",
+              "label": "DSS_ITN_V_DST_HH_DAILY",
               "vizType": "chart",
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "siItnDstDaily",
-                  "name": "DSS_SI_ITN_DST_DAILY",
+                  "id": "itnDstHhDaily",
+                  "name": "DSS_ITN_DST_HH_DAILY",
                   "code": "",
                   "chartType": "line",
                   "filter": "",
                   "headers": [],
-                  "tabName": "SI_ITN_DAILY"
+                  "tabName": "DAILY"
                 },
                 {
-                  "id": "siItnDstDailyCum",
-                  "name": "DSS_SI_ITN_DST_DAILY_CUM",
+                  "id": "itnDstHhDailyCum",
+                  "name": "DSS_ITN_DST_HH_DAILY_CUM",
                   "code": "",
                   "chartType": "line",
                   "filter": "",
                   "headers": [],
-                  "tabName": "SI_ITN_CUMULATIVE"
+                  "tabName": "CUMULATIVE"
+                }
+              ]
+            },
+            {
+              "id": 4059,
+              "name": "DSS_ITN_V_DST_ITN_DAILY",
+              "label": "DSS_ITN_V_DST_ITN_DAILY",
+              "vizType": "chart",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "itnDstItnDaily",
+                  "name": "DSS_ITN_DST_ITN_DAILY",
+                  "code": "",
+                  "chartType": "line",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "DAILY"
+                },
+                {
+                  "id": "itnDstItnDailyCum",
+                  "name": "DSS_ITN_DST_ITN_DAILY_CUM",
+                  "code": "",
+                  "chartType": "line",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "CUMULATIVE"
                 }
               ]
             }

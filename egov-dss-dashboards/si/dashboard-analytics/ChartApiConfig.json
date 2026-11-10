@@ -32192,6 +32192,1154 @@
     "hideInsights": true,
     "sort": "sortKeyAsc"
   },
+  "siItnDstHhEligible": {
+    "chartName": "DSS_ITN_DST_HH_ELIGIBLE",
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households eligible"
+    ],
+    "insight": {},
+    "_comment": "Registered households with caregiverConsent TRUE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Households_eligible\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Households eligible\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
+      }
+    ]
+  },
+  "siItnDstHhServed": {
+    "chartName": "DSS_ITN_DST_HH_SERVED",
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households served"
+    ],
+    "insight": {},
+    "_comment": "Unique households with an ADMINISTRATION_SUCCESS task",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Households_served\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}"
+      }
+    ]
+  },
+  "siItnDstHhUnserved": {
+    "chartName": "DSS_ITN_DST_HH_UNSERVED",
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households eligible",
+      "Households served (negated)"
+    ],
+    "insight": {},
+    "_comment": "Eligible - served households",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Households_eligible\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Households eligible\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"W_Households_served_negated\":{\"filters\":{\"filters\":{\"all\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}}},\"aggs\":{\"v\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"Households served (negated)\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"v\"},\"script\":\"params.v * -1\"}}}}}}"
+      }
+    ]
+  },
+  "siItnDstHhCoverageP": {
+    "chartName": "DSS_ITN_DST_HH_COVERAGE_P",
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Households served",
+      "Households eligible"
+    ],
+    "insight": {},
+    "_comment": "Served / eligible households x 100",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Households_served\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Households_eligible\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Households eligible\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
+      }
+    ]
+  },
+  "siItnDstItnRequired": {
+    "chartName": "DSS_ITN_DST_ITN_REQUIRED",
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "ITNs required"
+    ],
+    "insight": {},
+    "_comment": "Same rule as Registration tab: min(ceil(members/2), 3), over consenting (caregiverConsent TRUE) households only",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_ITNs_required\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"ITNs required\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstItnDistributed": {
+    "chartName": "DSS_ITN_DST_ITN_DISTRIBUTED",
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "ITNs distributed"
+    ],
+    "insight": {},
+    "_comment": "Sum of quantity on ADMINISTRATION_SUCCESS tasks",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_ITNs_distributed\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"ITNs distributed\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
+      }
+    ]
+  },
+  "siItnDstItnRemaining": {
+    "chartName": "DSS_ITN_DST_ITN_REMAINING",
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "ITNs required",
+      "ITNs distributed (negated)"
+    ],
+    "insight": {},
+    "_comment": "ITNs required (consenting households) - ITNs distributed",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_ITNs_required\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"ITNs required\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"W_ITNs_distributed_negated\":{\"filters\":{\"filters\":{\"all\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}}},\"aggs\":{\"v\":{\"sum\":{\"field\":\"Data.quantity\"}},\"ITNs distributed (negated)\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"v\"},\"script\":\"params.v * -1\"}}}}}}"
+      }
+    ]
+  },
+  "siItnDstItnCoverageP": {
+    "chartName": "DSS_ITN_DST_ITN_COVERAGE_P",
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "ITNs distributed",
+      "ITNs required"
+    ],
+    "insight": {},
+    "_comment": "ITNs distributed / ITNs required x 100",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_ITNs_distributed\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"ITNs distributed\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_ITNs_required\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"ITNs required\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstPopRegistered": {
+    "chartName": "DSS_ITN_DST_POP_REGISTERED",
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population registered"
+    ],
+    "insight": {},
+    "_comment": "Persons in registered households with caregiverConsent TRUE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Population_registered\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Population registered\":{\"sum\":{\"field\":\"Data.household.memberCount\"}}}}}}"
+      }
+    ]
+  },
+  "siItnDstPopCovered": {
+    "chartName": "DSS_ITN_DST_POP_COVERED",
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population covered"
+    ],
+    "insight": {},
+    "_comment": "Sum of memberCount on ADMINISTRATION_SUCCESS tasks",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Population_covered\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Population covered\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}"
+      }
+    ]
+  },
+  "siItnDstPopRemaining": {
+    "chartName": "DSS_ITN_DST_POP_REMAINING",
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Population registered",
+      "Population covered (negated)"
+    ],
+    "insight": {},
+    "_comment": "Population registered in consenting households - population covered",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Population_registered\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Population registered\":{\"sum\":{\"field\":\"Data.household.memberCount\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"W_Population_covered_negated\":{\"filters\":{\"filters\":{\"all\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}}}},\"aggs\":{\"v\":{\"sum\":{\"field\":\"Data.memberCount\"}},\"Population covered (negated)\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"v\"},\"script\":\"params.v * -1\"}}}}}}"
+      }
+    ]
+  },
+  "siItnDstPopCoveredP": {
+    "chartName": "DSS_ITN_DST_POP_COVERED_P",
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Population covered",
+      "Population registered"
+    ],
+    "insight": {},
+    "_comment": "Population covered / population registered in consenting households x 100",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Population_covered\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Population covered\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Population_registered\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Population registered\":{\"sum\":{\"field\":\"Data.household.memberCount\"}}}}}}"
+      }
+    ]
+  },
+  "siItnDstHhPctByDistrict": {
+    "chartName": "DSS_ITN_DST_HH_PCT_BY_DISTRICT",
+    "chartType": "line",
+    "valueType": "percentage",
+    "drillChart": "siItnDstHhPctByChiefdom",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Distribution coverage %",
+      "Households eligible"
+    ],
+    "insight": {},
+    "_comment": "Households served / households eligible (registered, caregiverConsent TRUE) x 100; bars by district, drills to chiefdom",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "district",
+        "column": "District"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Served\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Distribution coverage %\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Eligible\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Households eligible\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstHhPctByChiefdom": {
+    "chartName": "DSS_ITN_DST_HH_PCT_BY_CHIEFDOM",
+    "chartType": "line",
+    "valueType": "percentage",
+    "drillChart": "siItnDstHhPctByPhu",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Distribution coverage %",
+      "Households eligible"
+    ],
+    "insight": {},
+    "_comment": "Households served / households eligible (registered, caregiverConsent TRUE) x 100; bars by chiefdom, drills to phu",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "chiefdom",
+        "column": "Chiefdom"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Served\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Distribution coverage %\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Eligible\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Households eligible\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstHhPctByPhu": {
+    "chartName": "DSS_ITN_DST_HH_PCT_BY_PHU",
+    "chartType": "line",
+    "valueType": "percentage",
+    "drillChart": "siItnDstHhPctByDp",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Distribution coverage %",
+      "Households eligible"
+    ],
+    "insight": {},
+    "_comment": "Households served / households eligible (registered, caregiverConsent TRUE) x 100; bars by phu, drills to distributionPoint",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "phu",
+        "column": "Phu"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Served\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Distribution coverage %\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.phu.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Eligible\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Households eligible\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.phu.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstHhPctByDp": {
+    "chartName": "DSS_ITN_DST_HH_PCT_BY_DISTRIBUTIONPOINT",
+    "chartType": "line",
+    "valueType": "percentage",
+    "drillChart": "siItnDstHhPctByCommunity",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Distribution coverage %",
+      "Households eligible"
+    ],
+    "insight": {},
+    "_comment": "Households served / households eligible (registered, caregiverConsent TRUE) x 100; bars by distributionPoint, drills to community",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "distributionPoint",
+        "column": "Dp"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Served\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Distribution coverage %\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Eligible\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Households eligible\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstHhPctByCommunity": {
+    "chartName": "DSS_ITN_DST_HH_PCT_BY_COMMUNITY",
+    "chartType": "line",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Distribution coverage %",
+      "Households eligible"
+    ],
+    "insight": {},
+    "_comment": "Households served / households eligible (registered, caregiverConsent TRUE) x 100; bars by community",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Served\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Distribution coverage %\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Eligible\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Households eligible\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstHhCountByDistrict": {
+    "chartName": "DSS_ITN_DST_HH_COUNT_BY_DISTRICT",
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "siItnDstHhCountByChiefdom",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households eligible",
+      "Households served"
+    ],
+    "insight": {},
+    "_comment": "Households eligible (registered, caregiverConsent TRUE) vs households served; bars by district, drills to chiefdom",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "district",
+        "column": "District"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Eligible\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Households eligible\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Served\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Households served\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstHhCountByChiefdom": {
+    "chartName": "DSS_ITN_DST_HH_COUNT_BY_CHIEFDOM",
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "siItnDstHhCountByPhu",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households eligible",
+      "Households served"
+    ],
+    "insight": {},
+    "_comment": "Households eligible (registered, caregiverConsent TRUE) vs households served; bars by chiefdom, drills to phu",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "chiefdom",
+        "column": "Chiefdom"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Eligible\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Households eligible\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Served\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Households served\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstHhCountByPhu": {
+    "chartName": "DSS_ITN_DST_HH_COUNT_BY_PHU",
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "siItnDstHhCountByDp",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households eligible",
+      "Households served"
+    ],
+    "insight": {},
+    "_comment": "Households eligible (registered, caregiverConsent TRUE) vs households served; bars by phu, drills to distributionPoint",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "phu",
+        "column": "Phu"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Eligible\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Households eligible\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.phu.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Served\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Households served\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.phu.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstHhCountByDp": {
+    "chartName": "DSS_ITN_DST_HH_COUNT_BY_DISTRIBUTIONPOINT",
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "siItnDstHhCountByCommunity",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households eligible",
+      "Households served"
+    ],
+    "insight": {},
+    "_comment": "Households eligible (registered, caregiverConsent TRUE) vs households served; bars by distributionPoint, drills to community",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "distributionPoint",
+        "column": "Dp"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Eligible\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Households eligible\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Served\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Households served\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstHhCountByCommunity": {
+    "chartName": "DSS_ITN_DST_HH_COUNT_BY_COMMUNITY",
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households eligible",
+      "Households served"
+    ],
+    "insight": {},
+    "_comment": "Households eligible (registered, caregiverConsent TRUE) vs households served; bars by community",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Eligible\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"Households eligible\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Served\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Households served\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstItnPctByDistrict": {
+    "chartName": "DSS_ITN_DST_ITN_PCT_BY_DISTRICT",
+    "chartType": "line",
+    "valueType": "percentage",
+    "drillChart": "siItnDstItnPctByChiefdom",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "ITN distribution coverage %",
+      "ITNs required"
+    ],
+    "insight": {},
+    "_comment": "ITNs distributed / ITNs required (consenting households) x 100; bars by district, drills to chiefdom",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "district",
+        "column": "District"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Distributed\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"ITN distribution coverage %\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Required\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"ITNs required\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstItnPctByChiefdom": {
+    "chartName": "DSS_ITN_DST_ITN_PCT_BY_CHIEFDOM",
+    "chartType": "line",
+    "valueType": "percentage",
+    "drillChart": "siItnDstItnPctByPhu",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "ITN distribution coverage %",
+      "ITNs required"
+    ],
+    "insight": {},
+    "_comment": "ITNs distributed / ITNs required (consenting households) x 100; bars by chiefdom, drills to phu",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "chiefdom",
+        "column": "Chiefdom"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Distributed\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"ITN distribution coverage %\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Required\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"ITNs required\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstItnPctByPhu": {
+    "chartName": "DSS_ITN_DST_ITN_PCT_BY_PHU",
+    "chartType": "line",
+    "valueType": "percentage",
+    "drillChart": "siItnDstItnPctByDp",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "ITN distribution coverage %",
+      "ITNs required"
+    ],
+    "insight": {},
+    "_comment": "ITNs distributed / ITNs required (consenting households) x 100; bars by phu, drills to distributionPoint",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "phu",
+        "column": "Phu"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Distributed\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"ITN distribution coverage %\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.phu.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Required\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"ITNs required\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.phu.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstItnPctByDp": {
+    "chartName": "DSS_ITN_DST_ITN_PCT_BY_DISTRIBUTIONPOINT",
+    "chartType": "line",
+    "valueType": "percentage",
+    "drillChart": "siItnDstItnPctByCommunity",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "ITN distribution coverage %",
+      "ITNs required"
+    ],
+    "insight": {},
+    "_comment": "ITNs distributed / ITNs required (consenting households) x 100; bars by distributionPoint, drills to community",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "distributionPoint",
+        "column": "Dp"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Distributed\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"ITN distribution coverage %\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Required\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"ITNs required\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstItnPctByCommunity": {
+    "chartName": "DSS_ITN_DST_ITN_PCT_BY_COMMUNITY",
+    "chartType": "line",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "ITN distribution coverage %",
+      "ITNs required"
+    ],
+    "insight": {},
+    "_comment": "ITNs distributed / ITNs required (consenting households) x 100; bars by community",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Distributed\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"ITN distribution coverage %\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Required\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"ITNs required\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstItnCountByDistrict": {
+    "chartName": "DSS_ITN_DST_ITN_COUNT_BY_DISTRICT",
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "siItnDstItnCountByChiefdom",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "ITNs required",
+      "ITNs distributed"
+    ],
+    "insight": {},
+    "_comment": "ITNs required (consenting households) vs ITNs distributed; bars by district, drills to chiefdom",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "district",
+        "column": "District"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Required\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"ITNs required\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Distributed\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"ITNs distributed\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstItnCountByChiefdom": {
+    "chartName": "DSS_ITN_DST_ITN_COUNT_BY_CHIEFDOM",
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "siItnDstItnCountByPhu",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "ITNs required",
+      "ITNs distributed"
+    ],
+    "insight": {},
+    "_comment": "ITNs required (consenting households) vs ITNs distributed; bars by chiefdom, drills to phu",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "chiefdom",
+        "column": "Chiefdom"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Required\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"ITNs required\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Distributed\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"ITNs distributed\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstItnCountByPhu": {
+    "chartName": "DSS_ITN_DST_ITN_COUNT_BY_PHU",
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "siItnDstItnCountByDp",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "ITNs required",
+      "ITNs distributed"
+    ],
+    "insight": {},
+    "_comment": "ITNs required (consenting households) vs ITNs distributed; bars by phu, drills to distributionPoint",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "phu",
+        "column": "Phu"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Required\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"ITNs required\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.phu.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Distributed\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"ITNs distributed\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.phu.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstItnCountByDp": {
+    "chartName": "DSS_ITN_DST_ITN_COUNT_BY_DISTRIBUTIONPOINT",
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "siItnDstItnCountByCommunity",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "ITNs required",
+      "ITNs distributed"
+    ],
+    "insight": {},
+    "_comment": "ITNs required (consenting households) vs ITNs distributed; bars by distributionPoint, drills to community",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "distributionPoint",
+        "column": "Dp"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Required\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"ITNs required\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Distributed\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"ITNs distributed\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnDstItnCountByCommunity": {
+    "chartName": "DSS_ITN_DST_ITN_COUNT_BY_COMMUNITY",
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "ITNs required",
+      "ITNs distributed"
+    ],
+    "insight": {},
+    "_comment": "ITNs required (consenting households) vs ITNs distributed; bars by community",
+    "isCumulative": false,
+    "sort": "sortKeyAsc",
+    "filterKeys": [],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-household-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Required\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"ITNs required\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Distributed\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"ITNs distributed\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      }
+    ]
+  },
+  "itnDstHhDaily": {
+    "chartName": "DSS_ITN_DST_HH_DAILY",
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households served per day"
+    ],
+    "insight": {},
+    "_comment": "Unique households served per day (ADMINISTRATION_SUCCESS)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Households_served_per_day\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Households served per day\":{\"date_histogram\":{\"field\":\"Data.createdTime\",\"calendar_interval\":\"day\"},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      }
+    ],
+    "isCumulative": false,
+    "interval": "day"
+  },
+  "itnDstHhDailyCum": {
+    "chartName": "DSS_ITN_DST_HH_DAILY_CUM",
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Households served (cumulative)"
+    ],
+    "insight": {},
+    "_comment": "Running total of households served",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Households_served_cumulative\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"Households served (cumulative)\":{\"date_histogram\":{\"field\":\"Data.createdTime\",\"calendar_interval\":\"day\"},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
+      }
+    ],
+    "isCumulative": true,
+    "interval": "day"
+  },
+  "itnDstItnDaily": {
+    "chartName": "DSS_ITN_DST_ITN_DAILY",
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "ITNs distributed per day"
+    ],
+    "insight": {},
+    "_comment": "Sum of quantity per day (ADMINISTRATION_SUCCESS)",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_ITNs_distributed_per_day\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"ITNs distributed per day\":{\"date_histogram\":{\"field\":\"Data.createdTime\",\"calendar_interval\":\"day\"},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      }
+    ],
+    "isCumulative": false,
+    "interval": "day"
+  },
+  "itnDstItnDailyCum": {
+    "chartName": "DSS_ITN_DST_ITN_DAILY_CUM",
+    "chartType": "line",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "ITNs distributed (cumulative)"
+    ],
+    "insight": {},
+    "_comment": "Running total of ITNs distributed",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-project-task-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_ITNs_distributed_cumulative\":{\"filter\":{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},\"aggs\":{\"ITNs distributed (cumulative)\":{\"date_histogram\":{\"field\":\"Data.createdTime\",\"calendar_interval\":\"day\"},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
+      }
+    ],
+    "isCumulative": true,
+    "interval": "day"
+  },
   "siItnDstServed": {
     "chartName": "DSS_SI_ITN_DST_SERVED",
     "chartType": "metric",
@@ -33310,7 +34458,6 @@
       "ITNs required",
       "Population reached",
       "Population target",
-      "e-Tokens issued",
       "Nets (negated)"
     ],
     "insight": {},
@@ -33335,7 +34482,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
         "indexName": "si-household-index-v1",
-        "aggrQuery": "{\"aggs\":{\"F_tok\":{\"filter\":{\"wildcard\":{\"Data.additionalDetails.identifiers.keyword\":\"UNIQUE_BENEFICIARY_ID*\"}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"e-Tokens issued\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}},\"ITNs required\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"F_consent\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ITNs required\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -33376,15 +34523,6 @@
           "Population target"
         ],
         "newField": "Population coverage %"
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "PercentageComputedField",
-        "fields": [
-          "Households served",
-          "e-Tokens issued"
-        ],
-        "newField": "Redemption %"
       },
       {
         "postAggregationTheory": "",
@@ -33676,7 +34814,6 @@
       "ITNs required",
       "Population reached",
       "Population target",
-      "e-Tokens issued",
       "Nets (negated)"
     ],
     "insight": {},
@@ -33701,7 +34838,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
         "indexName": "si-household-index-v1",
-        "aggrQuery": "{\"aggs\":{\"F_tok\":{\"filter\":{\"wildcard\":{\"Data.additionalDetails.identifiers.keyword\":\"UNIQUE_BENEFICIARY_ID*\"}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"e-Tokens issued\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}},\"ITNs required\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"F_consent\":{\"filter\":{\"terms\":{\"Data.additionalDetails.caregiverConsent.keyword\":[\"TRUE\",\"true\"]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ITNs required\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -33742,15 +34879,6 @@
           "Population target"
         ],
         "newField": "Population coverage %"
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "PercentageComputedField",
-        "fields": [
-          "Households served",
-          "e-Tokens issued"
-        ],
-        "newField": "Redemption %"
       },
       {
         "postAggregationTheory": "",
