@@ -29094,7 +29094,7 @@
     "chartName": "DSS_SI_ITN_REG_REGISTRAR_SYNC_TABLE_N",
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "siItnRegRegistrarSyncTableP",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
@@ -29133,7 +29133,14 @@
         ],
         "newField": "Sync rate %"
       }
-    ]
+    ],
+    "filterKeys": [
+      {
+        "key": "province",
+        "column": "Province"
+      }
+    ],
+    "kind": "drillDown"
   },
   "siItnDqByAreaN": {
     "chartName": "DSS_SI_ITN_DQ_BY_AREA_N",
@@ -29163,7 +29170,7 @@
     "chartName": "DSS_SI_ITN_DQ_SUMMARY_N",
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "siItnDqSummaryP",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
@@ -29187,7 +29194,14 @@
     "plotLabel": "Province",
     "hideHeaderDenomination": true,
     "hideInsights": true,
-    "sort": "sortKeyAsc"
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "province",
+        "column": "Province"
+      }
+    ],
+    "kind": "drillDown"
   },
   "siItnRegHhTargetP": {
     "chartName": "DSS_SI_ITN_REG_HH_TARGET_P",
@@ -29637,7 +29651,7 @@
     "chartName": "DSS_SI_ITN_REG_REGISTRAR_SYNC_TABLE_P",
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "siItnRegRegistrarSyncTableD",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
@@ -29676,7 +29690,14 @@
         ],
         "newField": "Sync rate %"
       }
-    ]
+    ],
+    "filterKeys": [
+      {
+        "key": "district",
+        "column": "District"
+      }
+    ],
+    "kind": "drillDown"
   },
   "siItnDqByAreaP": {
     "chartName": "DSS_SI_ITN_DQ_BY_AREA_P",
@@ -29706,7 +29727,7 @@
     "chartName": "DSS_SI_ITN_DQ_SUMMARY_P",
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "siItnDqSummaryD",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
@@ -29730,7 +29751,14 @@
     "plotLabel": "District",
     "hideHeaderDenomination": true,
     "hideInsights": true,
-    "sort": "sortKeyAsc"
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "district",
+        "column": "District"
+      }
+    ],
+    "kind": "drillDown"
   },
   "siItnRegHhTargetD": {
     "chartName": "DSS_SI_ITN_REG_HH_TARGET_D",
@@ -31178,7 +31206,7 @@
     "chartName": "DSS_SI_ITN_DST_DISTRIBUTOR_SYNC_TABLE_N",
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "siItnDstDistributorSyncTableP",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
@@ -31217,7 +31245,14 @@
         ],
         "newField": "Sync rate %"
       }
-    ]
+    ],
+    "filterKeys": [
+      {
+        "key": "province",
+        "column": "Province"
+      }
+    ],
+    "kind": "drillDown"
   },
   "siItnDstPopCoverageP": {
     "chartName": "DSS_SI_ITN_DST_POP_COVERAGE_P",
@@ -31543,7 +31578,7 @@
     "chartName": "DSS_SI_ITN_DST_DISTRIBUTOR_SYNC_TABLE_P",
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "siItnDstDistributorSyncTableD",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
@@ -31582,7 +31617,14 @@
         ],
         "newField": "Sync rate %"
       }
-    ]
+    ],
+    "filterKeys": [
+      {
+        "key": "district",
+        "column": "District"
+      }
+    ],
+    "kind": "drillDown"
   },
   "siItnDstPopCoverageD": {
     "chartName": "DSS_SI_ITN_DST_POP_COVERAGE_D",
@@ -32480,7 +32522,7 @@
     "chartName": "DSS_SI_ITN_CMP_OPEN_AGE_N",
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "siItnCmpOpenAgeP",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
@@ -32504,13 +32546,20 @@
     "plotLabel": "Province",
     "hideHeaderDenomination": true,
     "hideInsights": true,
-    "sort": "sortKeyAsc"
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "province",
+        "column": "Province"
+      }
+    ],
+    "kind": "drillDown"
   },
   "siItnCmpSummaryN": {
     "chartName": "DSS_SI_ITN_CMP_SUMMARY_N",
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "siItnCmpSummaryP",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
@@ -32533,7 +32582,14 @@
     "plotLabel": "Province",
     "hideHeaderDenomination": true,
     "hideInsights": true,
-    "sort": "sortKeyAsc"
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "province",
+        "column": "Province"
+      }
+    ],
+    "kind": "drillDown"
   },
   "siItnCmpByAreaP": {
     "chartName": "DSS_SI_ITN_CMP_BY_AREA_P",
@@ -32642,7 +32698,7 @@
     "chartName": "DSS_SI_ITN_CMP_OPEN_AGE_P",
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "siItnCmpOpenAgeD",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
@@ -32666,13 +32722,20 @@
     "plotLabel": "District",
     "hideHeaderDenomination": true,
     "hideInsights": true,
-    "sort": "sortKeyAsc"
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "district",
+        "column": "District"
+      }
+    ],
+    "kind": "drillDown"
   },
   "siItnCmpSummaryP": {
     "chartName": "DSS_SI_ITN_CMP_SUMMARY_P",
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "siItnCmpSummaryD",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
@@ -32695,7 +32758,14 @@
     "plotLabel": "District",
     "hideHeaderDenomination": true,
     "hideInsights": true,
-    "sort": "sortKeyAsc"
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "district",
+        "column": "District"
+      }
+    ],
+    "kind": "drillDown"
   },
   "siItnCmpByAreaD": {
     "chartName": "DSS_SI_ITN_CMP_BY_AREA_D",
