@@ -32864,10 +32864,7 @@
       "ITNs required",
       "Population reached",
       "Population target",
-      "e-Tokens issued",
-      "Nets (negated)",
-      "Start Date",
-      "End Date"
+      "Nets (negated)"
     ],
     "insight": {},
     "_comment": "KPI DST-01..11: distribution summary by area",
@@ -32891,7 +32888,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
         "indexName": "si-household-index-v1",
-        "aggrQuery": "{\"aggs\":{\"F_tok\":{\"filter\":{\"wildcard\":{\"Data.additionalDetails.identifiers.keyword\":\"UNIQUE_BENEFICIARY_ID*\"}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"e-Tokens issued\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}},\"ITNs required\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"F_tok\":{\"filter\":{\"wildcard\":{\"Data.additionalDetails.identifiers.keyword\":\"UNIQUE_BENEFICIARY_ID*\"}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ITNs required\":{\"sum\":{\"script\":{\"source\":\"int m = doc['Data.household.memberCount'].size() == 0 ? 0 : (int) doc['Data.household.memberCount'].value; return Math.min((m + 1) / 2, 3);\"}}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -32899,13 +32896,6 @@
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
         "indexName": "si-project-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Population_target\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Population target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-index-v1",
-        "aggrQuery": "{\"aggs\":{\"F_dates\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.province.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.district.keyword\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Start Date\":{\"min\":{\"field\":\"Data.startDate\"}},\"End Date\":{\"max\":{\"field\":\"Data.endDate\"}}}}}}}}"
       }
     ],
     "plotLabel": "Province",
@@ -32942,37 +32932,12 @@
       },
       {
         "postAggregationTheory": "",
-        "actionName": "PercentageComputedField",
-        "fields": [
-          "Households served",
-          "e-Tokens issued"
-        ],
-        "newField": "Redemption %"
-      },
-      {
-        "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
           "ITNs required",
           "Nets (negated)"
         ],
         "newField": "Nets still to give"
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Start Date"
-        ],
-        "newField": "startDate"
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "End Date"
-        ],
-        "newField": "endDate"
       }
     ],
     "excludedColumns": [

@@ -3585,40 +3585,6 @@
                   "headers": []
                 }
               ]
-            },
-            {
-              "id": 4016,
-              "name": "DSS_SI_ITN_V_DST_TOKENS",
-              "label": "DSS_SI_ITN_V_DST_TOKENS",
-              "vizType": "stacked-collection",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "siItnRegTokens",
-                  "name": "DSS_SI_ITN_REG_TOKENS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnDstRedemption",
-                  "name": "DSS_SI_ITN_DST_REDEMPTION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "siItnDstUnredeemed",
-                  "name": "DSS_SI_ITN_DST_UNREDEEMED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
             }
           ]
         },
