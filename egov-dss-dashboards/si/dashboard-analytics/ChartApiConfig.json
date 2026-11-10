@@ -34862,7 +34862,7 @@
     "chartName": "DSS_SI_ITN_STK_BY_AREA_P",
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "siItnStkByAreaD",
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
@@ -34946,7 +34946,14 @@
     "plotLabel": "District",
     "hideHeaderDenomination": true,
     "hideInsights": true,
-    "sort": "sortKeyAsc"
+    "sort": "sortKeyAsc",
+    "filterKeys": [
+      {
+        "key": "district",
+        "column": "District"
+      }
+    ],
+    "kind": "drillDown"
   },
   "siItnStkLossByAreaP": {
     "chartName": "DSS_SI_ITN_STK_LOSS_BY_AREA_P",
