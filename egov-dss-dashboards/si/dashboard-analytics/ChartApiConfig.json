@@ -28339,7 +28339,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Closed_households\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"REGISTRAR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"CLOSED_HOUSEHOLD\"}}]}},\"aggs\":{\"Closed households\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}"
       }
     ]
@@ -28544,7 +28544,7 @@
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_rows\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"REGISTRAR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"CLOSED_HOUSEHOLD\"}}]}},\"aggs\":{\"rows\":{\"date_histogram\":{\"field\":\"Data.createdTime\",\"calendar_interval\":\"day\",\"format\":\"yyyy-MM-dd\",\"min_doc_count\":1},\"aggs\":{\"Closed households\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       }
     ],
@@ -28951,7 +28951,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Closed_households\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"REGISTRAR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"CLOSED_HOUSEHOLD\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Closed households\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
@@ -29519,7 +29519,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Closed_households\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"REGISTRAR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"CLOSED_HOUSEHOLD\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Closed households\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
@@ -30056,7 +30056,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Closed_households\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"REGISTRAR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"CLOSED_HOUSEHOLD\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Closed households\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
@@ -30268,7 +30268,7 @@
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}"
       }
     ]
@@ -30290,7 +30290,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}"
       }
     ]
@@ -30320,7 +30320,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"W_Closed_households_negated\":{\"filters\":{\"filters\":{\"all\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"REGISTRAR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"CLOSED_HOUSEHOLD\"}}]}}}},\"aggs\":{\"v\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"Closed households (negated)\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"v\"},\"script\":\"params.v * -1\"}}}}}}"
       }
     ]
@@ -30343,7 +30343,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}"
       },
       {
@@ -30372,7 +30372,7 @@
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Nets_distributed\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
       }
     ]
@@ -30394,7 +30394,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Nets_distributed\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
       }
     ]
@@ -30417,7 +30417,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Nets_distributed\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}"
       },
       {
@@ -30454,7 +30454,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"W_Nets_distributed_negated\":{\"filters\":{\"filters\":{\"all\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}}}},\"aggs\":{\"v\":{\"sum\":{\"field\":\"Data.quantity\"}},\"Nets distributed (negated)\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"v\"},\"script\":\"params.v * -1\"}}}}}}"
       }
     ]
@@ -30476,7 +30476,7 @@
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Population_reached\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}"
       }
     ]
@@ -30498,7 +30498,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Population_reached\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}"
       }
     ]
@@ -30521,7 +30521,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}"
       },
       {
@@ -30558,7 +30558,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"W_Households_served_negated\":{\"filters\":{\"filters\":{\"all\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}}}},\"aggs\":{\"v\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"Households served (negated)\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"v\"},\"script\":\"params.v * -1\"}}}}}}"
       }
     ]
@@ -30581,14 +30581,14 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_with_1_net_per_2_people\":{\"filter\":{\"bool\":{\"must\":[{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},{\"script\":{\"script\":{\"source\":\"doc['Data.quantity'].size() > 0 && doc['Data.memberCount'].size() > 0 && doc['Data.quantity'].value * 2 >= doc['Data.memberCount'].value\"}}}]}},\"aggs\":{\"Households with 1 net per 2 people\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}"
       }
     ]
@@ -30614,7 +30614,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"size\":2000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}},\"Nets (negated)\":{\"bucket_script\":{\"buckets_path\":{\"n\":\"Nets distributed\"},\"script\":\"params.n * -1\"}}}}}}}}"
       },
       {
@@ -30671,14 +30671,14 @@
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_served_per_day\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Households served per day\":{\"date_histogram\":{\"field\":\"Data.createdTime\",\"calendar_interval\":\"day\"},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Nets_distributed_per_day\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Nets distributed per day\":{\"date_histogram\":{\"field\":\"Data.createdTime\",\"calendar_interval\":\"day\"},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
       }
     ],
@@ -30703,14 +30703,14 @@
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_served_(cumulative)\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Households served (cumulative)\":{\"date_histogram\":{\"field\":\"Data.createdTime\",\"calendar_interval\":\"day\"},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Nets_distributed_(cumulative)\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Nets distributed (cumulative)\":{\"date_histogram\":{\"field\":\"Data.createdTime\",\"calendar_interval\":\"day\"},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
       }
     ],
@@ -30736,7 +30736,7 @@
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"date_histogram\":{\"field\":\"Data.createdTime\",\"calendar_interval\":\"day\",\"format\":\"yyyy-MM-dd\",\"min_doc_count\":1},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}},\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
       }
     ],
@@ -30763,7 +30763,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Population_reached\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}"
       },
       {
@@ -30793,7 +30793,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Households served\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
@@ -30831,7 +30831,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Households served\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
@@ -30863,7 +30863,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Population_reached\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Population reached\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
       },
       {
@@ -30895,7 +30895,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Nets_distributed\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Nets distributed\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
       },
       {
@@ -30942,7 +30942,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}},\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}},\"Nets (negated)\":{\"bucket_script\":{\"buckets_path\":{\"n\":\"Nets distributed\"},\"script\":\"params.n * -1\"}}}}}}}}"
       },
       {
@@ -31075,7 +31075,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households administered\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
       },
       {
@@ -31237,7 +31237,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Population_reached\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}"
       },
       {
@@ -31267,7 +31267,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Households served\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
@@ -31305,7 +31305,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Households served\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
@@ -31337,7 +31337,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Population_reached\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Population reached\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
       },
       {
@@ -31369,7 +31369,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Nets_distributed\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Nets distributed\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
       },
       {
@@ -31414,7 +31414,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}},\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}},\"Nets (negated)\":{\"bucket_script\":{\"buckets_path\":{\"n\":\"Nets distributed\"},\"script\":\"params.n * -1\"}}}}}}}}"
       },
       {
@@ -31602,7 +31602,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Population_reached\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}"
       },
       {
@@ -31632,7 +31632,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Households served\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
@@ -31664,7 +31664,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Households served\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
@@ -31696,7 +31696,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Population_reached\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Population reached\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
       },
       {
@@ -31728,7 +31728,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Nets_distributed\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Nets distributed\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
       },
       {
@@ -31773,7 +31773,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}},\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}},\"Nets (negated)\":{\"bucket_script\":{\"buckets_path\":{\"n\":\"Nets distributed\"},\"script\":\"params.n * -1\"}}}}}}}}"
       },
       {
@@ -31973,7 +31973,7 @@
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":2000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}},\"Active days\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.taskDates\"}},\"Households per day\":{\"bucket_script\":{\"buckets_path\":{\"n\":\"Households served\",\"d\":\"Active days\"},\"script\":\"params.d > 0 ? params.n / params.d : 0\"}}}}}}}}"
       }
     ],
@@ -32030,14 +32030,14 @@
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Households_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_Active_distributors\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Active distributors\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.createdBy.keyword\"}}}}}}"
       }
     ]
@@ -32320,7 +32320,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F_served\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":2000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}},\"Active days\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.taskDates\"}},\"Households per day\":{\"bucket_script\":{\"buckets_path\":{\"n\":\"Households served\",\"d\":\"Active days\"},\"script\":\"params.d > 0 ? params.n / params.d : 0\"}}}}}}}}"
       }
     ],
@@ -32922,7 +32922,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
@@ -32967,7 +32967,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
       },
       {
@@ -33012,7 +33012,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.province.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
       },
       {
@@ -33102,7 +33102,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
@@ -33147,7 +33147,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
       },
       {
@@ -33192,7 +33192,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
       },
       {
@@ -33282,7 +33282,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households served\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}}}"
       },
       {
@@ -33327,7 +33327,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Population reached\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
       },
       {
@@ -33372,7 +33372,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Nets distributed\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
       },
       {
@@ -33472,7 +33472,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"adm\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"q\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}",
         "key": "administered",
         "transformData": "linearAggregation",
@@ -33818,7 +33818,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"adm\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"q\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}",
         "key": "administered",
         "transformData": "linearAggregation",
@@ -34409,7 +34409,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"adm\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"q\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}",
         "key": "administered",
         "transformData": "linearAggregation",
@@ -34701,7 +34701,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"filter\":[{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Administered\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
       }
     ],
@@ -34760,7 +34760,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"filter\":[{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}}]}},\"aggs\":{\"Administered\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
       },
       {
@@ -34887,7 +34887,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"filter\":[{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Administered\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
       }
     ],
@@ -34946,7 +34946,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"F\":{\"filter\":{\"bool\":{\"filter\":[{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}}]}},\"aggs\":{\"Administered\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"count\":{\"sum\":{\"field\":\"Data.quantity\"}}}}}}}}"
       },
       {
@@ -35017,7 +35017,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"closed\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"REGISTRAR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"CLOSED_HOUSEHOLD\"}}]}},\"aggs\":{\"v\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}",
         "key": "closed",
         "transformData": "linearAggregation",
@@ -35173,7 +35173,7 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"closed\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"REGISTRAR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"CLOSED_HOUSEHOLD\"}}]}},\"aggs\":{\"v\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}}}}}}",
         "key": "closed",
         "transformData": "linearAggregation",
@@ -35326,7 +35326,7 @@
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-project-task-index-v1*,-si-project-task-index-v1-*",
+        "indexName": "si-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"all\":{\"filters\":{\"filters\":{\"all\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":\"DISTRIBUTOR\"}},{\"term\":{\"Data.administrationStatus.keyword\":\"ADMINISTRATION_SUCCESS\"}},{\"term\":{\"Data.isDelivered\":true}}]}}}},\"aggs\":{\"hh\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.householdId.keyword\"}},\"users\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.createdBy.keyword\"}},\"per\":{\"bucket_script\":{\"buckets_path\":{\"a\":\"hh\",\"b\":\"users\"},\"script\":\"params.b > 0 ? Math.round(params.a * 10.0 / params.b) / 10.0 : 0\"}}}}}}",
         "key": "dst",
         "transformData": "linearAggregation",
