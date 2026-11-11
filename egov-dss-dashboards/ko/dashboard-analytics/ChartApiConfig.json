@@ -23325,7 +23325,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "ko-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Bednets Target\":{\"filters\":{\"filters\":{\"nets\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"ITN Target\":{\"filters\":{\"filters\":{\"nets\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -23385,7 +23385,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "ko-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"ITN Target\":{\"filters\":{\"filters\":{\"nets\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Bednets Target\":{\"filters\":{\"filters\":{\"nets\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       }
     ],
     "chartType": "metric",
