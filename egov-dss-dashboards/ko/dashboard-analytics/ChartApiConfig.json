@@ -23034,6 +23034,207 @@
     "insight": {},
     "_comment": " "
   },
+  "rdPopulationChartProvincePercentBednetsICCD": {
+    "chartName": "DSS_HEALTH_R_D_POPULATION_COVERED_PROVINCE_PERCENT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"wildcard\":{\"Data.productVariant.keyword\":\"PVAR*\"}},{\"term\":{\"Data.projectType.keyword\":\"Bednet\"}},{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}}]}}}},\"aggs\":{\"Percentage of Population Covered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Population\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"wildcard\":{\"Data.productVariant.keyword\":\"PVAR*\"}},{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"Population Targeted\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "percentage",
+    "drillChart": "rdPopulationChartDistrictPercentBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Percentage of Population Covered"
+    ],
+    "filterKeys": [
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Percentage of Population Covered",
+          "Population Targeted"
+        ],
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "_comment": " ",
+    "kind": "drillDown"
+  },
+  "rdPopulationChartDistrictPercentBednetsICCD": {
+    "chartName": "DSS_HEALTH_R_D_POPULATION_COVERED_DISTRICT_PERCENT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Percentage of Population Covered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"script\":{\"source\":\"doc['Data.quantity'].value * 1.8\"}}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"Population Targeted\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"TPD\":{\"sum\":{\"script\":{\"source\":\"doc['Data.targetPerDay'].value * 365\"}}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Percentage of Population Covered",
+      "Population Targeted"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Percentage of Population Covered",
+          "Population Targeted"
+        ],
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "_comment": "Overall population coverage percentage (lga level)"
+  },
+  "rdPopulationChartProvinceBednetsICCD": {
+    "chartName": "DSS_HEALTH_R_D_POPULATION_COVERED_PROVINCE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Population Covered\":{\"filter\":{\"bool\":{\"must\":[{\"wildcard\":{\"Data.productVariant.keyword\":\"PVAR*\"}},{\"term\":{\"Data.projectType.keyword\":\"Bednet\"}},{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"LGA\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Population\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "drillChart": "rdPopulationChartDistrictBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Population Covered"
+    ],
+    "filterKeys": [
+      {
+        "key": "lga"
+      }
+    ],
+    "insight": {},
+    "_comment": " ",
+    "kind": "drillDown"
+  },
+  "rdPopulationChartDistrictBednetsICCD": {
+    "kind": "drillDown",
+    "chartName": "DSS_HEALTH_R_D_POPULATION_COVERED_DISTRICT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Total Population Covered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"script\":{\"source\":\"doc['Data.quantity'].value * 1.8\"}}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "drillChart": "rdPopulationChartAPBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Population Covered"
+    ],
+    "filterKeys": [
+      {
+        "key": "ward"
+      }
+    ],
+    "insight": {},
+    "_comment": " "
+  },
+  "rdPopulationChartAPBednetsICCD": {
+    "kind": "drillDown",
+    "chartName": "DSS_HEALTH_R_D_POPULATION_COVERED_AP",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Total Population Covered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.community.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"script\":{\"source\":\"doc['Data.quantity'].value * 1.8\"}}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "drillChart": "rdPopulationChartLocalityBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Population Covered"
+    ],
+    "filterKeys": [
+      {
+        "key": "community"
+      }
+    ],
+    "insight": {},
+    "_comment": " "
+  },
+  "rdPopulationChartLocalityBednetsICCD": {
+    "kind": "drillDown",
+    "chartName": "DSS_HEALTH_R_D_POPULATION_COVERED_LOCALITY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-task-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Total Population Covered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"script\":{\"source\":\"doc['Data.quantity'].value * 1.8\"}}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Population Covered"
+    ],
+    "insight": {},
+    "_comment": " "
+  },
   "rdBednetsDistributedChartProvincePercentBednetsICCD": {
     "chartName": "DSS_HEALTH_R_D_BEDNETS_DISTRIBUTED_PROVINCE_PERCENT",
     "queries": [
