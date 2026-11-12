@@ -3177,7 +3177,13 @@
                   "headers": []
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_NATIONAL_HEALTH_DISTRIBUTION",
+          "vizArray": [
             {
               "id": 104,
               "name": "DSS_HEALTH_NATIONAL_POPULATION_COVERED_ITNS",
@@ -3211,13 +3217,7 @@
                   "headers": []
                 }
               ]
-            }
-          ]
-        },
-        {
-          "row": 2,
-          "name": "DSS_NATIONAL_HEALTH_DISTRIBUTION",
-          "vizArray": [
+            },
             {
               "id": 301,
               "name": "DSS_HEALTH_NATIONAL_USERS_OVERVIEW",
