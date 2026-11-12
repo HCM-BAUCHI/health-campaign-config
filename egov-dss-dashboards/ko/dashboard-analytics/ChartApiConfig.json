@@ -19284,6 +19284,223 @@
     "hideHeaderDenomination": true,
     "kind": "drillDown"
   },
+  "InventorySummaryByLgaBednetsICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_LGA",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\",\"IN_TRANSIT\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"LGA\":{\"terms\":{\"size\":1000,\"order\":{\"_key\":\"asc\"},\"script\":{\"lang\":\"painless\",\"source\":\"String ft = doc['Data.facilityType.keyword'].size() > 0 ? doc['Data.facilityType.keyword'].value : ''; String tt = doc['Data.transactingFacilityType.keyword'].size() > 0 ? doc['Data.transactingFacilityType.keyword'].value : ''; if (ft == 'Warehouse' && tt == 'LGA Facility' && doc['Data.transactingFacilityName.keyword'].size() > 0) { String n = doc['Data.transactingFacilityName.keyword'].value; if (n.endsWith(' Warehouse')) { return n.substring(0, n.length() - 10); } return n; } if (doc['Data.boundaryHierarchy.lga.keyword'].size() > 0) { return doc['Data.boundaryHierarchy.lga.keyword'].value; } return null;\"}},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Warehouse\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\",\"IN_TRANSIT\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ReceivedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Received>SUM\"},\"script\":\"params.v\"}},\"IssuedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Issued>SUM\"},\"script\":\"params.v\"}},\"ReturnedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Returned>SUM\"},\"script\":\"params.v\"}},\"TotalStockValue\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"Received>SUM\",\"issued\":\"Issued>SUM\",\"returned\":\"Returned>SUM\"},\"script\":\"params.received - params.issued + params.returned\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "InventorySummaryByDhBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "LGA",
+    "excludedColumns": [
+      "SUM",
+      "Received",
+      "Issued",
+      "Returned",
+      "TotalStockValue",
+      "ReceivedValue",
+      "IssuedValue",
+      "ReturnedValue"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ReceivedValue"
+        ],
+        "newField": "Stock Received",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "IssuedValue"
+        ],
+        "newField": "Stock Issued",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ReturnedValue"
+        ],
+        "newField": "Stock Returned",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "TotalStockValue"
+        ],
+        "newField": "Stock Balance",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown"
+  },
+  "InventorySummaryByDhBednetsICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_DH",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"DH\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"if (doc.containsKey('Data.facilityType.keyword') && !doc['Data.facilityType.keyword'].empty && doc['Data.facilityType.keyword'].value == 'LGA Facility' && doc.containsKey('Data.transactingFacilityType.keyword') && !doc['Data.transactingFacilityType.keyword'].empty && doc['Data.transactingFacilityType.keyword'].value == 'Distribution Hub' && doc.containsKey('Data.transactingFacilityName.keyword') && !doc['Data.transactingFacilityName.keyword'].empty) { String dh = doc['Data.transactingFacilityName.keyword'].value; if (dh.endsWith(' DH')) { dh = dh.substring(0, dh.length() - 3); } return dh; } if (doc.containsKey('Data.boundaryHierarchy.Distribution Hub.keyword') && !doc['Data.boundaryHierarchy.Distribution Hub.keyword'].empty) { return doc['Data.boundaryHierarchy.Distribution Hub.keyword'].value; } return 'UNKNOWN_DH';\"},\"size\":2000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ReturnedToLga\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ReceivedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Received>SUM\"},\"script\":\"params.v\"}},\"IssuedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Issued>SUM\"},\"script\":\"params.v\"}},\"ReturnedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Returned>SUM\"},\"script\":\"params.v\"}},\"ReturnedToLgaValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ReturnedToLga>SUM\"},\"script\":\"params.v\"}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"ReceivedValue\",\"issued\":\"IssuedValue\",\"returned\":\"ReturnedValue\",\"returnedToLga\":\"ReturnedToLgaValue\"},\"script\":\"params.received - params.issued + params.returned - params.returnedToLga\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "Distribution Hub",
+        "column": "Distribution Hub"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "InventorySummaryByMdtBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Distribution Hub",
+    "excludedColumns": [
+      "SUM",
+      "Received",
+      "Issued",
+      "Returned",
+      "ReturnedToLga",
+      "Total Stock",
+      "ReceivedValue",
+      "IssuedValue",
+      "ReturnedValue",
+      "ReturnedToLgaValue"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ReceivedValue"
+        ],
+        "newField": "Stock Received",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "IssuedValue"
+        ],
+        "newField": "Stock Issued",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ReturnedValue"
+        ],
+        "newField": "Stock Returned",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Stock"
+        ],
+        "newField": "Stock Balance",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown"
+  },
+  "InventorySummaryByMdtBednetsICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_MDT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"filter\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"filter\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Distribution Hub\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"if (doc.containsKey('Data.facilityType.keyword') && !doc['Data.facilityType.keyword'].empty && doc.containsKey('Data.transactingFacilityType.keyword') && !doc['Data.transactingFacilityType.keyword'].empty) { String ft = doc['Data.facilityType.keyword'].value; String tt = doc['Data.transactingFacilityType.keyword'].value; if (ft == 'Distribution Hub' && tt == 'STAFF' && doc.containsKey('Data.transactingFacilityName.keyword') && !doc['Data.transactingFacilityName.keyword'].empty) { return doc['Data.transactingFacilityName.keyword'].value; } if (ft == 'STAFF' && tt == 'Distribution Hub' && doc.containsKey('Data.facilityName.keyword') && !doc['Data.facilityName.keyword'].empty) { return doc['Data.facilityName.keyword'].value; } } return 'UNKNOWN_MDT';\"},\"size\":2000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Received\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Balance\":{\"sum\":{\"script\":{\"lang\":\"painless\",\"source\":\"if (!doc.containsKey('Data.additionalDetails.stockEntryType.keyword') || doc['Data.additionalDetails.stockEntryType.keyword'].empty || !doc.containsKey('Data.physicalCount') || doc['Data.physicalCount'].empty) { return 0; } String type = doc['Data.additionalDetails.stockEntryType.keyword'].value; if (type == 'ISSUED') { return doc['Data.physicalCount'].value; } if (type == 'RETURNED') { return -doc['Data.physicalCount'].value; } return 0;\"}}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "mdt",
+        "column": "MDT"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "MDT",
+    "excludedColumns": [
+      "SUM",
+      "Received",
+      "Returned",
+      "Balance"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Received.SUM"
+        ],
+        "newField": "Stock Received",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Returned.SUM"
+        ],
+        "newField": "Stock Returned",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Balance"
+        ],
+        "newField": "Stock Balance",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown"
+  },
   "excessLossStockStateBednetsICCD": {
     "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_STATE",
     "queries": [
@@ -19339,6 +19556,186 @@
     "hideHeaderDenomination": true,
     "kind": "drillDown",
     "_comment": "State-wise Excess and Loss Stock"
+  },
+  "excessLossStockLgaBednetsICCD": {
+    "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_LGA",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"LGA\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "state",
+        "column": "State"
+      },
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "documentType": "_doc",
+    "action": "",
+    "drillChart": "excessLossStockWardBednetsICCD",
+    "plotLabel": "LGA",
+    "excludedColumns": [
+      "Quantity",
+      "ExcessStockFilter",
+      "LossStockFilter",
+      "ExcessStockValue",
+      "LossStockValue",
+      "DSS_HEADER_EXCESSSTOCKVALUE",
+      "DSS_HEADER_LOSSSTOCKVALUE"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ExcessStockValue"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "LossStockValue"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "LGA-wise Excess and Loss Stock"
+  },
+  "excessLossStockWardBednetsICCD": {
+    "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_WARD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "state",
+        "column": "State"
+      },
+      {
+        "key": "lga",
+        "column": "LGA"
+      },
+      {
+        "key": "ward",
+        "column": "Ward"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "documentType": "_doc",
+    "action": "",
+    "drillChart": "excessLossStockDhBednetsICCD",
+    "plotLabel": "Ward",
+    "excludedColumns": [
+      "Quantity",
+      "ExcessStockFilter",
+      "LossStockFilter",
+      "ExcessStockValue",
+      "LossStockValue",
+      "DSS_HEADER_EXCESSSTOCKVALUE",
+      "DSS_HEADER_LOSSSTOCKVALUE"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ExcessStockValue"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "LossStockValue"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "Ward-wise Excess and Loss Stock"
+  },
+  "excessLossStockDhBednetsICCD": {
+    "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_DH",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.facilityType.keyword\":\"Distribution Hub\"}}]}},\"aggs\":{\"Distribution Hub\":{\"terms\":{\"field\":\"Data.facilityName.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "documentType": "_doc",
+    "action": "",
+    "drillChart": "none",
+    "plotLabel": "Distribution Hub",
+    "excludedColumns": [
+      "Quantity",
+      "ExcessStockFilter",
+      "LossStockFilter",
+      "ExcessStockValue",
+      "LossStockValue",
+      "DSS_HEADER_EXCESSSTOCKVALUE",
+      "DSS_HEADER_LOSSSTOCKVALUE"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ExcessStockValue"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "LossStockValue"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "Distribution Hub-wise Excess and Loss Stock"
   },
   "userSyncRateByDistrictBednetsICCD": {
     "chartName": "DSS_HEALTH_SUPERVISION_USER_SYNC_RATE_BY_DISTRICT",
