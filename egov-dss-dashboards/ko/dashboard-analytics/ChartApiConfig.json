@@ -20824,6 +20824,82 @@
     "insight": {},
     "_comment": " "
   },
+  "complaintsByStatusSummaryAPBednetsICCD": {
+    "kind": "drillDown",
+    "chartName": "DSS_HEALTH_COMPLAINTS_STATUS_SUMMARY_AP",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.service.auditDetails.lastModifiedTime",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-transformer-pgr-services",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Open\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.service.applicationStatus.keyword\":\"PENDING_ASSIGNMENT\"}}]}},\"aggs\":{\"Community\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Open Complaints Count\":{\"value_count\":{\"field\":\"Data.service.id.keyword\"}}}}}},\"Resolved\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.service.applicationStatus.keyword\":\"RESOLVED\"}}]}},\"aggs\":{\"Community\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Resolved Complaints Count\":{\"value_count\":{\"field\":\"Data.service.id.keyword\"}}}}}},\"Rejected\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.service.applicationStatus.keyword\":\"REJECTED\"}}]}},\"aggs\":{\"Community\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Rejected Complaints Count\":{\"value_count\":{\"field\":\"Data.service.id.keyword\"}}}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "community",
+        "column": "Community"
+      }
+    ],
+    "chartType": "table",
+    "valueType": "number",
+    "drillChart": "complaintsByStatusSummaryLocalityBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "showFooter": true,
+    "plotLabel": "Community",
+    "excludedColumns": [
+      "Resolved Complaints Count",
+      "Rejected Complaints Count",
+      "Open Complaints Count"
+    ],
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Resolved Complaints Count",
+          "Rejected Complaints Count",
+          "Open Complaints Count"
+        ],
+        "newField": "Registered",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Resolved Complaints Count"
+        ],
+        "newField": "Resolved",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Rejected Complaints Count"
+        ],
+        "newField": "Rejected",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Open Complaints Count"
+        ],
+        "newField": "Open",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "sort": "sortKeyAsc",
+    "_comment": " "
+  },
   "complaintsByStatusSummaryDistrictBednetsICCD": {
     "kind": "drillDown",
     "chartName": "DSS_HEALTH_COMPLAINTS_STATUS_SUMMARY_DISTRICT",
@@ -20899,6 +20975,46 @@
     "insight": {},
     "sort": "sortKeyAsc",
     "_comment": " "
+  },
+  "openComplaintsSummaryByLocalityBednetsICCD": {
+    "kind": "drillDown",
+    "chartName": "DSS_HEALTH_OPEN_COMPLAINTS_SUMMARY_BY_LOCALITY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.service.auditDetails.lastModifiedTime",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-transformer-pgr-services",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Open\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.service.applicationStatus.keyword\":\"PENDING_ASSIGNMENT\"}}]}},\"aggs\":{\"Community\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.community.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Open Complaints Count\":{\"range\":{\"script\":{\"source\":\"doc['Data.service.auditDetails.lastModifiedTime'].size()!=0 ? new Date().getTime() - doc['Data.service.auditDetails.lastModifiedTime'].value : 0\"},\"keyed\":true,\"ranges\":[{\"from\":0,\"to\":21600000,\"key\":\"open since 6h\"},{\"from\":21600000,\"to\":43200000,\"key\":\"open since 6h-12h\"},{\"from\":43200000,\"to\":86400000,\"key\":\"open since 12h-24h\"},{\"from\":86400000,\"to\":172800000,\"key\":\"open since 24h-48h\"},{\"from\":172800000,\"key\":\"open for more than 48h\"}]}}}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "community",
+        "column": "Community"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "openComplaintsSummaryByVillageBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "showFooter": true,
+    "plotLabel": "Community",
+    "excludedColumns": [],
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "aggregationPaths": [
+      "open since 6h",
+      "open since 6h-12h",
+      "open since 12h-24h",
+      "open since 24h-48h",
+      "open for more than 48h"
+    ],
+    "computedFields": [],
+    "insight": {},
+    "sort": "sortKeyAsc",
+    "_comment": ""
   },
   "openComplaintsSummaryByAPBednetsICCD": {
     "kind": "drillDown",
