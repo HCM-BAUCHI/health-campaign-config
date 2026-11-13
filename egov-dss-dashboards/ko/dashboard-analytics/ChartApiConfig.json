@@ -22132,16 +22132,16 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.isDelivered\":true}},{\"term\":{\"Data.projectType.keyword\":\"Bednet\"}},{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"wildcard\":{\"Data.productVariant.keyword\":\"PVAR*\"}}]}},\"aggs\":{\"Total visits\":{\"cardinality\":{\"field\":\"Data.householdId.keyword\"}}}}"
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.projectType.keyword\":\"Bednet\"}}]}},\"aggs\":{\"Total visits\":{\"cardinality\":{\"field\":\"Data.household.id.keyword\",\"precision_threshold\":40000}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "ko-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Overall target\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"wildcard\":{\"Data.productVariant.keyword\":\"PVAR*\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"TargetValue\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Household Target\":{\"filters\":{\"filters\":{\"households\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -22152,19 +22152,10 @@
     "action": "percentage",
     "aggregationPaths": [
       "Total visits",
-      "Overall target"
+      "Household Target"
     ],
-    "postAggregationTheory": "",
-    "insight": {
-      "chartResponseMap": "totalHouseholdCoverageProvinceBednetsICCD",
-      "action": "differenceOfNumbers",
-      "upwardIndicator": "positive",
-      "downwardIndicator": "negative",
-      "textMessage": "$indicator$value% than last $insightInterval",
-      "colorCode": "#228B22",
-      "insightInterval": "dateRange"
-    },
-    "_comment": ""
+    "insight": {},
+    "_comment": "Household visit coverage percentage"
   },
   "overviewPopulationCoveredBednetsICCD": {
     "chartName": "DSS_HEALTH_OVERVIEW_POPULATION_COVERED",
