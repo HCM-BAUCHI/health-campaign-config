@@ -16746,7 +16746,8 @@
             "dateOfEntry": "Data.dateOfEntry",
             "createdTime": "Data.createdTime",
             "nameOfUser": "Data.nameOfUser",
-            "userName": "Data.userName"
+            "userName": "Data.userName",
+            "boundaryHierarchyCode": "Data.boundaryHierarchyCode"
           }
         ]
       }
