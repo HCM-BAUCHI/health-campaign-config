@@ -2075,173 +2075,6 @@
     "insight": {},
     "_comment": " "
   },
-  "usersRecordsSummaryTable": {
-    "chartName": "DSS_HEALTH_COMPLAINTS_BY_HEALTH_DISTRICT_TOTAL_BURUNDI",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.syncedTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-project-task-index-v1",
-        "transformData": "rawDocuments",
-        "transformKey": "taskTransformer",
-        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[],\"must_not\":[{\"term\":{\"Data.administrationStatus.keywor\":{\"value\":\"DELIVERED\"}}}]}},\"_source\":[\"Data.geoPoint\",\"Data.taskId\",\"Data.productName\",\"Data.administrationStatus\",\"Data.@timestamp\",\"Data.quantity\",\"Data.latitude\",\"Data.longitude\",\"Data.boundaryHierarchy.subHills\",\"Data.additionalDetails.cycleIndex.keyword\"]}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.syncedTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "transformData": "rawDocuments",
-        "transformKey": "stockTransformer",
-        "aggrQuery": "{\"size\":100,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.id\",\"Data.productName\",\"Data.eventType\",\"Data.reason\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.@timestamp\",\"Data.physicalCount\",\"Data.additionalDetails.lat\",\"Data.additionalDetails.lng\"]}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.service.auditDetails.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.service.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-transformer-pgr-services",
-        "transformData": "rawDocuments",
-        "transformKey": "complaintsTransformer",
-        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.service.serviceRequestId\",\"Data.service.serviceCode\",\"Data.service.description\",\"Data.service.applicationStatus\",\"Data.@timestamp\"]}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.auditDetails.createdTime",
-        "requestQueryMap": "{\"userId\": \"Data.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-transformed-errors-index-v1",
-        "transformData": "rawDocuments",
-        "transformKey": "errorTransformer",
-        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.id\",\"Data.errorCategory\",\"Data.@timestamp\"]}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.hfReferral.auditDetails.createdTime",
-        "requestQueryMap": "{\"userId\": \"Data.hfReferral.clientAuditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-hf-referral-index-v1",
-        "transformData": "rawDocuments",
-        "transformKey": "referralTransformer",
-        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.hfReferral.id\",\"Data.hfReferral.beneficiaryId\",\"Data.hfReferral.symptom\",\"Data.@timestamp\"]}"
-      }
-    ],
-    "chartType": "rawResponse",
-    "transform": {
-      "referralTransformer": {
-        "transformationMappings": [
-          {
-            "id": "Data.hfReferral.id",
-            "timestamp": "Data.@timestamp",
-            "actionType": "'Referral'",
-            "detail": "'${Data.hfReferral.beneficiaryId} is referred with ${Data.hfReferral.symptom}'",
-            "gps": "'-'",
-            "outcome": "BENEFICIARY_REFERRED"
-          }
-        ]
-      },
-      "taskTransformer": {
-        "transformationMappings": [
-          {
-            "id": "Data.taskId",
-            "timestamp": "Data.@timestamp",
-            "actionType": "'Delivery'",
-            "detail": "Data.administrationStatus === 'ADMINISTRATION_SUCCESS' ? `Delivered ${Data.quantity} of ${Data.productName}` : Data.administrationStatus",
-            "gps": "Data.geoPoint[1] && Data.geoPoint[0]? `${Data.geoPoint[1]}, ${Data.geoPoint[0]}` : '-'",
-            "outcome": "Data.administrationStatus === 'ADMINISTRATION_SUCCESS' ? 'SUCCESS': Data.administrationStatus"
-          }
-        ]
-      },
-      "stockTransformer": {
-        "transformationMappings": [
-          {
-            "id": "Data.id",
-            "timestamp": "Data.@timestamp",
-            "actionType": "'Stock'",
-            "detail": "Data.eventType === 'RECEIVED' && Data.reason === 'RETURNED' ? `${Data.facilityName} Got Return Stock of ${Data.physicalCount} ${Data.productName} from ${Data.transactingFacilityName}` : Data.eventType === 'RECEIVED' ? `${Data.facilityName} Received ${Data.physicalCount} ${Data.productName} from ${Data.transactingFacilityName}` : `${Data.facilityName} Dispatched ${Data.physicalCount} ${Data.productName} to ${Data.transactingFacilityName}`",
-            "gps": "Data.additionalDetails.lat && Data.additionalDetails.lng ? `${Data.additionalDetails.lat}, ${Data.additionalDetails.lng}` : '-'",
-            "outcome": "'SUCCESS'"
-          }
-        ]
-      },
-      "complaintsTransformer": {
-        "transformationMappings": [
-          {
-            "id": "Data.service.serviceRequestId",
-            "timestamp": "Data.@timestamp",
-            "actionType": "'Complaint'",
-            "detail": "`Raised Complaint ${Data.service.serviceCode} which is in status ${Data.service.applicationStatus} with Description ${Data.service.description}`",
-            "gps": "'-'",
-            "outcome": "'COMPLAINT'"
-          }
-        ]
-      },
-      "errorTransformer": {
-        "transformationMappings": [
-          {
-            "id": "Data.id",
-            "timestamp": "Data.@timestamp",
-            "actionType": "'Error Record'",
-            "detail": "Data.errorCategory",
-            "gps": "'-'",
-            "outcome": "'FAILED'"
-          }
-        ]
-      }
-    },
-    "merges": [
-      {
-        "mergeKey": "mergedUsersRecordTaskStockSummary",
-        "baseDataset": "taskTransformer",
-        "dataset": "stockTransformer",
-        "baseKey": "userId",
-        "joinKey": "userId",
-        "joinType": "concat",
-        "clearDatasets": [
-          "taskTransformer",
-          "stockTransformer"
-        ]
-      },
-      {
-        "mergeKey": "mergedUsersRecordSummary1",
-        "baseDataset": "mergedUsersRecordTaskStockSummary",
-        "dataset": "complaintsTransformer",
-        "baseKey": "userId",
-        "joinKey": "userId",
-        "joinType": "concat",
-        "clearDatasets": [
-          "mergedUsersRecordTaskStockSummary",
-          "complaintsTransformer"
-        ]
-      },
-      {
-        "mergeKey": "mergedUsersRecordSummary",
-        "baseDataset": "mergedUsersRecordSummary1",
-        "dataset": "errorTransformer",
-        "baseKey": "userId",
-        "joinKey": "userId",
-        "joinType": "concat",
-        "clearDatasets": [
-          "mergedUsersRecordSummary1",
-          "errorTransformer"
-        ]
-      }
-    ],
-    "isCumulative": false,
-    "valueType": "number",
-    "showLabel": true,
-    "drillChart": "none",
-    "filterKeys": [
-      {
-        "key": "mergedUsersRecordSummary"
-      }
-    ],
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "mergedUsersRecordSummary"
-    ],
-    "insight": {},
-    "_comment": " "
-  },
   "paymentsEditedOverviewBanner": {
     "chartName": "DSS_HEALTH_PAYMENTS_OVERVIEW_EDITED",
     "queries": [
@@ -4561,100 +4394,6 @@
     "insight": {},
     "_comment": " "
   },
-  "usersSummaryTable": {
-    "chartName": "DSS_HEALTH_COMPLAINTS_BY_HEALTH_DISTRICT_TOTAL_BURUNDI",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-project-staff-index-v1",
-        "key": "staffDocuments",
-        "transformData": "rawDocuments",
-        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.userId\",\"Data.userName\",\"Data.role\",\"Data.boundaryHierarchyCode.lga\" ,\"Data.boundaryHierarchyCode.state\" ,\"Data.boundaryHierarchy.lga\", \"Data.boundaryHierarchy.state\", \"Data.nameOfUser\"]}",
-        "select": {
-          "userId": "Data.userId",
-          "userName": "Data.userName",
-          "nameOfUser": "Data.nameOfUser",
-          "role": "Data.role",
-          "state": "Data.boundaryHierarchy.state",
-          "lga": "Data.boundaryHierarchy.lga",
-          "provinceCode": "Data.boundaryHierarchyCode.state",
-          "districtCode": "Data.boundaryHierarchyCode.lga"
-        }
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-user-sync-index-v1",
-        "key": "userSyncDocuments",
-        "transformData": "termsAggregation",
-        "bucketsPath": "Username.buckets",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[]}},\"aggs\":{\"Username\":{\"terms\":{\"field\":\"Data.syncedUserId.keyword\",\"size\":10000},\"aggs\":{\"LatestSyncedTime\":{\"max\":{\"field\":\"Data.syncedTimeStamp\"}},\"RecordTotal\":{\"value_count\":{\"field\":\"Data.syncedUserName.keyword\"}},\"Last3Hours\":{\"filter\":{\"range\":{\"Data.syncedTimeStamp\":{\"gte\":\"now-3h\",\"lte\":\"now\"}}}},\"LatestDoc\":{\"top_hits\":{\"size\":1,\"sort\":[{\"Data.syncedTimeStamp\":{\"order\":\"desc\"}}],\"_source\":{\"includes\":[\"Data.syncedUserName\",\"Data.@timestamp\",\"Data.boundaryHierarchy.lga\",\"Data.boundaryHierarchy.state\",\"Data.role\",\"Data.syncedTimeStamp\",\"Data.nameOfUser\"]}}}}}}}",
-        "select": {
-          "userId": "key",
-          "userName": "LatestDoc.hits.hits[0]._source.Data.syncedUserName",
-          "nameOfUser": "LatestDoc.hits.hits[0]._source.Data.nameOfUser",
-          "role": "LatestDoc.hits.hits[0]._source.Data.role",
-          "state": "LatestDoc.hits.hits[0]._source.Data.boundaryHierarchy.state",
-          "lga": "LatestDoc.hits.hits[0]._source.Data.boundaryHierarchy.lga",
-          "totalRecords": "RecordTotal.value",
-          "latestSyncTime": "LatestSyncedTime.value_as_string",
-          "latestSyncEpoch": "toNumber(LatestSyncedTime.value)",
-          "active": "Last3Hours.doc_count > 0 ? 'ACTIVE' : 'INACTIVE'"
-        }
-      }
-    ],
-    "chartType": "rawResponse",
-    "merges": [
-      {
-        "mergeKey": "mergedUsersSummary",
-        "baseDataset": "staffDocuments",
-        "dataset": "userSyncDocuments",
-        "baseKey": "userId",
-        "joinKey": "userId",
-        "joinType": "full",
-        "clearDatasets2": [],
-        "clearDatasets": [
-          "staffDocuments",
-          "userSyncDocuments"
-        ],
-        "outputMappings": [
-          {
-            "userId": "staffDocuments.userId ? staffDocuments.userId : userSyncDocuments.userId",
-            "userName": "staffDocuments.userName ? staffDocuments.userName : userSyncDocuments.userName",
-            "nameOfUser": "staffDocuments.nameOfUser ? staffDocuments.nameOfUser : userSyncDocuments.nameOfUser",
-            "role": "staffDocuments.role ? staffDocuments.role: userSyncDocuments.role",
-            "state": "staffDocuments.state ? staffDocuments.state: userSyncDocuments.state",
-            "lga": "staffDocuments.lga ? staffDocuments.lga : userSyncDocuments.lga",
-            "provinceCode": "staffDocuments.provinceCode",
-            "districtCode": "staffDocuments.districtCode",
-            "totalRecords": "userSyncDocuments.totalRecords",
-            "latestSyncTime": "userSyncDocuments.latestSyncTime",
-            "active": "userSyncDocuments.active ? userSyncDocuments.active : 'INACTIVE'",
-            "fullLocation": "concat(staffDocuments.state ? staffDocuments.state: userSyncDocuments.state, ' - ', staffDocuments.lga ? staffDocuments.lga : userSyncDocuments.lga)"
-          }
-        ]
-      }
-    ],
-    "isCumulative": false,
-    "valueType": "number",
-    "showLabel": true,
-    "drillChart": "none",
-    "filterKeys": [
-      {
-        "key": "mergedUsersSummary"
-      }
-    ],
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "mergedUsersSummary"
-    ],
-    "insight": {},
-    "_comment": " "
-  },
   "referralSummaryByDistrictsICCD": {
     "chartName": "DSS_HEALTH_REFERRAL_SUMMARY_BY_DISTRICTS_ICCD",
     "queries": [
@@ -6868,168 +6607,6 @@
     ],
     "sort": "sortKeyAsc",
     "computeMultiPaths": true,
-    "insight": {},
-    "_comment": " "
-  },
-  "overallUsersMetrics": {
-    "chartName": "DSS_HEALTH_COMPLAINTS_BY_HEALTH_DISTRICT_TOTAL_BURUNDI",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-project-staff-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Users Count\":{\"cardinality\":{\"field\":\"Data.userId.keyword\"}}}}",
-        "select": {
-          "totalUsersCreated": "Total Users Count.value"
-        }
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-user-sync-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"range\":{\"Data.syncedTimeStamp\":{\"gte\":\"now-3h\"}}}]}},\"aggs\":{\"Active Users\":{\"cardinality\":{\"field\":\"Data.syncedUserId.keyword\"}}}}",
-        "select": {
-          "totalUsersActive": "Active Users.value"
-        }
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.syncedTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-project-task-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Task Records\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}",
-        "select": {
-          "taskRecordCount": "Task Records.value"
-        }
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.syncedTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Stock Records\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}",
-        "select": {
-          "stockRecordCount": "Stock Records.value"
-        }
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.service.auditDetails.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.service.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-transformer-pgr-services",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Complaint Records\":{\"value_count\":{\"field\":\"Data.service.serviceRequestId.keyword\"}}}}",
-        "select": {
-          "complaintRecordCount": "Complaint Records.value"
-        }
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.hfReferral.auditDetails.createdTime",
-        "requestQueryMap": "{\"userId\": \"Data.hfReferral.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-hf-referral-index-v1",
-        "transformData": "linearAggregation",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Referral Records\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}",
-        "select": {
-          "referralRecordCount": "Referral Records.value"
-        }
-      }
-    ],
-    "chartType": "rawResponse",
-    "merges": [
-      {
-        "mergeType": "linear",
-        "mergeKey": "combinedUserStats",
-        "flatten": true,
-        "datasets": [],
-        "outputMappings": [
-          {
-            "inactiveUsers": "subtract(totalUsersCreated, totalUsersActive)",
-            "totalRecordsCount": "add(referralRecordCount,add(complaintRecordCount,add(taskRecordCount,stockRecordCount)))"
-          }
-        ]
-      }
-    ],
-    "isCumulative": false,
-    "valueType": "number",
-    "showLabel": true,
-    "drillChart": "none",
-    "filterKeys": [
-      {
-        "key": "Users"
-      }
-    ],
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "totalUsersCreated",
-      "totalUsersActive",
-      "totalRecordsCount",
-      "inactiveUsers"
-    ],
-    "cardsList": [
-      {
-        "id": "totalUsersCreated",
-        "labelKey": "DSS_OVERALL_USERS_TOTAL",
-        "valuePath": "totalUsersCreated",
-        "valueType": "NUMBER",
-        "descriptionParams": {
-          "count": "totalUsersCreated"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      },
-      {
-        "id": "totalUsersActive",
-        "labelKey": "DSS_OVERALL_USERS_ACTIVE",
-        "valuePath": "totalUsersActive",
-        "valueType": "NUMBER",
-        "descriptionParams": {
-          "count": "totalUsersActive",
-          "offline": "inactiveUsers"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      },
-      {
-        "id": "totalRecordsCount",
-        "labelKey": "DSS_OVERALL_RECORDS_TOTAL",
-        "valuePath": "totalRecordsCount",
-        "valueType": "NUMBER",
-        "descriptionParams": {
-          "count": "totalRecordsCount"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#0B4B66"
-        }
-      },
-      {
-        "id": "inactiveUsers",
-        "labelKey": "DSS_OVERALL_USERS_INACTIVE",
-        "valuePath": "inactiveUsers",
-        "valueType": "NUMBER",
-        "descriptionParams": {
-          "count": "inactiveUsers",
-          "total": "totalUsersCreated",
-          "online": "totalUsersActive"
-        },
-        "colorRules": {
-          "type": "constant",
-          "color": "#C84C0E"
-        }
-      }
-    ],
     "insight": {},
     "_comment": " "
   },
@@ -15356,158 +14933,6 @@
     "insight": {},
     "_comment": " "
   },
-  "individualUsersMetrics": {
-    "chartName": "DSS_HEALTH_COMPLAINTS_BY_HEALTH_DISTRICT_TOTAL_BURUNDI",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.syncedUserId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-user-sync-index-v1",
-        "transformData": "linearAggregation",
-        "transformKey": "lastSyncTimeTransformer",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"LastSyncTime\":{\"max\":{\"field\":\"Data.syncedTimeStamp\"}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.syncedTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-project-task-index-v1",
-        "transformData": "linearAggregation",
-        "transformKey": "taskRecordCountTransformer",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Task Records\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.syncedTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "transformData": "linearAggregation",
-        "transformKey": "stockRecordCountTransformer",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Stock Records\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.syncedTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-project-task-index-v1",
-        "transformData": "linearAggregation",
-        "transformKey": "latestGpsTransformer",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"LatestDoc\":{\"top_hits\":{\"size\":1,\"sort\":[{\"Data.syncedTimeStamp\":{\"order\":\"desc\"}}],\"_source\":{\"includes\":[\"Data.geoPoint\",\"Data.syncedTimeStamp\"]}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.auditDetails.createdTime",
-        "requestQueryMap": "{\"userId\": \"Data.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-transformed-errors-index-v1",
-        "transformData": "linearAggregation",
-        "transformKey": "failedRecordCountTransformer",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Error Records\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.service.auditDetails.createdTime",
-        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.service.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-transformer-pgr-services",
-        "transformData": "linearAggregation",
-        "transformKey": "complaintsRecordCountTransformer",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Complaint Records\":{\"value_count\":{\"field\":\"Data.service.serviceRequestId.keyword\"}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.hfReferral.auditDetails.createdTime",
-        "requestQueryMap": "{\"userId\": \"Data.hfReferral.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-hf-referral-index-v1",
-        "transformData": "linearAggregation",
-        "transformKey": "referralRecordCountTransformer",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Referral Records\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}"
-      }
-    ],
-    "chartType": "rawResponse",
-    "transform": {
-      "failedRecordCountTransformer": {
-        "transformationMappings": [
-          {
-            "failedRecordCount": "Error Records.value"
-          }
-        ]
-      },
-      "taskRecordCountTransformer": {
-        "transformationMappings": [
-          {
-            "taskRecordCount": "Task Records.value"
-          }
-        ]
-      },
-      "complaintsRecordCountTransformer": {
-        "transformationMappings": [
-          {
-            "complaintRecordCount": "Complaint Records.value"
-          }
-        ]
-      },
-      "stockRecordCountTransformer": {
-        "transformationMappings": [
-          {
-            "stockRecordCount": "Stock Records.value"
-          }
-        ]
-      },
-      "latestGpsTransformer": {
-        "transformationMappings": [
-          {
-            "latestGps": "LatestDoc.hits.hits[0]._source.Data.geoPoint"
-          }
-        ]
-      },
-      "lastSyncTimeTransformer": {
-        "transformationMappings": [
-          {
-            "lastSyncTime": "LastSyncTime.value_as_string"
-          }
-        ]
-      },
-      "referralRecordCountTransformer": {
-        "transformationMappings": [
-          {
-            "referralRecordCount": "Referral Records.value"
-          }
-        ]
-      }
-    },
-    "merges": [
-      {
-        "mergeType": "linear",
-        "mergeKey": "combinedUserStats",
-        "flatten": true,
-        "datasets": [],
-        "outputMappings": [
-          {
-            "totalRecordsCount": "add(referralRecordCount,add(complaintRecordCount, add(taskRecordCount, stockRecordCount)))"
-          }
-        ]
-      }
-    ],
-    "isCumulative": false,
-    "valueType": "number",
-    "showLabel": true,
-    "drillChart": "none",
-    "filterKeys": [
-      {
-        "key": "Users"
-      }
-    ],
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "totalRecordsCount",
-      "latestGps",
-      "failedRecordCount",
-      "lastSyncTime"
-    ],
-    "insight": {},
-    "_comment": " "
-  },
   "teamsActivePercent": {
     "chartName": "DSS_HEALTH_ATTENDANCE_WORKERS_PRESENT_NUMBER",
     "queries": [
@@ -19063,792 +18488,6 @@
     "hideHeaderDenomination": true,
     "_comment": " "
   },
-  "InventorySummaryByDistrictBednetsICCD": {
-    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_DISTRICT",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Product Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"Target per day\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Overall Target to Receive\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target for range\":{\"bucket_script\":{\"buckets_path\":{\"target\":\"Target per day\"},\"script\":\"params.target*365\"}},\"Target for days to last\":{\"bucket_script\":{\"buckets_path\":{\"target\":\"Target per day\"},\"script\":\"params.target*100\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-updated-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-updated-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Outgoing\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-updated-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\",\"RS\":\"Returned Stock>SUM\"},\"script\":\"params.IS-params.OS+params.RS\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Excess\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Loss\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "drillChart": "InventorySummaryByApBednetsICCD",
-    "documentType": "_doc",
-    "action": "",
-    "plotLabel": "Inventory summary By District",
-    "filterKeys": [
-      {
-        "key": "lga",
-        "column": "Inventory summary By District"
-      }
-    ],
-    "divisorFields": [],
-    "showFooter": false,
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "excludedColumns": [
-      "SUM",
-      "Target for range",
-      "Target per day",
-      "Target for days to last",
-      "Incoming",
-      "Outgoing",
-      "Total Stock",
-      "Overall Target to Receive",
-      "Excess",
-      "Loss"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Overall Target to Receive"
-        ],
-        "newField": "Bednets Target",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Incoming"
-        ],
-        "newField": "Bednets Incoming Stock",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Outgoing"
-        ],
-        "newField": "Bednets Outgoing Stock",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Stock"
-        ],
-        "newField": "Bednets Stock Left",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "PercentageComputedField",
-        "fields": [
-          "Total Stock",
-          "Target for days to last"
-        ],
-        "newField": "Days To Last",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Excess"
-        ],
-        "newField": "Excess Stock",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Loss"
-        ],
-        "newField": "Loss Stock",
-        "_comments": ""
-      }
-    ],
-    "insight": {},
-    "sort": "sortKeyAsc",
-    "_comment": " ",
-    "kind": "drillDown"
-  },
-  "InventorySummaryByStateBednetsICCD": {
-    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STATE",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\",\"IN_TRANSIT\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"terms\":{\"Data.transactingFacilityType.keyword\":[\"State Facility\"]}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"State\":{\"terms\":{\"size\":1000,\"order\":{\"_key\":\"asc\"},\"script\":{\"source\":\"String state = doc['Data.boundaryHierarchy.state.keyword'].size() > 0 ? doc['Data.boundaryHierarchy.state.keyword'].value : ''; String ft = doc['Data.facilityType.keyword'].size() > 0 ? doc['Data.facilityType.keyword'].value : ''; String tt = doc['Data.transactingFacilityType.keyword'].size() > 0 ? doc['Data.transactingFacilityType.keyword'].value : ''; String se = doc['Data.additionalDetails.stockEntryType.keyword'].size() > 0 ? doc['Data.additionalDetails.stockEntryType.keyword'].value : ''; if (state != '') { return state; } if (ft == 'Central Facility' && tt == 'State Facility' && se == 'ISSUED') { return 'Kogi'; } return null;\"},\"value_type\":\"string\"},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\",\"IN_TRANSIT\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"terms\":{\"Data.transactingFacilityType.keyword\":[\"State\",\"State Facility\"]}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ReceivedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Received>SUM\"},\"script\":\"params.v\"}},\"IssuedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Issued>SUM\"},\"script\":\"params.v\"}},\"ReturnedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Returned>SUM\"},\"script\":\"params.v\"}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"ReceivedValue\",\"issued\":\"IssuedValue\",\"returned\":\"ReturnedValue\"},\"script\":\"params.received - params.issued + params.returned\"}}}}}}"
-      }
-    ],
-    "filterKeys": [
-      {
-        "key": "state",
-        "column": "State"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "drillChart": "InventorySummaryByLgaBednetsICCD",
-    "documentType": "_doc",
-    "action": "",
-    "plotLabel": "State",
-    "excludedColumns": [
-      "SUM",
-      "Received",
-      "Issued",
-      "Returned",
-      "Total Stock",
-      "ReceivedValue",
-      "IssuedValue",
-      "ReturnedValue"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "ReceivedValue"
-        ],
-        "newField": "Stock Received",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "IssuedValue"
-        ],
-        "newField": "Stock Issued",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "ReturnedValue"
-        ],
-        "newField": "Stock Returned",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Stock"
-        ],
-        "newField": "Stock Balance",
-        "_comments": ""
-      }
-    ],
-    "insight": {},
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "kind": "drillDown"
-  },
-  "InventorySummaryByLgaBednetsICCD": {
-    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_LGA",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"LGA\":{\"terms\":{\"size\":1000,\"order\":{\"_key\":\"asc\"},\"script\":{\"lang\":\"painless\",\"source\":\"String ft = doc['Data.facilityType.keyword'].size() > 0 ? doc['Data.facilityType.keyword'].value : ''; String tt = doc['Data.transactingFacilityType.keyword'].size() > 0 ? doc['Data.transactingFacilityType.keyword'].value : ''; if (ft == 'State Facility' && tt == 'LGA Facility' && doc['Data.transactingFacilityName.keyword'].size() > 0) { String n = doc['Data.transactingFacilityName.keyword'].value; if (n.endsWith(' Warehouse')) { return n.substring(0, n.length() - ' Warehouse'.length()); } if (n.endsWith(' State Facility')) { return n.substring(0, n.length() - ' State Facility'.length()); } return n; } if (doc['Data.boundaryHierarchy.lga.keyword'].size() > 0) { return doc['Data.boundaryHierarchy.lga.keyword'].value; } return null;\"}},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ReceivedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Received>SUM\"},\"script\":\"params.v\"}},\"IssuedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Issued>SUM\"},\"script\":\"params.v\"}},\"ReturnedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Returned>SUM\"},\"script\":\"params.v\"}},\"TotalStockValue\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"Received>SUM\",\"issued\":\"Issued>SUM\",\"returned\":\"Returned>SUM\"},\"script\":\"params.received - params.issued + params.returned\"}}}}}}"
-      }
-    ],
-    "filterKeys": [
-      {
-        "key": "lga",
-        "column": "LGA"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "drillChart": "InventorySummaryByDhBednetsICCD",
-    "documentType": "_doc",
-    "action": "",
-    "plotLabel": "LGA",
-    "excludedColumns": [
-      "SUM",
-      "Received",
-      "Issued",
-      "Returned",
-      "TotalStockValue",
-      "ReceivedValue",
-      "IssuedValue",
-      "ReturnedValue"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "ReceivedValue"
-        ],
-        "newField": "Stock Received",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "IssuedValue"
-        ],
-        "newField": "Stock Issued",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "ReturnedValue"
-        ],
-        "newField": "Stock Returned",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "TotalStockValue"
-        ],
-        "newField": "Stock Balance",
-        "_comments": ""
-      }
-    ],
-    "insight": {},
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "kind": "drillDown"
-  },
-  "InventorySummaryByDhBednetsICCD": {
-    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_DH",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"DH\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"String ft = doc['Data.facilityType.keyword'].size() > 0 ? doc['Data.facilityType.keyword'].value : ''; String tt = doc['Data.transactingFacilityType.keyword'].size() > 0 ? doc['Data.transactingFacilityType.keyword'].value : ''; String dh = ''; if (ft == 'LGA Facility' && tt == 'Health Facility') { if (doc['Data.transactingFacilityName.keyword'].size() > 0) { dh = doc['Data.transactingFacilityName.keyword'].value; if (dh.endsWith(' DH')) { dh = dh.substring(0, dh.length() - 3); } else if (dh.endsWith(' DH A') || dh.endsWith(' DH B') || dh.endsWith(' DH C') || dh.endsWith(' DH D') || dh.endsWith(' DH E') || dh.endsWith(' DH F') || dh.endsWith(' DH G') || dh.endsWith(' DH H') || dh.endsWith(' DH I') || dh.endsWith(' DH J') || dh.endsWith(' DH K') || dh.endsWith(' DH L') || dh.endsWith(' DH M') || dh.endsWith(' DH N') || dh.endsWith(' DH O') || dh.endsWith(' DH P') || dh.endsWith(' DH Q') || dh.endsWith(' DH R') || dh.endsWith(' DH S') || dh.endsWith(' DH T') || dh.endsWith(' DH U') || dh.endsWith(' DH V') || dh.endsWith(' DH W') || dh.endsWith(' DH X') || dh.endsWith(' DH Y') || dh.endsWith(' DH Z')) { dh = dh.substring(0, dh.length() - 5); } } } else if (doc['Data.boundaryHierarchy.Distribution Hub.keyword'].size() > 0) { dh = doc['Data.boundaryHierarchy.Distribution Hub.keyword'].value; } if (dh != '') { return dh; } return null;\"},\"size\":2000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ReturnedToLga\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ReceivedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Received>SUM\"},\"script\":\"params.v\"}},\"IssuedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Issued>SUM\"},\"script\":\"params.v\"}},\"ReturnedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Returned>SUM\"},\"script\":\"params.v\"}},\"ReturnedToLgaValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ReturnedToLga>SUM\"},\"script\":\"params.v\"}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"ReceivedValue\",\"issued\":\"IssuedValue\",\"returned\":\"ReturnedValue\",\"returnedToLga\":\"ReturnedToLgaValue\"},\"script\":\"params.received - params.issued + params.returned - params.returnedToLga\"}}}}}}"
-      }
-    ],
-    "filterKeys": [
-      {
-        "key": "Distribution Hub",
-        "column": "Distribution Hub"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "drillChart": "InventorySummaryByMdtBednetsICCD",
-    "documentType": "_doc",
-    "action": "",
-    "plotLabel": "Distribution Hub",
-    "excludedColumns": [
-      "SUM",
-      "Received",
-      "Issued",
-      "Returned",
-      "ReturnedToLga",
-      "Total Stock",
-      "ReceivedValue",
-      "IssuedValue",
-      "ReturnedValue",
-      "ReturnedToLgaValue"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "ReceivedValue"
-        ],
-        "newField": "Stock Received",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "IssuedValue"
-        ],
-        "newField": "Stock Issued",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "ReturnedValue"
-        ],
-        "newField": "Stock Returned",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Stock"
-        ],
-        "newField": "Stock Balance",
-        "_comments": ""
-      }
-    ],
-    "insight": {},
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "kind": "drillDown"
-  },
-  "InventorySummaryByMdtBednetsICCD": {
-    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_MDT",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"track_total_hits\":true,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"filter\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"filter\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"\\n            if (\\n              doc.containsKey('Data.facilityType.keyword') &&\\n              !doc['Data.facilityType.keyword'].empty &&\\n              doc.containsKey('Data.transactingFacilityType.keyword') &&\\n              !doc['Data.transactingFacilityType.keyword'].empty\\n            ) {\\n              String ft = doc['Data.facilityType.keyword'].value;\\n              String tt = doc['Data.transactingFacilityType.keyword'].value;\\n              if (\\n                ft == 'Health Facility' &&\\n                tt == 'STAFF' &&\\n                doc.containsKey('Data.transactingFacilityName.keyword') &&\\n                !doc['Data.transactingFacilityName.keyword'].empty\\n              ) {\\n                return doc['Data.transactingFacilityName.keyword'].value;\\n              }\\n              if (\\n                ft == 'STAFF' &&\\n                tt == 'Health Facility' &&\\n                doc.containsKey('Data.facilityName.keyword') &&\\n                !doc['Data.facilityName.keyword'].empty\\n              ) {\\n                return doc['Data.facilityName.keyword'].value;\\n              }\\n            }\\n            return 'UNKNOWN_MDT';\\n          \"},\"size\":2000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Received\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Balance\":{\"sum\":{\"script\":{\"lang\":\"painless\",\"source\":\"\\n                if (\\n                  !doc.containsKey('Data.additionalDetails.stockEntryType.keyword') ||\\n                  doc['Data.additionalDetails.stockEntryType.keyword'].empty ||\\n                  !doc.containsKey('Data.physicalCount') ||\\n                  doc['Data.physicalCount'].empty\\n                ) {\\n                  return 0;\\n                }\\n                String type = doc['Data.additionalDetails.stockEntryType.keyword'].value;\\n                if (type == 'ISSUED') {\\n                  return doc['Data.physicalCount'].value;\\n                }\\n                if (type == 'RETURNED') {\\n                  return -doc['Data.physicalCount'].value;\\n                }\\n                return 0;\\n              \"}}}}}}}"
-      }
-    ],
-    "filterKeys": [
-      {
-        "key": "mdt",
-        "column": "MDT"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "plotLabel": "MDT",
-    "excludedColumns": [
-      "SUM",
-      "Received",
-      "Returned",
-      "Balance"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Received.SUM"
-        ],
-        "newField": "Stock Received",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Returned.SUM"
-        ],
-        "newField": "Stock Returned",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Balance"
-        ],
-        "newField": "Stock Balance",
-        "_comments": ""
-      }
-    ],
-    "insight": {},
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "kind": "drillDown"
-  },
-  "excessLossStockStateBednetsICCD": {
-    "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_STATE",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"State\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
-      }
-    ],
-    "filterKeys": [
-      {
-        "key": "state",
-        "column": "State"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "drillChart": "excessLossStockLgaBednetsICCD",
-    "documentType": "_doc",
-    "action": "",
-    "plotLabel": "State",
-    "excludedColumns": [
-      "Quantity",
-      "ExcessStockFilter",
-      "LossStockFilter",
-      "ExcessStockValue",
-      "LossStockValue"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "ExcessStockValue"
-        ],
-        "newField": "Excess Stock",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "LossStockValue"
-        ],
-        "newField": "Loss Stock",
-        "_comments": ""
-      }
-    ],
-    "insight": {},
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "kind": "drillDown",
-    "_comment": "State-wise Excess and Loss Stock"
-  },
-  "excessLossStockLgaBednetsICCD": {
-    "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_LGA",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"LGA\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
-      }
-    ],
-    "filterKeys": [
-      {
-        "key": "state",
-        "column": "State"
-      },
-      {
-        "key": "lga",
-        "column": "LGA"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "documentType": "_doc",
-    "action": "",
-    "drillChart": "excessLossStockWardBednetsICCD",
-    "plotLabel": "LGA",
-    "excludedColumns": [
-      "Quantity",
-      "ExcessStockFilter",
-      "LossStockFilter",
-      "ExcessStockValue",
-      "LossStockValue",
-      "DSS_HEADER_EXCESSSTOCKVALUE",
-      "DSS_HEADER_LOSSSTOCKVALUE"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "ExcessStockValue"
-        ],
-        "newField": "Excess Stock",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "LossStockValue"
-        ],
-        "newField": "Loss Stock",
-        "_comments": ""
-      }
-    ],
-    "insight": {},
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "kind": "drillDown",
-    "_comment": "LGA-wise Excess and Loss Stock"
-  },
-  "excessLossStockWardBednetsICCD": {
-    "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_WARD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
-      }
-    ],
-    "filterKeys": [
-      {
-        "key": "state",
-        "column": "State"
-      },
-      {
-        "key": "lga",
-        "column": "LGA"
-      },
-      {
-        "key": "ward",
-        "column": "Ward"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "documentType": "_doc",
-    "action": "",
-    "drillChart": "excessLossStockDhBednetsICCD",
-    "plotLabel": "Ward",
-    "excludedColumns": [
-      "Quantity",
-      "ExcessStockFilter",
-      "LossStockFilter",
-      "ExcessStockValue",
-      "LossStockValue",
-      "DSS_HEADER_EXCESSSTOCKVALUE",
-      "DSS_HEADER_LOSSSTOCKVALUE"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "ExcessStockValue"
-        ],
-        "newField": "Excess Stock",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "LossStockValue"
-        ],
-        "newField": "Loss Stock",
-        "_comments": ""
-      }
-    ],
-    "insight": {},
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "kind": "drillDown",
-    "_comment": "Ward-wise Excess and Loss Stock"
-  },
-  "excessLossStockDhBednetsICCD": {
-    "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_DH",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}}]}},\"aggs\":{\"Distribution Hub\":{\"terms\":{\"field\":\"Data.facilityName.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "documentType": "_doc",
-    "action": "",
-    "drillChart": "none",
-    "plotLabel": "Distribution Hub",
-    "excludedColumns": [
-      "Quantity",
-      "ExcessStockFilter",
-      "LossStockFilter",
-      "ExcessStockValue",
-      "LossStockValue",
-      "DSS_HEADER_EXCESSSTOCKVALUE",
-      "DSS_HEADER_LOSSSTOCKVALUE"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "ExcessStockValue"
-        ],
-        "newField": "Excess Stock",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "LossStockValue"
-        ],
-        "newField": "Loss Stock",
-        "_comments": ""
-      }
-    ],
-    "insight": {},
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "kind": "drillDown",
-    "_comment": "Distribution Hub-wise Excess and Loss Stock"
-  },
-  "userSyncRateByDistrictBednetsICCD": {
-    "chartName": "DSS_HEALTH_SUPERVISION_USER_SYNC_RATE_BY_DISTRICT",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-user-sync-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Sync Rate Percentage\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Unique Users Synced\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.syncedUserId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-project-staff-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Total Users Created\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}}}"
-      }
-    ],
-    "chartType": "line",
-    "isCumulative": false,
-    "valueType": "percentage",
-    "plotLabel": "none",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "percentage",
-    "filterKeys": [
-      {
-        "key": "lga"
-      }
-    ],
-    "sort": "sortKeyAsc",
-    "aggregationPaths": [
-      "Sync Rate Percentage",
-      "AGGS"
-    ],
-    "insight": {},
-    "_comment": " "
-  },
-  "numberOfSuccessfulRegistrationsCDDBednetsICCD": {
-    "chartName": "DSS_HEALTH_NATIONAL_NUMBER_OF_HOUSEHOLDS_REGISTERED_CDD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.household.auditDetails.createdTime",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-household-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Successful Registrations\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
-      }
-    ],
-    "chartType": "line",
-    "isCumulative": false,
-    "valueType": "number",
-    "plotLabel": "none",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "filterKeys": [
-      {
-        "key": "lga"
-      }
-    ],
-    "sort": "sortKeyAsc",
-    "aggregationPaths": [
-      "Successful Registrations"
-    ],
-    "insight": {},
-    "_comment": "CDD successful registrations grouped by LGA"
-  },
-  "summaryReportByLGACDDBednetsICCD": {
-    "chartName": "DSS_HEALTH_SUMMARY_REPORT_BY_LGA_CDD",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.household.auditDetails.createdTime",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-household-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Summary Report By LGA\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households Registered\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "Summary Report By LGA"
-    ],
-    "insight": {},
-    "_comment": "CDD household registration summary grouped by LGA"
-  },
-  "cddTeamPerformanceBednetsICCD": {
-    "chartName": "DSS_HEALTH_CDD_TEAM_PERFORMANCE",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.household.auditDetails.createdTime",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-household-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"CDD Team Performance\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households Registered\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}},\"CDD Name\":{\"terms\":{\"field\":\"Data.nameOfUser.keyword\",\"size\":1}}}}}}"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "CDD Team Performance"
-    ],
-    "insight": {},
-    "_comment": "CDD wise household registration performance"
-  },
   "userSyncSummaryDistrictBednetsICCD": {
     "chartName": "DSS_HEALTH_USER_SYNC_SUMMARY",
     "queries": [
@@ -20234,37 +18873,6 @@
     ],
     "insight": {},
     "_comment": " "
-  },
-  "rdPopulationChartDistrictPercentBednetsICCD": {
-    "chartName": "DSS_HEALTH_R_D_POPULATION_COVERED_DISTRICT_PERCENT",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Percentage of Population Covered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"script\":{\"source\":\"doc['Data.quantity'].value * 1.8\"}}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"Population Targeted\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"TPD\":{\"sum\":{\"script\":{\"source\":\"doc['Data.targetPerDay'].value * 365\"}}}}}}}}}"
-      }
-    ],
-    "chartType": "line",
-    "isCumulative": false,
-    "valueType": "percentage",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "percentage",
-    "aggregationPaths": [
-      "Percentage of Population Covered",
-      "Population Targeted"
-    ],
-    "insight": {},
-    "_comment": "Overall population coverage percentage (lga level)"
   },
   "rdPopulationChartDistrictBednetsICCD": {
     "kind": "drillDown",
@@ -21108,266 +19716,6 @@
     ],
     "insight": {},
     "_comment": " "
-  },
-  "InventorySummaryByApBednetsICCD": {
-    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_AP",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}}]}},\"aggs\":{\"Product Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"},\"aggs\":{\"Target per day\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Overall Target to Receive\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target for range\":{\"bucket_script\":{\"buckets_path\":{\"target\":\"Target per day\"},\"script\":\"params.target*365\"}},\"Target for days to last\":{\"bucket_script\":{\"buckets_path\":{\"target\":\"Target per day\"},\"script\":\"params.target*100\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-updated-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-updated-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Outgoing\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-updated-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\",\"RS\":\"Returned Stock>SUM\"},\"script\":\"params.IS-params.OS+params.RS\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Excess\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Loss\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "drillChart": "InventorySummaryByWarehouseBednetsICCD",
-    "documentType": "_doc",
-    "action": "",
-    "plotLabel": "Inventory summary By Distribution Hub",
-    "filterKeys": [
-      {
-        "key": "Distribution Hub",
-        "column": "Inventory summary By Distribution Hub"
-      }
-    ],
-    "divisorFields": [],
-    "showFooter": false,
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "excludedColumns": [
-      "SUM",
-      "Target for range",
-      "Target per day",
-      "Target for days to last",
-      "Incoming",
-      "Outgoing",
-      "Total Stock",
-      "Overall Target to Receive",
-      "Excess",
-      "Loss"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Overall Target to Receive"
-        ],
-        "newField": "Bednets Target",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Incoming"
-        ],
-        "newField": "Bednets Incoming Stock",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Outgoing"
-        ],
-        "newField": "Bednets Outgoing Stock",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Stock"
-        ],
-        "newField": "Bednets Stock Left",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "PercentageComputedField",
-        "fields": [
-          "Total Stock",
-          "Target for days to last"
-        ],
-        "newField": "Days To Last",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Excess"
-        ],
-        "newField": "Excess Stock",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Loss"
-        ],
-        "newField": "Loss Stock",
-        "_comments": ""
-      }
-    ],
-    "insight": {},
-    "sort": "sortKeyAsc",
-    "_comment": " ",
-    "kind": "drillDown"
-  },
-  "InventorySummaryByWarehouseBednetsICCD": {
-    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_MDT",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-updated-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.userName.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.userName.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-updated-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"exists\":{\"field\":\"Data.userName.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.userName.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Outgoing\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-updated-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.userName.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.userName.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\",\"RS\":\"Returned Stock>SUM\"},\"script\":\"params.IS-params.OS+params.RS\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.userName.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.userName.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Excess\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-stock-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.userName.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.userName.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Loss\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
-      }
-    ],
-    "chartType": "xtable",
-    "valueType": "number",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "plotLabel": "Inventory summary By MDT",
-    "filterKeys": [
-      {
-        "key": "userName",
-        "column": "Inventory summary By MDT"
-      }
-    ],
-    "divisorFields": [],
-    "showFooter": false,
-    "hideInsights": true,
-    "hideHeaderDenomination": true,
-    "excludedColumns": [
-      "SUM",
-      "Incoming",
-      "Outgoing",
-      "Total Stock",
-      "Excess",
-      "Loss"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Incoming"
-        ],
-        "newField": "Bednets Incoming Stock",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Outgoing"
-        ],
-        "newField": "Bednets Outgoing Stock",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Total Stock"
-        ],
-        "newField": "Bednets Stock Left",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Excess"
-        ],
-        "newField": "Excess Stock",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": [
-          "Loss"
-        ],
-        "newField": "Loss Stock",
-        "_comments": ""
-      }
-    ],
-    "insight": {},
-    "sort": "sortKeyAsc",
-    "_comment": " ",
-    "kind": "drillDown"
   },
   "nationalHouseholdsRegisteredBednetsICCD": {
     "chartName": "DSS_HEALTH_NATIONAL_NUMBER_OF_HOUSEHOLDS_REGISTERED",
@@ -23375,35 +21723,6 @@
     "_comment": " ",
     "kind": "drillDown"
   },
-  "rdPopulationChartDistrictBednetsICCD": {
-    "kind": "drillDown",
-    "chartName": "DSS_HEALTH_R_D_POPULATION_COVERED_DISTRICT",
-    "queries": [
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"FILTERS\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}},{\"match_phrase\":{\"Data.productVariant\":\"PVAR\"}}]}}}},\"aggs\":{\"Total Population Covered\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"script\":{\"source\":\"doc['Data.quantity'].value * 1.8\"}}}}}}}}}"
-      }
-    ],
-    "chartType": "line",
-    "isCumulative": false,
-    "valueType": "number",
-    "drillChart": "rdPopulationChartAPBednetsICCD",
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "Total Population Covered"
-    ],
-    "filterKeys": [
-      {
-        "key": "ward"
-      }
-    ],
-    "insight": {},
-    "_comment": " "
-  },
   "rdPopulationChartAPBednetsICCD": {
     "kind": "drillDown",
     "chartName": "DSS_HEALTH_R_D_POPULATION_COVERED_AP",
@@ -25337,6 +23656,1627 @@
       {
         "key": "community"
       }
+    ],
+    "insight": {},
+    "_comment": " "
+  },
+  "InventorySummaryByStateBednetsICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_STATE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\",\"IN_TRANSIT\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"terms\":{\"Data.transactingFacilityType.keyword\":[\"State Facility\"]}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"State\":{\"terms\":{\"size\":1000,\"order\":{\"_key\":\"asc\"},\"script\":{\"source\":\"String state = doc['Data.boundaryHierarchy.state.keyword'].size() > 0 ? doc['Data.boundaryHierarchy.state.keyword'].value : ''; String ft = doc['Data.facilityType.keyword'].size() > 0 ? doc['Data.facilityType.keyword'].value : ''; String tt = doc['Data.transactingFacilityType.keyword'].size() > 0 ? doc['Data.transactingFacilityType.keyword'].value : ''; String se = doc['Data.additionalDetails.stockEntryType.keyword'].size() > 0 ? doc['Data.additionalDetails.stockEntryType.keyword'].value : ''; if (state != '') { return state; } if (ft == 'Central Facility' && tt == 'State Facility' && se == 'ISSUED') { return 'Kogi'; } return null;\"},\"value_type\":\"string\"},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Central Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\",\"IN_TRANSIT\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"terms\":{\"Data.transactingFacilityType.keyword\":[\"State\",\"State Facility\"]}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ReceivedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Received>SUM\"},\"script\":\"params.v\"}},\"IssuedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Issued>SUM\"},\"script\":\"params.v\"}},\"ReturnedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Returned>SUM\"},\"script\":\"params.v\"}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"ReceivedValue\",\"issued\":\"IssuedValue\",\"returned\":\"ReturnedValue\"},\"script\":\"params.received - params.issued + params.returned\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "state",
+        "column": "State"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "InventorySummaryByLgaBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "State",
+    "excludedColumns": [
+      "SUM",
+      "Received",
+      "Issued",
+      "Returned",
+      "Total Stock",
+      "ReceivedValue",
+      "IssuedValue",
+      "ReturnedValue"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ReceivedValue"
+        ],
+        "newField": "Stock Received",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "IssuedValue"
+        ],
+        "newField": "Stock Issued",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ReturnedValue"
+        ],
+        "newField": "Stock Returned",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Stock"
+        ],
+        "newField": "Stock Balance",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown"
+  },
+  "InventorySummaryByLgaBednetsICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_LGA",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"LGA\":{\"terms\":{\"size\":1000,\"order\":{\"_key\":\"asc\"},\"script\":{\"lang\":\"painless\",\"source\":\"String ft = doc['Data.facilityType.keyword'].size() > 0 ? doc['Data.facilityType.keyword'].value : ''; String tt = doc['Data.transactingFacilityType.keyword'].size() > 0 ? doc['Data.transactingFacilityType.keyword'].value : ''; if (ft == 'State Facility' && tt == 'LGA Facility' && doc['Data.transactingFacilityName.keyword'].size() > 0) { String n = doc['Data.transactingFacilityName.keyword'].value; if (n.endsWith(' Warehouse')) { return n.substring(0, n.length() - ' Warehouse'.length()); } if (n.endsWith(' State Facility')) { return n.substring(0, n.length() - ' State Facility'.length()); } return n; } if (doc['Data.boundaryHierarchy.lga.keyword'].size() > 0) { return doc['Data.boundaryHierarchy.lga.keyword'].value; } return null;\"}},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"State Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"terms\":{\"Data.additionalDetails.status.keyword\":[\"ACCEPTED\"]}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ReceivedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Received>SUM\"},\"script\":\"params.v\"}},\"IssuedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Issued>SUM\"},\"script\":\"params.v\"}},\"ReturnedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Returned>SUM\"},\"script\":\"params.v\"}},\"TotalStockValue\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"Received>SUM\",\"issued\":\"Issued>SUM\",\"returned\":\"Returned>SUM\"},\"script\":\"params.received - params.issued + params.returned\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "InventorySummaryByDhBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "LGA",
+    "excludedColumns": [
+      "SUM",
+      "Received",
+      "Issued",
+      "Returned",
+      "TotalStockValue",
+      "ReceivedValue",
+      "IssuedValue",
+      "ReturnedValue"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ReceivedValue"
+        ],
+        "newField": "Stock Received",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "IssuedValue"
+        ],
+        "newField": "Stock Issued",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ReturnedValue"
+        ],
+        "newField": "Stock Returned",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "TotalStockValue"
+        ],
+        "newField": "Stock Balance",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown"
+  },
+  "InventorySummaryByDhBednetsICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_DH",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"DH\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"String ft = doc['Data.facilityType.keyword'].size() > 0 ? doc['Data.facilityType.keyword'].value : ''; String tt = doc['Data.transactingFacilityType.keyword'].size() > 0 ? doc['Data.transactingFacilityType.keyword'].value : ''; String dh = ''; if (ft == 'LGA Facility' && tt == 'Health Facility') { if (doc['Data.transactingFacilityName.keyword'].size() > 0) { dh = doc['Data.transactingFacilityName.keyword'].value; if (dh.endsWith(' DH')) { dh = dh.substring(0, dh.length() - 3); } else if (dh.endsWith(' DH A') || dh.endsWith(' DH B') || dh.endsWith(' DH C') || dh.endsWith(' DH D') || dh.endsWith(' DH E') || dh.endsWith(' DH F') || dh.endsWith(' DH G') || dh.endsWith(' DH H') || dh.endsWith(' DH I') || dh.endsWith(' DH J') || dh.endsWith(' DH K') || dh.endsWith(' DH L') || dh.endsWith(' DH M') || dh.endsWith(' DH N') || dh.endsWith(' DH O') || dh.endsWith(' DH P') || dh.endsWith(' DH Q') || dh.endsWith(' DH R') || dh.endsWith(' DH S') || dh.endsWith(' DH T') || dh.endsWith(' DH U') || dh.endsWith(' DH V') || dh.endsWith(' DH W') || dh.endsWith(' DH X') || dh.endsWith(' DH Y') || dh.endsWith(' DH Z')) { dh = dh.substring(0, dh.length() - 5); } } } else if (doc['Data.boundaryHierarchy.Distribution Hub.keyword'].size() > 0) { dh = doc['Data.boundaryHierarchy.Distribution Hub.keyword'].value; } if (dh != '') { return dh; } return null;\"},\"size\":2000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Received\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ReturnedToLga\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ReceivedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Received>SUM\"},\"script\":\"params.v\"}},\"IssuedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Issued>SUM\"},\"script\":\"params.v\"}},\"ReturnedValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"Returned>SUM\"},\"script\":\"params.v\"}},\"ReturnedToLgaValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ReturnedToLga>SUM\"},\"script\":\"params.v\"}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"received\":\"ReceivedValue\",\"issued\":\"IssuedValue\",\"returned\":\"ReturnedValue\",\"returnedToLga\":\"ReturnedToLgaValue\"},\"script\":\"params.received - params.issued + params.returned - params.returnedToLga\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "Distribution Hub",
+        "column": "Distribution Hub"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "InventorySummaryByMdtBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Distribution Hub",
+    "excludedColumns": [
+      "SUM",
+      "Received",
+      "Issued",
+      "Returned",
+      "ReturnedToLga",
+      "Total Stock",
+      "ReceivedValue",
+      "IssuedValue",
+      "ReturnedValue",
+      "ReturnedToLgaValue"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ReceivedValue"
+        ],
+        "newField": "Stock Received",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "IssuedValue"
+        ],
+        "newField": "Stock Issued",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ReturnedValue"
+        ],
+        "newField": "Stock Returned",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Stock"
+        ],
+        "newField": "Stock Balance",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown"
+  },
+  "InventorySummaryByMdtBednetsICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_MDT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"track_total_hits\":true,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}}],\"filter\":[{\"bool\":{\"should\":[{\"bool\":{\"filter\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}},{\"bool\":{\"filter\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.transactingFacilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}}]}}],\"minimum_should_match\":1}}]}},\"aggs\":{\"MDT\":{\"terms\":{\"script\":{\"lang\":\"painless\",\"source\":\"\\n            if (\\n              doc.containsKey('Data.facilityType.keyword') &&\\n              !doc['Data.facilityType.keyword'].empty &&\\n              doc.containsKey('Data.transactingFacilityType.keyword') &&\\n              !doc['Data.transactingFacilityType.keyword'].empty\\n            ) {\\n              String ft = doc['Data.facilityType.keyword'].value;\\n              String tt = doc['Data.transactingFacilityType.keyword'].value;\\n              if (\\n                ft == 'Health Facility' &&\\n                tt == 'STAFF' &&\\n                doc.containsKey('Data.transactingFacilityName.keyword') &&\\n                !doc['Data.transactingFacilityName.keyword'].empty\\n              ) {\\n                return doc['Data.transactingFacilityName.keyword'].value;\\n              }\\n              if (\\n                ft == 'STAFF' &&\\n                tt == 'Health Facility' &&\\n                doc.containsKey('Data.facilityName.keyword') &&\\n                !doc['Data.facilityName.keyword'].empty\\n              ) {\\n                return doc['Data.facilityName.keyword'].value;\\n              }\\n            }\\n            return 'UNKNOWN_MDT';\\n          \"},\"size\":2000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Received\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Balance\":{\"sum\":{\"script\":{\"lang\":\"painless\",\"source\":\"\\n                if (\\n                  !doc.containsKey('Data.additionalDetails.stockEntryType.keyword') ||\\n                  doc['Data.additionalDetails.stockEntryType.keyword'].empty ||\\n                  !doc.containsKey('Data.physicalCount') ||\\n                  doc['Data.physicalCount'].empty\\n                ) {\\n                  return 0;\\n                }\\n                String type = doc['Data.additionalDetails.stockEntryType.keyword'].value;\\n                if (type == 'ISSUED') {\\n                  return doc['Data.physicalCount'].value;\\n                }\\n                if (type == 'RETURNED') {\\n                  return -doc['Data.physicalCount'].value;\\n                }\\n                return 0;\\n              \"}}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "mdt",
+        "column": "MDT"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "MDT",
+    "excludedColumns": [
+      "SUM",
+      "Received",
+      "Returned",
+      "Balance"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Received.SUM"
+        ],
+        "newField": "Stock Received",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Returned.SUM"
+        ],
+        "newField": "Stock Returned",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Balance"
+        ],
+        "newField": "Stock Balance",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown"
+  },
+  "excessLossStockStateBednetsICCD": {
+    "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_STATE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"State\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "state",
+        "column": "State"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "excessLossStockLgaBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "State",
+    "excludedColumns": [
+      "Quantity",
+      "ExcessStockFilter",
+      "LossStockFilter",
+      "ExcessStockValue",
+      "LossStockValue"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ExcessStockValue"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "LossStockValue"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "State-wise Excess and Loss Stock"
+  },
+  "excessLossStockLgaBednetsICCD": {
+    "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_LGA",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"LGA\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "state",
+        "column": "State"
+      },
+      {
+        "key": "lga",
+        "column": "LGA"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "documentType": "_doc",
+    "action": "",
+    "drillChart": "excessLossStockWardBednetsICCD",
+    "plotLabel": "LGA",
+    "excludedColumns": [
+      "Quantity",
+      "ExcessStockFilter",
+      "LossStockFilter",
+      "ExcessStockValue",
+      "LossStockValue",
+      "DSS_HEADER_EXCESSSTOCKVALUE",
+      "DSS_HEADER_LOSSSTOCKVALUE"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ExcessStockValue"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "LossStockValue"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "LGA-wise Excess and Loss Stock"
+  },
+  "excessLossStockWardBednetsICCD": {
+    "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_WARD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
+      }
+    ],
+    "filterKeys": [
+      {
+        "key": "state",
+        "column": "State"
+      },
+      {
+        "key": "lga",
+        "column": "LGA"
+      },
+      {
+        "key": "ward",
+        "column": "Ward"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "documentType": "_doc",
+    "action": "",
+    "drillChart": "excessLossStockDhBednetsICCD",
+    "plotLabel": "Ward",
+    "excludedColumns": [
+      "Quantity",
+      "ExcessStockFilter",
+      "LossStockFilter",
+      "ExcessStockValue",
+      "LossStockValue",
+      "DSS_HEADER_EXCESSSTOCKVALUE",
+      "DSS_HEADER_LOSSSTOCKVALUE"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ExcessStockValue"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "LossStockValue"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "Ward-wise Excess and Loss Stock"
+  },
+  "excessLossStockDhBednetsICCD": {
+    "chartName": "DSS_HEALTH_EXCESS_LOSS_STOCK_DH",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}}]}},\"aggs\":{\"Distribution Hub\":{\"terms\":{\"field\":\"Data.facilityName.keyword\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"ExcessStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"LossStockFilter\":{\"filter\":{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}},\"aggs\":{\"Quantity\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"ExcessStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"ExcessStockFilter>Quantity\"},\"script\":\"params.v\"}},\"LossStockValue\":{\"bucket_script\":{\"buckets_path\":{\"v\":\"LossStockFilter>Quantity\"},\"script\":\"params.v\"}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "documentType": "_doc",
+    "action": "",
+    "drillChart": "none",
+    "plotLabel": "Distribution Hub",
+    "excludedColumns": [
+      "Quantity",
+      "ExcessStockFilter",
+      "LossStockFilter",
+      "ExcessStockValue",
+      "LossStockValue",
+      "DSS_HEADER_EXCESSSTOCKVALUE",
+      "DSS_HEADER_LOSSSTOCKVALUE"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "ExcessStockValue"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "LossStockValue"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "kind": "drillDown",
+    "_comment": "Distribution Hub-wise Excess and Loss Stock"
+  },
+  "userSyncRateByDistrictBednetsICCD": {
+    "chartName": "DSS_HEALTH_SUPERVISION_USER_SYNC_RATE_BY_DISTRICT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-user-sync-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Sync Rate Percentage\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Unique Users Synced\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.syncedUserId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-staff-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Total Users Created\":{\"value_count\":{\"field\":\"Data.userId.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "percentage",
+    "plotLabel": "none",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "filterKeys": [
+      {
+        "key": "lga"
+      }
+    ],
+    "sort": "sortKeyAsc",
+    "aggregationPaths": [
+      "Sync Rate Percentage",
+      "AGGS"
+    ],
+    "insight": {},
+    "_comment": " "
+  },
+  "numberOfSuccessfulRegistrationsCDDBednetsICCD": {
+    "chartName": "DSS_HEALTH_NATIONAL_NUMBER_OF_HOUSEHOLDS_REGISTERED_CDD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.household.auditDetails.createdTime",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Successful Registrations\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "plotLabel": "none",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "filterKeys": [
+      {
+        "key": "lga"
+      }
+    ],
+    "sort": "sortKeyAsc",
+    "aggregationPaths": [
+      "Successful Registrations"
+    ],
+    "insight": {},
+    "_comment": "CDD successful registrations grouped by LGA"
+  },
+  "summaryReportByLGACDDBednetsICCD": {
+    "chartName": "DSS_HEALTH_SUMMARY_REPORT_BY_LGA_CDD",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.household.auditDetails.createdTime",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Summary Report By LGA\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households Registered\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Summary Report By LGA"
+    ],
+    "insight": {},
+    "_comment": "CDD household registration summary grouped by LGA"
+  },
+  "cddTeamPerformanceBednetsICCD": {
+    "chartName": "DSS_HEALTH_CDD_TEAM_PERFORMANCE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.household.auditDetails.createdTime",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-household-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"CDD Team Performance\":{\"terms\":{\"field\":\"Data.userName.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Households Registered\":{\"value_count\":{\"field\":\"Data.household.id.keyword\"}},\"CDD Name\":{\"terms\":{\"field\":\"Data.nameOfUser.keyword\",\"size\":1}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "CDD Team Performance"
+    ],
+    "insight": {},
+    "_comment": "CDD wise household registration performance"
+  },
+  "InventorySummaryByDistrictBednetsICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_DISTRICT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Product Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.lga.keyword\"},\"aggs\":{\"Target per day\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Overall Target to Receive\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target for range\":{\"bucket_script\":{\"buckets_path\":{\"target\":\"Target per day\"},\"script\":\"params.target*365\"}},\"Target for days to last\":{\"bucket_script\":{\"buckets_path\":{\"target\":\"Target per day\"},\"script\":\"params.target*100\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Outgoing\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"LGA Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\",\"RS\":\"Returned Stock>SUM\"},\"script\":\"params.IS-params.OS+params.RS\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Excess\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Loss\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "InventorySummaryByApBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Inventory summary By District",
+    "filterKeys": [
+      {
+        "key": "lga",
+        "column": "Inventory summary By District"
+      }
+    ],
+    "divisorFields": [],
+    "showFooter": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "excludedColumns": [
+      "SUM",
+      "Target for range",
+      "Target per day",
+      "Target for days to last",
+      "Incoming",
+      "Outgoing",
+      "Total Stock",
+      "Overall Target to Receive",
+      "Excess",
+      "Loss"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Overall Target to Receive"
+        ],
+        "newField": "Bednets Target",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Incoming"
+        ],
+        "newField": "Bednets Incoming Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Outgoing"
+        ],
+        "newField": "Bednets Outgoing Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Stock"
+        ],
+        "newField": "Bednets Stock Left",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Total Stock",
+          "Target for days to last"
+        ],
+        "newField": "Days To Last",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Excess"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Loss"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "sort": "sortKeyAsc",
+    "_comment": " ",
+    "kind": "drillDown"
+  },
+  "InventorySummaryByApBednetsICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_AP",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-project-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}}]}},\"aggs\":{\"Product Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"},\"aggs\":{\"Target per day\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Overall Target to Receive\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target for range\":{\"bucket_script\":{\"buckets_path\":{\"target\":\"Target per day\"},\"script\":\"params.target*365\"}},\"Target for days to last\":{\"bucket_script\":{\"buckets_path\":{\"target\":\"Target per day\"},\"script\":\"params.target*100\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Outgoing\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"Health Facility\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\",\"RS\":\"Returned Stock>SUM\"},\"script\":\"params.IS-params.OS+params.RS\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Excess\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Loss\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "InventorySummaryByWarehouseBednetsICCD",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Inventory summary By Distribution Hub",
+    "filterKeys": [
+      {
+        "key": "Distribution Hub",
+        "column": "Inventory summary By Distribution Hub"
+      }
+    ],
+    "divisorFields": [],
+    "showFooter": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "excludedColumns": [
+      "SUM",
+      "Target for range",
+      "Target per day",
+      "Target for days to last",
+      "Incoming",
+      "Outgoing",
+      "Total Stock",
+      "Overall Target to Receive",
+      "Excess",
+      "Loss"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Overall Target to Receive"
+        ],
+        "newField": "Bednets Target",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Incoming"
+        ],
+        "newField": "Bednets Incoming Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Outgoing"
+        ],
+        "newField": "Bednets Outgoing Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Stock"
+        ],
+        "newField": "Bednets Stock Left",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Total Stock",
+          "Target for days to last"
+        ],
+        "newField": "Days To Last",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Excess"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Loss"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "sort": "sortKeyAsc",
+    "_comment": " ",
+    "kind": "drillDown"
+  },
+  "InventorySummaryByWarehouseBednetsICCD": {
+    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_MDT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.userName.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.userName.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}},{\"exists\":{\"field\":\"Data.userName.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.userName.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Outgoing\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-updated-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.userName.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.userName.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Incoming Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.eventType.keyword\":\"DISPATCHED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Outgoing Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Returned Stock\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.facilityType.keyword\":\"STAFF\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"RETURNED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}},\"Total Stock\":{\"bucket_script\":{\"buckets_path\":{\"IS\":\"Incoming Stock>SUM\",\"OS\":\"Outgoing Stock>SUM\",\"RS\":\"Returned Stock>SUM\"},\"script\":\"params.IS-params.OS+params.RS\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.userName.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"EXCESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.userName.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Excess\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"exists\":{\"field\":\"Data.userName.keyword\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"LESS\"}}]}},\"aggs\":{\"Available Stock\":{\"terms\":{\"size\":500,\"field\":\"Data.userName.keyword\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Loss\":{\"sum\":{\"field\":\"Data.physicalCount\"}}}}}}}}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Inventory summary By MDT",
+    "filterKeys": [
+      {
+        "key": "userName",
+        "column": "Inventory summary By MDT"
+      }
+    ],
+    "divisorFields": [],
+    "showFooter": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "excludedColumns": [
+      "SUM",
+      "Incoming",
+      "Outgoing",
+      "Total Stock",
+      "Excess",
+      "Loss"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Incoming"
+        ],
+        "newField": "Bednets Incoming Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Outgoing"
+        ],
+        "newField": "Bednets Outgoing Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Stock"
+        ],
+        "newField": "Bednets Stock Left",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Excess"
+        ],
+        "newField": "Excess Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Loss"
+        ],
+        "newField": "Loss Stock",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "sort": "sortKeyAsc",
+    "_comment": " ",
+    "kind": "drillDown"
+  },
+  "overallUsersMetrics": {
+    "chartName": "DSS_HEALTH_COMPLAINTS_BY_HEALTH_DISTRICT_TOTAL_BURUNDI",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-project-staff-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Total Users Count\":{\"cardinality\":{\"field\":\"Data.userId.keyword\"}}}}",
+        "select": {
+          "totalUsersCreated": "Total Users Count.value"
+        }
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-user-sync-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[{\"range\":{\"Data.syncedTimeStamp\":{\"gte\":\"now-3h\"}}}]}},\"aggs\":{\"Active Users\":{\"cardinality\":{\"field\":\"Data.syncedUserId.keyword\"}}}}",
+        "select": {
+          "totalUsersActive": "Active Users.value"
+        }
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.syncedTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Task Records\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}",
+        "select": {
+          "taskRecordCount": "Task Records.value"
+        }
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.syncedTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Stock Records\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}",
+        "select": {
+          "stockRecordCount": "Stock Records.value"
+        }
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.service.auditDetails.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.service.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-transformer-pgr-services",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Complaint Records\":{\"value_count\":{\"field\":\"Data.service.serviceRequestId.keyword\"}}}}",
+        "select": {
+          "complaintRecordCount": "Complaint Records.value"
+        }
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.hfReferral.auditDetails.createdTime",
+        "requestQueryMap": "{\"userId\": \"Data.hfReferral.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-hf-referral-index-v1",
+        "transformData": "linearAggregation",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Referral Records\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}",
+        "select": {
+          "referralRecordCount": "Referral Records.value"
+        }
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "combinedUserStats",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": [
+          {
+            "inactiveUsers": "subtract(totalUsersCreated, totalUsersActive)",
+            "totalRecordsCount": "add(referralRecordCount,add(complaintRecordCount,add(taskRecordCount,stockRecordCount)))"
+          }
+        ]
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [
+      {
+        "key": "Users"
+      }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "totalUsersCreated",
+      "totalUsersActive",
+      "totalRecordsCount",
+      "inactiveUsers"
+    ],
+    "cardsList": [
+      {
+        "id": "totalUsersCreated",
+        "labelKey": "DSS_OVERALL_USERS_TOTAL",
+        "valuePath": "totalUsersCreated",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "totalUsersCreated"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "totalUsersActive",
+        "labelKey": "DSS_OVERALL_USERS_ACTIVE",
+        "valuePath": "totalUsersActive",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "totalUsersActive",
+          "offline": "inactiveUsers"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "totalRecordsCount",
+        "labelKey": "DSS_OVERALL_RECORDS_TOTAL",
+        "valuePath": "totalRecordsCount",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "totalRecordsCount"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "inactiveUsers",
+        "labelKey": "DSS_OVERALL_USERS_INACTIVE",
+        "valuePath": "inactiveUsers",
+        "valueType": "NUMBER",
+        "descriptionParams": {
+          "count": "inactiveUsers",
+          "total": "totalUsersCreated",
+          "online": "totalUsersActive"
+        },
+        "colorRules": {
+          "type": "constant",
+          "color": "#C84C0E"
+        }
+      }
+    ],
+    "insight": {},
+    "_comment": " "
+  },
+  "usersSummaryTable": {
+    "chartName": "DSS_HEALTH_COMPLAINTS_BY_HEALTH_DISTRICT_TOTAL_BURUNDI",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-project-staff-index-v1",
+        "key": "staffDocuments",
+        "transformData": "rawDocuments",
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.userId\",\"Data.userName\",\"Data.role\",\"Data.boundaryHierarchyCode.lga\" ,\"Data.boundaryHierarchyCode.state\" ,\"Data.boundaryHierarchy.lga\", \"Data.boundaryHierarchy.state\", \"Data.nameOfUser\"]}",
+        "select": {
+          "userId": "Data.userId",
+          "userName": "Data.userName",
+          "nameOfUser": "Data.nameOfUser",
+          "role": "Data.role",
+          "state": "Data.boundaryHierarchy.state",
+          "lga": "Data.boundaryHierarchy.lga",
+          "provinceCode": "Data.boundaryHierarchyCode.state",
+          "districtCode": "Data.boundaryHierarchyCode.lga"
+        }
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-user-sync-index-v1",
+        "key": "userSyncDocuments",
+        "transformData": "termsAggregation",
+        "bucketsPath": "Username.buckets",
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"must\":[]}},\"aggs\":{\"Username\":{\"terms\":{\"field\":\"Data.syncedUserId.keyword\",\"size\":10000},\"aggs\":{\"LatestSyncedTime\":{\"max\":{\"field\":\"Data.syncedTimeStamp\"}},\"RecordTotal\":{\"value_count\":{\"field\":\"Data.syncedUserName.keyword\"}},\"Last3Hours\":{\"filter\":{\"range\":{\"Data.syncedTimeStamp\":{\"gte\":\"now-3h\",\"lte\":\"now\"}}}},\"LatestDoc\":{\"top_hits\":{\"size\":1,\"sort\":[{\"Data.syncedTimeStamp\":{\"order\":\"desc\"}}],\"_source\":{\"includes\":[\"Data.syncedUserName\",\"Data.@timestamp\",\"Data.boundaryHierarchy.lga\",\"Data.boundaryHierarchy.state\",\"Data.role\",\"Data.syncedTimeStamp\",\"Data.nameOfUser\"]}}}}}}}",
+        "select": {
+          "userId": "key",
+          "userName": "LatestDoc.hits.hits[0]._source.Data.syncedUserName",
+          "nameOfUser": "LatestDoc.hits.hits[0]._source.Data.nameOfUser",
+          "role": "LatestDoc.hits.hits[0]._source.Data.role",
+          "state": "LatestDoc.hits.hits[0]._source.Data.boundaryHierarchy.state",
+          "lga": "LatestDoc.hits.hits[0]._source.Data.boundaryHierarchy.lga",
+          "totalRecords": "RecordTotal.value",
+          "latestSyncTime": "LatestSyncedTime.value_as_string",
+          "latestSyncEpoch": "toNumber(LatestSyncedTime.value)",
+          "active": "Last3Hours.doc_count > 0 ? 'ACTIVE' : 'INACTIVE'"
+        }
+      }
+    ],
+    "chartType": "rawResponse",
+    "merges": [
+      {
+        "mergeKey": "mergedUsersSummary",
+        "baseDataset": "staffDocuments",
+        "dataset": "userSyncDocuments",
+        "baseKey": "userId",
+        "joinKey": "userId",
+        "joinType": "full",
+        "clearDatasets2": [],
+        "clearDatasets": [
+          "staffDocuments",
+          "userSyncDocuments"
+        ],
+        "outputMappings": [
+          {
+            "userId": "staffDocuments.userId ? staffDocuments.userId : userSyncDocuments.userId",
+            "userName": "staffDocuments.userName ? staffDocuments.userName : userSyncDocuments.userName",
+            "nameOfUser": "staffDocuments.nameOfUser ? staffDocuments.nameOfUser : userSyncDocuments.nameOfUser",
+            "role": "staffDocuments.role ? staffDocuments.role: userSyncDocuments.role",
+            "state": "staffDocuments.state ? staffDocuments.state: userSyncDocuments.state",
+            "lga": "staffDocuments.lga ? staffDocuments.lga : userSyncDocuments.lga",
+            "provinceCode": "staffDocuments.provinceCode",
+            "districtCode": "staffDocuments.districtCode",
+            "totalRecords": "userSyncDocuments.totalRecords",
+            "latestSyncTime": "userSyncDocuments.latestSyncTime",
+            "active": "userSyncDocuments.active ? userSyncDocuments.active : 'INACTIVE'",
+            "fullLocation": "concat(staffDocuments.state ? staffDocuments.state: userSyncDocuments.state, ' - ', staffDocuments.lga ? staffDocuments.lga : userSyncDocuments.lga)"
+          }
+        ]
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [
+      {
+        "key": "mergedUsersSummary"
+      }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "mergedUsersSummary"
+    ],
+    "insight": {},
+    "_comment": " "
+  },
+  "individualUsersMetrics": {
+    "chartName": "DSS_HEALTH_COMPLAINTS_BY_HEALTH_DISTRICT_TOTAL_BURUNDI",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.syncedUserId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-user-sync-index-v1",
+        "transformData": "linearAggregation",
+        "transformKey": "lastSyncTimeTransformer",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"LastSyncTime\":{\"max\":{\"field\":\"Data.syncedTimeStamp\"}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.syncedTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "transformKey": "taskRecordCountTransformer",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Task Records\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.syncedTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "transformData": "linearAggregation",
+        "transformKey": "stockRecordCountTransformer",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Stock Records\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.syncedTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-project-task-index-v1",
+        "transformData": "linearAggregation",
+        "transformKey": "latestGpsTransformer",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"LatestDoc\":{\"top_hits\":{\"size\":1,\"sort\":[{\"Data.syncedTimeStamp\":{\"order\":\"desc\"}}],\"_source\":{\"includes\":[\"Data.geoPoint\",\"Data.syncedTimeStamp\"]}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.auditDetails.createdTime",
+        "requestQueryMap": "{\"userId\": \"Data.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-transformed-errors-index-v1",
+        "transformData": "linearAggregation",
+        "transformKey": "failedRecordCountTransformer",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Error Records\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.service.auditDetails.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.service.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-transformer-pgr-services",
+        "transformData": "linearAggregation",
+        "transformKey": "complaintsRecordCountTransformer",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Complaint Records\":{\"value_count\":{\"field\":\"Data.service.serviceRequestId.keyword\"}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.hfReferral.auditDetails.createdTime",
+        "requestQueryMap": "{\"userId\": \"Data.hfReferral.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-hf-referral-index-v1",
+        "transformData": "linearAggregation",
+        "transformKey": "referralRecordCountTransformer",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Referral Records\":{\"value_count\":{\"field\":\"Data.hfReferral.id.keyword\"}}}}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "transform": {
+      "failedRecordCountTransformer": {
+        "transformationMappings": [
+          {
+            "failedRecordCount": "Error Records.value"
+          }
+        ]
+      },
+      "taskRecordCountTransformer": {
+        "transformationMappings": [
+          {
+            "taskRecordCount": "Task Records.value"
+          }
+        ]
+      },
+      "complaintsRecordCountTransformer": {
+        "transformationMappings": [
+          {
+            "complaintRecordCount": "Complaint Records.value"
+          }
+        ]
+      },
+      "stockRecordCountTransformer": {
+        "transformationMappings": [
+          {
+            "stockRecordCount": "Stock Records.value"
+          }
+        ]
+      },
+      "latestGpsTransformer": {
+        "transformationMappings": [
+          {
+            "latestGps": "LatestDoc.hits.hits[0]._source.Data.geoPoint"
+          }
+        ]
+      },
+      "lastSyncTimeTransformer": {
+        "transformationMappings": [
+          {
+            "lastSyncTime": "LastSyncTime.value_as_string"
+          }
+        ]
+      },
+      "referralRecordCountTransformer": {
+        "transformationMappings": [
+          {
+            "referralRecordCount": "Referral Records.value"
+          }
+        ]
+      }
+    },
+    "merges": [
+      {
+        "mergeType": "linear",
+        "mergeKey": "combinedUserStats",
+        "flatten": true,
+        "datasets": [],
+        "outputMappings": [
+          {
+            "totalRecordsCount": "add(referralRecordCount,add(complaintRecordCount, add(taskRecordCount, stockRecordCount)))"
+          }
+        ]
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [
+      {
+        "key": "Users"
+      }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "totalRecordsCount",
+      "latestGps",
+      "failedRecordCount",
+      "lastSyncTime"
+    ],
+    "insight": {},
+    "_comment": " "
+  },
+  "usersRecordsSummaryTable": {
+    "chartName": "DSS_HEALTH_COMPLAINTS_BY_HEALTH_DISTRICT_TOTAL_BURUNDI",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.syncedTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-project-task-index-v1",
+        "transformData": "rawDocuments",
+        "transformKey": "taskTransformer",
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[],\"must_not\":[{\"term\":{\"Data.administrationStatus.keywor\":{\"value\":\"DELIVERED\"}}}]}},\"_source\":[\"Data.geoPoint\",\"Data.taskId\",\"Data.productName\",\"Data.administrationStatus\",\"Data.@timestamp\",\"Data.quantity\",\"Data.latitude\",\"Data.longitude\",\"Data.boundaryHierarchy.subHills\",\"Data.additionalDetails.cycleIndex.keyword\"]}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.syncedTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-stock-index-v1",
+        "transformData": "rawDocuments",
+        "transformKey": "stockTransformer",
+        "aggrQuery": "{\"size\":100,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.id\",\"Data.productName\",\"Data.eventType\",\"Data.reason\",\"Data.facilityName\",\"Data.transactingFacilityName\",\"Data.@timestamp\",\"Data.physicalCount\",\"Data.additionalDetails.lat\",\"Data.additionalDetails.lng\"]}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.service.auditDetails.createdTime",
+        "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"userId\": \"Data.service.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-transformer-pgr-services",
+        "transformData": "rawDocuments",
+        "transformKey": "complaintsTransformer",
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.service.serviceRequestId\",\"Data.service.serviceCode\",\"Data.service.description\",\"Data.service.applicationStatus\",\"Data.@timestamp\"]}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.auditDetails.createdTime",
+        "requestQueryMap": "{\"userId\": \"Data.auditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-transformed-errors-index-v1",
+        "transformData": "rawDocuments",
+        "transformKey": "errorTransformer",
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.id\",\"Data.errorCategory\",\"Data.@timestamp\"]}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.hfReferral.auditDetails.createdTime",
+        "requestQueryMap": "{\"userId\": \"Data.hfReferral.clientAuditDetails.createdBy.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"lga\": \"Data.boundaryHierarchy.lga.keyword\"}",
+        "indexName": "ko-hf-referral-index-v1",
+        "transformData": "rawDocuments",
+        "transformKey": "referralTransformer",
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[]}},\"_source\":[\"Data.hfReferral.id\",\"Data.hfReferral.beneficiaryId\",\"Data.hfReferral.symptom\",\"Data.@timestamp\"]}"
+      }
+    ],
+    "chartType": "rawResponse",
+    "transform": {
+      "referralTransformer": {
+        "transformationMappings": [
+          {
+            "id": "Data.hfReferral.id",
+            "timestamp": "Data.@timestamp",
+            "actionType": "'Referral'",
+            "detail": "'${Data.hfReferral.beneficiaryId} is referred with ${Data.hfReferral.symptom}'",
+            "gps": "'-'",
+            "outcome": "BENEFICIARY_REFERRED"
+          }
+        ]
+      },
+      "taskTransformer": {
+        "transformationMappings": [
+          {
+            "id": "Data.taskId",
+            "timestamp": "Data.@timestamp",
+            "actionType": "'Delivery'",
+            "detail": "Data.administrationStatus === 'ADMINISTRATION_SUCCESS' ? `Delivered ${Data.quantity} of ${Data.productName}` : Data.administrationStatus",
+            "gps": "Data.geoPoint[1] && Data.geoPoint[0]? `${Data.geoPoint[1]}, ${Data.geoPoint[0]}` : '-'",
+            "outcome": "Data.administrationStatus === 'ADMINISTRATION_SUCCESS' ? 'SUCCESS': Data.administrationStatus"
+          }
+        ]
+      },
+      "stockTransformer": {
+        "transformationMappings": [
+          {
+            "id": "Data.id",
+            "timestamp": "Data.@timestamp",
+            "actionType": "'Stock'",
+            "detail": "Data.eventType === 'RECEIVED' && Data.reason === 'RETURNED' ? `${Data.facilityName} Got Return Stock of ${Data.physicalCount} ${Data.productName} from ${Data.transactingFacilityName}` : Data.eventType === 'RECEIVED' ? `${Data.facilityName} Received ${Data.physicalCount} ${Data.productName} from ${Data.transactingFacilityName}` : `${Data.facilityName} Dispatched ${Data.physicalCount} ${Data.productName} to ${Data.transactingFacilityName}`",
+            "gps": "Data.additionalDetails.lat && Data.additionalDetails.lng ? `${Data.additionalDetails.lat}, ${Data.additionalDetails.lng}` : '-'",
+            "outcome": "'SUCCESS'"
+          }
+        ]
+      },
+      "complaintsTransformer": {
+        "transformationMappings": [
+          {
+            "id": "Data.service.serviceRequestId",
+            "timestamp": "Data.@timestamp",
+            "actionType": "'Complaint'",
+            "detail": "`Raised Complaint ${Data.service.serviceCode} which is in status ${Data.service.applicationStatus} with Description ${Data.service.description}`",
+            "gps": "'-'",
+            "outcome": "'COMPLAINT'"
+          }
+        ]
+      },
+      "errorTransformer": {
+        "transformationMappings": [
+          {
+            "id": "Data.id",
+            "timestamp": "Data.@timestamp",
+            "actionType": "'Error Record'",
+            "detail": "Data.errorCategory",
+            "gps": "'-'",
+            "outcome": "'FAILED'"
+          }
+        ]
+      }
+    },
+    "merges": [
+      {
+        "mergeKey": "mergedUsersRecordTaskStockSummary",
+        "baseDataset": "taskTransformer",
+        "dataset": "stockTransformer",
+        "baseKey": "userId",
+        "joinKey": "userId",
+        "joinType": "concat",
+        "clearDatasets": [
+          "taskTransformer",
+          "stockTransformer"
+        ]
+      },
+      {
+        "mergeKey": "mergedUsersRecordSummary1",
+        "baseDataset": "mergedUsersRecordTaskStockSummary",
+        "dataset": "complaintsTransformer",
+        "baseKey": "userId",
+        "joinKey": "userId",
+        "joinType": "concat",
+        "clearDatasets": [
+          "mergedUsersRecordTaskStockSummary",
+          "complaintsTransformer"
+        ]
+      },
+      {
+        "mergeKey": "mergedUsersRecordSummary",
+        "baseDataset": "mergedUsersRecordSummary1",
+        "dataset": "errorTransformer",
+        "baseKey": "userId",
+        "joinKey": "userId",
+        "joinType": "concat",
+        "clearDatasets": [
+          "mergedUsersRecordSummary1",
+          "errorTransformer"
+        ]
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [
+      {
+        "key": "mergedUsersRecordSummary"
+      }
+    ],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "mergedUsersRecordSummary"
     ],
     "insight": {},
     "_comment": " "
