@@ -154,7 +154,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"chartSpecificProperty\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"startDate\":{\"terms\":{\"field\":\"Data.startDate\"}},\"endDate\":{\"terms\":{\"field\":\"Data.endDate\"}},\"Population Target\":{\"date_histogram\":{\"field\":\"Data.startDate\",\"calendar_interval\":\"day\"},\"aggs\":{\"Target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}}}},\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"chartSpecificProperty\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"startDate\":{\"terms\":{\"field\":\"Data.startDate\"}},\"endDate\":{\"terms\":{\"field\":\"Data.endDate\"}},\"Population Target\":{\"date_histogram\":{\"field\":\"Data.startDate\",\"calendar_interval\":\"day\"},\"aggs\":{\"Target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}}}},\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       }
     ],
     "chartType": "line",
@@ -1877,7 +1877,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Distribution Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Distribution Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -6746,7 +6746,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"aggs\":{\"chartSpecificProperty\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"startDate\":{\"terms\":{\"field\":\"Data.startDate\"}},\"endDate\":{\"terms\":{\"field\":\"Data.endDate\"}},\"Drugs Target\":{\"date_histogram\":{\"field\":\"Data.startDate\",\"calendar_interval\":\"day\"},\"aggs\":{\"Target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}}}},\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"chartSpecificProperty\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"startDate\":{\"terms\":{\"field\":\"Data.startDate\"}},\"endDate\":{\"terms\":{\"field\":\"Data.endDate\"}},\"Drugs Target\":{\"date_histogram\":{\"field\":\"Data.startDate\",\"calendar_interval\":\"day\"},\"aggs\":{\"Target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}}}},\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       }
     ],
     "chartType": "line",
@@ -7064,7 +7064,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Drug Distribution Target\":{\"filters\":{\"filters\":{\"distributions\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Drug Target by Range\":{\"bucket_script\":{\"buckets_path\":{\"target\":\"Target\"},\"script\":\"(params.target) * 365\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Drug Distribution Target\":{\"filters\":{\"filters\":{\"distributions\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Drug Target by Range\":{\"bucket_script\":{\"buckets_path\":{\"target\":\"Target\"},\"script\":\"(params.target) * 365\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -8256,7 +8256,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -8451,7 +8451,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -9723,7 +9723,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target per day\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target Households per Day\":{\"bucket_script\":{\"buckets_path\":{\"tpd\":\"Target per day\"},\"script\":\"(params.tpd)*365\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target per day\":{\"sum\":{\"field\":\"Data.targetPerDay\"}},\"Target Households per Day\":{\"bucket_script\":{\"buckets_path\":{\"tpd\":\"Target per day\"},\"script\":\"(params.tpd)*365\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -12079,7 +12079,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"Drug Distribution Target\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"Drug Distribution Target\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       },
       {
         "module": "COMMON",
@@ -12327,21 +12327,21 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Population Target\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Product Target\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"Overall Product Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Product Target\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"Overall Product Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Project Start and End Dates\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"Start Date\":{\"min\":{\"field\":\"Data.startDate\"}},\"End Date\":{\"max\":{\"field\":\"Data.endDate\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Project Start and End Dates\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"},\"aggs\":{\"Start Date\":{\"min\":{\"field\":\"Data.startDate\"}},\"End Date\":{\"max\":{\"field\":\"Data.endDate\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -12429,7 +12429,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target per day\":{\"sum\":{\"field\":\"Data.targetPerDay\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"INDIVIDUAL\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}},\"Target per day\":{\"sum\":{\"field\":\"Data.targetPerDay\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -14776,7 +14776,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Overall target\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}}}},\"aggs\":{\"TargetValue\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Overall target\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"HOUSEHOLD\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"TargetValue\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -15073,7 +15073,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"3-11MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"3-11MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -15102,7 +15102,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"3-11MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"3-11MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -15187,7 +15187,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"Overall Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -15216,7 +15216,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"cycle\": \"Data.additionalDetails.cycleIndex.keyword\", \"projectTypeId\": \"Data.projectTypeId.keyword\", \"state\": \"Data.boundaryHierarchy.state.keyword\", \"campaignNumber\": \"Data.campaignNumber.keyword\"}",
         "indexName": "jg-project-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.state.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filters\":{\"filters\":{\"Campaign Filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.targetType.keyword\":\"12-59MONTH\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}}}},\"aggs\":{\"Overall Population Target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}"
       }
     ],
     "chartType": "metric",
