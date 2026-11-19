@@ -22574,13 +22574,6 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.taskDates",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ko-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Population Total\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Total Population covered\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "ko-project-index-v1",
@@ -22673,13 +22666,6 @@
         "actionName": "AdditiveComputedField",
         "fields": ["Total Population Target"],
         "newField": "Population Targeted",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": ["Total Population covered"],
-        "newField": "Population Covered",
         "_comments": ""
       },
       {
