@@ -23191,13 +23191,6 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.taskDates",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ab-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\"}}]}},\"aggs\":{\"Population Total\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.lga.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Total Population covered\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "ab-project-index-v1",
@@ -23294,13 +23287,6 @@
       },
       {
         "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": ["Total Population covered"],
-        "newField": "Population Covered",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
         "fields": ["Total Population Registered", "Total Population Target"],
         "newField": "Population Coverage %",
@@ -23364,13 +23350,6 @@
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "ab-project-task-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\"}}]}},\"aggs\":{\"Population Registered\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.ward.keyword\",\"size\":500,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Total Population Registered\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ab-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Population Total\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.ward.keyword\"},\"aggs\":{\"Total Population covered\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -23469,13 +23448,6 @@
       },
       {
         "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": ["Total Population covered"],
-        "newField": "Population Covered",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
         "fields": ["Total Population Registered", "Overall Population target"],
         "newField": "Population Coverage %",
@@ -23545,13 +23517,6 @@
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
-        "indexName": "ab-project-task-index-v1",
-        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"term\":{\"Data.isDelivered\":true}}]}},\"aggs\":{\"Population Total\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"},\"aggs\":{\"Total Population covered\":{\"sum\":{\"field\":\"Data.memberCount\"}}}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "",
-        "requestQueryMap": "{\"projectTypeId\":\"Data.projectTypeId.keyword\",\"state\":\"Data.boundaryHierarchy.state.keyword\",\"lga\":\"Data.boundaryHierarchy.lga.keyword\",\"ward\":\"Data.boundaryHierarchy.ward.keyword\",\"Distribution Hub\":\"Data.boundaryHierarchy.Distribution Hub.keyword\",\"campaignNumber\":\"Data.campaignNumber.keyword\"}",
         "indexName": "ab-project-index-v1",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGS\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.projectTypeId.keyword\":\"Bednet\"}},{\"prefix\":{\"Data.productVariant.keyword\":\"PVAR\"}},{\"term\":{\"Data.targetType.keyword\":\"PRODUCT\"}},{\"exists\":{\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"}}],\"must_not\":[{\"exists\":{\"field\":\"Data.boundaryHierarchy.community.keyword\"}}]}},\"aggs\":{\"Bednets Target\":{\"terms\":{\"size\":500,\"order\":{\"_key\":\"asc\"},\"field\":\"Data.boundaryHierarchy.Distribution Hub.keyword\"},\"aggs\":{\"Overall Bednets target\":{\"sum\":{\"field\":\"Data.overallTarget\"}}}}}}}}"
       },
@@ -23608,7 +23573,6 @@
       "Total Households Registered",
       "Total Households distributed",
       "Total Population Registered",
-      "Total Population covered",
       "Total Bednets distributed",
       "Overall Bednets target",
       "Overall Household target",
@@ -23650,13 +23614,6 @@
         "fields": ["Overall Population target"],
         "newField": "Population Targeted",
         "_comments": ""
-      },
-      {
-        "postAggregationTheory": "",
-        "actionName": "AdditiveComputedField",
-        "fields": ["Total Population covered"],
-        "newField": "Population Covered",
-        "_comments": "Now sourced from real Data.memberCount, replacing prior Quantity*1.8 proxy"
       },
       {
         "postAggregationTheory": "",
