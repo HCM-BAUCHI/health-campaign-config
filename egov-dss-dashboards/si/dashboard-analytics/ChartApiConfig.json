@@ -5544,8 +5544,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Users syncing per day",
-      "Records synced per day"
+      "Users syncing per day"
     ],
     "insight": {},
     "_comment": "KPI SYS-04: sync trend per day",
@@ -5556,13 +5555,6 @@
         "requestQueryMap": "{\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
         "indexName": "si-user-sync-index-v1",
         "aggrQuery": "{\"aggs\":{\"Users syncing per day\":{\"date_histogram\":{\"field\":\"Data.syncedTimeStamp\",\"calendar_interval\":\"day\"},\"aggs\":{\"count\":{\"cardinality\":{\"precision_threshold\":40000,\"field\":\"Data.syncedUserId.keyword\"}}}}}}"
-      },
-      {
-        "module": "COMMON",
-        "dateRefField": "Data.syncedTimeStamp",
-        "requestQueryMap": "{\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\"}",
-        "indexName": "si-user-sync-index-v1",
-        "aggrQuery": "{\"aggs\":{\"Records synced per day\":{\"date_histogram\":{\"field\":\"Data.syncedTimeStamp\",\"calendar_interval\":\"day\"},\"aggs\":{\"count\":{\"value_count\":{\"field\":\"Data.syncedUserId.keyword\"}}}}}}"
       }
     ],
     "isCumulative": false,
@@ -9526,5 +9518,353 @@
     "hideInsights": true,
     "hideHeaderDenomination": true,
     "_comment": "KPI tiles (cards-list): CMP-01/04: received, open, resolved, rejected (selected dates)"
+  },
+  "siItnBaleTiles1": {
+    "chartName": "DSS_ITN_BALE_TILES_1",
+    "chartType": "rawResponse",
+    "aggregationPaths": [
+      "bale_sent",
+      "bale_received",
+      "bale_scanned",
+      "bale_manual",
+      "bale_not_scanned",
+      "bale_compliance"
+    ],
+    "cardsList": [
+      {
+        "id": "bales_sent",
+        "labelKey": "DSS_ITN_TILE_BALES_SENT",
+        "valuePath": "bale_sent",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "bales_received",
+        "labelKey": "DSS_ITN_TILE_BALES_RECEIVED",
+        "valuePath": "bale_received",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "bales_scanned",
+        "labelKey": "DSS_ITN_TILE_BALES_SCANNED",
+        "valuePath": "bale_scanned",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Bale scanning tiles row 1: Bales sent (sum balesQuantity), received (sum actualBalesReceived), scanned (sum balesScannedStock). Stock index, stockEntryType ISSUED AND status ACCEPTED.",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "key": "bales",
+        "transformData": "linearAggregation",
+        "select": {
+          "bale_sent": "all.buckets.all.sent.value",
+          "bale_received": "all.buckets.all.received.value",
+          "bale_scanned": "all.buckets.all.scanned.value",
+          "bale_manual": "all.buckets.all.manual.value",
+          "bale_not_scanned": "all.buckets.all.not_scanned.value",
+          "bale_compliance": "all.buckets.all.compliance.value"
+        },
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"all\":{\"filters\":{\"filters\":{\"all\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}}}},\"aggs\":{\"sent\":{\"sum\":{\"field\":\"Data.additionalDetails.balesQuantity\"}},\"received\":{\"sum\":{\"field\":\"Data.additionalDetails.actualBalesReceived\"}},\"scanned\":{\"sum\":{\"field\":\"Data.additionalDetails.balesScannedStock\"}},\"manual\":{\"sum\":{\"field\":\"Data.additionalDetails.baleScannedStockManual\"}},\"not_scanned\":{\"bucket_script\":{\"buckets_path\":{\"r\":\"received\",\"s\":\"scanned\",\"m\":\"manual\"},\"script\":\"params.r - (params.s + params.m)\"}},\"compliance\":{\"bucket_script\":{\"buckets_path\":{\"r\":\"received\",\"s\":\"scanned\",\"m\":\"manual\"},\"script\":\"params.r > 0 ? Math.round((params.s + params.m) * 10000.0 / params.r) / 100.0 : 0\"}}}}}}"
+      }
+    ]
+  },
+  "siItnBaleTiles2": {
+    "chartName": "DSS_ITN_BALE_TILES_2",
+    "chartType": "rawResponse",
+    "aggregationPaths": [
+      "bale_sent",
+      "bale_received",
+      "bale_scanned",
+      "bale_manual",
+      "bale_not_scanned",
+      "bale_compliance"
+    ],
+    "cardsList": [
+      {
+        "id": "bales_manual",
+        "labelKey": "DSS_ITN_TILE_BALES_MANUAL",
+        "valuePath": "bale_manual",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      },
+      {
+        "id": "bales_not_scanned",
+        "labelKey": "DSS_ITN_TILE_BALES_NOT_SCANNED",
+        "valuePath": "bale_not_scanned",
+        "valueType": "NUMBER",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "range",
+          "valuePath": "bale_not_scanned",
+          "ranges": [
+            {
+              "gt": 0,
+              "color": "#C84C0E"
+            },
+            {
+              "lte": 0,
+              "color": "#00703C"
+            }
+          ]
+        }
+      },
+      {
+        "id": "bale_scan_compliance",
+        "labelKey": "DSS_ITN_TILE_BALE_SCAN_COMPLIANCE",
+        "valuePath": "bale_compliance",
+        "valueType": "PERCENTAGE",
+        "descriptionParams": {},
+        "colorRules": {
+          "type": "constant",
+          "color": "#0B4B66"
+        }
+      }
+    ],
+    "isCumulative": false,
+    "valueType": "number",
+    "showLabel": true,
+    "drillChart": "none",
+    "filterKeys": [],
+    "documentType": "_doc",
+    "action": "",
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": "Bale scanning tiles row 2: Bales entered manually (sum baleScannedStockManual), not scanned = received - (scanned + manual), compliance % = (scanned + manual) / received x 100. Stock index, stockEntryType ISSUED AND status ACCEPTED.",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "key": "bales",
+        "transformData": "linearAggregation",
+        "select": {
+          "bale_sent": "all.buckets.all.sent.value",
+          "bale_received": "all.buckets.all.received.value",
+          "bale_scanned": "all.buckets.all.scanned.value",
+          "bale_manual": "all.buckets.all.manual.value",
+          "bale_not_scanned": "all.buckets.all.not_scanned.value",
+          "bale_compliance": "all.buckets.all.compliance.value"
+        },
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"filter\":[]}},\"aggs\":{\"all\":{\"filters\":{\"filters\":{\"all\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}}}},\"aggs\":{\"sent\":{\"sum\":{\"field\":\"Data.additionalDetails.balesQuantity\"}},\"received\":{\"sum\":{\"field\":\"Data.additionalDetails.actualBalesReceived\"}},\"scanned\":{\"sum\":{\"field\":\"Data.additionalDetails.balesScannedStock\"}},\"manual\":{\"sum\":{\"field\":\"Data.additionalDetails.baleScannedStockManual\"}},\"not_scanned\":{\"bucket_script\":{\"buckets_path\":{\"r\":\"received\",\"s\":\"scanned\",\"m\":\"manual\"},\"script\":\"params.r - (params.s + params.m)\"}},\"compliance\":{\"bucket_script\":{\"buckets_path\":{\"r\":\"received\",\"s\":\"scanned\",\"m\":\"manual\"},\"script\":\"params.r > 0 ? Math.round((params.s + params.m) * 10000.0 / params.r) / 100.0 : 0\"}}}}}}"
+      }
+    ]
+  },
+  "siItnBaleSummaryByDistrict": {
+    "chartName": "DSS_ITN_BALE_SUMMARY_BY_DISTRICT",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "siItnBaleSummaryByChiefdom",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Bales sent",
+      "Bales received",
+      "Bales scanned",
+      "Bales entered manually",
+      "Scanned total",
+      "Bales not scanned"
+    ],
+    "insight": {},
+    "_comment": "Bale scanning summary by District, drills to siItnBaleSummaryByChiefdom. Stock index, stockEntryType ISSUED AND status ACCEPTED. Not scanned = received - (scanned + manual); compliance % = (scanned + manual) / received x 100.",
+    "plotLabel": "District",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Scanned total",
+          "Bales received"
+        ],
+        "newField": "Bale scanning compliance %"
+      }
+    ],
+    "excludedColumns": [
+      "Scanned total"
+    ],
+    "chartSpecificProperty": {
+      "XtableColumnOrder": [
+        "S.N.",
+        "District",
+        "Bales sent",
+        "Bales received",
+        "Bales scanned",
+        "Bales entered manually",
+        "Bales not scanned",
+        "Bale scanning compliance %"
+      ]
+    },
+    "filterKeys": [
+      {
+        "key": "district",
+        "column": "District"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Issued_accepted\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.district.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Bales sent\":{\"sum\":{\"field\":\"Data.additionalDetails.balesQuantity\"}},\"Bales received\":{\"sum\":{\"field\":\"Data.additionalDetails.actualBalesReceived\"}},\"Bales scanned\":{\"sum\":{\"field\":\"Data.additionalDetails.balesScannedStock\"}},\"Bales entered manually\":{\"sum\":{\"field\":\"Data.additionalDetails.baleScannedStockManual\"}},\"Scanned total\":{\"bucket_script\":{\"buckets_path\":{\"s\":\"Bales scanned\",\"m\":\"Bales entered manually\"},\"script\":\"params.s + params.m\"}},\"Bales not scanned\":{\"bucket_script\":{\"buckets_path\":{\"r\":\"Bales received\",\"s\":\"Bales scanned\",\"m\":\"Bales entered manually\"},\"script\":\"params.r - (params.s + params.m)\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnBaleSummaryByChiefdom": {
+    "chartName": "DSS_ITN_BALE_SUMMARY_BY_CHIEFDOM",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "siItnBaleSummaryByPhu",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Bales sent",
+      "Bales received",
+      "Bales scanned",
+      "Bales entered manually",
+      "Scanned total",
+      "Bales not scanned"
+    ],
+    "insight": {},
+    "_comment": "Bale scanning summary by Chiefdom, drills to siItnBaleSummaryByPhu. Stock index, stockEntryType ISSUED AND status ACCEPTED. Not scanned = received - (scanned + manual); compliance % = (scanned + manual) / received x 100.",
+    "plotLabel": "Chiefdom",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Scanned total",
+          "Bales received"
+        ],
+        "newField": "Bale scanning compliance %"
+      }
+    ],
+    "excludedColumns": [
+      "Scanned total"
+    ],
+    "chartSpecificProperty": {
+      "XtableColumnOrder": [
+        "S.N.",
+        "Chiefdom",
+        "Bales sent",
+        "Bales received",
+        "Bales scanned",
+        "Bales entered manually",
+        "Bales not scanned",
+        "Bale scanning compliance %"
+      ]
+    },
+    "filterKeys": [
+      {
+        "key": "chiefdom",
+        "column": "Chiefdom"
+      }
+    ],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Issued_accepted\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Bales sent\":{\"sum\":{\"field\":\"Data.additionalDetails.balesQuantity\"}},\"Bales received\":{\"sum\":{\"field\":\"Data.additionalDetails.actualBalesReceived\"}},\"Bales scanned\":{\"sum\":{\"field\":\"Data.additionalDetails.balesScannedStock\"}},\"Bales entered manually\":{\"sum\":{\"field\":\"Data.additionalDetails.baleScannedStockManual\"}},\"Scanned total\":{\"bucket_script\":{\"buckets_path\":{\"s\":\"Bales scanned\",\"m\":\"Bales entered manually\"},\"script\":\"params.s + params.m\"}},\"Bales not scanned\":{\"bucket_script\":{\"buckets_path\":{\"r\":\"Bales received\",\"s\":\"Bales scanned\",\"m\":\"Bales entered manually\"},\"script\":\"params.r - (params.s + params.m)\"}}}}}}}}"
+      }
+    ]
+  },
+  "siItnBaleSummaryByPhu": {
+    "chartName": "DSS_ITN_BALE_SUMMARY_BY_PHU",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Bales sent",
+      "Bales received",
+      "Bales scanned",
+      "Bales entered manually",
+      "Scanned total",
+      "Bales not scanned"
+    ],
+    "insight": {},
+    "_comment": "Bale scanning summary by PHU (last drill level). Stock index, stockEntryType ISSUED AND status ACCEPTED. Not scanned = received - (scanned + manual); compliance % = (scanned + manual) / received x 100.",
+    "plotLabel": "PHU",
+    "hideHeaderDenomination": true,
+    "hideInsights": true,
+    "sort": "sortKeyAsc",
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Scanned total",
+          "Bales received"
+        ],
+        "newField": "Bale scanning compliance %"
+      }
+    ],
+    "excludedColumns": [
+      "Scanned total"
+    ],
+    "chartSpecificProperty": {
+      "XtableColumnOrder": [
+        "S.N.",
+        "PHU",
+        "Bales sent",
+        "Bales received",
+        "Bales scanned",
+        "Bales entered manually",
+        "Bales not scanned",
+        "Bale scanning compliance %"
+      ]
+    },
+    "filterKeys": [],
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"campaignNumber\":\"Data.campaignNumber.keyword\",\"projectTypeId\":\"Data.projectTypeId.keyword\",\"country\":\"Data.boundaryHierarchy.country.keyword\",\"province\":\"Data.boundaryHierarchy.province.keyword\",\"district\":\"Data.boundaryHierarchy.district.keyword\",\"chiefdom\":\"Data.boundaryHierarchy.chiefdom.keyword\",\"phu\":\"Data.boundaryHierarchy.phu.keyword\",\"distributionPoint\":\"Data.boundaryHierarchy.distributionPoint.keyword\",\"community\":\"Data.boundaryHierarchy.community.keyword\"}",
+        "indexName": "si-stock-index-v1",
+        "aggrQuery": "{\"aggs\":{\"F_Issued_accepted\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.additionalDetails.stockEntryType.keyword\":\"ISSUED\"}},{\"term\":{\"Data.additionalDetails.status.keyword\":\"ACCEPTED\"}}]}},\"aggs\":{\"rows\":{\"terms\":{\"field\":\"Data.boundaryHierarchy.phu.keyword\",\"size\":10000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Bales sent\":{\"sum\":{\"field\":\"Data.additionalDetails.balesQuantity\"}},\"Bales received\":{\"sum\":{\"field\":\"Data.additionalDetails.actualBalesReceived\"}},\"Bales scanned\":{\"sum\":{\"field\":\"Data.additionalDetails.balesScannedStock\"}},\"Bales entered manually\":{\"sum\":{\"field\":\"Data.additionalDetails.baleScannedStockManual\"}},\"Scanned total\":{\"bucket_script\":{\"buckets_path\":{\"s\":\"Bales scanned\",\"m\":\"Bales entered manually\"},\"script\":\"params.s + params.m\"}},\"Bales not scanned\":{\"bucket_script\":{\"buckets_path\":{\"r\":\"Bales received\",\"s\":\"Bales scanned\",\"m\":\"Bales entered manually\"},\"script\":\"params.r - (params.s + params.m)\"}}}}}}}}"
+      }
+    ]
   }
 }

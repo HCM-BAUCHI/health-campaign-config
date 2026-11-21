@@ -1517,6 +1517,78 @@
         },
         {
           "row": 1,
+          "name": "DSS_ITN_TAB_BALE_SCANNING",
+          "vizArray": [
+            {
+              "id": 4060,
+              "name": "DSS_ITN_V_BALE_TILES_1",
+              "label": "DSS_ITN_V_BALE_TILES_1",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnBaleTiles1",
+                  "name": "DSS_ITN_BALE_TILES_1",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_ITN_TAB_BALE_SCANNING",
+          "vizArray": [
+            {
+              "id": 4061,
+              "name": "DSS_ITN_V_BALE_TILES_2",
+              "label": "DSS_ITN_V_BALE_TILES_2",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnBaleTiles2",
+                  "name": "DSS_ITN_BALE_TILES_2",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "DSS_ITN_TAB_BALE_SCANNING",
+          "vizArray": [
+            {
+              "id": 4062,
+              "name": "DSS_ITN_V_BALE_SUMMARY",
+              "label": "DSS_ITN_V_BALE_SUMMARY",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnBaleSummaryByDistrict",
+                  "name": "DSS_ITN_BALE_SUMMARY_BY_DISTRICT",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 1,
           "name": "DSS_SI_ITN_TAB_COMPLAINTS",
           "vizArray": [
             {
@@ -3294,6 +3366,78 @@
                       "bboxPadding": 1.5
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 1,
+          "name": "DSS_ITN_TAB_BALE_SCANNING",
+          "vizArray": [
+            {
+              "id": 5060,
+              "name": "DSS_ITN_V_BALE_TILES_1",
+              "label": "DSS_ITN_V_BALE_TILES_1",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnBaleTiles1",
+                  "name": "DSS_ITN_BALE_TILES_1",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_ITN_TAB_BALE_SCANNING",
+          "vizArray": [
+            {
+              "id": 5061,
+              "name": "DSS_ITN_V_BALE_TILES_2",
+              "label": "DSS_ITN_V_BALE_TILES_2",
+              "vizType": "cards-list",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnBaleTiles2",
+                  "name": "DSS_ITN_BALE_TILES_2",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "DSS_ITN_TAB_BALE_SCANNING",
+          "vizArray": [
+            {
+              "id": 5062,
+              "name": "DSS_ITN_V_BALE_SUMMARY",
+              "label": "DSS_ITN_V_BALE_SUMMARY",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "siItnBaleSummaryByChiefdom",
+                  "name": "DSS_ITN_BALE_SUMMARY_BY_CHIEFDOM",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
                 }
               ]
             }
